@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC  = ROOT / "src" / "scripts"
 
 LINE_PATTERNS = [
-  re.compile(r"^load text:\s*id=\d+$", re.I),
+  re.compile(r"^load text:\s*id=(\d+|\$[A-Za-z0-9_.]+)$", re.I),
   re.compile(r"^al engine:\s*register script='[^']+'$", re.I),
   re.compile(r"^al engine:\s*set plugin '[^']+' description to '.*'$", re.I),
   re.compile(r"^al engine:\s*set plugin '[^']+' timer interval to \d+\s*s$", re.I),
@@ -103,7 +103,7 @@ def lint_file(path: Path) -> list[str]:
     errors.append(f"{path.name}:{opener.line_no}: '{opener.kind}' not closed with 'end'")
 
   # setup rule
-  if setup_like and not any(re.match(r"^load text:\s*id=\d+$", l, re.I) for _, l in body):
+  if setup_like and not any(re.match(r"^load text:\s*id=(\d+|\$[A-Za-z0-9_.]+)$", l, re.I) for _, l in body):
     errors.append(f"{path.name}: setup script missing 'load text: id=<...>'")
 
   # emit
