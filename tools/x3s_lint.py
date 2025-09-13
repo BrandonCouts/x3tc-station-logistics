@@ -10,30 +10,27 @@ Checks:
 - Optional header checks: #name, #page (must look like 89xxx), #lang (44)
 """
 from __future__ import annotations
-import re, sys
+import json, re, sys
 from pathlib import Path
 from dataclasses import dataclass
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC  = ROOT / "src" / "scripts"
+RULES = ROOT / "tools" / "x3s_rules.json"
 
-LINE_PATTERNS = [
-  re.compile(r"^load text:\s*id=(\d+|\$[A-Za-z0-9_.]+)$", re.I),
-  re.compile(r"^al engine:\s*register script='[^']+'$", re.I),
-  re.compile(r"^al engine:\s*set plugin '[^']+' description to '.*'$", re.I),
-  re.compile(r"^al engine:\s*set plugin '[^']+' timer interval to \d+\s*s$", re.I),
-  re.compile(r"^\[THIS]->stop task \d+$", re.I),
-  re.compile(r"^start task \d+\s+with script='[^']+'\s+on=\[THIS\]$", re.I),
-  re.compile(r"^=?\s*\[THIS]->\s*call script '[^']+'( : .*)?$", re.I),
-  re.compile(r"^=?\s*wait \d+\s*ms$", re.I),
-  re.compile(r"^set global variable:\s*name='[^']+'\s*value=.*$", re.I),
-  re.compile(r"^return (null|value .+)$", re.I),
-  # control flow (syntax-only; expression is free-form)
-  re.compile(r"^if\b.+$", re.I),
-  re.compile(r"^else$", re.I),
-  re.compile(r"^end$", re.I),
-  re.compile(r"^while\b.+$", re.I),
-]
+def load_patterns() -> list[re.Pattern[str]]:
+  try:
+    data = json.loads(RULES.read_text(encoding="utf-8"))
+  except FileNotFoundError:
+    return []
+  pats = []
+  for entry in data.get("patterns", []):
+    rx = entry.get("regex")
+    if rx:
+      pats.append(re.compile(rx, re.I))
+  return pats
+
+LINE_PATTERNS = load_patterns()
 
 HEADER_RX = re.compile(r'^\s*#(\w+)\s*:\s*(.+)$')
 COMMENT_RX = re.compile(r'^\s*([*#].*|\s*)$')
@@ -42,7 +39,9 @@ COMMENT_RX = re.compile(r'^\s*([*#].*|\s*)$')
 class Block:
   kind: str   # 'if' or 'while'
   line_no: int
-  has_wait: bool = False   # only used for while
+  var: str | None = None    # controlling var for while
+  has_wait: bool = False
+  has_progress: bool = False
 
 def lint_file(path: Path) -> list[str]:
   errors: list[str] = []
@@ -77,13 +76,16 @@ def lint_file(path: Path) -> list[str]:
       if not stack or stack[-1].kind != "if":
         errors.append(f"{path.name}:{ln}: 'else' without matching 'if'")
     elif low.startswith("while "):
-      stack.append(Block("while", ln))
+      var = None
+      if m := re.match(r"while\s+\$([A-Za-z0-9_.]+)\s*>\s*0$", low):
+        var = m.group(1)
+      stack.append(Block("while", ln, var=var))
     elif low == "end":
       if not stack:
         errors.append(f"{path.name}:{ln}: 'end' without opener")
       else:
         blk = stack.pop()
-        if blk.kind == "while" and not blk.has_wait:
+        if blk.kind == "while" and not (blk.has_wait or blk.has_progress):
           errors.append(f"{path.name}:{blk.line_no}: while-block has no 'wait' before 'end'")
     # mark waits inside while
     if re.search(r'\bwait\s+\d+\s*ms\b', low):
@@ -92,8 +94,17 @@ def lint_file(path: Path) -> list[str]:
           b.has_wait = True
           break
 
+    # mark decrement progress in while loops
+    if low.startswith("dec $"):
+      var = low.split()[1].lstrip("$")
+      for b in reversed(stack):
+        if b.kind == "while" and b.var == var:
+          b.has_progress = True
+          break
+
     # line-shape validation (warn on unknown shapes)
-    if not any(pat.match(line) for pat in LINE_PATTERNS):
+    recognizable = any(pat.match(line) for pat in LINE_PATTERNS)
+    if not recognizable and not (low.startswith("if ") or low == "else" or low == "end" or low.startswith("while ")):
       # Allow variable assignments and general calls as free-form to reduce false positives
       if not re.match(r"^\$[A-Za-z0-9_.]+(\s*=|->)", line) and "call script" not in low:
         warnings.append(f"{path.name}:{ln}: unrecognized line (check syntax): {line}")
@@ -110,14 +121,23 @@ def lint_file(path: Path) -> list[str]:
   out = [f"ERROR: {e}" for e in errors] + [f"WARN:  {w}" for w in warnings]
   return out
 
-def main():
-  if not SRC.exists():
-    print("No src/scripts directory found.", file=sys.stderr)
-    sys.exit(1)
+def iter_paths(args: list[str]) -> list[Path]:
+  if not args:
+    return sorted(SRC.glob("*.x3s"))
+  paths: list[Path] = []
+  for a in args:
+    p = Path(a)
+    if p.is_dir():
+      paths.extend(sorted(p.glob("*.x3s")))
+    else:
+      paths.append(p)
+  return paths
 
-  files = sorted(SRC.glob("*.x3s"))
+def main(argv: list[str] | None = None):
+  argv = argv or sys.argv[1:]
+  files = iter_paths(argv)
   if not files:
-    print("No .x3s files found in src/scripts", file=sys.stderr)
+    print("No .x3s files found", file=sys.stderr)
     sys.exit(1)
 
   any_errors = False

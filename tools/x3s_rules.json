@@ -1,0 +1,69 @@
+{
+  "patterns": [
+    {
+      "name": "load.text",
+      "regex": "^load text:\\s*id=(\\d+|\\$[A-Za-z0-9_.]+)$",
+      "examples": ["load text: id=9055"]
+    },
+    {
+      "name": "al.register",
+      "regex": "^al engine:\\s*register script='[^']+'$",
+      "examples": ["al engine: register script='al.plugin.slx'"]
+    },
+    {
+      "name": "al.description",
+      "regex": "^al engine:\\s*set plugin '[^']+' description to '.*'$",
+      "examples": ["al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'"]
+    },
+    {
+      "name": "al.timer",
+      "regex": "^al engine:\\s*set plugin '[^']+' timer interval to \\d+\\s*s$",
+      "examples": ["al engine: set plugin 'al.plugin.slx' timer interval to 30 s"]
+    },
+    {
+      "name": "stop.task",
+      "regex": "^\\[THIS]->stop task \\d+$",
+      "examples": ["[THIS]->stop task 0"]
+    },
+    {
+      "name": "start.task",
+      "regex": "^start task \\d+\\s+with script='[^']+'\\s+on=\\[THIS\\]$",
+      "examples": ["start task 123 with script='plugin.example' on=[THIS]"]
+    },
+    {
+      "name": "call.script",
+      "regex": "^=?\\s*\\[THIS]->\\s*call script '[^']+'( : .*)?$",
+      "examples": ["= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt"]
+    },
+    {
+      "name": "wait",
+      "regex": "^=?\\s*wait \\d+\\s*ms$",
+      "examples": ["wait 1000 ms"]
+    },
+    {
+      "name": "set.global",
+      "regex": "^set global variable:\\s*name='[^']+'\\s*value=.*$",
+      "examples": ["set global variable: name='g.slx.foo' value=$bar"]
+    },
+    {
+      "name": "return",
+      "regex": "^return (null|value .+)$",
+      "examples": ["return null"]
+    },
+    {
+      "name": "write.log",
+      "regex": "^write to log file \\$[A-Za-z0-9_.]+ append=\\[(TRUE|FALSE)\\] value=(\\$[A-Za-z0-9_.]+|'[^']+')$",
+      "examples": ["write to log file $DebugID append=[FALSE] value=$txt"]
+    },
+    {
+      "name": "dec",
+      "regex": "^dec \\$[A-Za-z0-9_.]+$",
+      "examples": ["dec $s"]
+    },
+    {
+      "name": "remove.array.elem",
+      "regex": "^remove element from array \\$[A-Za-z0-9_.]+ at index \\$[A-Za-z0-9_.]+$",
+      "examples": ["remove element from array $config.Array at index $s"]
+    }
+  ]
+}
