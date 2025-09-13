@@ -1,0 +1,133 @@
+* Author: Logain Abler
+* -----------------------------------------------------------------------------------
+* This script is used to return a list of sectors that will show in FDN menus
+* Will not return sectors with without Factories or Docks
+* Search value depending on which menu calls the script
+
+* Expected values:
+* - 1 = Factory search
+* - 2 = Dock search
+* - 3 All sectors - this is used for the buy and sell
+
+* Return values:
+* - A lsit of sectors that contain a player owned Factory or Dock
+
+* ToDo:
+* - ?
+
+* Version: 1.0
+* Date: 17/05/2012
+* Tested: 17/05/2012
+* -----------------------------------------------------------------------------------
+
+* Fetch values saved in the AL Plugin global variable:
+* DC
+* factory array
+* dock array
+$al.Settings = get global variable: name='al.LI.FDN.event'
+if $al.Settings
+$dc = $al.Settings[2]
+$factory.array = $al.Settings[3]
+$dock.array = $al.Settings[4]
+else
+return null
+end
+* -----------------------------------------------------------------------------------
+
+* Create return array to hold the found sectors
+$return.array = array alloc: size=0
+* Create return array to hold all player owned factories and docks
+$exclude.array = array alloc: size=0
+* -----------------------------------------------------------------------------------
+
+$find.array = get station array: of race [Player] class/type=[Station]
+
+$s = size of array $find.array
+while $s > 0
+dec $s
+$station = $find.array[$s]
+append $station to array $exclude.array
+* -----------------------------------------------------------------------------------
+
+* Call Capture Station Sub
+gosub Capture.Station.Sub:
+* -----------------------------------------------------------------------------------
+
+$sector = $station-> get sector
+if not find $sector in array: $return.array
+* If Factory and not a Comples or part of a Complex
+if $station-> is of class [Factory]
+if not $station-> is of class [Complex Hub]
+$detectable = $station-> is detectable
+if $detectable == 0
+append $sector to array $return.array
+end
+end
+end
+
+* If Dock and not the DC
+if $station-> is of class [Dock]
+if not find $station in array: $dock.array
+append $station to array $dock.array
+end
+if not $station == $dc
+append $sector to array $return.array
+end
+end
+end
+end
+
+$al.Settings[8] = $exclude.array
+set global variable: name='al.LI.FDN.event' value=$al.Settings
+
+
+if $search == 3
+$find.array = get ship array: of race [Player] class/type=[Advanced Satellite]
+$s = size of array $find.array
+while $s > 0
+dec $s
+$sat = $find.array[$s]
+$sector = $sat-> get sector
+if not find $sector in array: $return.array
+append $sector to array $return.array
+end
+end
+end
+* -----------------------------------------------------------------------------------
+
+* Sort and reverse the return array
+$return.array = sort array $return.array
+$return.array = reverse array $return.array
+* -----------------------------------------------------------------------------------
+
+* Return the array to the menu
+$s = size of array $return.array
+if $s > 0
+return $return.array
+end
+* -----------------------------------------------------------------------------------
+return null
+* -----------------------------------------------------------------------------------
+
+* This sub will add the Factory or Dock to the matching array in the AL Plugin variable
+Capture.Station.Sub:
+if $station-> is of class [Factory]
+* If Factory and not a Comples or part of a Complex
+if not $station-> is of class [Complex Hub]
+$detectable = $station-> is detectable
+if $detectable == 0
+if not find $station in array: $factory.array
+append $station to array $factory.array
+end
+end
+end
+* Adds all Docks to the array even the DC
+else if $station-> is of class [Dock]
+if not find $station in array: $dock.array
+append $station to array $dock.array
+end
+end
+endsub
+* -----------------------------------------------------------------------------------
+return null
+
