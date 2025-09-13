@@ -90,5 +90,36 @@
       "regex": "^return \\$[A-Za-z0-9_.]+$",
       "examples": ["return $al.Ret"]
     }
+    ,
+    {
+      "name": "append.array",
+      "regex": "^append \\$[A-Za-z0-9_.]+ to array \\$[A-Za-z0-9_.]+$",
+      "examples": ["append $station to array $exclude.array"]
+    },
+    {
+      "name": "gosub",
+      "regex": "^gosub [A-Za-z0-9_.]+:$",
+      "examples": ["gosub Debug.Sub:"]
+    },
+    {
+      "name": "label",
+      "regex": "^[A-Za-z0-9_.]+:$",
+      "examples": ["Debug.Sub:"]
+    },
+    {
+      "name": "endsub",
+      "regex": "^endsub$",
+      "examples": ["endsub"]
+    },
+    {
+      "name": "obj.add.units",
+      "regex": "^=?\\s*\\$[A-Za-z0-9_.]+->\\s*add (\\$[A-Za-z0-9_.]+|[-]?\\d+) units of \\$[A-Za-z0-9_.]+$",
+      "examples": ["= $station-> add $amount units of $ware"]
+    },
+    {
+      "name": "wait.random",
+      "regex": "^=?\\s*wait randomly from \\d+ to \\d+ ms$",
+      "examples": ["= wait randomly from 500 to 1000 ms"]
+    }
   ]
 }

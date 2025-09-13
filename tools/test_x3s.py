@@ -14,6 +14,7 @@ def run_fail(cmd):
   print('>', ' '.join(cmd))
   p = subprocess.run(cmd, cwd=ROOT)
   if p.returncode == 0:
+    print('expected failure but command passed')
     sys.exit(1)
 
 if __name__ == '__main__':
