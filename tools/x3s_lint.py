@@ -72,6 +72,9 @@ def lint_file(path: Path) -> list[str]:
     low = line.strip().lower()
     if low.startswith("if "):
       stack.append(Block("if", ln))
+    elif low.startswith("else if "):
+      if not stack or stack[-1].kind != "if":
+        errors.append(f"{path.name}:{ln}: 'else if' without matching 'if'")
     elif low == "else":
       if not stack or stack[-1].kind != "if":
         errors.append(f"{path.name}:{ln}: 'else' without matching 'if'")
@@ -104,9 +107,9 @@ def lint_file(path: Path) -> list[str]:
 
     # line-shape validation (warn on unknown shapes)
     recognizable = any(pat.match(line) for pat in LINE_PATTERNS)
-    if not recognizable and not (low.startswith("if ") or low == "else" or low == "end" or low.startswith("while ")):
+    if not recognizable and not (low.startswith("if ") or low.startswith("else if ") or low == "else" or low == "end" or low.startswith("while ")):
       # Allow variable assignments and general calls as free-form to reduce false positives
-      if not re.match(r"^\$[A-Za-z0-9_.]+(\s*=|->)", line) and "call script" not in low:
+      if not re.match(r"^\$[A-Za-z0-9_.]+(\[[^\]]+\])?(\s*=|->)", line) and "call script" not in low:
         warnings.append(f"{path.name}:{ln}: unrecognized line (check syntax): {line}")
 
   if stack:

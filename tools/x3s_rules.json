@@ -64,6 +64,31 @@
       "name": "remove.array.elem",
       "regex": "^remove element from array \\$[A-Za-z0-9_.]+ at index \\$[A-Za-z0-9_.]+$",
       "examples": ["remove element from array $config.Array at index $s"]
+    },
+    {
+      "name": "skip.if",
+      "regex": "^skip if \\$[A-Za-z0-9_.]+$",
+      "examples": ["skip if $section"]
+    },
+    {
+      "name": "al.description.var",
+      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ description to \\$[A-Za-z0-9_.]+$",
+      "examples": ["al engine: set plugin $al.PluginID description to $plugin.description"]
+    },
+    {
+      "name": "al.timer.var",
+      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\d+\\s*s$",
+      "examples": ["al engine: set plugin $al.PluginID timer interval to 25 s"]
+    },
+    {
+      "name": "set.global.var",
+      "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=\\$[A-Za-z0-9_.]+$",
+      "examples": ["set global variable: name=$al.PluginID value=$al.Settings"]
+    },
+    {
+      "name": "return.var",
+      "regex": "^return \\$[A-Za-z0-9_.]+$",
+      "examples": ["return $al.Ret"]
     }
   ]
 }

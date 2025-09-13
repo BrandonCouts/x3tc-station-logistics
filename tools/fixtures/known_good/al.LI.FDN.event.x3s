@@ -1,0 +1,52 @@
+* Auther: Logain Abler
+* --------------------
+
+$PageID = 9910
+
+$al.Settings = get global variable: name=$al.PluginID
+if not $al.Settings
+$al.Settings = array alloc: size=30
+$al.Settings[0] = [FALSE]
+$al.Settings[1] = $PageID
+$al.Settings[2] = null
+$factory.array = array alloc: size=0
+$al.Settings[3] = $factory.array
+$dock.array = array alloc: size=0
+$al.Settings[4] = $dock.array
+$al.Settings[5] = null
+$is.dymanic = array alloc: size=10
+$is.dymanic[0] = [TRUE]
+$is.dymanic[1] = [TRUE]
+$is.dymanic[2] = [TRUE]
+$al.Settings[6] = $is.dymanic
+$al.Settings[7] = null
+set global variable: name=$al.PluginID value=$al.Settings
+end
+
+$al.Ret = null
+if $al.Event == 'init' OR $al.Event == 'reinit'
+
+$plugin.description = sprintf: pageid=$PageID textid=100, null, null, null, null, null
+al engine: set plugin $al.PluginID description to $plugin.description
+al engine: set plugin $al.PluginID timer interval to 25 s
+
+= [THIS]-> call script 'plugin.LI.FDN.Setup' :
+
+else if $al.Event == 'start'
+$al.Settings[0] = [TRUE]
+= [THIS]-> call script 'plugin.LI.FDN.Setup' :
+
+else if $al.Event == 'stop'
+$al.Settings[0] = [FALSE]
+= [THIS]-> call script 'plugin.LI.FDN.Setup' :
+
+else if $al.Event == 'timer'
+if $al.Settings[0]
+= [THIS]-> call script 'plugin.LI.FDN.Supply.Start' :
+end
+else if $al.Event == 'isenabled'
+$al.Ret = $al.Settings[0]
+end
+
+return $al.Ret
+

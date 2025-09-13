@@ -17,7 +17,12 @@ def run_fail(cmd):
     sys.exit(1)
 
 if __name__ == '__main__':
-  run([sys.executable, 'tools/x3s_lint.py'])
+  # lint project scripts
+  run([sys.executable, 'tools/x3s_lint.py', 'src/scripts'])
+
+  # lint known-good fixtures
   run([sys.executable, 'tools/x3s_lint.py', 'tools/fixtures/known_good'])
+
+  # ensure safety checks still trigger
   run_fail([sys.executable, 'tools/x3s_lint.py', 'tools/fixtures/should_fail'])
 
