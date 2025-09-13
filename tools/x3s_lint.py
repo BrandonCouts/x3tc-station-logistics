@@ -30,8 +30,6 @@ def load_patterns() -> list[re.Pattern[str]]:
       pats.append(re.compile(rx, re.I))
   return pats
 
-LINE_PATTERNS = load_patterns()
-
 HEADER_RX = re.compile(r'^\s*#(\w+)\s*:\s*(.+)$')
 COMMENT_RX = re.compile(r'^\s*([*#].*|\s*)$')
 
@@ -43,7 +41,8 @@ class Block:
   has_wait: bool = False
   has_progress: bool = False
 
-def lint_file(path: Path) -> list[str]:
+def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list[str]:
+  patterns = patterns or load_patterns()
   errors: list[str] = []
   warnings: list[str] = []
 
@@ -106,7 +105,7 @@ def lint_file(path: Path) -> list[str]:
           break
 
     # line-shape validation (warn on unknown shapes)
-    recognizable = any(pat.match(line) for pat in LINE_PATTERNS)
+    recognizable = any(pat.match(line) for pat in patterns)
     if not recognizable and not (low.startswith("if ") or low.startswith("else if ") or low == "else" or low == "end" or low.startswith("while ")):
       # Allow variable assignments and general calls as free-form to reduce false positives
       if not re.match(r"^\$[A-Za-z0-9_.]+(\[[^\]]+\])?(\s*=|->)", line) and "call script" not in low:
@@ -143,9 +142,10 @@ def main(argv: list[str] | None = None):
     print("No .x3s files found", file=sys.stderr)
     sys.exit(1)
 
+  patterns = load_patterns()
   any_errors = False
   for p in files:
-    msgs = lint_file(p)
+    msgs = lint_file(p, patterns)
     if msgs:
       print(f"== {p.name} ==")
       print("\n".join(msgs))
