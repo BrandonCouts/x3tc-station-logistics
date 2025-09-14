@@ -1,0 +1,15 @@
+#name: plugin.sk.ecs.al.stop
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.al.stop.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+
+$ecs.setup = get global variable: name='plugin.ecs.setup'
+$ecs.setup[3] = [FALSE]
+set global variable: name='plugin.ecs.setup' value=$ecs.setup
+START [THIS] -> call script plugin.sk.ecs.manager :
+
+return null

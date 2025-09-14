@@ -1,0 +1,51 @@
+#name: plugin.sk.ecs.news.add
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.news.add.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+* Use this function to add a news/message to the list.
+* ===========================================
+* Parameter :
+* - plugin.id : The global variable you used to register (string)
+* - news.title : News Title
+* - news.content : Main text of the news
+* - news.from : Who is sending this message (optional)
+* ===========================================
+
+$ecs.setup = get global variable: name='plugin.ecs.setup'
+$ecs.installed = $ecs.setup[1]
+$ecs.configs = $ecs.setup[2]
+$ecs.news = $ecs.setup[5]
+
+skip if  find $plugin.id in array: $ecs.installed
+return null
+$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1
+
+$my.config = $ecs.configs[$index]
+$max.news.count = $my.config[5]
+$news.list = $ecs.news[$index]
+
+
+$my.news =  array alloc: size=4
+$my.news[0] = $news.title
+$my.news[1] = $news.content
+$my.news[2] = $news.from
+$pl.time = playing time
+$my.news[3] = $pl.time
+if $news.list
+insert $my.news into array $news.list at index 0
+else
+$news.list =  array alloc: size=1
+$news.list[0] = $my.news
+end
+
+$news.count =  size of array $news.list
+if $news.count > $max.news.count
+resize array $news.list to $max.news.count
+end
+
+
+return [TRUE]

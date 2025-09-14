@@ -1,0 +1,29 @@
+#name: plugin.sk.ecs.al.init
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.al.init.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+
+$ecs.setup = get global variable: name='plugin.ecs.setup'
+if  is datatyp[ $ecs.setup ] == DATATYP_ARRAY
+$ecs.setup[3] = [TRUE]
+else
+$ecs.setup =  array alloc: size=6
+$ecs.installed =  array alloc: size=0
+$ecs.configs =  array alloc: size=0
+$ecs.news =  array alloc: size=0
+$ecs.guilds =  array alloc: size=0
+$ecs.setup[0] = 250
+$ecs.setup[1] = $ecs.installed
+$ecs.setup[2] = $ecs.configs
+$ecs.setup[3] = [TRUE]
+$ecs.setup[4] = null
+$ecs.setup[5] = $ecs.news
+$ecs.setup[6] = $ecs.guilds
+end
+set global variable: name='plugin.ecs.setup' value=$ecs.setup
+= [THIS] -> call script plugin.sk.ecs.hotkey.install :
+return null

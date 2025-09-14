@@ -1,0 +1,53 @@
+#name: plugin.sk.ecs.call.script
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.call.script.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+* This script is started each time the ECS hotkey is pressed.
+* It gets the player's current targeti and check every ECS plugin to see if the
+* object is handled by such plugin. If found, it will run the plugin's comm.script
+* ===========================================
+
+$target =  get player tracking aim
+skip if $target -> exists
+return null
+$setup = get global variable: name='plugin.ecs.setup'
+skip if  is datatyp[ $setup ] == DATATYP_ARRAY
+return null
+
+$setup.installed = $setup[1]
+$setup.configs = $setup[2]
+
+$plugin.count =  size of array $setup.installed
+while $plugin.count
+dec $plugin.count =
+$plugin.name = $setup.installed[$plugin.count]
+if get global variable: name=$plugin.name
+$index =  get index of $plugin.name in array $setup.installed offset=-1 + 1
+$plugin.config = $setup.configs[$index]
+$plugin.config.global = $plugin.config[0]
+$plugin.config.script = $plugin.config[1]
+$plugin.config.local = $plugin.config[2]
+$plugin.config.race = $plugin.config[3]
+$plugin.config.class = $plugin.config[4]
+$target.local = $target -> get local variable: name=$plugin.config.local
+if $plugin.config.local != null AND $target.local == null
+continue
+end
+$target.race = $target -> get owner race
+if $plugin.config.race != null AND $target.race != $plugin.config.race
+continue
+end
+if $plugin.config.class != null
+skip if $target -> is of class $plugin.config.class
+continue
+end
+= [THIS] -> call named script: script=$plugin.config.script, $target, null, null, null, null
+break
+end
+end
+
+return [TRUE]

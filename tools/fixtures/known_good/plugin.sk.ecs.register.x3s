@@ -1,0 +1,69 @@
+#name: plugin.sk.ecs.register
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.register.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+* Use this function to register your plugin or script to ECS, allowing you
+* to use the ECS hotkey
+* ===========================================
+* Parameter : SETUP -> Array
+* - 00 : Global variable to check to see if your plugin is enabled (string)
+* - 01 : Script to call when the ECS key is pressed (string)
+* - 02 : Restrict ECS to objects with this local variable set to TRUE (string)
+* - 03 : Restrict ECS to this RACE (var/race)
+* - 04 : Restrict ECS to this Object Class (var/class)
+* - 05 : News Channel (null=off, else max amount of news to store)
+* - 06 : News System Name (string, can be null if not used)
+* Indexes 02, 03, 04, 05 can be null
+* As an example Pirate Guild use the following SETUP array :
+* - 00 : anarkis.pirate.plugin (will check this global)
+* - 01 : anarkis.pirate.comm (if found, it will call this script only...)
+* - 02 : anarkis.pirate (... if this local var is found)
+* - 03 : Pirates (and this is pirate owned object)
+* - 04 : null (we dont care about object class)
+* - 05 : 12 (we want to store 12 most recent news)
+* - 06 : "Pirate Guild BBS"
+* ===========================================
+* Output :
+* - null : Script registration failed
+* - TRUE : Your script has be registered to ECS
+* ===========================================
+* If a same script is re registered, previous config will be overwritten.
+* ===========================================
+
+* Check the parameter, quit if error
+skip if  is datatyp[ $setup ] == DATATYP_ARRAY
+return null
+$setup.width =  size of array $setup
+if $setup.width != 7
+resize array $setup to 7
+end
+$setup.width =  size of array $setup
+* ---
+
+$global = $setup[0]
+
+* Retrieve ECS configuration
+$ecs.setup = get global variable: name='plugin.ecs.setup'
+$ecs.installed = $ecs.setup[1]
+$ecs.configs = $ecs.setup[2]
+$ecs.news = $ecs.setup[5]
+if  find $global in array: $ecs.installed
+* - Update if setup already found in list
+$index =  get index of $global in array $ecs.installed offset=-1 + 1
+$config.to.update = $ecs.configs[$index]
+copy array $setup index 0 ... 6 into array $config.to.update at index 0
+* - ---
+else
+* - We add the new plugin (todo: conflict check)
+append $global to array $ecs.installed
+append $setup to array $ecs.configs
+$my.news =  array alloc: size=0
+append $my.news to array $ecs.news
+* - ---
+end
+* ---
+return [TRUE]
