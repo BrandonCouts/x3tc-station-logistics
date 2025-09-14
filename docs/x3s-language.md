@@ -60,6 +60,19 @@
 - **start.speak.text**: `START speak text: page=13 id=131 priority=0`
 - **unregister.hotkey**: `unregister hotkey $hotkey.id`
 
+### New Statements Recognized
+- **gosub.label**: `gosub dodock`
+- **send.message.var.bool**: `send incoming message $msg to player: display it=[TRUE]`
+- **set.command.upgrade.software**: `set script command upgrade: command=ANARKIS_DOCKALL  upgrade=Carrier Command Software`
+- **set.command.upgrade.bool**: `set script command upgrade: command=ANARKIS_STATIONDEFENSE  upgrade=[TRUE]`
+- **global.script.map.simple**: `global script map: set: key=ANARKIS_DOCKALL, class=M1, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0`
+- **goto.label**: `goto label exit`
+- **add.money.literal**: `add money to player: -50000`
+- **menu.item.num**: `add custom menu item to array $menu: text=$dialog.yes returnvalue=1`
+- **insert.array**: `insert $my.news into array $news.list at index 0`
+- **copy.array.literal**: `copy array $setup index 0 ... 6 into array $config.to.update at index 0`
+- **start.command.args**: `START $new.leader -> command $cmd.name : arg1=$arg1, arg2=$arg2, arg3=$arg3, arg4=null`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod

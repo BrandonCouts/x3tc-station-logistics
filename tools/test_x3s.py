@@ -23,7 +23,7 @@ def run_fail(cmd: list[str]):
 if __name__ == '__main__':
   src_files = sorted((ROOT / 'src/scripts').glob('*.x3s'))
   good_files = sorted((ROOT / 'tools/fixtures/known_good').glob('*.x3s'))
-  fail_files = sorted(ROOT.glob('tools/fixtures/should_fail/**/*.x3s'))
+  fail_files = sorted((ROOT / 'tools/fixtures/should_fail').rglob('*.x3s'))
 
   run([sys.executable, 'tools/x3s_lint.py', *[str(p.relative_to(ROOT)) for p in src_files + good_files]])
   if fail_files:

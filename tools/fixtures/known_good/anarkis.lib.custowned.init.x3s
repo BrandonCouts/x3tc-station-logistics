@@ -1,0 +1,8 @@
+#name: anarkis.lib.custowned.init
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.custowned.init.xml
+
+$var =  array alloc: size=0
+[THIS] -> set local variable: name='anarkis.owned' value=$var
+return $var
