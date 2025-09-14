@@ -10,5 +10,12 @@
     <t id="205">Exported to consumer</t>
     <t id="206">Imported from store</t>
     <t id="207">Imported from producer</t>
+    <t id="208">Exit</t>
+    <t id="209">Select Station</t>
+    <t id="210">Role (producer|consumer|store|auto)</t>
+    <t id="211">Min %</t>
+    <t id="212">Max %</t>
+    <t id="213">Chunk %</t>
+    <t id="214">%s | %s %s %s %s %s</t>
   </page>
 </language>
