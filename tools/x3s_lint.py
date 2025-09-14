@@ -51,6 +51,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
 
   # split header/comments vs body
   for i, raw in enumerate(text, start=1):
+    raw = raw.replace('\u00A0', ' ')
     if m := HEADER_RX.match(raw):
       headers[m.group(1).lower()] = m.group(2).strip()
       continue
@@ -83,15 +84,15 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
   for ln, line in body:
     # control flow tracking
     low = line.strip().lower()
-    if low.startswith("if "):
+    if re.match(r'^if\b', low):
       stack.append(Block("if", ln))
-    elif low.startswith("else if "):
+    elif re.match(r'^else\s+if\b', low):
       if not stack or stack[-1].kind != "if":
         errors.append(f"{path.name}:{ln}: 'else if' without matching 'if'")
     elif low == "else":
       if not stack or stack[-1].kind != "if":
         errors.append(f"{path.name}:{ln}: 'else' without matching 'if'")
-    elif low.startswith("while "):
+    elif re.match(r'^while\b', low):
       var = None
       if m := re.match(r"while\s+\$([A-Za-z0-9_.]+)", low):
         var = m.group(1)
@@ -147,7 +148,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
 
     # line-shape validation (warn on unknown shapes)
     recognizable = any(pat.match(line.strip()) for pat in patterns)
-    if not recognizable and not (low.startswith("if ") or low.startswith("else if ") or low == "else" or low == "end" or low.startswith("while ")):
+    if not recognizable and not (re.match(r'^if\b', low) or re.match(r'^else\s+if\b', low) or low == "else" or low == "end" or re.match(r'^while\b', low)):
       # Allow variable assignments and general calls as free-form to reduce false positives
       if not re.match(r"^\s*=?\s*(?:\$[A-Za-z0-9_.]+|\[[A-Za-z]+\])(\[[^\]]+\])*\s*(=|->)", line) and "call script" not in low:
         warnings.append(f"{path.name}:{ln}: unrecognized line (check syntax): {line}")

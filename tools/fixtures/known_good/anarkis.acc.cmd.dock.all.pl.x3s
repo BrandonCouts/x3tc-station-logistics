@@ -1,0 +1,9 @@
+#name: anarkis.acc.cmd.dock.all.pl
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.dock.all.pl.xml
+
+[THIS] -> set command: ANARKIS_DOCKALL  target=null target2=null par1=null par2=null
+= [THIS] -> call script anarkis.acc.cmd.dock.all :
+
+return null

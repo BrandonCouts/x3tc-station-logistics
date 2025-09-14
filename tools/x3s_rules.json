@@ -113,6 +113,13 @@
       ]
     },
     {
+      "name": "al.timer.vars",
+      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\$[A-Za-z0-9_.]+\\s*s$",
+      "examples": [
+        "al engine: set plugin $plugin.ID timer interval to $interval s"
+      ]
+    },
+    {
       "name": "set.global.var",
       "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=\\$[A-Za-z0-9_.]+$",
       "examples": [
@@ -376,6 +383,20 @@
       "regex": "^send incoming message \\$[A-Za-z0-9_.]+ to player: display it=\\d+$",
       "examples": [
         "send incoming message $Msg to player: display it=0"
+      ]
+    },
+    {
+      "name": "speak.text",
+      "regex": "^=?\\s*speak text: page=\\d+ id=\\d+ priority=\\d+$",
+      "examples": [
+        "= speak text: page=13 id=1276 priority=0"
+      ]
+    },
+    {
+      "name": "speak.array",
+      "regex": "^=?\\s*speak array: \\$[A-Za-z0-9_.]+ prio=\\d+$",
+      "examples": [
+        "= speak array: $d prio=0"
       ]
     },
     {
