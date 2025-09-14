@@ -3,10 +3,8 @@
 * DESCRIPTION: UI helpers for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
-$fn = argument 1
 
-if $fn == 'FormatReason'
-  $code = argument 2
+if $function == 'FormatReason'
   $page = 89055
   * auto roles use same text as base codes
   if $code == 'A_AT_MIN'

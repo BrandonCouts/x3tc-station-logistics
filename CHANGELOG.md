@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.8-internal
+- Linter now rejects positional argument syntax and scripts use named parameters.
+
 ## 0.1.7-internal
 - Added overview section to SLX README for clarity.
 

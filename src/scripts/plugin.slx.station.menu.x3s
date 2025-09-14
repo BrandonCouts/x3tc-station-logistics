@@ -3,7 +3,6 @@
 * DESCRIPTION: Station configuration menu for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
-$station = argument 1
 $PageId = 89055
 
 if not $station
