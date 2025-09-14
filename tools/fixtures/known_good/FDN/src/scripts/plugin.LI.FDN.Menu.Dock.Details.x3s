@@ -2,6 +2,7 @@
 #lang: 44
 #origin_mod: FDN
 #source: mods/FDN/scripts/plugin.LI.FDN.Menu.Dock.Details.xml
+
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * This script builds the Dock Details Menu and retuns the array back to the Main Menu

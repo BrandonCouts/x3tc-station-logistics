@@ -2,6 +2,7 @@
 #lang: 44
 #origin_mod: FDN
 #source: mods/FDN/scripts/plugin.LI.FDN.Wares.Summary.xml
+
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * This formats the warea fro the DC and Dock menus

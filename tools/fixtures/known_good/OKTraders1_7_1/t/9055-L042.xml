@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Generated using X-Studio -->
+<language id="42">
+
+	<page id="2008" title="Cmd ID" desc="" voice="no">
+		<t id="448">GLEN_OK_TRADE</t>
+	</page>
+
+	<page id="2010" title="Cmd Name" desc="" voice="no">
+		<t id="448">\33COK\33X Trade</t>
+	</page>
+
+	<page id="2011" title="Cmd Shortname" desc="" voice="no">
+		<t id="448">\33COK.T\33X</t>
+	</page>
+
+	<page id="2022" title="Cmd Desc" desc="" voice="no">
+		<t id="448">This command opens the \33COK\33X trade menu</t>
+	</page>
+
+	<page id="9055" title="OK Traders" desc="" voice="no">
+		<t id="0">\33COK\33X Traders</t>
+		<t id="1">\33COK\33X Home Trader</t>
+		<t id="2">\33COK\33X Free Trader</t>
+		<t id="6">Tether Sector: %s</t>
+		<t id="7">Tether Range: %s</t>
+		<t id="10">\33GStart Trading\33X</t>
+		<t id="15">Trader Balance: \33R%s\33X</t>
+		<t id="16">Trader Balance: \33G%s\33X</t>
+		<t id="17">Global Balance: \33R%s\33X</t>
+		<t id="18">Global Balance: \33G%s\33X</t>
+		<t id="20">Global Settings...</t>
+		<t id="21">Broadcast</t>
+		<t id="22">Ship Type</t>
+		<t id="25">Broadcast to docked ships</t>
+		<t id="28">\33MBroadcast:\33X Ships Homebased At: \33Y%s\33X</t>
+		<t id="29">\33MBroadcast:\33X Ships Docked At...</t>
+		<t id="30">\33RUninstall...\33X</t>
+		<t id="31">\33MBroadcast:\33X Fleet...</t>
+		<t id="49">\33Y!!\33X Free trading requires no homebase and %s \33Y!!\33X\n</t>
+		<t id="50">\33Y!!\33X Homebased trading requires a station homebase and %s \33Y!!\33X</t>
+		<t id="51">This ship is already trading. It`s orders can be reviewed and updated below. Changes take effect after the trader`s current action.</t>
+		<t id="52">This ship is already trading.</t>
+		<t id="53">When the trader has a homebase assigned it will trade wares only for its homebase.</t>
+		<t id="54">When the trader has no homebase assigned it will act as a free trader and seek out profitable trades.</t>
+		<t id="55">The broadcast command applies OK Trade with the selected ware options to multiple ships.</t>
+		<t id="56">Wares with \33Bblue\33X names cannot fit in this trader`s cargobay.</t>
+		<t id="70">Mode</t>
+		<t id="71">Normal \(Standard Free Trading\)</t>
+		<t id="72">\33GEconomy\33X \(Prefer Stalled NPC Stations\)</t>
+		<t id="73">\33OPlayer\33X \(Prefer Player Stations\)</t>
+		<t id="80">Stock Limits...</t>
+		<t id="81">Stock Limits</t>
+		<t id="82">Stock limits apply to all traders at that homebase.</t>
+		<t id="83">OK traders avoid selling wares below the minimum stock percentage, and avoid buying wares above the maximum stock percentage. Note that this limit only applies to OK Traders and not NPC traders.</t>
+		<t id="84">OK traders observe limits configured in the dockware manager bonus plugin for how much of a ware should be bought by a station, in addition to OK`s own percentage based settings. If both dockware manager and OK trade limits apply to a ware, the minimum of the 2 settings will be used by OK to determine the max stock level.</t>
+		<t id="85">\33WMin Stock %\33X</t>
+		<t id="86">\33WMax Stock %\33X</t>
+		<t id="87">\33WDockware Manager Limit\33X</t>
+		<t id="88">\33WWare\33X</t>
+		<t id="120">\33BBuy\33X</t>
+		<t id="121">\33MSell\33X</t>
+		<t id="122">\33YNo Trade\33X</t>
+		<t id="200">\33COK\33X Global Settings</t>
+		<t id="210">Auto Rename</t>
+		<t id="211">Blacklist...</t>
+		<t id="212">Min Stock Level Trade %</t>
+		<t id="213">Trade Illegal Wares</t>
+		<t id="214">Alert sound when targetted</t>
+		<t id="238">Homebased Traders</t>
+		<t id="239">Free Traders</t>
+		<t id="240">Debugging</t>
+		<t id="241">Logging</t>
+		<t id="242">Logging Target: %s</t>
+		<t id="243">Logging Verbosity</t>
+		<t id="250">&lt;all&gt;</t>
+		<t id="260">Select a logging target</t>
+		<t id="270">Equipment\n</t>
+		<t id="271">Lasers</t>
+		<t id="272">Shields</t>
+		<t id="273">Missiles</t>
+		<t id="274">Drones</t>
+		<t id="275">Docking Computer</t>
+		<t id="276">Jumpdrive</t>
+		<t id="277">Triplex Scanner</t>
+		<t id="278">Rudder Optimization</t>
+		<t id="279">Cargo Life Support</t>
+		<t id="280">Duplex Scanner</t>
+		<t id="300">\33COK\33X Uninstall</t>
+		<t id="310">\33GAbort\33x</t>
+		<t id="311">\33RUninstall\33x</t>
+		<t id="320">To complete the uninstall save the game and ensure the setup script is removed before reloading.</t>
+		<t id="330">\33COK\33X Traders - Uninstalling... %s\%</t>
+		<t id="331">\33COK\33X Traders has been uninstalled. To complete the uninstall save the game and ensure the setup script is removed before reloading.</t>
+		<t id="400">\33COK\33X Blacklist</t>
+		<t id="410">Add Sector...</t>
+		<t id="411">Add \33MPirate\33X Sectors</t>
+		<t id="412">Add \33BNon-Jumpable\33X Sectors</t>
+		<t id="413">Add \33RWar\33X Sectors</t>
+		<t id="414">\33YClear\33X List</t>
+		<t id="415">Add Station...</t>
+		<t id="416">Add Race Sectors...</t>
+		<t id="420">\33WSector\33X</t>
+		<t id="421">\33WRace\33X</t>
+		<t id="430">Add to blacklist</t>
+		<t id="500">Reset Free Trader Balance</t>
+		<t id="501">Reset Global Free Trader Balance</t>
+		<t id="1000">OK Traders Version=%s.%s.%s, Internal=%s</t>
+		<t id="1001">\33COK\33X Traders v%s.%s.%s installed.</t>
+		<t id="1002">\33COK\33X Traders upgraded to v%s.%s.%s.</t>
+		<t id="1003">\33COK\33X Traders downgraded to v%s.%s.%s.</t>
+		<t id="1050">Off</t>
+		<t id="1051">On</t>
+		<t id="1052">Yes</t>
+		<t id="1053">No</t>
+		<t id="1054">&lt;none&gt;</t>
+		<t id="1056">Any</t>
+		<t id="1059">\33B%s\33X</t>
+		<t id="1060">Freighters</t>
+		<t id="1100">Free Trader</t>
+		<t id="1101">\33GEco\33X Trader</t>
+		<t id="1102">\33OPlayer\33X Trader %s</t>
+		<t id="1200">\33COK\33X: %s \(%s\) - incoming missile in sector %s</t>
+		<t id="1201">\33COK\33X: %s \(%s\) - under attack by %s in sector %s</t>
+		<t id="1202">\33COK\33X: %s \(%s\) - targetted by enemy %s in sector %s</t>
+		<t id="2000">OK Traders %s.%s.%s</t>
+	</page>
+</language>
