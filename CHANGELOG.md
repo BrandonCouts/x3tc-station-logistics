@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.5-internal
+- Added store balancing loop and auto role inference with prefixed last reason codes.
+
 ## 0.1.4-internal
 - Manager tick now runs continuously every ~10 seconds.
 
