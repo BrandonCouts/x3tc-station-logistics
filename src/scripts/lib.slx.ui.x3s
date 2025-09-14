@@ -8,6 +8,43 @@ $fn = argument 1
 if $fn == 'FormatReason'
   $code = argument 2
   $page = 89055
+  * auto roles use same text as base codes
+  if $code == 'A_AT_MIN'
+    $code = 'AT_MIN'
+  end
+  if $code == 'A_NO_STORE'
+    $code = 'NO_STORE'
+  end
+  if $code == 'A_FILLED_MAX'
+    $code = 'FILLED_MAX'
+  end
+  if $code == 'A_P2S'
+    $code = 'P2S'
+  end
+  if $code == 'A_P2C'
+    $code = 'P2C'
+  end
+  if $code == 'A_S2C'
+    $code = 'S2C'
+  end
+  if $code == 'A_P2S_RECV'
+    $code = 'P2S_RECV'
+  end
+  if $code == 'A_S_BAL'
+    $code = 'S_BAL'
+  end
+  if $code == 'A_S2S'
+    $code = 'S2S'
+  end
+  if $code == 'A_S2S_RECV'
+    $code = 'S2S_RECV'
+  end
+  if $code == 'A_NO_PEER'
+    $code = 'NO_PEER'
+  end
+  if $code == 'A_BAL_OK'
+    $code = 'BAL_OK'
+  end
   if $code == 'AT_MIN'
     $txt = read text: page=$page id=201
     return $txt
@@ -38,6 +75,22 @@ if $fn == 'FormatReason'
   end
   if $code == 'S_BAL'
     $txt = read text: page=$page id=217
+    return $txt
+  end
+  if $code == 'S2S'
+    $txt = read text: page=$page id=218
+    return $txt
+  end
+  if $code == 'S2S_RECV'
+    $txt = read text: page=$page id=219
+    return $txt
+  end
+  if $code == 'NO_PEER'
+    $txt = read text: page=$page id=220
+    return $txt
+  end
+  if $code == 'BAL_OK'
+    $txt = read text: page=$page id=221
     return $txt
   end
   $txt = ''

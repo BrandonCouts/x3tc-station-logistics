@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.6-internal
+- Added peer store status reason codes and auto-role mapping in UI helper.
+
 ## 0.1.5-internal
 - Added store balancing loop and auto role inference with prefixed last reason codes.
 - Removed unused call to nonexistent `plugin.slx.Wares` from setup script.
