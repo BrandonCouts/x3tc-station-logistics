@@ -58,6 +58,20 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
       continue
     body.append((i, raw.rstrip()))
 
+  # pre-scan for labels that contain blocking menu calls
+  label = None
+  blocking_labels: set[str] = set()
+  for _, line in body:
+    low = line.strip().lower()
+    if m := re.match(r'^([a-z0-9_\.]+):$', low):
+      label = m.group(1)
+      continue
+    if low == 'endsub':
+      label = None
+      continue
+    if label and ('open custom menu:' in low or 'open custom info menu:' in low):
+      blocking_labels.add(label)
+
   # header sanity
   if "page" in headers and not re.fullmatch(r"89\d{3}", headers["page"]):
     warnings.append(f"{path.name}:{1}: header #page should look like 89xxx")
@@ -90,7 +104,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
         if blk.kind == "while" and not (blk.has_wait or blk.has_progress):
           errors.append(f"{path.name}:{blk.line_no}: while-block has no 'wait' before 'end'")
     # mark waits inside while
-    if re.search(r'\bwait\s+\d+\s*ms\b', low):
+    if re.search(r'\bwait(\s+\d+\s*ms| randomly from (\d+|\$[A-Za-z0-9_.]+) to (\d+|\$[A-Za-z0-9_.]+) ms)\b', low):
       for b in reversed(stack):
         if b.kind == "while":
           b.has_wait = True
@@ -104,11 +118,26 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
           b.has_progress = True
           break
 
+    # treat certain blocking calls as progress (e.g., menu interaction)
+    if "open custom menu:" in low or "open custom info menu:" in low:
+      for b in reversed(stack):
+        if b.kind == "while":
+          b.has_progress = True
+          break
+
+    if m := re.match(r'^gosub\s+([A-Za-z0-9_.]+):$', low):
+      lbl = m.group(1)
+      if lbl.lower() in blocking_labels:
+        for b in reversed(stack):
+          if b.kind == "while":
+            b.has_progress = True
+            break
+
     # line-shape validation (warn on unknown shapes)
     recognizable = any(pat.match(line) for pat in patterns)
     if not recognizable and not (low.startswith("if ") or low.startswith("else if ") or low == "else" or low == "end" or low.startswith("while ")):
       # Allow variable assignments and general calls as free-form to reduce false positives
-      if not re.match(r"^\$[A-Za-z0-9_.]+(\[[^\]]+\])?(\s*=|->)", line) and "call script" not in low:
+      if not re.match(r"^\s*\$[A-Za-z0-9_.]+(\[[^\]]+\])*\s*(=|->)", line) and "call script" not in low:
         warnings.append(f"{path.name}:{ln}: unrecognized line (check syntax): {line}")
 
   if stack:

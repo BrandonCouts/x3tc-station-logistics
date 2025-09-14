@@ -37,7 +37,7 @@
     },
     {
       "name": "wait",
-      "regex": "^=?\\s*wait \\d+\\s*ms$",
+      "regex": "^\\s*=?\\s*wait \\d+\\s*ms$",
       "examples": ["wait 1000 ms"]
     },
     {
@@ -52,13 +52,13 @@
     },
     {
       "name": "write.log",
-      "regex": "^write to log file \\$[A-Za-z0-9_.]+ append=\\[(TRUE|FALSE)\\] value=(\\$[A-Za-z0-9_.]+|'[^']+')$",
+      "regex": "^write to log file \\$[A-Za-z0-9_.]+\\s+append=\\[(TRUE|FALSE)\\]\\s+value=(\\$[A-Za-z0-9_.]+|'[^']+')$",
       "examples": ["write to log file $DebugID append=[FALSE] value=$txt"]
     },
     {
       "name": "dec",
-      "regex": "^dec \\$[A-Za-z0-9_.]+$",
-      "examples": ["dec $s"]
+      "regex": "^dec \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
+      "examples": ["dec $s ="]
     },
     {
       "name": "remove.array.elem",
@@ -67,7 +67,7 @@
     },
     {
       "name": "skip.if",
-      "regex": "^skip if \\$[A-Za-z0-9_.]+$",
+      "regex": "^skip if \\$[A-Za-z0-9_.]+(\\[[^\\]]+\\])?$",
       "examples": ["skip if $section"]
     },
     {
@@ -113,13 +113,80 @@
     },
     {
       "name": "obj.add.units",
-      "regex": "^=?\\s*\\$[A-Za-z0-9_.]+->\\s*add (\\$[A-Za-z0-9_.]+|[-]?\\d+) units of \\$[A-Za-z0-9_.]+$",
+      "regex": "^\\s*=?\\s*\\$[A-Za-z0-9_.]+\\s*->\\s*add (\\$[A-Za-z0-9_.]+|[-]?\\d+) units of \\$[A-Za-z0-9_.]+$",
       "examples": ["= $station-> add $amount units of $ware"]
     },
     {
       "name": "wait.random",
-      "regex": "^=?\\s*wait randomly from \\d+ to \\d+ ms$",
+      "regex": "^\\s*=?\\s*wait randomly from (\\d+|\\$[A-Za-z0-9_.]+) to (\\d+|\\$[A-Za-z0-9_.]+) ms$",
       "examples": ["= wait randomly from 500 to 1000 ms"]
+    }
+    ,
+    {
+      "name": "al.register.noquote",
+      "regex": "^al engine:\\s*register script=[A-Za-z0-9_.]+$",
+      "examples": ["al engine: register script=al.LI.FDN.event"]
+    },
+    {
+      "name": "inc",
+      "regex": "^inc \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
+      "examples": ["inc $sector.count ="]
+    },
+    {
+      "name": "set.global.var.null",
+      "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=null$",
+      "examples": ["set global variable: name=$var value=null"]
+    },
+    {
+      "name": "menu.info",
+      "regex": "^add custom menu info line to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+      "examples": ["add custom menu info line to array $menu: text=$txt"]
+    },
+    {
+      "name": "menu.heading",
+      "regex": "^add custom menu heading to array \\$[A-Za-z0-9_.]+: title=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+      "examples": ["add custom menu heading to array $menu: title=$txt"]
+    },
+    {
+      "name": "menu.item",
+      "regex": "^add custom menu item to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*') returnvalue=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+      "examples": ["add custom menu item to array $menu: text=$txt returnvalue=$return.array"]
+    },
+    {
+      "name": "menu.section",
+      "regex": "^add section to custom menu: \\$[A-Za-z0-9_.]+$",
+      "examples": ["add section to custom menu: $menu"]
+    },
+    {
+      "name": "menu.group.start",
+      "regex": "^add new grouping to menu: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*'), open=\\$[A-Za-z0-9_.]+$",
+      "examples": ["add new grouping to menu: $menu, text=$txt, open=$check"]
+    },
+    {
+      "name": "menu.group.end",
+      "regex": "^add end grouping to menu: \\$[A-Za-z0-9_.]+$",
+      "examples": ["add end grouping to menu: $menu"]
+    },
+    {
+      "name": "menu.nonselect",
+      "regex": "^add non selectable menu item: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+      "examples": ["add non selectable menu item: $menu, text=$temp.array"]
+    },
+    {
+      "name": "display.subtitle",
+      "regex": "^display subtitle text: text=\\$[A-Za-z0-9_.]+ duration=\\d+\\s*ms$",
+      "examples": ["display subtitle text: text=$txt duration=2000 ms"]
+    },
+    {
+      "name": "menu.open",
+      "regex": "^open custom menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+$",
+      "examples": ["open custom menu: title=$txt description=null option array=$menu"]
+    }
+    ,
+    {
+      "name": "skip.if.eq",
+      "regex": "^skip if \\$[A-Za-z0-9_.]+ == \\d+$",
+      "examples": ["skip if $open.menu == 1"]
     }
   ]
 }

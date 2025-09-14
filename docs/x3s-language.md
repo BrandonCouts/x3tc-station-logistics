@@ -15,6 +15,19 @@
 - **endsub**: `endsub`
 - **obj.add.units**: `= $station-> add $amount units of $ware`
 - **wait.random**: `= wait randomly from 500 to 1000 ms`
+- **al.register.noquote**: `al engine: register script=al.LI.FDN.event`
+- **inc**: `inc $sector.count =`
+- **set.global.var.null**: `set global variable: name=$var value=null`
+- **menu.info**: `add custom menu info line to array $menu: text=$txt`
+- **menu.heading**: `add custom menu heading to array $menu: title=$txt`
+- **menu.item**: `add custom menu item to array $menu: text=$txt returnvalue=$return.array`
+- **menu.section**: `add section to custom menu: $menu`
+- **menu.group.start**: `add new grouping to menu: $menu, text=$txt, open=$check`
+- **menu.group.end**: `add end grouping to menu: $menu`
+- **menu.nonselect**: `add non selectable menu item: $menu, text=$temp.array`
+- **display.subtitle**: `display subtitle text: text=$txt duration=2000 ms`
+- **menu.open**: `open custom menu: title=$txt description=null option array=$menu`
+- **skip.if.eq**: `skip if $open.menu == 1`
 
 ## Fixtures
 
