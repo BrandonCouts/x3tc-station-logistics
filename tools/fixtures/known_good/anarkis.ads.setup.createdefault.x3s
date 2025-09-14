@@ -1,0 +1,22 @@
+#name: anarkis.ads.setup.createdefault
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.setup.createdefault.xml
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+
+if $refobj -> is of class Ship
+$setup = $gl.setup[1]
+else
+$setup = $gl.setup[2]
+end
+
+$cnt =  size of array $setup
+$result =  array alloc: size=$cnt
+
+while $cnt
+dec $cnt =
+$result[$cnt] = $setup[$cnt]
+end
+
+return $result

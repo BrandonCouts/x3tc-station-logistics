@@ -1,0 +1,11 @@
+#name: anarkis.ads.settings.default.get
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.settings.default.get.xml
+
+
+$setup = get global variable: name='anarkis.ads.default'
+skip if $setup
+$setup = [THIS] -> call script anarkis.ads.settings.default.ini :
+
+return $setup

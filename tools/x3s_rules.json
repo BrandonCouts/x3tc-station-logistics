@@ -559,6 +559,20 @@
             "examples": [
                 "add custom menu item to array $menu: text=$st returnvalue=Carrier"
             ]
+        },
+        {
+            "name": "append.player",
+            "regex": "^append Player to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append Player to array $ignore"
+            ]
+        },
+        {
+            "name": "append.null",
+            "regex": "^append null to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append null to array $setup"
+            ]
         }
     ]
 }

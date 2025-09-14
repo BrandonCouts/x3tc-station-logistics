@@ -1,0 +1,46 @@
+#name: anarkis.ads.toggle.task
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.toggle.task.xml
+
+$npc = [FALSE]
+if $target -> is script anarkis.acc.task.autocarrier on stack of task=10
+$task.id = 10
+else if $target -> is script anarkis.acc.task.autocarrier on stack of task=11
+$task.id = 11
+else if $target -> is script anarkis.acc.task.autocarrier on stack of task=894
+$task.id = 894
+else if $target -> is script anarkis.acc.task.autocarrier.npc on stack of task=894
+$npc = [TRUE]
+$task.id = 894
+end
+$target -> start task 900 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+skip if not $task.id
+$target -> start task $task.id with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+= wait 200 ms
+
+if $active
+
+if not $task.id
+$owner = $target -> get owner race
+if $owner != Player
+$npc = [TRUE]
+$task.id = 894
+else
+$npc = [FALSE]
+if $target -> is task 10 in use
+$task.id = 11
+else
+$task.id = 10
+end
+end
+end
+
+if $npc
+$target -> start task $task.id with script anarkis.acc.task.autocarrier.npc and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+else
+$target -> start task $task.id with script anarkis.acc.task.autocarrier and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+end
+
+return null

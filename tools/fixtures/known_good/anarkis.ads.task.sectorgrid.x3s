@@ -1,0 +1,37 @@
+#name: anarkis.ads.task.sectorgrid
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.task.sectorgrid.xml
+
+if [THIS] -> exists
+$race = [THIS] -> get owner race
+$sector = [THIS] -> get sector
+end
+
+$alert.level = 3
+
+while [TRUE]
+= [THIS] -> call script anarkis.lib.wait :  wait time (in sec)=30  global to check=null
+
+$threat = [THIS] -> call script anarkis.ads.lib.get.sectorthreat :  sector=$sector  race=$race
+if $threat >= $alert.level
+$gridships = [THIS] -> call script anarkis.ads.lib.get.gridships :  Race=$race  available only=[TRUE]  base sector (or null)=$sector
+$gridships.cnt =  size of array $gridships
+$enemy = [THIS] -> call script anarkis.ads.lib.enemy.strongest :  sector=$sector  race=$race
+$needed.strength = $threat * 3
+while $gridships.cnt AND ( $needed.strength > 0 )
+dec $gridships.cnt =
+$grid.select = $gridships[$gridships.cnt]
+$grid.threat = [THIS] -> call script anarkis.ads.lib.get.shipthreat :  ship/class=$grid.select
+$needed.strength = $needed.strength - $grid.threat
+$grid.select -> interrupt with script anarkis.ads.cmd.protectgrid and prio 10: arg1=$enemy arg2=$sector arg3=null arg4=null
+end
+= [THIS] -> call script anarkis.lib.wait :  wait time (in sec)=300  global to check=null
+end
+
+end
+
+
+
+
+return null
