@@ -1,5 +1,3 @@
 * while loop without wait should fail
-$i = 0
-while $i < 10
-inc $i
+while 1
 end

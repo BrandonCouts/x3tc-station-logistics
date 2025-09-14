@@ -29,6 +29,25 @@
 - **menu.open**: `open custom menu: title=$txt description=null option array=$menu`
 - **skip.if.eq**: `skip if $open.menu == 1`
 
+### New Statements Recognized
+- **break**: `break`
+- **continue**: `continue`
+- **do.if**: `do if $Config[$Config.Debug.Enabled]`
+- **resize.array**: `resize array $State to 30`
+- **append.const**: `append 0 to array $Mins`
+- **copy.array**: `copy array $Arg2 index 0 ... $Arg2.Length into array $rc at index $Arg1.Length`
+- **return.int**: `return 0`
+- **skip.if.any**: `skip if $rc >= 0`
+- **write.log.printf**: `write to log file $PageId append=1 printf: fmt='New install', null, null`
+- **write.logbook.printf**: `write to player logbook: printf: pageid=$PageId textid=$Id.Logbook.Installed, null, null`
+- **set.command.upgrade**: `set script command upgrade: command=[GLEN_OK_TRADE]  upgrade=[TRUE]`
+- **global.script.map**: `global script map: set: key=[GLEN_OK_TRADE], class=[Moveable Ship], race=[Player], script=glen.trade.ok.cmd, prio=0`
+- **set.command.preload**: `set ship command preload script: command=[GLEN_OK_TRADE] script=glen.trade.ok.menu`
+- **add.money**: `add money to player: $Cost`
+- **set.script.command**: `set script command: [GLEN_OK_TRADE]`
+- **send.message**: `send incoming message $Msg to player: display it=0`
+- **play.sample**: `play sample 972`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
