@@ -117,3 +117,15 @@ via `python tools/convert_mods.py` and are used by the test suite.
 ### New Statements Recognized
 - **array.alloc**: `$sel.role = array alloc: size=0`
 - **menu.create**: `$menu = create custom menu array`
+
+### New Statements Recognized
+- **skip.if.find.array**: `skip if  find $plugin.id in array: $ecs.installed`
+- **skip.if.datatyp**: `skip if  is datatyp[ $setup ] == DATATYP_ARRAY`
+- **skip.if.not.var**: `skip if not $sound`
+- **skip.if.var.exists**: `skip if $target -> exists`
+- **skip.if.global.var**: `skip if get global variable: name='plugin.ecs.setup'`
+- **skip.if.call.register**: `skip if [THIS] -> call script plugin.sk.ecs.register :  Setup Array=$setup`
+- **skip.if.call.unregister**: `skip if [THIS] -> call script plugin.sk.ecs.unregister :  Plugin ID='plugin.ecs.dummy'`
+- **skip.if.is.class**: `skip if $target -> is of class $plugin.config.class`
+- **skip.if.not.eq.num**: `skip if not $mycount == 0`
+- **array.get.index**: `$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1`

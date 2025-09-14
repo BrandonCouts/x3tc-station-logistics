@@ -664,6 +664,76 @@
             "examples": [
                 "$menu = create custom menu array"
             ]
+        },
+        {
+            "name": "skip.if.find.array",
+            "regex": "^skip\\s+if\\s+find \\$[A-Za-z0-9_.]+ in array: \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "skip if  find $plugin.id in array: $ecs.installed"
+            ]
+        },
+        {
+            "name": "skip.if.datatyp",
+            "regex": "^skip\\s+if\\s+is datatyp\\[\\s*\\$[A-Za-z0-9_.]+\\s*\\]\\s*==\\s*DATATYP_[A-Z_]+$",
+            "examples": [
+                "skip if  is datatyp[ $setup ] == DATATYP_ARRAY"
+            ]
+        },
+        {
+            "name": "skip.if.not.var",
+            "regex": "^skip\\s+if\\s+not \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "skip if not $sound"
+            ]
+        },
+        {
+            "name": "skip.if.var.exists",
+            "regex": "^skip\\s+if\\s+\\$[A-Za-z0-9_.]+\\s*->\\s*exists$",
+            "examples": [
+                "skip if $target -> exists"
+            ]
+        },
+        {
+            "name": "skip.if.global.var",
+            "regex": "^skip\\s+if\\s+get global variable: name='[^']+'$",
+            "examples": [
+                "skip if get global variable: name='plugin.ecs.setup'"
+            ]
+        },
+        {
+            "name": "skip.if.call.register",
+            "regex": "^skip\\s+if\\s+\\[THIS\\]\\s*->\\s*call script plugin\\.sk\\.ecs\\.register\\s*:  Setup Array=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "skip if [THIS] -> call script plugin.sk.ecs.register :  Setup Array=$setup"
+            ]
+        },
+        {
+            "name": "skip.if.call.unregister",
+            "regex": "^skip\\s+if\\s+\\[THIS\\]\\s*->\\s*call script plugin\\.sk\\.ecs\\.unregister\\s*:  Plugin ID='[^']+'$",
+            "examples": [
+                "skip if [THIS] -> call script plugin.sk.ecs.unregister :  Plugin ID='plugin.ecs.dummy'"
+            ]
+        },
+        {
+            "name": "skip.if.is.class",
+            "regex": "^skip\\s+if\\s+\\$[A-Za-z0-9_.]+\\s*->\\s*is of class \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "skip if $target -> is of class $plugin.config.class"
+            ]
+        },
+        {
+            "name": "skip.if.not.eq.num",
+            "regex": "^skip\\s+if\\s+not \\$[A-Za-z0-9_.]+\\s*==\\s*\\d+$",
+            "examples": [
+                "skip if not $mycount == 0"
+            ]
+        },
+        {
+            "name": "array.get.index",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*get index of \\$[A-Za-z0-9_.]+ in array \\$[A-Za-z0-9_.]+ offset=-1 \\+ 1$",
+            "examples": [
+                "$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1"
+            ]
         }
     ]
 }
