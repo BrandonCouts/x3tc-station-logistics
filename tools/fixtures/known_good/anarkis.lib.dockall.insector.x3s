@@ -1,0 +1,91 @@
+#name: anarkis.lib.dockall.insector
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.dockall.insector.xml
+
+* ===========================================
+* Securely Dock All Ships to a Carrier / Station
+* ===========================================
+
+$ship.list = $carrier -> get owned ships: class/type=Moveable Ship
+$global =  size of array $ship.list
+$my.owner = $carrier -> get owner race
+* 1st Pass
+while $global
+$ship.count =  size of array $ship.list
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+$env = $ship -> get environment
+if not $carrier -> is docking possible of $ship
+remove element from array $ship.list at index $ship.count
+continue
+end
+if $env == $carrier
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+if not $ship -> exists
+remove element from array $ship.list at index $ship.count
+continue
+end
+$ship.owner = $ship -> get owner race
+if not $ship.owner == $my.owner
+remove element from array $ship.list at index $ship.count
+continue
+end
+
+if $ship -> is script !move.movetostation on stack of task=0
+$distance = get distance between $ship and $carrier
+$transport.device = $ship -> get true amount of ware Transporter Device in cargo bay
+
+* - - Teleport ships with transporter device
+if $distance <= 5000 AND $transport.device >= 1
+$ship -> put into environment $carrier ->
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+* - Check for buggy ships
+$speed = $ship -> get current speed
+if $speed == 0
+* - - Transporter Device Teleportation possible ?
+$distance = get distance between $ship and $carrier
+if $distance <= 6000 AND $transport.device >= 1
+$ship -> put into environment $carrier ->
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+* - - - Go Idle and hope it'll work next try
+else
+START $ship -> call script !ship.cmd.idle.std :
+= wait 5000 ms
+end
+end
+else
+$env = $ship -> get environment
+if $env != [THIS]
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=$carrier arg2=null arg3=null arg4=null arg5=null
+else if $env == [THIS]
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+end
+end
+$global =  size of array $ship.list
+= wait 5000 ms
+end
+
+return null
+
+dodock:
+$ship -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$ship -> set command: COMMAND_NONE  target=null target2=null par1=null par2=null
+$ship -> set destination to null
+$v1 = $ship -> get maximum shield strength
+$ship -> set current shield strength to $v1
+endsub
+
+return null

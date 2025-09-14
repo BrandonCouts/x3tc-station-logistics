@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 160 known-good ADS scripts:
+The linter is validated against these 180 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -164,3 +164,23 @@ The linter is validated against these 160 known-good ADS scripts:
 - anarkis.lib.cmd.jumptobeacon.x3s
 - anarkis.lib.cmd.killandland.timeout.x3s
 - anarkis.lib.create.marine.x3s
+- anarkis.lib.create.passenger.x3s
+- anarkis.lib.createfactory.x3s
+- anarkis.lib.createship.x3s
+- anarkis.lib.custowned.addship.x3s
+- anarkis.lib.custowned.cleanarr.f.x3s
+- anarkis.lib.custowned.cleanarray.x3s
+- anarkis.lib.custowned.getarray.f.x3s
+- anarkis.lib.custowned.getarray.x3s
+- anarkis.lib.custowned.getdocked.x3s
+- anarkis.lib.custowned.kill.x3s
+- anarkis.lib.disable.ai.x3s
+- anarkis.lib.display.message.x3s
+- anarkis.lib.dockall.adsonly.x3s
+- anarkis.lib.dockall.full.x3s
+- anarkis.lib.dockall.insector.x3s
+- anarkis.lib.dockall.secure.x3s
+- anarkis.lib.dockcustom.secure.x3s
+- anarkis.lib.encyclopedia.chapter.x3s
+- anarkis.lib.encyclopedia.x3s
+- anarkis.lib.get.bycargovalue.fro.x3s
