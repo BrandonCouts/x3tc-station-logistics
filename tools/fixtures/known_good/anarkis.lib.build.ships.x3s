@@ -1,0 +1,39 @@
+#name: anarkis.lib.build.ships
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.build.ships.xml
+
+* ===========================================
+* Build a given amount of ships
+* ===========================================
+
+$null = null
+
+$class.list =  get ship type array: maker race=$race class=Fighter
+$class.cnt =  size of array $class.list
+
+$result =  array alloc: size=0
+while $ship.count
+dec $ship.count =
+if $shiptype == null
+$rnd =  = random value from 0 to $class.cnt - 1
+$new.class = $class.list[$rnd]
+else
+$new.class = $shiptype
+end
+
+$rnd =  = random value from 0 to 7 - 1
+$ship = $null -> call script anarkis.lib.createship :  Ship Type=$new.class  location=$sector  race=$race  best weapon ?=$rnd  no.ion=[FALSE]  no ammo=[FALSE]
+append $ship to array $result
+= $ship -> install 1 units of Jumpdrive
+= $ship -> install 1 units of Transporter Device
+
+$ship -> set homebase to $ship.homebase
+
+if $Put.in.Home == [TRUE]
+$ship -> put into environment $ship.homebase ->
+end
+
+end
+
+return $result

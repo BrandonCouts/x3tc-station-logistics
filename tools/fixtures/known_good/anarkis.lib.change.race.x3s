@@ -1,0 +1,14 @@
+#name: anarkis.lib.change.race
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.change.race.xml
+
+$l = $tg -> get ship array from sector/ship/station
+$c =  size of array $l
+while $c
+dec $c =
+$s = $l[$c]
+$s -> set owner race to $race
+end
+$tg -> set owner race to $race
+return null

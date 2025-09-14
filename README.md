@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 140 known-good ADS scripts:
+The linter is validated against these 160 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -144,3 +144,23 @@ The linter is validated against these 140 known-good ADS scripts:
 - anarkis.ads.toggle.task.x3s
 - anarkis.ads.wing.attack.pl.x3s
 - anarkis.ads.wing.defense.pl.x3s
+- anarkis.debug.off.x3s
+- anarkis.debug.on.x3s
+- anarkis.debug.output.x3s
+- anarkis.ecs.al.init.x3s
+- anarkis.lib.add.software.x3s
+- anarkis.lib.armship.x3s
+- anarkis.lib.armturret.x3s
+- anarkis.lib.array.append.x3s
+- anarkis.lib.build.ships.x3s
+- anarkis.lib.change.race.x3s
+- anarkis.lib.clear.shiparray.x3s
+- anarkis.lib.cmd.attackland.x3s
+- anarkis.lib.cmd.attacksame.x3s
+- anarkis.lib.cmd.dock.all.x3s
+- anarkis.lib.cmd.dock.custom.x3s
+- anarkis.lib.cmd.donothing.x3s
+- anarkis.lib.cmd.jumpnearobject.x3s
+- anarkis.lib.cmd.jumptobeacon.x3s
+- anarkis.lib.cmd.killandland.timeout.x3s
+- anarkis.lib.create.marine.x3s

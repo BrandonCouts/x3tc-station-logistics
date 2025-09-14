@@ -1,0 +1,17 @@
+#name: anarkis.debug.output
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.debug.output.xml
+
+$debug.on = get global variable: name='anarkis.debug'
+if $debug.on
+*write to player logbook $message
+$playtime = playing time
+$playtime =  format time: $playtime
+*$playtime = $playtime / 60
+
+$m = '(' + $playtime + ') ' + $message
+write to log file #8513  append=1  value=$m
+display subtitle text: text=$m duration=5000 ms
+end
+return null
