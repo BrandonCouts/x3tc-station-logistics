@@ -253,6 +253,13 @@
       ]
     },
     {
+      "name": "menu.open.info",
+      "regex": "^\\s*=?\\s*open custom info menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+(?: maxoptions=\\d+)?$",
+      "examples": [
+        "open custom info menu: title=$txt description=null option array=$menu maxoptions=2"
+      ]
+    },
+    {
       "name": "skip.if.eq",
       "regex": "^skip if \\$[A-Za-z0-9_.]+ == \\d+$",
       "examples": [

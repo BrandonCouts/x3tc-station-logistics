@@ -48,6 +48,9 @@
 - **send.message**: `send incoming message $Msg to player: display it=0`
 - **play.sample**: `play sample 972`
 
+### New Statements Recognized
+- **menu.open.info**: `open custom info menu: title=$txt description=null option array=$menu maxoptions=2`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
