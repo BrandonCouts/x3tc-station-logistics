@@ -4,4 +4,195 @@
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
 
+$stations = call script 'lib.slx.query' : function='ListEnrolledStations'
+$scount = size of array $stations
+while $scount
+  dec $scount
+  $st = $stations[$scount]
+  $wares = $st -> get tradeable ware array from station
+  $wcount = size of array $wares
+  while $wcount
+    dec $wcount
+    $ware = $wares[$wcount]
+    $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$st, ware=$ware
+    $role = $cfg['role']
+    if not $role
+      continue
+    end
+    $pct = call script 'lib.slx.query' : function='GetStationWarePct', station=$st, ware=$ware
+    if $role == 'producer'
+      gosub ProducerLoop
+    end
+    if $role == 'consumer'
+      gosub ConsumerLoop
+    end
+    = wait 1 ms
+  end
+  = wait 1 ms
+end
+
 return null
+
+ProducerLoop:
+  if $pct > $cfg['max_pct']
+    $dst = null
+    $sec = call script 'lib.slx.query' : function='GetSector', station=$st
+    $idx2 = size of array $stations
+    while $idx2
+      dec $idx2
+      $other = $stations[$idx2]
+      skip if $other == $st
+      $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
+      skip if $cfg2['role'] != 'store'
+      $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
+      if $pct2 < $cfg2['max_pct']
+        $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
+        if $sec == $sec2
+          $dst = $other
+          break
+        end
+        if not $dst
+          $dst = $other
+        end
+      end
+      = wait 1 ms
+    end
+    if $dst
+      $srcAmt = $st -> get amount of ware $ware in cargo bay
+      $srcCap = $st -> get max amount of ware $ware that can be stored in cargo bay
+      $dstAmt = $dst -> get amount of ware $ware in cargo bay
+      $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
+      $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
+      $srcChunk = $srcCap * $cfg['chunk_pct'] / 100
+      $dstChunk = $dstCap * $dstCfg['chunk_pct'] / 100
+      $available = $srcAmt - ($cfg['max_pct'] * $srcCap / 100)
+      $room = ($dstCfg['max_pct'] * $dstCap / 100) - $dstAmt
+      $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
+      if $amt > 0
+        $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
+        if $ok
+          call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='P2S'
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2S_RECV'
+        else
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+        end
+      else
+        call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+      end
+    else
+      call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+    end
+  else if $pct > $cfg['min_pct']
+    $dst = null
+    $sec = call script 'lib.slx.query' : function='GetSector', station=$st
+    $idx2 = size of array $stations
+    while $idx2
+      dec $idx2
+      $other = $stations[$idx2]
+      skip if $other == $st
+      $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
+      skip if $cfg2['role'] != 'consumer'
+      $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
+      if $pct2 < $cfg2['max_pct']
+        $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
+        if $sec == $sec2
+          $dst = $other
+          break
+        end
+        if not $dst
+          $dst = $other
+        end
+      end
+      = wait 1 ms
+    end
+    if $dst
+      $srcAmt = $st -> get amount of ware $ware in cargo bay
+      $srcCap = $st -> get max amount of ware $ware that can be stored in cargo bay
+      $dstAmt = $dst -> get amount of ware $ware in cargo bay
+      $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
+      $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
+      $srcChunk = $srcCap * $cfg['chunk_pct'] / 100
+      $dstChunk = $dstCap * $dstCfg['chunk_pct'] / 100
+      $available = $srcAmt - ($cfg['min_pct'] * $srcCap / 100)
+      $room = ($dstCfg['max_pct'] * $dstCap / 100) - $dstAmt
+      $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
+      if $amt > 0
+        $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
+        if $ok
+          call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='P2C'
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2C'
+        else
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='AT_MIN'
+        end
+      else
+        call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='AT_MIN'
+      end
+    else
+      call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='AT_MIN'
+    end
+  else
+    call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='AT_MIN'
+  end
+  return null
+
+ConsumerLoop:
+  if $pct < $cfg['min_pct']
+    $src = null
+    $sec = call script 'lib.slx.query' : function='GetSector', station=$st
+    $idx2 = size of array $stations
+    while $idx2
+      dec $idx2
+      $other = $stations[$idx2]
+      skip if $other == $st
+      $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
+      skip if $cfg2['role'] != 'store'
+      $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
+      if $pct2 > $cfg2['min_pct']
+        $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
+        if $sec == $sec2
+          $src = $other
+          break
+        end
+        if not $src
+          $src = $other
+        end
+      end
+      = wait 1 ms
+    end
+    if $src
+      $srcAmt = $src -> get amount of ware $ware in cargo bay
+      $srcCap = $src -> get max amount of ware $ware that can be stored in cargo bay
+      $dstAmt = $st -> get amount of ware $ware in cargo bay
+      $dstCap = $st -> get max amount of ware $ware that can be stored in cargo bay
+      $srcCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
+      $srcChunk = $srcCap * $srcCfg['chunk_pct'] / 100
+      $dstChunk = $dstCap * $cfg['chunk_pct'] / 100
+      $available = $srcAmt - ($srcCfg['min_pct'] * $srcCap / 100)
+      $room = ($cfg['min_pct'] * $dstCap / 100) - $dstAmt
+      $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
+      $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
+      if $amt > 0
+        $ok = call script 'lib.slx.transfer' : function='CanMove', src=$src, dst=$st, ware=$ware, amount=$amt
+        if $ok
+          call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$st, ware=$ware, amount=$amt
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='S2C'
+          call script 'lib.slx.query' : function='SetLastReason', station=$src, ware=$ware, text='S2C'
+        else
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+        end
+      else
+        call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+      end
+    else
+      call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
+    end
+  end
+  return null
+

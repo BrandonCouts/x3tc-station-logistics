@@ -3,5 +3,12 @@
   <page id="89055" title="SLX" desc="" voice="no">
     <t id="101">SLX</t>
     <t id="102">Open SLX</t>
+    <t id="201">At Min (no export)</t>
+    <t id="202">No store headroom</t>
+    <t id="203">Filled to Max</t>
+    <t id="204">Exported to store</t>
+    <t id="205">Exported to consumer</t>
+    <t id="206">Imported from store</t>
+    <t id="207">Imported from producer</t>
   </page>
 </language>
