@@ -113,3 +113,7 @@ via `python tools/convert_mods.py` and are used by the test suite.
 - **size.of.array**: `$ship.count = size of array $ship.list`
 - **create.station**: `$select = create station: type=$station.type owner=$race addto=$sector x=$x y=$y z=$z`
 - **random.value**: `$p.face = = random value from 0 to 4 - 1`
+
+### New Statements Recognized
+- **array.alloc**: `$sel.role = array alloc: size=0`
+- **menu.create**: `$menu = create custom menu array`

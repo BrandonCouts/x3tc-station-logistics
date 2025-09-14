@@ -1,0 +1,96 @@
+#name: anarkis.ads.comm.barracks
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.comm.barracks.xml
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+$page.id = $gl.setup[0]
+
+$sel.role =  array alloc: size=0
+$st = sprintf: pageid=$page.id textid=1076, null, null, null, null, null
+append $st to array $sel.role
+$st = sprintf: pageid=$page.id textid=1077, null, null, null, null, null
+append $st to array $sel.role
+$st = sprintf: pageid=$page.id textid=1078, null, null, null, null, null
+append $st to array $sel.role
+$sel.role.id = 'role'
+$sel.role.select = 0
+
+while $menu.result != -1
+= wait 10 ms
+$menu =  create custom menu array
+$st = sprintf: pageid=$page.id textid=1004, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=1106, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='save'
+$st = sprintf: pageid=$page.id textid=1107, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$array = $ship -> get marines array
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$v1 = $select -> get name
+$v2 = $select -> get marine overall skill
+$v3 = $select -> get marine buy price
+$v1 = [THIS] -> call script anarkis.lib.shortstring :  string=$v1  max=20
+$v3 =  convert number $v3 to string
+$st = sprintf: pageid=$page.id textid=1080, $v1, $v2, $v3, null, null
+$sel.role.select = $select -> get local variable: name='anarkis.ads.marine'
+add value selection to menu: $menu, text=$st, value array=$sel.role, default=$sel.role.select, return id=$select
+$v1 = $select -> get marine fighting skill
+$v2 = $select -> get marine mechanical skill
+$v3 = $select -> get marine hacking skill
+$v4 = $select -> get marine engineering skill
+$st = sprintf: pageid=$page.id textid=1079, $v1, $v2, $v3, $v4, null
+add custom menu item to array $menu: text=$st returnvalue=0
+end
+
+$array = $ship -> get marines array
+$v2 = $ship -> free space for marines
+$cnt =  size of array $array
+$v2 = $v2 + $cnt
+$v1 = sprintf: pageid=$page.id textid=1109, $cnt, $v2, null, null, null
+add custom menu info line to array $menu: text=$v1
+$v1 = 0
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+skip if not $select -> get local variable: name='anarkis.ads.marine'
+inc $v1 =
+end
+$st = sprintf: pageid=$page.id textid=1108, $v1, null, null, null, null
+add custom menu info line to array $menu: text=$st
+$v1 = [THIS] -> call script anarkis.ads.crew.getcost :  ref object=$ship
+$v1 =  convert number $v1 to string
+$v1 = sprintf: pageid=$page.id textid=1105, $v1, null, null, null, null
+add custom menu info line to array $menu: text=$v1
+
+$v1 = sprintf: pageid=$page.id textid=1088, $v1, null, null, null, null
+add custom menu info line to array $menu: text=$v1
+
+$v1 =  read text: page=$page.id id=1075
+
+$v2 = sprintf: pageid=$page.id textid=455, $ship, null, null, null, null
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+if  is datatyp[ $menu.result ] == DATATYP_ARRAY
+$cnt =  size of array $menu.result
+while $cnt
+dec $cnt =
+$r.id = $menu.result[$cnt][0]
+$r.val = $menu.result[$cnt][1]
+if $r.id -> exists
+$r.id -> set local variable: name='anarkis.ads.marine' value=$r.val
+end
+end
+end
+if $menu.result -> exists
+
+$menu.result -> set local variable: name='anarkis.ads.marine' value=[TRUE]
+end
+
+
+end
+
+return null

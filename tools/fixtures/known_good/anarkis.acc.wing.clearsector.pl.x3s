@@ -1,0 +1,13 @@
+#name: anarkis.acc.wing.clearsector.pl
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.wing.clearsector.pl.xml
+
+* ===========================================
+* Wing : Send all ships in wings
+* ===========================================
+* Ships will be dispatched in 5 ship wings
+[THIS] -> set command: ANARKIS_CLEANSECTOR  target=null target2=null par1=null par2=null
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+
+return null

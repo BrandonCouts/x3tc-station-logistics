@@ -1,0 +1,63 @@
+#name: anarkis.acc.wing.clearsector
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.wing.clearsector.xml
+
+* ===========================================
+* Wing : Send all ships in wings
+* ===========================================
+* Ships will be dispatched in 5 ship wings
+
+$wing.array = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$cnt =  size of array $wing.array
+while $cnt
+dec $cnt =
+$leader = $wing.array[$cnt]
+skip if not $leader -> is of class Freighter
+remove element from array $wing.array at index $cnt
+end
+$cnt =  size of array $wing.array
+
+= [THIS] -> call script anarkis.acc.apply.relations :  active ships only?=[TRUE]
+$maincount =  size of array $wing.array
+$setup = [THIS] -> get local variable: name='anarkis.acc.setup'
+$callback = $setup[3]
+$autorename = $setup[15]
+$wing.id = 0
+
+while $maincount
+$leader = $wing.array[0]
+skip if $leader -> exists
+return null
+= [THIS] -> call script anarkis.acc.repairshields.single :  ship=$leader
+inc $wing.id =
+START $leader -> call script !ship.cmd.killenemies.std :
+$leader -> set local variable: name='anarkis.acc.wing' value=$wing.id
+if $callback == [TRUE]
+$leader -> start task 900 with script anarkis.acc.task.hullcheck and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+*if $autorename == [TRUE]
+*$leader -> start task 893 with script anarkis.acc.task.autoname and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+*end
+remove element from array $wing.array at index 0
+$cnt = 4
+$size =  size of array $wing.array
+while $cnt > 0 AND $size > 0
+dec $cnt =
+$wingmate = $wing.array[0]
+= [THIS] -> call script anarkis.acc.repairshields.single :  ship=$wingmate
+START $wingmate -> call script !ship.cmd.attacksame.std :  the target=$leader  stop if leader is docked=[FALSE]
+$wingmate -> set local variable: name='anarkis.acc.wing' value=$wing.id
+if $callback == [TRUE]
+$wingmate -> start task 900 with script anarkis.acc.task.hullcheck and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+*if $autorename == [TRUE]
+*$wingmate -> start task 893 with script anarkis.acc.task.autoname and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+*end
+remove element from array $wing.array at index 0
+$size =  size of array $wing.array
+end
+$maincount =  size of array $wing.array
+end
+
+return null
