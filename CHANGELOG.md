@@ -4,6 +4,7 @@
 - Linter now rejects positional argument syntax and scripts use named parameters.
 - Fixed remaining positional-style references in ware config query.
 - Enforced numeric array indexing for ware configs and linter rejects string keys.
+- Documented array commands.
 
 ## 0.1.7-internal
 - Added overview section to SLX README for clarity.
