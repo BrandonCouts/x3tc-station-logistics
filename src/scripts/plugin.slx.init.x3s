@@ -1,0 +1,7 @@
+* ******************************************************************************
+* SCRIPT NAME: plugin.slx.init
+* DESCRIPTION: Initialize SLX and start core tasks
+* AUTHOR:      Brandon              DATE: 8 September 2025
+* ******************************************************************************
+
+return null
