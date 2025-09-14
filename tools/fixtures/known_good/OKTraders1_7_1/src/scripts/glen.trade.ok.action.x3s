@@ -1,0 +1,844 @@
+#name: glen.trade.ok.action
+#lang: 44
+#origin_mod: OKTraders1_7_1
+#source: mods/OKTraders1_7_1/scripts/glen.trade.ok.action.xml
+
+			* ******************************************************************************
+			* OK Trade
+			*  Action routines
+			* ******************************************************************************
+
+			$Comp = 'Action'
+
+			$Config = get global variable: name='glen.trade.ok'
+			skip if $Config
+			return null
+
+			* Config settings used in this script.
+			$Config.Debug.Enabled = 5
+			$Config.All.Wares = 13
+			$Config.Global.Balance = 18
+			$Config.Equip = 20
+
+			* Mission types.
+			$Mission.Type.None = 0
+			$Mission.Type.Buy = 1
+			$Mission.Type.Sell = 2
+			$Mission.Type.Move.Station = 3
+
+			* Published state entries
+			$State.Version = 0
+			$State.Mission = 1
+			$State.Dest = 2
+			$State.Ware = 3
+			$State.Price = 4
+			$State.Balance = 7
+
+			* Library functions
+			$Lib.Get.Topup.Jump.Energy = 3
+			$Lib.Check.Cmd.Enabled = 6
+			$Lib.Can.Trade.Ware = 8
+			$Lib.Test.Buys.Infinite.Wares = 14
+			$Lib.Find.Station = 16
+			$Lib.Get.Amount.For.Sale = 24
+			$Lib.Get.Amount.To.Buy = 25
+			$Lib.Get.Repair.Cost = 29
+			$Lib.Get.Reserved.Amount = 30
+			$Lib.BigInt.Add = 33
+			$Lib.Check.Dest2 = 37
+
+			$Lib.Generic.Get.Minimum = 1
+			$Lib.Generic.Clone.Array = 3
+
+			* State functions
+			$Lib.State.Fetch = 0
+			$Lib.State.Publish = 1
+			$Lib.State.Get.Excludes = 4
+
+			$Lib.Config.Get.Stock.Limit.Free = 3
+			$Lib.Config.Get.Stock.Limit.Tradeable = 4
+
+			* Options
+			$Cmd.Move.Station = 1
+			$Cmd.Buy.Ware = 2
+			$Cmd.Sell.Ware = 3
+			$Cmd.Offload.Wares = 4
+			$Cmd.Load.Jumpdrive.Energy = 5
+			$Cmd.None = 6
+			$Cmd.Repair = 7
+			$Cmd.Launch.Countermeasures = 8
+			$Cmd.Equip = 9
+			$Internal.Move.Station = 100
+			$Internal.Buy.Ware = 102
+			$Internal.Sell.Ware = 103
+
+			* Equipping config
+			$Config.Equip.Ver = 0
+			$Config.Equip.Lasers = 1
+			$Config.Equip.Shields = 2
+			$Config.Equip.Missiles = 3
+			$Config.Equip.Drones = 4
+			$Config.Equip.DockingComputer = 5
+			$Config.Equip.Jumpdrive = 6
+			$Config.Equip.Triplex = 7
+			$Config.Equip.Rudder = 8
+			$Config.Equip.CargoLifeSupport = 9
+			$Config.Equip.Duplex = 10
+
+			$Homebase.Start = [HOMEBASE]
+			$rc = null
+
+			* ******************************************************************************
+			* Options
+			* ******************************************************************************
+			if $Func == $Cmd.None
+			gosub Cmd.None:
+			else if $Func == $Cmd.Move.Station
+			gosub Cmd.Move.Station:
+			else if $Func == $Cmd.Buy.Ware
+			gosub Cmd.Buy.Ware:
+			else if $Func == $Cmd.Sell.Ware
+			gosub Cmd.Sell.Ware:
+			else if $Func == $Cmd.Offload.Wares
+			gosub Cmd.Offload.Wares:
+			else if $Func == $Cmd.Load.Jumpdrive.Energy
+			gosub Cmd.Load.Jumpdrive.Energy:
+			else if $Func == $Cmd.Repair
+			gosub Cmd.Repair:
+			else if $Func == $Cmd.Launch.Countermeasures
+			gosub Cmd.Launch.Countermeasures:
+			else if $Func == $Cmd.Equip
+			gosub Cmd.Equip:
+			else if $Func == $Internal.Move.Station
+			gosub Action.Move.Station:
+			else if $Func == $Internal.Buy.Ware
+			gosub Buy.Ware:
+			else if $Func == $Internal.Sell.Ware
+			gosub Sell.Ware:
+			else
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=0 fmt='Unknown function %s' arg1=$Func arg2=null arg3=null arg4=null arg5=null
+			end
+
+			return $rc
+
+			* ******************************************************************************
+			* Cmd.None
+			*  Do nothing
+			* ******************************************************************************
+			Cmd.None:
+			[THIS]-> set command: [COMMAND_NONE]
+			[THIS]-> set destination to null
+			[THIS]-> set wanted ware count to null
+			[THIS]-> set wanted ware to null
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Move.Station
+			*  Move to station
+			* ******************************************************************************
+			Cmd.Move.Station:
+			$Dest = $Arg1
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Move.Station: Dest=%s' arg1=$Dest arg2=null arg3=null arg4=null arg5=null
+
+			while 1
+
+			if [HOMEBASE] AND $Dest == [HOMEBASE]
+			[THIS]-> set command: [COMMAND_RETURN_HOME]
+			break
+			end
+
+			if $Dest-> is of class [Dock]
+			[THIS]-> set command: [COMMAND_RESUPPLY]
+			break
+			end
+
+			if [THIS]-> get amount of ware {Jumpdrive} in cargo bay
+			if $Dest-> uses ware {Energy Cells} as product
+			[THIS]-> set command: [COMMAND_REFUEL]
+			break
+			end
+			end
+
+			if $Dest-> is of class [Shipyard]
+			[THIS]-> set command: [COMMAND_MOVE_REPAIR]
+			break
+			end
+
+			[THIS]-> set command: [COMMAND_DOCKAT]
+			break
+			end
+
+			$rc = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Move.Station Arg1=$Dest Arg2=null Arg3=null Arg4=null Arg5=null
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Move.Station: Dest=%s, rc=%s' arg1=$Dest arg2=$rc arg3=null arg4=null arg5=null
+
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Buy.Ware
+			*  Buy ware and return home or sell at dest2
+			* ******************************************************************************
+			Cmd.Buy.Ware:
+			$rc = 0
+			$Ware = $Arg1
+			$Dest = $Arg2
+			$Dest2 = $Arg3
+			$Price = $Arg4
+			skip if not is datatype[$Price] == [DATATYPE_NULL]
+			$Price = $Dest-> get price of ware $Ware
+
+			$Amount = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Amount.To.Buy Arg1=$Ware Arg2=$Dest Arg3=$Dest2 Arg4=null Arg5=null Arg6=null
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Buy.Ware: Dest=%s, Dest2=%s, Ware=%s, Price=%s, Amount=%s' arg1=$Dest arg2=$Dest2 arg3=$Ware arg4=$Price arg5=$Amount
+
+			while 1
+			skip if $Amount
+			break
+
+			[THIS]-> set command: [COMMAND_GET_WARE]  target=$Ware target2=$Dest par1=null par2=null
+			[THIS]-> set wanted ware count to $Amount
+			[THIS]-> set wanted ware to $Ware
+
+			skip if [THIS]-> call script glen.trade.ok.action : Func=$Internal.Move.Station Arg1=$Dest Arg2=null Arg3=null Arg4=null Arg5=null
+			break
+			skip if [DOCKEDAT] == $Dest
+			break
+
+			gosub Sanity.Check:
+
+			= [THIS]-> call script glen.trade.ok.action : Func=$Cmd.Load.Jumpdrive.Energy Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+
+			* Because time has passed recalculate dest2 and trade amount
+			if [HOMEBASE] == null AND $Dest2
+			$Dest2 = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Check.Dest2 Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			if not $Dest2
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Buy.Ware: No dest2, abort purchase.' arg1=$Ware arg2=null arg3=null arg4=null arg5=null
+			break
+			end
+			end
+			$Amount = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Amount.To.Buy Arg1=$Ware Arg2=$Dest Arg3=$Dest2 Arg4=null Arg5=null Arg6=null
+			skip if $Amount
+			break
+
+			$rc = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Buy.Ware Arg1=$Ware Arg2=$Amount Arg3=null Arg4=null Arg5=null
+			break
+			end
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Buy.Ware: Ware=%s, Dest=%s, rc=%s' arg1=$Ware arg2=$Dest arg3=$rc arg4=null arg5=null
+
+			* Advance to next stage of mission
+			if $rc
+			if [HOMEBASE]
+			$Equipping = is upgrade: ware=$Ware
+			skip if $Equipping
+			$Equipping = is inventory: ware=$Ware
+			skip if $Equipping
+			$Equipping = is equipment: ware=$Ware
+
+			if $Equipping
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+			else
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.Move.Station Arg2=[HOMEBASE] Arg3=null Arg4=null Arg5=null
+			end
+
+			else if $Dest2-> exists
+			$Price = $Dest2-> get price of ware $Ware
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.Sell Arg2=$Dest2 Arg3=$Ware Arg4=$Price Arg5=null
+			else
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+			end
+			else
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+			end
+
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Sell.Ware
+			*  Sell ware
+			* ******************************************************************************
+			Cmd.Sell.Ware:
+			$rc = 0
+			$Ware = $Arg1
+			$Dest = $Arg2
+
+			$Amount = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Amount.For.Sale Arg1=$Ware Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			$Price = $Dest-> get price of ware $Ware
+
+			$Buys.Infinite = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Test.Buys.Infinite.Wares Arg1=[THIS] Arg2=$Ware Arg3=$Dest Arg4=null Arg5=null Arg6=null
+
+			if [HOMEBASE] AND [DOCKEDAT] == [HOMEBASE]
+			* Load ware if at homebase
+			$p1 = [THIS]-> get free amount of ware $Ware in cargo bay
+			$p2 = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Stock.Limit.Tradeable Arg1=[HOMEBASE] Arg2=$Ware Arg3=null Arg4=null Arg5=null
+			$p3 = null
+			* If the target station buys infinite amounts of ware then disregard how much
+			* apparent free space it has.
+			if not $Buys.Infinite
+			$p3 = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Stock.Limit.Free Arg1=$Dest Arg2=$Ware Arg3=null Arg4=null Arg5=null
+			$p3 = $p3 - $Amount
+			skip if $p3 > 0
+			$p3 = 0
+			end
+			$Amount.Topup = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$p1 Arg2=$p2 Arg3=$p3 Arg4=null Arg5=null
+			if $Amount.Topup > 0
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Sell.Ware: loading %s units of %s' arg1=$Amount.Topup arg2=$Ware arg3=null arg4=null arg5=null
+			= [THIS]-> load $Amount.Topup units of $Ware
+			$Amount = $Amount + $Amount.Topup
+			end
+			end
+
+			while 1
+			skip if $Amount
+			break
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Sell.Ware: Dest=%s, Ware=%s, Price=%s, Amount=%s' arg1=$Dest arg2=$Ware arg3=$Price arg4=$Amount arg5=null
+
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.Sell Arg2=$Dest Arg3=$Ware Arg4=$Price Arg5=null
+			[THIS]-> set command: [COMMAND_SELL_WARE]  target=$Ware target2=$Dest par1=null par2=null
+			[THIS]-> set wanted ware count to $Amount
+			[THIS]-> set wanted ware to $Ware
+
+			skip if [THIS]-> call script glen.trade.ok.action : Func=$Internal.Move.Station Arg1=$Dest Arg2=null Arg3=null Arg4=null Arg5=null
+			break
+
+			gosub Sanity.Check:
+
+			* Because time has passed, recalculate the amount to sell
+			$Amount = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Amount.For.Sale Arg1=$Ware Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			if not $Buys.Infinite
+			$Amount.Dest = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Stock.Limit.Free Arg1=$Dest Arg2=$Ware Arg3=null Arg4=null Arg5=null
+			$Amount = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$Amount Arg2=$Amount.Dest Arg3=null Arg4=null Arg5=null
+			end
+			$rc = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Sell.Ware Arg1=$Ware Arg2=$Amount Arg3=$Buys.Infinite Arg4=null Arg5=null
+
+			= [THIS]-> call script glen.trade.ok.action : Func=$Cmd.Load.Jumpdrive.Energy Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+
+			break
+			end
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=6 fmt='Cmd.Sell.Ware: Ware=%s, Dest=%s, rc=%s' arg1=$Ware arg2=$Dest arg3=$rc arg4=null arg5=null
+
+			= [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Offload.Wares
+			*  Sell or unload any wares the station has room for. At the homebase this
+			*  cleans up a variety of sins like failed missions, not enough room to unload
+			*  all wares ealier on, unloading wares that were already on board and so forth.
+			* ******************************************************************************
+			Cmd.Offload.Wares:
+			$Skip.Ware = $Arg1
+			if [DOCKEDAT]-> is of class [Station]
+			$All.Wares = $Config[$Config.All.Wares]
+			$Wares.Station = [DOCKEDAT]-> get tradeable ware array from station
+			$idx = size of array $Wares.Station
+			while $idx
+			dec $idx
+			$Ware = $Wares.Station[$idx]
+
+			* Avoid selling tunings and equipment
+			if not find $Ware in array: $All.Wares
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=10 fmt='Cmd.Offload.Wares: Ware %s not in global wares list' arg1=$Ware arg2=null arg3=null arg4=null arg5=null
+			continue
+			end
+
+			* When not docked at a homebase then only offload wares the station buys
+			if [DOCKEDAT] != [HOMEBASE]
+			skip if [DOCKEDAT]-> can buy ware $Ware
+			continue
+			end
+
+			* Avoid selling ware back to station we just bought it from
+			if $Ware == $Skip.Ware
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Offload.Wares: Not selling ware %s as we just bought it from here' arg1=$Ware arg2=null arg3=null arg4=null arg5=null
+			continue
+			end
+
+			$p1 = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Amount.For.Sale Arg1=$Ware Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			if [DOCKEDAT] == [HOMEBASE]
+			* At homebase have the trader unload what it can regardless of stock limits to avoid taking trader cargo space
+			$p2 = [DOCKEDAT]-> get free amount of ware $Ware in cargo bay
+			else
+			$p2 = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Stock.Limit.Free Arg1=[DOCKEDAT] Arg2=$Ware Arg3=null Arg4=null Arg5=null
+			end
+
+			$Amount = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$p1 Arg2=$p2 Arg3=null Arg4=null Arg5=null
+			if $Amount > 0
+			if [DOCKEDAT] == [HOMEBASE]
+			= [THIS]-> unload $Amount units of $Ware
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Offload.Wares: Unloaded %s units of %s' arg1=$Amount arg2=$Ware arg3=null arg4=null arg5=null
+			else
+			$Buys.Infinite = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Test.Buys.Infinite.Wares Arg1=[THIS] Arg2=$Ware Arg3=$Dest Arg4=null Arg5=null Arg6=null
+			= [THIS]-> call script glen.trade.ok.action : Func=$Internal.Sell.Ware Arg1=$Ware Arg2=$Amount Arg3=$Buys.Infinite Arg4=null Arg5=null
+			end
+			end
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Load.Jumpdrive.Energy
+			*  Top up jumpdrive energy
+			* ******************************************************************************
+			Cmd.Load.Jumpdrive.Energy:
+			skip if [THIS]-> get amount of ware {Jumpdrive} in cargo bay
+			endsub
+
+			skip if [DOCKEDAT]-> is of class [Station]
+			endsub
+
+			$Owner = [DOCKEDAT]-> get owner race
+			if $Owner != [Player]
+			skip if [DOCKEDAT]-> uses ware {Energy Cells} as product
+			endsub
+			end
+
+			* Don't apply minimum stock limit to refuelling. If min stock level is gigantic this would
+			* mean traders never have any jump energy while building up to that level.
+			$p1 = [DOCKEDAT]-> get amount of ware {Energy Cells} in cargo bay
+			skip if $p1
+			endsub
+
+			$p2 = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Topup.Jump.Energy Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			$min = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$p1 Arg2=$p2 Arg3=null Arg4=null Arg5=null
+			skip if $min > 0
+			endsub
+
+			$rc = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Buy.Ware Arg1={Energy Cells} Arg2=$min Arg3=null Arg4=null Arg5=null
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Repair
+			*  Repair if at shipyard
+			* ******************************************************************************
+			Cmd.Repair:
+			$rc = 0
+			while 1
+			skip if [DOCKEDAT]
+			break
+			skip if [DOCKEDAT]-> is of class [Shipyard]
+			break
+			$Hull.Percent = [THIS]-> get hull percent
+			skip if $Hull.Percent < 100
+			break
+			$Cost = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Repair.Cost Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			$Funds = get player money
+			skip if $Funds > $Cost
+			break
+			if $Funds > $Cost
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Repair: Repaired ship for %s credits from %s percent hull' arg1=$Cost arg2=$Hull.Percent arg3=null arg4=null arg5=null
+			$Cost = $Cost * -1
+			add money to player: $Cost
+			$Max = [THIS]-> get max hull
+			[THIS]-> set hull to $Max
+			end
+			break
+			end
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Launch.Countermeasures
+			*  Launch countermeasures
+			* ******************************************************************************
+			Cmd.Launch.Countermeasures:
+			$Threats = $Arg1
+			$Missiles = $Threats[1]
+			$Enemies = $Threats[2]
+
+			* Launch fighter drones
+			if size of array $Enemies
+			$a = [THIS]-> get amount of ware {Fighter Drone} in cargo bay
+			$b = [THIS]-> get amount of ware {Fighter Drone MKII} in cargo bay
+			$c = [THIS]-> get amount of ware {Keris} in cargo bay
+			$Available.Drones = $a + $b + $c
+			if $Available.Drones > 0
+			* Find ships that already have a drone attacking them
+			$Drones = find ship: sector=[SECTOR] class or type=[Fighter Drone] race=[OWNER] flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+			$Drone.Targets = array alloc: size=0
+			$idx = size of array $Drones
+			while $idx
+			dec $idx
+			$Drone = $Drones[$idx]
+			$Target = $Drone-> get attack target
+			skip if $Target-> exists
+			$Target = $Drone-> get command target
+			skip if not $Target-> exists
+			append $Target to array $Drone.Targets
+			end
+
+			* Get targets not being attacked by drones
+			$Targets = array alloc: size=0
+			$idx = size of array $Enemies
+			while $idx
+			dec $idx
+			$Enemy = $Enemies[$idx]
+			skip if find $Enemy in array: $Drone.Targets
+			append $Enemy to array $Targets
+			end
+
+			* Determine number of drones per target
+			$idx = size of array $Targets
+			$Drones.Per.Enemy = $Available.Drones / $idx
+			skip if $Drones.Per.Enemy > 0
+			$Drones.Per.Enemy = 1
+			skip if $Drones.Per.Enemy < 4
+			$Drones.Per.Enemy = 3
+
+			* Send drones to targets
+			while $idx
+			dec $idx
+			$Enemy = $Targets[$idx]
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Launch.Countermeasures: Launching %s drones at %s' arg1=$Drones.Per.Enemy arg2=$Enemy arg3=null arg4=null arg5=null
+
+			* Send drones 1 at a time as this command will send less than desired
+			* if running out of 1 type of drone before breaking into another.
+			$Amount = $Drones.Per.Enemy
+			while $Amount
+			dec $Amount
+			= [THIS]-> launch 1 fight drones: protect me or attack target=$Enemy
+			end
+
+			$Available.Drones = $Available.Drones - $Drones.Per.Enemy
+			skip if $Available.Drones >= $Drones.Per.Enemy
+			$Drones.Per.Enemy = $Available.Drones
+			skip if $Available.Drones > 0
+			break
+			end
+			end
+
+			end
+
+			* Launch missiles
+			$Tmp = [THIS]-> get compatible missile array from cargobay
+			if size of array $Tmp
+			$Fired = 0
+			$idx = size of array $Enemies
+			while $idx
+			dec $idx
+			$Target = $Enemies[$idx]
+			if $Target-> exists
+			if not $Target-> find nearest missile aiming to me
+			$Missile = [THIS]-> call script !lib.get.best.missile.fortarget : Target=$Target set.timediff=0
+			if $Missile
+			$Fired = [THIS]-> fire missile $Missile on $Target
+			if $Fired
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Launch.Countermeasures: Fired a %s at %s' arg1=$Missile arg2=$Target arg3=null arg4=null arg5=null
+			break
+			end
+			end
+			end
+			end
+			end
+
+			if not $Fired
+			$idx = size of array $Missiles
+			while $idx
+			dec $idx
+			$Target = $Missiles[$idx]
+			if $Target-> exists
+			if not $Target-> find nearest missile aiming to me
+			$Missile = [THIS]-> call script !lib.get.best.missile.fortarget : Target=$Target set.timediff=0
+			if $Missile
+			if [THIS]-> fire missile $Missile on $Target
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Launch.Countermeasures: Fired a %s at %s' arg1=$Missile arg2=$Target arg3=null arg4=null arg5=null
+			break
+			end
+			end
+			end
+			end
+			end
+			end
+
+			end
+			endsub
+
+			* ******************************************************************************
+			* Cmd.Equip:
+			*  Buy things we need
+			* ******************************************************************************
+			Cmd.Equip:
+			$Equip.Config = $Config[$Config.Equip]
+
+			while 1
+			skip if [DOCKEDAT]-> is of class [Dock]
+			break
+
+			* $Owner = [DOCKEDAT]->get owner race
+			* skip if $Owner != [Player]
+			* break
+
+			if $Equip.Config[$Config.Equip.Missiles]
+			$Wares = [THIS]-> get compatible missile array
+			else
+			$Wares = array alloc: size=0
+			end
+
+			if $Equip.Config[$Config.Equip.Drones]
+			append {Fighter Drone} to array $Wares
+			append {Fighter Drone MKII} to array $Wares
+			append {Keris} to array $Wares
+			end
+
+			if $Equip.Config[$Config.Equip.Jumpdrive]
+			append {Jumpdrive} to array $Wares
+			end
+
+			if $Equip.Config[$Config.Equip.DockingComputer]
+			append {Docking Computer} to array $Wares
+			end
+
+			if $Equip.Config[$Config.Equip.Duplex]
+			* Don't buy duplex if we have triplex already
+			skip if [THIS]-> get amount of ware {Triplex Scanner} in cargo bay
+			append {Duplex Scanner} to array $Wares
+			end
+
+			if $Equip.Config[$Config.Equip.Triplex]
+			append {Triplex Scanner} to array $Wares
+			end
+
+			append {Engine Tuning} to array $Wares
+
+			if $Equip.Config[$Config.Equip.Rudder]
+			append {Rudder Optimisation} to array $Wares
+			end
+
+			if $Equip.Config[$Config.Equip.CargoLifeSupport]
+			append {Cargo Lifesupport System} to array $Wares
+			end
+
+			$idx = size of array $Wares
+			while $idx
+			dec $idx
+			$Ware = $Wares[$idx]
+			if [DOCKEDAT]-> can sell ware $Ware
+			if [THIS]-> can buy ware $Ware at station [DOCKEDAT]
+			$Max = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Get.Reserved.Amount Arg1=$Ware Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			$Cur = [THIS]-> get amount of ware $Ware in cargo bay
+			$p1 = $Max - $Cur
+			$p2 = [DOCKEDAT]-> get true amount of ware $Ware in cargo bay
+			$p3 = [THIS]-> get free amount of ware $Ware in cargo bay
+			$Wanted = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$p1 Arg2=$p2 Arg3=$p3 Arg4=null Arg5=null
+			if $Wanted > 0
+			if [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Can.Trade.Ware Arg1=$Ware Arg2=$Mission.Type.Buy Arg3=null Arg4=null Arg5=null Arg6=null
+			$Amount = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Buy.Ware Arg1=$Ware Arg2=$Wanted Arg3=null Arg4=null Arg5=null
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Equip: Bought and equipped %s units of %s' arg1=$Amount arg2=$Ware arg3=null arg4=null arg5=null
+			end
+			end
+			end
+			end
+			end
+
+			if $Equip.Config[$Config.Equip.Shields]
+			* Dock sells best shield
+			$Best.Shield = [THIS]-> get max. shield type that can be installed
+			$Bays = [THIS]-> get number of shield bays
+			$Have = [THIS]-> get amount of ware $Best.Shield in cargo bay
+			skip if $Have <= $Bays
+			$Have = $Bays
+			if [DOCKEDAT]-> can sell ware $Best.Shield
+			if [THIS]-> can buy ware $Best.Shield at station [DOCKEDAT]
+			if $Have < $Bays
+			$Wanted = $Bays - $Have
+			$Avail = [DOCKEDAT]-> get true amount of ware $Best.Shield in cargo bay
+			$Free = [THIS]-> get free amount of ware $Best.Shield in cargo bay
+			$Wanted = [THIS]-> call script glen.trade.ok.lib.generic : Func=$Lib.Generic.Get.Minimum Arg1=$Wanted Arg2=$Avail Arg3=$Free Arg4=null Arg5=null
+			if $Wanted
+			if [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Can.Trade.Ware Arg1=$Ware Arg2=$Mission.Type.Buy Arg3=null Arg4=null Arg5=null Arg6=null
+			$Bought = [THIS]-> call script glen.trade.ok.action : Func=$Internal.Buy.Ware Arg1=$Best.Shield Arg2=$Wanted Arg3=null Arg4=null Arg5=null
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Equip: Bought %s units of best shield %s. Had=%s, Bought=%s' arg1=$Wanted arg2=$Best.Shield arg3=$Have arg4=$Bought arg5=null
+			$Have = $Have + $Bought
+			end
+			end
+			end
+			end
+			end
+
+			* Requip to best shield
+			$Installed = 0
+			$idx = $Bays
+			while $idx
+			dec $idx
+			$Shield = [THIS]-> get shield type in bay $idx
+			skip if $Shield != $Best.Shield
+			inc $Installed
+			end
+			if $Installed < $Have
+			$Tmp = $Have * -1
+			= [THIS]-> add $Tmp units of $Best.Shield
+			= [THIS]-> install $Have units of $Best.Shield
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Cmd.Equip: Installed %s out of max %s bays of best shield %s' arg1=$Have arg2=$Bays arg3=$Best.Shield arg4=null arg5=null
+			end
+			end
+
+			break
+			end
+			endsub
+
+			* ******************************************************************************
+			* Action.Move.Station
+			*  Move to station
+			* ******************************************************************************
+			Action.Move.Station:
+			$rc = 0
+			$Dest = $Arg1
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=10 fmt='Action.Move.Station: Dest=%s' arg1=$Dest arg2=null arg3=null arg4=null arg5=null
+
+			while 1
+			skip if $Dest-> exists
+			break
+			skip if $Dest-> is of class [Station]
+			break
+			if [ENVIRONMENT] == $Dest
+			$rc = 1
+			break
+			end
+			[THIS]-> set destination to $Dest
+			= [THIS]-> call script !move.movetostation : targetstation=$Dest
+			[THIS]-> set destination to null
+
+			skip if [ENVIRONMENT] != $Dest
+			$rc = 1
+			break
+			end
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=10 fmt='Action.Move.Station: Dest=%s, rc=%s' arg1=$Dest arg2=$rc arg3=null arg4=null arg5=null
+			endsub
+
+			* ******************************************************************************
+			* Buy.Ware
+			*  Buy a quanity of ware
+			* ******************************************************************************
+			Buy.Ware:
+			$rc = 0
+			$Ware = $Arg1
+			$Amount = $Arg2
+
+			skip if [DOCKEDAT]-> is of class [Station]
+			endsub
+
+			if [HOMEBASE] == [DOCKEDAT]
+			$rc = [THIS]-> load $Amount units of $Ware
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Buy.Ware: Dock=%s (homebase), Ware=%s, Wanted=%s, Loaded=%s' arg1=[DOCKEDAT] arg2=$Ware arg3=$Amount arg4=$rc arg5=null
+			else
+			$Price = [DOCKEDAT]-> get price of ware $Ware
+			$rc = [THIS]-> buy $Amount units of $Ware to a max. price of $Price cr
+
+			* Free traders track the balance of their trades
+			if not [HOMEBASE]
+			$State = [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Fetch Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+			$Trader.Balance = $State[$State.Balance]
+			$Global.Balance = $Config[$Config.Global.Balance]
+			$Cost = $Price * $rc * -1
+
+			$Tmp = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.BigInt.Add Arg1=$Trader.Balance Arg2=$Cost Arg3=null Arg4=null Arg5=null Arg6=null
+			$State[$State.Balance] = $Tmp
+			$Tmp = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.BigInt.Add Arg1=$Global.Balance Arg2=$Cost Arg3=null Arg4=null Arg5=null Arg6=null
+			$Config[$Config.Global.Balance] = $Tmp
+			end
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Buy.Ware: Dock=%s, Ware=%s, Wanted=%s, Bought=%s, Price.Unit=%s' arg1=[DOCKEDAT] arg2=$Ware arg3=$Amount arg4=$rc arg5=$Price
+			end
+			endsub
+
+			* ******************************************************************************
+			* Sell.Ware
+			*  Sell a quanity of ware
+			* ******************************************************************************
+			Sell.Ware:
+			$rc = 0
+			$Ware = $Arg1
+			$Amount = $Arg2
+			$Buys.Infinite = $Arg3
+			skip if not is datatype[$Buys.Infinite] == [DATATYPE_NULL]
+			$Buys.Infinite = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Test.Buys.Infinite.Wares Arg1=[THIS] Arg2=$Ware Arg3=[DOCKEDAT] Arg4=null Arg5=null Arg6=null
+
+			if [DOCKEDAT]
+			$Price = [DOCKEDAT]-> get price of ware $Ware
+
+			if $Buys.Infinite
+			$Sold = 1
+			while $Sold
+			$Free = [DOCKEDAT]-> get free amount of ware $Ware in cargo bay
+			skip if $Free
+			break
+			$Sold = [THIS]-> sell $Free units of $Ware
+			$rc = $rc + $Sold
+			end
+			else
+			$rc = [THIS]-> sell $Amount units of $Ware
+			end
+
+			* Free traders track the balance of their trades
+			if not [HOMEBASE]
+			$State = [THIS]-> call script glen.trade.ok.state : Func=$Lib.State.Fetch Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+			$Trader.Balance = $State[$State.Balance]
+			$Global.Balance = $Config[$Config.Global.Balance]
+			$Profit = $Price * $rc
+
+			$Tmp = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.BigInt.Add Arg1=$Trader.Balance Arg2=$Profit Arg3=null Arg4=null Arg5=null Arg6=null
+			$State[$State.Balance] = $Tmp
+			$Tmp = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.BigInt.Add Arg1=$Global.Balance Arg2=$Profit Arg3=null Arg4=null Arg5=null Arg6=null
+			$Config[$Config.Global.Balance] = $Tmp
+			end
+
+			end
+
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Sell.Ware: Dest=%s, Ware=%s, Wanted=%s, Sold=%s' arg1=[DOCKEDAT] arg2=$Ware arg3=$Amount arg4=$rc arg5=null
+			endsub
+
+			* ******************************************************************************
+			* Sanity.Check
+			*  Called after performing an action to check if we should bail out
+			* ******************************************************************************
+			Sanity.Check:
+			$Cmd.Enabled = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.Check.Cmd.Enabled Arg1=[THIS] Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			if not $Cmd.Enabled
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Sanity.Check: Lib.Check.Cmd.Enabled returned 0' arg1=null arg2=null arg3=null arg4=null arg5=null
+			return null
+			end
+
+			if [HOMEBASE] != $Homebase.Start
+			skip if not $Config[$Config.Debug.Enabled]
+			= [THIS]-> call script glen.trade.ok.trace : comp=$Comp lvl=5 fmt='Sanity.Check: Homebase has changed since script started' arg1=null arg2=null arg3=null arg4=null arg5=null
+			return null
+			end
+
+			* Config can be replaced on downgrade or removed at uninstall
+			$Config = get global variable: name='glen.trade.ok'
+			skip if $Config
+			return null
+			endsub
+
+			return null
