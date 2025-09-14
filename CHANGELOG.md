@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.9-internal
+- Document merchant commands.
+
 ## 0.1.8-internal
 - Linter now rejects positional argument syntax and scripts use named parameters.
 - Fixed remaining positional-style references in ware config query.
