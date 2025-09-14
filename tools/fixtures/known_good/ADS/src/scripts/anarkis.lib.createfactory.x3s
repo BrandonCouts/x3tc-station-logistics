@@ -1,0 +1,41 @@
+#name: anarkis.lib.createfactory
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.createfactory.xml
+
+* ===========================================
+* Build a factory according to params
+* ===========================================
+
+$x = $location[0]
+$y = $location[1]
+$z = $location[2]
+$sector = $location[3]
+$select =  create station: type=$station.type owner=$race addto=$sector x=$x y=$y z=$z
+$select -> add default wares to station/dock
+$v1 = $select -> get maximum shield strength
+$select -> set current shield strength to $v1
+
+$select -> factory production task: on=[FALSE]
+$arr = $select -> get tradeable ware array from station
+$v1 =  size of array $arr
+while $v1
+dec $v1 =
+$v2 = $arr[$v1]
+if $select -> uses ware $v2 as product
+$select -> remove product from factory or dock: $v2
+else if $select -> uses ware $v2 as primary resource
+$select -> remove primary resource from factory: $v2
+else
+$select -> remove second resource from factory: $v2
+end
+end
+skip if not $product
+$select -> add product to factory or dock: $product
+skip if not $ressource1
+$select -> add primary resource to factory: $ressource1
+skip if not $ressource2
+$select -> add primary resource to factory: $ressource2
+$select -> factory production task: on=[TRUE]
+
+return $select

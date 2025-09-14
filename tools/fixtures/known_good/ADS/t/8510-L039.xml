@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<language id="39">
+
+<page id="2008" title="Script Object Commands" descr="0">
+ <t id="830">ANARKIS_SETDOCKED</t>
+ <t id="831">ANARKIS_SELLWARES</t>
+ <t id="832">ANARKIS_BUYWARES</t>
+ <t id="833">ANARKIS_DEFENSIVEWING</t>
+ <t id="834">ANARKIS_ATTACKWING</t>
+ <t id="835">ANARKIS_CLEANSECTOR</t>
+ <t id="836">ANARKIS_DOCKALL</t>
+ <t id="1231">ANARKIS_SETTACTICS</t>
+ <t id="1232">ANARKIS_AUTOCARRIER</t>
+ <t id="1131">ANARKIS_SETUPSTATION</t>
+ <t id="1132">ANARKIS_STATIONDEFENSE</t>
+</page>
+
+<page id="2010" title="Script Cmd Names" descr="Versione estesa dei comandi. Questi sono i comandi assegnati alle navi utilizzando la console di comando. Le pagine 2010 e 2011 contengono assieme le versioni estese e compatte degli stessi comandi"> 
+ <t id="830">\033RADS:\033X Impostazioni Base</t>
+ <t id="831">\033RADS:\033X Vendi merci...</t>
+ <t id="832">\033RADS:\033X Compra merci per la carrier...</t>
+ <t id="833">\033RADS:\033X Invia Wing Difensiva</t>
+ <t id="834">\033RADS:\033X Wing d'attacco contro...</t>
+ <t id="835">\033RADS:\033X Pulisci Settore</t>
+ <t id="836">\033RADS:\033X Attracca tutte le navi</t>
+ <t id="1231">\033RADS:\033X Impostazioni Carrier</t>
+ <t id="1232">\033RADS:\033X Carrier Automatizzata</t>
+ <t id="1131">\033RADS:\033X Imposta Sistema Difesa</t>
+ <t id="1132">\033RADS:\033X Difesa Settore</t>
+</page> 
+
+<page id="2011" title="Script Cmd Shorts" descr="Versione compatta dei comandi. Questi sono i comandi assegnati alle navi utilizzando la console di comando. Le pagine 2010 e 2011 contengono assieme le versioni estese e compatte degli stessi comandi"> 
+ <t id="830">imposta.homebase</t>  
+ <t id="831">vendi.merci</t>
+ <t id="832">compra.merci</t>
+ <t id="833">wing.difensiva</t>
+ <t id="834">wing.attacco</t>
+ <t id="835">clean.sector</t>
+ <t id="836">attracca.navi</t>
+ <t id="1131">imposta.difese</t>
+ <t id="1132">stazione.auto</t>
+ <t id="1231">imposta.tattiche</t>
+ <t id="1232">carrier.auto</t>
+</page> 
+
+<page id="2022"> 
+ <t id="830">Permette di selezionare le impostazioni della base per le navi attraccate a questa carrier. Le navi verranno rinominate e le impostazioni dei missili applicate.</t>  
+ <t id="831">Invia molteplici navi a vendere le tue merci dalla Carrier</t>
+ <t id="832">Invia molteplici navi a comprare un dato ammontare di merci alla stazione più vicina</t>
+ <t id="833">Invia uno squadrone a difendere la tua carrier o un'altra nave</t>
+ <t id="834">Invia uno squadrone all'attacco di una nave o una stazione</t>
+ <t id="835">Ripulisci il settore da tutta l'attività nemica</t>
+ <t id="836">Tutte le navi assegnate a questa base attraccheranno qui. Le navi distanti equipaggiate con il jumpdrive proveranno ad attraccare alla carrier.</t>
+ <t id="1131">Imposta Anarkis Defense Station in questa stazione.</t>
+ <t id="1132">Abilità il sistema difensivo della stazione, inviera le navi contro i nemici in arrivo e gradualmente riparerà le navi attraccate</t>
+ <t id="1231">Questo comando ti permette di impostare sia le navi attraccate sia le carrier in modalità automatica.</t>
+ <t id="1232">Modalità automatica. La carrier difenderà se stessa e invierà le navi quando necessario.</t>
+</page> 
+
+<page id="8510" title="ACC" descr="Comandi Carrier Anarkis">
+ <t id="100">\033RADS:\033X Anarkis Defense System</t>
+ <t id="101">265</t>
+ <t id="102">Anarkis Federation</t>
+ <t id="103">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] v%s installato con successo ! </t>
+ <t id="104">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] aggiornato con successo alla versione v%s !</t>
+ <t id="105">[author][b]ADS - %s[/b][/author] Non puoi utilizzare questo comando sulla nave che attualmente piloti.</t>
+ <t id="106">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] è stato rimosso dal gioco.\nSi prega di salvare il gioco ora, esci e avvia il file 'Uninstall ADS.bat' nella tua cartella di X3.</t>
+ 
+ <t id="200">Menu Carrier Anarkis</t>
+
+ <t id="210">Generale</t>
+ <t id="211">Hangars ...</t>
+ <t id="212">Report Automatizzati Carriers</t>
+ <t id="213">Utilizzo Missili  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="214">Salto di Emergenza  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Limite Scuto  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="215">Salto Automatico  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Raggio Minimo  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="216">Rifornimento Automatico Celle \(Salti\)  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="217">Impostazione navi attraccate</t>
+
+ <t id="220">Impostazioni Automatizzate Carrier</t>
+ <t id="221">\033WLivello minimo minaccia\033X</t>
+ <t id="222">\033WMostra Avviso Messaggi\033X</t>
+ <t id="223">\033WObbliga Navi Danneggiate alla Ritirata\033X</t>
+ <t id="224">\033WModalita Attacco\033X</t>
+ <t id="225">\033WConteggio Navi Difesa\033X</t>
+ <t id="226">\033WRaggio Radar\033X</t>
+ <t id="227">Ignora Fazioni  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="228">Dettagliato</t>
+ <t id="229">\033WTipo Pericolo\033X</t>
+  
+ <t id="230">Impostazioni Plugin ADS</t>
+ <t id="231">Applica Impostazioni a \033Ytutte\033X le navi attraccate</t>
+ <t id="232">Imposta configurazione ai valori di Default</t>
+ <t id="233">Sottotitoli</t>
+ <t id="234">Audio</t>
+ <t id="235">Popup</t>
+ <t id="236">Debug Logfile Output  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="237">Applica impostazioni solamente alle navi attraccate \033Yattive\033X</t>
+
+ <t id="238">Ritardo prima dello schieramento dei caccia attraccati  \033R&lt;\033X \033Y%s sec\033X \033R&gt;\033X</t>
+
+ 
+ <t id="240">Gestione Carrier</t>
+ <t id="241">Carrier Automatizzata ...</t>
+ <t id="242">Ripara attracchi ...</t>
+ <t id="243">Rifornimenti Nave ...</t>
+ <t id="244">Impostazioni Torrette : \033Y%s\033X</t>
+ <t id="245">Proteggi Nave</t>
+ <t id="246">Attacca Nemici</t>
+ <t id="247">Difesa Missili</t>
+ <t id="248">\033RMARS:\033X Attacco</t>
+ <t id="249">\033RMARS:\033X Difesa</t>
+ 
+ <t id="201">Abilitato</t>
+ <t id="202">Disabilitato</t>
+ <t id="203">Si</t>
+ <t id="204">No</t>
+ <t id="205">Default</t>
+ <t id="206">Selezione Automatica</t>
+ <t id="207">Il più forte prima</t>
+ <t id="208">Il più vicino prima</t>
+ <t id="209">Niente</t>
+ 
+ <t id="250">Carrier : \033Y%s\033X [%s]</t>
+ <t id="251">Posizione : \033Y%s\033X</t>
+ <t id="252">Attraccate : %s/%s - Possedute : %s</t>
+ <t id="260">© Serial Kicked / [\033YAnarkis Federation\033X]</t>
+ 
+ <t id="300">Seleziona l'ammontare di navi utilizzate a scopo difensivo</t>
+ <t id="301">Impostazione acquisizione bersaglio</t>
+ <t id="302">Seleziona come la forza offensiva selezionerà i bersagli nemici</t>
+ <t id="303">Obbliga le navi danneggiate alla ritirata ?</t>
+ <t id="304">Mostra un messaggio di avviso quando la carrier è in pericolo ?</t>
+ <t id="305">Questo menù ti permette di scegliere il livello minimo di minaccia che aziona il lancio dei caccia. Per capire come il sistema funziona, devi conoscere il valore di "minaccia" utilizzato per ogni tipo di nave e devi anche sapere che la carrier invierà sempre navi se il nemico avvistato è una nave di classe M1/M2. I Droni da Combattimento vengono ignorati.</t>
+ <t id="306">M5: 1 - M4: 2  - M3: 5 - M8: 10 - M6: 14 - M7: 35\nTL: 15 - TM: 8 - TP/TS: 2\n\n\n\n</t>
+ <t id="307">Livello Minimo Minaccia</t>
+ <t id="308">Seleziona la quantità di celle da rifornire in Salti</t>
+ <t id="309">Vuoi abilitare la funzione di Salto Automatico per le navi attraccate ?</t>
+ <t id="310">Imposta il raggio minimo per il Salto Automatico</t>
+ <t id="311">Vuoi abilitare la funzione di Salto di Emergenza per le navi attraccate ?</t>
+ <t id="312">Imposta la soglia di emergenza dello scudo in percentuale</t>
+ <t id="313">Imposta l'utilizzo dei missili in percentuale</t>
+ <t id="314">Seleziona il nuovo raggio del radar in metri</t>
+ <t id="315">Seleziona il nuovo ritardo in secondi</t>
+ 
+ <t id="400">Meccanici</t>
+ <t id="401">Puoi utilizzare i meccanici per riparare le navi danneggiate nelle carrier. Puoi assumere meccanici ad un dato prezzo in qualunque settore amico. Quando sono fuori servizio ti costeranno circa 1000 crediti l'ora per meccanico, e molto di più quando stanno riparando una nave. Più meccanici possiedi, più velocemente ripareranno la nave danneggiata.\n\nAttuale costo fuori servizio : \033Y%s crediti per ora\033X\nAttuale costo in servizio : \033Y%s crediti per ora\033X\n\n\n\n</t>
+ <t id="402">Attualmente hai : \033Y%s\033X meccanici (costo fuori turno : \033Y%s\033X crediti per ora)</t>
+ <t id="403">Impostazioni</t>
+ <t id="404">Permetti di riparare le navi attraccate  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="405">Permetti la riparazione della carrier  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="406">Gestione : \033Y%s meccanici\033X</t>
+ <t id="407">Assumi nuovi meccanici</t>
+ <t id="408">Licenzia meccanici</t>
+ <t id="409">Navi Danneggiate</t>
+ <t id="410">  [%s] \033Y%s\033X - scafo : %s/100</t>
+ <t id="411">Assumere un nuovo meccanico ti costerà 50.000 crediti. Sei sicuro ?</t>
+ <t id="412">Non possiedi abbastanza crediti per assumere un novo meccanico.</t>
+ <t id="413">Hai bisogno di una Stazione amichevole nel settore in cui si trova attualmente la carrier.</t>
+
+ <t id="420">Gestione Hangar</t>
+ <t id="421">Seleziona quali navi vuoi utilizzino vengano utilizzate dai comandi ADS</t>
+ <t id="422">Lista Navi Attraccate</t>
+ <t id="423">Comandi Generali</t>
+ <t id="424">Applica base a tutte le navi attraccate</t>
+ <t id="425">Gestione</t>
+ <t id="426">Aggiungi tutte le navi</t>
+ <t id="427">Aggiungi solamente le navi M3 e M4</t>
+ <t id="428">Aggiungi solamente le navi M3</t>
+ <t id="429">Rimuovi tutte le navi</t>
+ <t id="430">  [%s] \033Y%s\033X - %s</t>
+ <t id="431">\033GAttivo\033X</t>
+ <t id="432">\033RInattivo\033X</t>
+ <t id="433">\033YIn Riparazione\033X</t>
+ <t id="434">Rinomina le navi attraccate</t>
+ <t id="435">Assegna la base solamente alle navi attive</t>
+
+ <t id="440">Rifornimenti Nave</t>
+ <t id="441">Questo menù permette di muovere il carico tra la carrier e le navi attraccate\n\n\n</t>
+ <t id="442">Azioni Standard</t>
+ <t id="443">Muovi merci dalla carrier alle navi attraccate</t>
+ <t id="444">Scarica le merci nella carrier</t>
+ <t id="445">Avanzato</t>
+ <t id="446">Permetti alla carrier di ricomprare i caccia distrutti  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="447">Permetti alla carrier di ripararsi al Cantiere  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="448">Permetti alla carrier di mantenere le navi rifornite \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="449">Questo menù permette di muovere le merci dalle navi attraccate alla carrier.</t>
+ <t id="450">\033YScarica :\033X %s</t>
+ <t id="451">Commercia solamente le merci [eccetto le Celle d'Energia]</t>
+ <t id="452">Commercia solamente le merci [incluse le Celle d'Energia]</t>
+ <t id="453">Missili</t>
+ <t id="454">Qualunque cosa non equipaggiata</t>
+ <t id="455">\033YDa :\033X %s</t>
+ <t id="456">Solamente navi Attive</t>
+ <t id="457">Tutte le navi attraccate</t>
+ <t id="458">\033YConvalida\033X</t>
+ <t id="459">Conferma Azione</t>
+ 
+ <t id="460">Fazioni Ignorate</t>
+ <t id="461">Gestione</t>
+ <t id="462">Cancella intera lista</t>
+ <t id="463">Aggiungi una fazione alla lista</t>
+ <t id="464">\033Y%s\033X - rimuovi</t>
+ <t id="465">Seleziona fazione da ignorare</t>
+
+ <t id="480">Rinomina Navi</t>
+ <t id="481">Tipo Classe - Numero</t>
+ <t id="482">Nome Carrier- Tipo - Numero</t>
+ <t id="483">Razza Costruttrice Classe - Numero</t>
+ <t id="484">Abilita rinominazione di massa alle navi attraccate.</t>
+ <t id="485">Impostazioni</t>
+ <t id="486">Applica a tutte le navi attraccate</t>
+ <t id="487">Applica a tutte le navi attive</t>
+ <t id="488">\033YSelezionate : \033X%s</t>
+ <t id="489">\033YEsempio : \033X%s</t>
+
+ 
+ <t id="500">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Pericolo:[/b] Il tuo [b]%s[/b] nel settore [b]%s[/b] è in pericolo e richiede la tua attenzione.</t>
+ <t id="501">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Cancellato:[/b] Non possiedi abbastanza navi a %s per questo comando</t>
+ <t id="502">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Cancellato:[/b] Non possiedi abbastanza navi a %s per ripulire il settore. Sono necessarie almeno 5.</t>
+ <t id="503">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Errorr:[/b] Not enough wares in cargo bay to equip any ship.</t>
+ <t id="504">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Successo:[/b] %s ha equipaggiato le navi %s/%s con %s %s.</t>
+ <t id="505">[author][b]Comandi Carrier Anarkis[/b][/author] [b]Cancellato:[/b] %s - Nessuna stazione nelle vicinanza possiede abbastanza %s.</t>
+ <t id="506">\033RALLERTA:\033X \033W%s nel settore %s necessita aiuto !\033X</t>
+ 
+ <t id="520">Equipaggia navi</t>
+ <t id="521">\033YMerci\033X</t>
+ <t id="522">&lt; \033Yaggiungi una nuova merce\033X &gt;</t>
+ <t id="523">\033W%s\033X [quantita: %s]  &lt;\033Rrimuovi\033X&gt;</t>
+ <t id="524">\033YModalità :\033X %s</t>
+ <t id="525">Stessa quantita a tutte le navi [$quantita = valore massimo]</t>
+ <t id="526">Almeno $quantity merci per ogni nave</t>
+ <t id="527">\033YDestinazione :\033X %s</t>
+ <t id="528">Navi Attraccate</t>
+ <t id="529">Navi Attive</t>
+ <t id="530">\033YConvalida\033X</t>
+ <t id="531">Conferma Azione</t>
+ <t id="532">Seleziona le merci che vuoi muovere</t>
+ <t id="533">Select the quantity</t>
+
+ <t id="540">Rapporti Trasferimenti</t>
+ <t id="541">Merci trasferite</t>
+ <t id="542">\033W%s %s\033X trasferite a \033Y%s\033X</t>
+ <t id="543">\033W%s %s\033X scaricate da \033Y%s\033X</t>
+ 
+ <t id="600">\033RADS:\033X Ripulisci Settore</t>
+ <t id="601">\033RADS:\033X Attracca tutte le mie navi</t>
+ <t id="602">\033RADS:\033X Attacca il mio bersaglio</t>
+ <t id="603">\033RADS\033X \033WManager\033W</t>
+
+ <t id="640">\033RADS:\033X Vendi Merci</t>
+ <t id="641">Merci Selezionate</t>
+ <t id="642">Selezione Rapida</t>
+ <t id="643">Cancella la Lista</t>
+ <t id="644">Aggiungi tutte le merci commerciabili</t>
+ <t id="645">Inizia trasferimento</t>
+ <t id="646">&lt; \033Yaggiungi una nuva merce\033X &gt;</t>
+ <t id="647">Impostazioni</t>
+ <t id="648">Distanza Massima \033R&lt;\033X \033Y%s settori\033X \033R&gt;\033X</t>
+ <t id="649">Questo comando permette alle tue carrier di vendere le merci alle stazioni vicine utilizzando le navi attraccate. Non viene effettuato nessu controllo per settori nemici pertanto imposta il raggio con attenzione.\n\n\n\n</t>
+ <t id="650">\033W%s\033X - Quantità: \033W%s\033X  &lt;\033Yrimuovi\033X&gt;</t>
+ <t id="651">Seleziona raggio di salto</t>
+ <t id="652">Seleziona la merce da aggiungere</t>
+ <t id="653">\033R[ADS]\033X \033Y%s\033X vende \033Y%s\033X a \033Y%s\033X</t> 
+ <t id="654">\033R[ADS]\033X Nessuna stazione sta comprando \033Y%s\033X</t> 
+ <t id="655">\033R[ADS]\033X Nessuna nave abilitata a caricare \033Y%s\033X</t>
+ <t id="656">\033R[ADS]\033X Nessuna stazione nel raggio sta vendendo \033Y%s\033X</t> 
+ <t id="657">\033RADS:\033X Compra Merci</t>
+ <t id="658">Questo comando permette alle tue carrier di comprare merci dalle stazioni vicine utilizzando le navi attraccate. Non viene effettuato nessu controllo per settori nemici pertanto imposta il raggio con attenzione.\n\n\n\n</t>
+ <t id="659">Procedi</t>
+ <t id="660">\033W%s\033X - Quantità: \033W%s\033X  &lt;\033Yrimuovi\033X&gt;</t>
+ <t id="661">\033R[ADS]\033X \033Y%s\033X compra \033Y%s %s\033X a \033Y%s\033X</t> 
+ <t id="662">Seleziona l'ammontare ricercato</t>
+ <t id="663">Aggiungi tutti i tipi di missili</t>
+ 
+
+ <t id="700">\033R[ADS]\033X \033WWing %s: \033X %s &lt;%s&gt;</t> 
+ <t id="702">\033R[ADS]\033X %s - \033WRitirata...\033X</t>
+ <t id="703">\033R[ADS]\033X %s</t>
+ <t id="710">\033YLeader\033X</t>
+ <t id="711">Wingmate</t>
+ <t id="712">\033GScorta\033X</t>
+ <t id="713">\033WNessun Bersaglio\033X</t>
+ <t id="714">\033R%s\033X</t>
+ <t id="715">\033B%s\033X</t>
+ 
+  
+ <t id="800">Report Carrier Automatizzati</t>
+ <t id="801">\033WSeleziona : \033X %s [%s]</t>
+ <t id="802">\033WOrdini : \033X %s - \033WAutomatizzato :\033X %s</t>
+ <t id="803">Seleziona</t>
+ <t id="804">\033Y%s\033X [\033Y%s\033X] - Settore : \033Y%s\033X</t>
+ <t id="805">\033WPosizione : \033X %s [%s]</t>
+ <t id="806">Azioni</t>
+ <t id="807">Impostazione carrier selezionata</t>
+ <t id="808">Applica le attuali impostazioni a tutte le carrier</t>
+
+
+ <t id="820">\033GSi\033X</t>
+ <t id="821">\033RNo\033X</t>
+  
+  <t id="001">** COMMENT ** v2.55 Begins Here</t>
+  
+ <t id="1000">ADS Setup Menu</t>
+ <t id="1001">\033YSelected :\033X %s</t>
+ <t id="1002">Manage Stations</t>
+ <t id="1003">Manage Carriers</t>
+ <t id="1004">\033YMenu\033X</t>
+ <t id="1005">List ADS %ss</t>
+ <t id="1006">Recent Events</t>
+ <t id="1007">\033RUninstall ADS\033X</t>
+ <t id="1008">Apply default settings to all %ss</t>
+ <t id="1009">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X | auto: \033W%s\033X | ADS figthers: \033W%s\033X</t>
+ 
+ <t id="1010">\033RADS Manager\033X</t>
+ <t id="1011">This menu gives you access to all \033YADS compatible\033X assets</t>
+ <t id="1012">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X</t>
+ <t id="1013">- \033GIntegrity:\033X Hull \033Y%s/100\033X - Shields \033Y%s/100\033X</t>
+ <t id="1014">- \033GStatus:\033X \033W%s\033X - \033Y%s\033X</t>
+ <t id="1015">- \033GCombat:\033X threat level \033Y%s\033X - attacked \033Y%s\033X - deployed \033Y%s\033X</t>
+ <t id="1016">- \033GFighters:\033X  owned \033Y%s\033X - docked \033Y%s\033X - ADS \033Y%s\033X</t>
+ <t id="1017">\033Y%s List\033X</t>
+ <t id="1018">ADS Automated Mode  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1019">Open Setup Menu for this %s</t>
+
+ <t id="1020">\033Y[\033X\033G%s\033X\033Y]\033X \033G%s\033X | auto: \033W%s\033X | ADS figthers: \033W%s\033X</t>
+ <t id="1021">\033Y[\033X\033G%s\033X\033Y]\033X \033Y%s\033X | auto: \033W%s\033X | ADS figthers: \033W%s\033X</t>
+ <t id="1022">\033Y[\033X\033G%s\033X\033Y]\033X \033R%s\033X | auto: \033W%s\033X | ADS figthers: \033W%s\033X</t>
+
+ <t id="1023">\033G   Jump to Me</t>
+ <t id="1024">\033G   Jump to Sector ...\033X</t>
+ <t id="1025">\033G   Attack Target ...\033X</t>
+ <t id="1026">Select Destination</t>
+ <t id="1027">Select Target</t>
+ <t id="1028">\033G   Patrol Sectors\033X</t>
+ <t id="1029">\033G   Attack All\033X</t>
+ <t id="1030">Select in crosshair and close</t>
+ <t id="1031">%s deployed fighters in %s</t>
+ <t id="1032">\033WReport From :\033X %s | \033WClass :\033X %s\n\033WLocation :\033X %s | \033WThreat Level :\033X %s\n\n\033WAction :\033X Fighters Launched</t>
+ <t id="1033">\033G   Dock at ...\033X</t>
+ <t id="1034">\033WCommand Panel\033X  \033Y&lt;\033G+\033X\033Y&gt;\033X</t>
+ <t id="1035">View owned ships</t>
+ <t id="1036">\033G   Protect ...\033X</t>
+ <t id="1037">\033G   Standby\033X</t>
+ <t id="1038">\033WCommand Panel\033X  \033Y&lt;\033G-\033X\033Y&gt;\033X</t>
+ <t id="1039">\033G   %s\033G</t>
+ <t id="1040">\033RADS:\033X \033WManager\033X</t>
+ <t id="1041">\033W%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Whull\033X %s%% \033G|\033X \033Wshield\033X %s%% \033G]\033X</t>
+ <t id="1042">Flying</t>
+ <t id="1043">Docked</t>
+ 
+ <t id="001">** COMMENT ** v2.60 Begins Here</t>
+ 
+ <t id="1044">Defense Grid</t>
+ <t id="1045">General Settings</t>
+ <t id="1046">Manage Sectors</t>
+ <t id="1047">View Ships  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1048">ADS Satellite (%s)</t>
+ <t id="1049">\033YDefense Grid\033X</t>
+ 
+ <t id="1050">\033YSector List\033X</t>
+ <t id="1051">[\033G%s,%s\033X] \033W%s\033X | Stations: \033G%s\033X | Threat Level: \033Y%s\033X</t>
+ <t id="1052">Filter : %s</t>
+ <t id="1053">All Sectors</t>
+ <t id="1054">Sectors protected by ADS</t>
+ <t id="1055">Threatened sectors</t>
+
+ <t id="1056">\033YShip List\033X</t>
+ <t id="1057">[\033G%s\033X] \033W%s\033X - \033W%s\033X | Defense Grid : \033Y%s\033X</t>
+ <t id="1058">Defense Grid  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1059">Used by the Defense Grid  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ 
+ <t id="1060">[\033G%s\033X] [%s]  \033W%s\033X</t>
+ <t id="1061">\033WCommand Panel\033X</t>
+ <t id="1062">\033GLaunch Wing\033X</t>
+ <t id="1063">Change Target  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1064">Ship Count</t>
+ <t id="1065">\033WManual Selection\033X</t>
+ <t id="1066">\033G%s\033X</t>
+ <t id="1067">\033Y%s\033X</t>
+ <t id="1068">\033R%s\033X</t>
+ 
+ <t id="1069">Launch</t>
+ <t id="1070">%s%%</t>
+ <t id="1071">Stay Docked</t>
+ <t id="1072">manual selection</t>
+ <t id="1073">auto</t>
+ <t id="1074">Class: %s | Owner: %s | Relation: %s</t>
+ 
+ <t id="001">** COMMENT ** v2.65 Begins Here</t> 
+ 
+ <t id="1075">Marine Training Center</t>
+ <t id="1076">Crew Quarters</t>
+ <t id="1077">Standard Training</t>
+ <t id="1078">Combat Training</t>
+
+<t id="001">** COMMENT ** Marine Statistics</t> 
+ <t id="1079">  \033Y[\033X Fight: \033W%s\033X - Mech: \033W%s\033X - Hack: \033W%s\033X - Engineer: \033W%s\033X\033Y ]\033X</t>
+ 
+ <t id="001">** COMMENT ** Marine Name - Overall Skill</t> 
+ <t id="1080">\033G%s\033X - \033WOverall:\033X \033G%s\033X</t>
+
+<t id="1081">Name</t>
+ <t id="1082">Fightskill</t>
+ <t id="1083">Mechanical</t>
+ <t id="1084">Hacking</t>
+ <t id="1085">Engineering</t>
+ <t id="1086">Barracks ...</t>
+ <t id="1087">\033GSave and close\033X</t>
+ <t id="1088">\n\033RPress [Esc] to close without saving\033X</t>
+ 
+ <t id="1089">\033WGeneral Settings\033X</t>
+ <t id="1090">\033YDefault Setup\033X</t>
+ <t id="1091">\033WEdit Default Carrier Setup\033W</t>
+ <t id="1092">\033WEdit Default Station Setup\033W</t>
+ <t id="1093">\033YDefense Grid Settings\033X</t>
+ <t id="1094">\033WMaximum Jump Distance\033X</t>
+ <t id="1095">\033WMinimum Threat to trigger an alert\033X</t>
+ <t id="1096">\033WDisplay Warning Message\033X</t>
+ <t id="1097">\033YIgnore Factions\033X</t>
+ <t id="1098">\033YGeneral Settings\033X</t>
+ <t id="1099">\033WDynamic Renaming System\033X</t>
+ <t id="1100">\033RReset All Settings to default values\033X</t>
+ <t id="1101">Auto</t>
+ <t id="1102">Manual</t>
+ <t id="1103">Trade Only</t>
+ <t id="1104">Ignore</t>
+
+<t id="1105">\033W- Training Cost :\033X \033Y%s\033X \033Wcredits per hour\033X</t>
+<t id="1106">\033GApply Settings\033X</t>
+<t id="1107">Barracks</t>
+<t id="1108">\033W- There is %s marines training onboard\033X</t>
+<t id="1109">\033W- Room :\033X \033Y%s/%s\033X</t>
+<t id="1110">Passengers</t>
+<t id="1111">Enslave</t>
+<t id="1112">Train</t>
+<t id="1113">\033RADS:\033X \033Y%s\033X \033Wis under attack [threat :\033X \033Y%s\033X\033W]\033X</t>
+<t id="1114">[\033G%s,%s\033X] \033W%s:\033X \033G%s</t>
+<t id="1115">%s\033X \033W%s\033X [\033Gauto\033X|\033W%s\033X]</t>
+<t id="1116">%s\033X \033W%s\033X [\033Wmanual\033X|\033W%s\033X]</t>
+<t id="1117">%s\033X \033W%s\033X</t>
+<t id="1118">\033YGrid Members\033X</t>
+<t id="1119">\033YUnassigned\033X</t>
+<t id="1120">%s\033X \033W%s\033X [\033Ybattle\033X|\033W%s\033X]</t>
+<t id="1121">[\033G%s,%s\033X] \033W%s:\033X \033Y%s</t>
+<t id="1122">[\033G%s,%s\033X] \033W%s:\033X %s</t>
+<t id="1123">\033Y%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Whull\033X %s%% \033G|\033X \033Wshield\033X %s%% \033G]\033X</t>
+
+ </page>
+
+</language>
+

@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<language id="48">
+
+<page id="2008" title="Script Object Commands" descr="0">
+ <t id="830">ANARKIS_SETDOCKED</t>
+ <t id="831">ANARKIS_SELLWARES</t>
+ <t id="832">ANARKIS_BUYWARES</t>
+ <t id="833">ANARKIS_DEFENSIVEWING</t>
+ <t id="834">ANARKIS_ATTACKWING</t>
+ <t id="835">ANARKIS_CLEANSECTOR</t>
+ <t id="836">ANARKIS_DOCKALL</t>
+ <t id="1231">ANARKIS_SETTACTICS</t>
+ <t id="1232">ANARKIS_AUTOCARRIER</t>
+ <t id="1131">ANARKIS_SETUPSTATION</t>
+ <t id="1132">ANARKIS_STATIONDEFENSE</t>
+</page>
+
+<page id="2010" title="Script Cmd Names" descr="Long version of commandos. These are the commandos assigned to ships using the commandconsole. Page 2010 and 2011 belong together and hold short and long versions of the same commands"> 
+ <t id="830">\033RADS:\033X Ustawienia Bazy macierzystej</t>
+ <t id="831">\033RADS:\033X Sprzedaj towary...</t>
+ <t id="832">\033RADS:\033X Kup towary dla lotniskowca...</t>
+ <t id="833">\033RADS:\033X Wyślij szwadron myśliwców</t>
+ <t id="834">\033RADS:\033X Atak szwadronów przeciwko...</t>
+ <t id="835">\033RADS:\033X Wyczyść Sektor</t>
+ <t id="836">\033RADS:\033X Zadokuj wszystkie statki</t>
+ <t id="1231">\033RADS:\033X Ustawienia Lotniskowca</t>
+ <t id="1232">\033RADS:\033X Zautomatyzowany Lotniskowiec</t>
+ <t id="1131">\033RADS:\033X Ustawienia Systemu Obrony</t>
+ <t id="1132">\033RADS:\033X Obrona Sektora</t>
+</page> 
+
+<page id="2011" title="Script Cmd Shorts" descr="Short version of commandos. These are the commandos assigned to ships using the commandconsole. Page 2010 and 2011 belong together and hold short and long versions of the same commands"> 
+ <t id="830">set.homebase</t>  
+ <t id="831">sell.ware</t>
+ <t id="832">buy.ware</t>
+ <t id="833">defense.wing</t>
+ <t id="834">attack.wing</t>
+ <t id="835">clean.sector</t>
+ <t id="836">dock.ships</t>
+ <t id="1131">set.defense</t>
+ <t id="1132">auto.station</t>
+ <t id="1231">set.tactics</t>
+ <t id="1232">auto.carrier</t>
+</page> 
+
+<page id="2022"> 
+ <t id="830">Zezwala na przypisanie bazy macierzystej dla zadokowanych statków na tym lotniskowcu. Statki zostaną uzbrojone w rakiety, a ich nazewnictwo ulegnie zmianie.</t>  
+ <t id="831">Wyślij wielozadaniowe statki, aby  sprzedały towary z tego lotniskowca</t>
+ <t id="832">Wyślij wielozadaniowe statki, żeby kupiły towary z pobliskich fabryk</t>
+ <t id="833">Wyślij szwadron do obrony lotniskowca lub innego statku</t>
+ <t id="834">Wyślij szwadron do ataku na wskazany statek lub fabrykę</t>
+ <t id="835">Wyczyść sektor z jakiejkolwiek aktywności wroga</t>
+ <t id="836">Wszystkim statkom z tej bazy macierzystej zostanie przypisana komenda zadokowania tutaj. Przy większych dystansach statki wyposażone w napęd skokowy będą z niego korzystały by dostać się do lotniskowca.</t>
+ <t id="1131">Ustawienia Systemu Obronnego Anarkis.</t>
+ <t id="1132">Włączenie trybu obronnego dla stacji oznacza to iż szwadrony myśliwców będą starały się przechwycić najeźdźców, a statki naprawcze będą dokonywały naprawę.</t>
+ <t id="1231">Ten rozkaz umożliwia tobie na ustawienie twojego lotniskowca jak i zadokowanych do niego statków w tryb zautomatyzowany.</t>
+ <t id="1232">Tryb automatyczny. Lotniskowiec będzie sam się bronił i wysyłał statki o ile zajdzie taka potrzeba.</t>
+</page> 
+
+<page id="8510" title="ACC" descr="Anarkis Command Carrier">
+ <t id="100">\033RADS:\033X System Obronny Anarkis</t>
+ <t id="101">265</t>
+ <t id="102">Federacja Anarkis</t>
+ <t id="103">[author][b]Federacja Anarkis[/b][/author][b]System Obronny Anarkis[/b] v%s prawidłowo zainstalowany ! </t>
+ <t id="104">[author][b]Federacja Anarkis[/b][/author][b]System Obronny Anarkis[/b] prawidłowo zaktualizowany do v%s !</t>
+ <t id="105">[author][b]ADS - %s[/b][/author] Nie możesz używać tego polecenia na statku dowodzonym przez ciebie.</t>
+ <t id="106">[author][b]Federacja Anarkis[/b][/author][b]System Obronny Anarkis[/b] został usuniety z gry.\nPrzed zapisem gry przejdź do folderu z grą X3 TC i uruchom program 'uninstall acc.bat. Po czym powróć do gry a następnie ją zapisz.</t>
+ 
+ <t id="200">Anarkis Menu Lotniskowca</t>
+
+ <t id="210">Główne</t>
+ <t id="211">Hangary...</t>
+ <t id="212">Automatyczny Raport Lotniskowca</t>
+ <t id="213">Używane Rakiety  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="214">Awaryjny Skok  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Próg Tarcz  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="215">Auto skok \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Minimalny Zasięg  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="216">Ilość Uzupełnianego Paliwa\(skoki\)  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="217">Zarządzanie Zadokowanymi Statkami</t>
+
+ <t id="220">Zautomatyzowane Zarządzanie Lotniskowcem</t>
+ <t id="221">\033WMinimalny Poziom Zagrożenia\033X</t>
+ <t id="222">\033WPokaż Komunikat Ostrzegawczy\033X</t>
+ <t id="223">\033WZmuś Uszkodzone Statki do Odwrotu\033X</t>
+ <t id="224">\033WTryb Ataku\033X</t>
+ <t id="225">\033WLiczba Statków W Obronie\033X</t>
+ <t id="226">\033WZasięg Radaru\033X</t>
+ <t id="227">Zignoruj Rasę  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="228">Pokaż</t>
+ <t id="229">\033WRodzaj Ostrzeżeń\033X</t>
+  
+ <t id="230">Wtyczka Ustawień SUA</t>
+ <t id="231">Zastosować ustawienia dla \033Ywszystkich\033X zadokowanych statków</t>
+ <t id="232">Resetowanie Ustawień do Wartości Domyślnych</t>
+ <t id="233">Napisy</t>
+ <t id="234">Dźwięk</t>
+ <t id="235">Wyskakujące Menu</t>
+ <t id="236">Zdebugować dziennik danych wyjściowych  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="237">Zastosować ustawienia tylko dla \033Yaktywnych\033X zadokowanych statków</t>
+
+ <t id="238">\033WOpóźnienie wysłania zadokowanych myśliwców w sekundach\033X</t>
+
+ 
+ <t id="240">Zarządzanie Lotniskowcem</t>
+ <t id="241">Zautomatyzowany Lotniskowiec...</t>
+ <t id="242">Naprawy w hangarach...</t>
+ <t id="243">Zaopatrzenie Statku...</t>
+ <t id="244">Ustawienia Wieżyczek: \033Y%s\033X</t>
+ <t id="245">Ochraniaj Statek</t>
+ <t id="246">Atakuj Wrogów</t>
+ <t id="247">Obrona Przeciwrakietowa</t>
+ <t id="248">\033RMARS:\033X Ofensywny</t>
+ <t id="249">\033RMARS:\033X Defensywny</t>
+ 
+ <t id="201">Włączony</t>
+ <t id="202">Wyłączony</t>
+ <t id="203">Tak</t>
+ <t id="204">Nie</t>
+ <t id="205">Domyślny</t>
+ <t id="206">Automatyczny Wybór</t>
+ <t id="207">Najpierw Silniejsze</t>
+ <t id="208">Najpierw Pobliskie</t>
+ <t id="209">Żadne</t>
+ 
+ <t id="250">Lotniskowiec: \033Y%s\033X [%s]</t>
+ <t id="251">Lokalizacja: \033Y%s\033X</t>
+ <t id="252">Zadokowany: %s/%s - Posiada: %s</t>
+ <t id="260">© Serial Kicked / [\033Y Federacja Anarkis\033X]</t>
+ 
+ <t id="300">Wybierz liczbę statków używaną do obrony celu</t>
+ <t id="301">Ustawienia Celowania</t>
+ <t id="302">Wybierz jakie statki mają atakować wrogie cele</t>
+ <t id="303">Zmusić uszkodzone statki do odwrotu?</t>
+ <t id="304">Wyświetlać wiadomość ostrzegawczą kiedy lotniskowiec jest w niebezpieczeństwie?</t>
+ <t id="305">Ta opcja pozwala Ci ustawić minimalne zagrożenie, które zapoczątkuje wysłanie myśliwców. Aby zrozumieć działanie opcji "Minimalny Poziom Zagrożenia", musisz wiedzieć że należy przypisać wartość dla każdego rodzaju statku. Powinieneś również wiedzieć że lotniskowiec zawsze wyśle myśliwce gdy tylko wykryje obecność M1 lub M2. Roboty bojowe są ignorowane.</t>
+ <t id="306">M5: 1 - M4: 2  - M3: 5 - M8: 10 - M6: 14 - M7: 35\nTL: 15 - TM: 8 - TP/TS: 2\n\n\n\n</t>
+ <t id="307">Minimalny Poziom Zagrożenia</t>
+ <t id="308">Wybierz sumę uzupełnianego paliwa do skoków</t>
+ <t id="309">Czy chcesz włączyć auto skok dla zadokowanych statków?</t>
+ <t id="310">Ustawienie minimalnego zasięgu dla auto skoku</t>
+ <t id="311">Czy chcesz włączyć awaryjny skok dla zadokowanych statków?</t>
+ <t id="312">Ustawienie awaryjnego progu tarcz w procentach</t>
+ <t id="313">Prawdopodobieństwo zastosowania rakiet w procentach</t>
+ <t id="314">Wybór zasięgu radaru w metrach</t>
+ <t id="315">Wybór opóźnienia w sekundach</t>
+ 
+ <t id="400">Mechanik</t>
+ <t id="401">Możesz użyć mechanika do naprawy uszkodzonych myśliwców w stacjonujących na lotniskowcu. Możesz zatrudnić mechanika za odpowiednią sumę w przyjaznych sektorach. Stawka godzinowa nieprzypisanych mechaników wynosi 1000 kredytów na każdego mechanika, lecz jego stawka znacznie wzrasta gdy dokonuje on napraw uszkodzonych myśliwców. Im więcej posiadasz mechaników tym szybciej naprawią i uzbroją twoje myśliwce.\n\nObecnie wydatki nieprzypisanego personelu to : \033Y%s kredytów na na godzinę\033X\nObecnie wydatki przypisanego personelu to: \033Y%s kredytów na na godzinę\033X\n\n\n\n</t>
+ <t id="402">Obecnie posiadasz : \033Y%s\033X Mechaników (wydatki nieprzypisanego personelu: \033Y%s\033X kredytów na na godzinę)</t>
+ <t id="403">Ustawienia</t>
+ <t id="404">Zezwól na reperowanie zadokowanych statków  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="405">Zezwól na reperowanie lotniskowca  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="406">Zarządzanie : \033Y%s Mechaników\033X</t>
+ <t id="407">Zatrudnij nowego mechanika</t>
+ <t id="408">Zwolnij mechanika</t>
+ <t id="409">Uszkodzone statki</t>
+ <t id="410">  [%s] \033Y%s\033X - kadłub: %s/100</t>
+ <t id="411">Zatrudnienie nowego mechanika będzie Cię kosztowało 50.000 kredytów. Czy jesteś tego pewien?</t>
+ <t id="412">Nie posiadasz wystarczającej ilości pieniędzy by móc zatrudnić nowego mechanika.</t>
+ <t id="413">W obecnym sektorze musi znajdować się Stacja Handlowa.</t>
+
+ <t id="420">Zarządzanie Hangarami</t>
+ <t id="421">Wybór statku który będzie używał poleceń ACC</t>
+ <t id="422">Lista Zadokowanych Statków.</t>
+ <t id="423">Główne polecenia</t>
+ <t id="424">Dodaj wszystkie zadokowane statki do bazy macierzystej</t>
+ <t id="425">Zarządzanie</t>
+ <t id="426">Dodaj wszystkie statki</t>
+ <t id="427">Dodaj tylko statki klasy M3 i M4</t>
+ <t id="428">Dodaj tylko statki klasy M3</t>
+ <t id="429">Usuń wszystkie statki</t>
+ <t id="430">  [%s] \033Y%s\033X - %s</t>
+ <t id="431">\033GAktywne\033X</t>
+ <t id="432">\033RNieaktywne\033X</t>
+ <t id="433">\033YW Trakcie Naprawy\033X</t>
+ <t id="434">Zmiana nazewnictwa zadokowanych statków</t>
+ <t id="435">Dodaj tylko aktywne statki do bazy macierzystej</t>
+
+ <t id="440">Zaopatrzenie Statku</t>
+ <t id="441">Możliwość przenoszenia ładunku pomiędzy lotniskowcem i zadokowanymi na nim statkami\n\n\n</t>
+ <t id="442">Działania Standardowe</t>
+ <t id="443">Przenieś towary z lotniskowca do zadokowanych statków</t>
+ <t id="444">Rozładuj towary do ładowni lotniskowca</t>
+ <t id="445">Zaawansowany</t>
+ <t id="446">Zezwala naszemu lotniskowcowi na zakupienie myśliwców w trakcie walk  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="447">Zezwala naszemu lotniskowcowi na podejmowanie napraw w stoczniach  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="448">Zezwala naszemu lotniskowcowi na utrzymywanie zaopatrzenia \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="449">Dzięki tej opcji możesz przenieść towary z zadokowanych statków do ładowni swojego lotniskowca.</t>
+ <t id="450">\033YRozładunek:\033X %s</t>
+ <t id="451">Handel tylko towarami [tylko ogniwa energetyczne]</t>
+ <t id="452">Handel tylko towarami [wliczając ogniwa energetyczne]</t>
+ <t id="453">Rakiety</t>
+ <t id="454">Niczego nie wyposażono</t>
+ <t id="455">\033YZ :\033X %s</t>
+ <t id="456">Aktywować tylko statki</t>
+ <t id="457">Wszystkie zadokowane statki</t>
+ <t id="458">\033YZatwierdź\033X</t>
+ <t id="459">Zatwierdź Działanie</t>
+ 
+ <t id="460">Ignorowane Rasy</t>
+ <t id="461">Zarządzanie</t>
+ <t id="462">Czysta lista</t>
+ <t id="463">Dodaj rasę do listy</t>
+ <t id="464">\033Y%s\033X - Usuń</t>
+ <t id="465">Wybierz rasę do Ignorowanych</t>
+
+ <t id="480">Zmień nazwę statku</t>
+ <t id="481">Typ i Klasa Statku - Numer</t>
+ <t id="482">Nazwa Lotniskowca - Typ Statku - Numer</t>
+ <t id="483">Klasa Rasy - Numer</t>
+ <t id="484">Umożliwia na masowe nazewnictwo zadokowanych statków.</t>
+ <t id="485">Ustawienia</t>
+ <t id="486">Dodaj do wszystkich zadokowanych statków</t>
+ <t id="487">Dodaj do wszystkich aktywnych statków</t>
+ <t id="488">\033YWybrano: \033X%s</t>
+ <t id="489">\033YPrzykład: \033X%s</t>
+
+ 
+ <t id="500">[author][b]Anarkis Carrier Commands[/b][/author] [b]Uwaga:[/b] Twój [b]%s[/b] w sektorze [b]%s[/b] jest w niebezpieczeństwie i moze wymagać twojego zainteresowania.</t>
+ <t id="501">[author][b]Anarkis Carrier Commands[/b][/author] [b]Anulowano:[/b] Nie posiadasz wystarczającej ilości statków w %s dla tego polecenia</t>
+ <t id="502">[author][b]Anarkis Carrier Commands[/b][/author] [b]Anulowano:[/b] Nie posiadasz wystarczającej ilości statków w  %s by móc oczyścić sektor. Wymaganych  jest co najmniej 5 statków.</t>
+ <t id="503">[author][b]Anarkis Carrier Commands[/b][/author] [b]Błąd:[/b] Brak wystarczającej ilości towarów by móc wyposażyć jakikolwiek statek.</t>
+ <t id="504">[author][b]Anarkis Carrier Commands[/b][/author] [b]Wykonano:[/b] %s został wyposażony %s/%s statek w %s %s.</t>
+ <t id="505">[author][b]Anarkis Carrier Commands[/b][/author] [b]Anulowano:[/b] %s - Stacja nie znajduje się w zasięgu %s.</t>
+ <t id="506">\033RAlarm:\033X \033W%s w sektorze %s potrzebuje pomocy !\033X</t>
+ 
+ <t id="520">Ekwipunek Statków</t>
+ <t id="521">\033YTowary\033X</t>
+ <t id="522">&lt; \033Ydodaj nowy towar\033X &gt;</t>
+ <t id="523">\033W%s\033X [ilość: %s]  &lt;\033Usunięto\033X&gt;</t>
+ <t id="524">\033YTryb:\033X %s</t>
+ <t id="525">Taka sama ilość dla wszystkich statków [$ilość = maksymalna suma]</t>
+ <t id="526"> $ilość towaru na każdy statek</t>
+ <t id="527">\033YZprzeznaczenie:\033X %s</t>
+ <t id="528">Zadokowane statki</t>
+ <t id="529">Aktywne statki</t>
+ <t id="530">\033YZatwierdź\033X</t>
+ <t id="531">Zatwierdź czynność</t>
+ <t id="532">Wybierz towar który chcesz przenieść</t>
+ <t id="533">Podaj ilość</t>
+
+ <t id="540">Raport Przeładunku</t>
+ <t id="541">Transferowane Towary</t>
+ <t id="542">\033W%s %s\033X przetransferowane do \033Y%s\033X</t>
+ <t id="543">\033W%s %s\033X rozładowane z \033Y%s\033X</t>
+ 
+ <t id="600">\033RADS:\033X Wyczyść Sektor</t>
+ <t id="601">\033RADS:\033X Zadokuj wszystkie moje statki</t>
+ <t id="602">\033RADS:\033X Atakuj mój cel</t>
+ <t id="603">\033RADS:\033X \033WZarządzanie\033W</t>
+
+ <t id="640">\033RADS:\033X Sprzedaż Towarów</t>
+ <t id="641">Wybrany Towar</t>
+ <t id="642">Szybki Wybór</t>
+ <t id="643">Wyczyść Listę</t>
+ <t id="644">Dodaj wszystkie dostępne towary</t>
+ <t id="645">Rozpoczęcie Transferu</t>
+ <t id="646">&lt; \033Ydodaj nowy towar\033X &gt;</t>
+ <t id="647">Ustawienia</t>
+ <t id="648">Maksymalny Dystans \033R&lt;\033X \033Y%s Sektor\033X \033R&gt;\033X</t>
+ <t id="649">To polecenie umożliwia twojemu lotniskowcowi na sprzedanie towarów do stacji za pomocą zadokowanych na nim statków. Statki nie posiadają możliwości wykrywania zagrożenia, to też ustal zasięg z rozwagą.\n\n\n\n</t>
+ <t id="650">\033W%s\033X - Suma: \033W%s\033X  &lt;\033Yusuń\033X&gt;</t>
+ <t id="651">Wybierz zasięg skoku</t>
+ <t id="652">Wybierz towar do dodania</t>
+ <t id="653">\033R[ADS]\033X \033Y%s\033X sprzedano \033Y%s\033X do \033Y%s\033X</t> 
+ <t id="654">\033R[ADS]\033X Brak stacji skupującej \033Y%s\033X</t> 
+ <t id="655">\033R[ADS]\033X Brak statku z odpowiednią klasą ładowni\033Y%s\033X</t>
+ <t id="656">\033R[ADS]\033X Brak stacji sprzedającej\033Y%s\033X w zasięgu</t> 
+ <t id="657">\033RADS:\033X Zakup Towarów</t>
+ <t id="658">To polecenie umożliwia lotniskowcowi na zakupienie towarów od stacji za pomocą zadokowanych na nim statków. Statki nie posiadają możliwości wykrywania zagrożenia, to też ustal zasięg z rozwagą.\n\n\n\n</t>
+ <t id="659">Wykonać</t>
+ <t id="660">\033W%s\033X - Ilość: \033W%s\033X  &lt;\033Yusunięto\033X&gt;</t>
+ <t id="661">\033R[ADS]\033X \033Y%s\033X kup \033Y%s %s\033X od \033Y%s\033X</t> 
+ <t id="662">Podaj żądaną sumę</t>
+ <t id="663">Dodaj wszystkie typy rakiet</t>
+ 
+
+ <t id="700">\033R[ADS]\033X \033WSkrzydło %s: \033X %s &lt;%s&gt;</t> 
+ <t id="702">\033R[ADS]\033X %s - \033WOdwrót...\033X</t>
+ <t id="703">\033R[ADS]\033X %s</t>
+ <t id="710">\033YLider\033X</t>
+ <t id="711">Skrzydłowy</t>
+ <t id="712">\033GEskorta\033X</t>
+ <t id="713">\033WBrak Celu\033X</t>
+ <t id="714">\033R%s\033X</t>
+ <t id="715">\033B%s\033X</t>
+
+
+ <t id="800">Rapot Zautomatyzowanych Lotniskowców</t>
+ <t id="801">\033WWybrano: \033X %s [%s]</t>
+ <t id="802">\033WRozkazy: \033X %s - \033WZautomatyzowany:\033X %s</t>
+ <t id="803">Selekcja</t>
+ <t id="804">\033Y%s\033X [\033Y%s\033X] - Sektor: \033Y%s\033X</t>
+ <t id="805">\033WLokalizacja: \033X %s [%s]</t>
+ <t id="806">Działania</t>
+ <t id="807">Ustawienia wybranego lotniskowca</t>
+ <t id="808">Dodaj obecne ustawienia do wszystkich lotniskowców</t>
+
+
+ <t id="820">\033GTak\033X</t>
+ <t id="821">\033RNie\033X</t>
+ 
+ <t id="001">** KOMENTARZ ** Tu zaczyna się v2.55</t>
+ 
+ <t id="1000">Menu ustawień ADS</t>
+ <t id="1001">\033YWybrany :\033X %s</t>
+ <t id="1002">Zarządzanie Stacją</t>
+ <t id="1003">Zarządzanie Statkami</t>
+ <t id="1004">\033YMenu\033X</t>
+ <t id="1005">Lista ADS %ss</t>
+ <t id="1006">Ostatnie wydarzenia</t>
+ <t id="1007">\033ROdinstaluj ADS\033X</t>
+ <t id="1008">Zastosuj ustawienia domyślne dla wszystkich %s</t>
+ <t id="1009">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X | auto: \033W%s\033X | ADS myśliwce: \033W%s\033X</t>
+ 
+ <t id="1010">\033RZarządzanie ADS\033X</t>
+ <t id="1011">To menu umożliwia dostęp do wszystkich \033Ykompatybilnych z ADS\033X własności</t>
+ <t id="1012">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X</t>
+ <t id="1013">- \033GIntegralność:\033X Kadłub \033Y%s/100\033X - Osłony \033Y%s/100\033X</t>
+ <t id="1014">- \033GStatus:\033X \033W%s\033X - \033Y%s\033X</t>
+ <t id="1015">- \033GWalka:\033X poziom zagrożenia \033Y%s\033X - zaatakowany \033Y%s\033X - rozmieszczone \033Y%s\033X</t>
+ <t id="1016">- \033GMyśliwce:\033X  posiadane \033Y%s\033X - zadokowane \033Y%s\033X - ADS \033Y%s\033X</t>
+ <t id="1017">\033Y%s Lista\033X</t>
+ <t id="1018">ADS Tryb automatyczny  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1019">Otwórz Menu ustawień ADS dla %s</t>
+
+ <t id="1020">\033Y[\033X\033G%s\033X\033Y]\033X \033G%s\033X | auto: \033W%s\033X | ADS myśliwce: \033W%s\033X</t>
+ <t id="1021">\033Y[\033X\033G%s\033X\033Y]\033X \033Y%s\033X | auto: \033W%s\033X | ADS myśliwce: \033W%s\033X</t>
+ <t id="1022">\033Y[\033X\033G%s\033X\033Y]\033X \033R%s\033X | auto: \033W%s\033X | ADS myśliwce: \033W%s\033X</t>
+
+ <t id="1023">\033G   Skocz do mnie</t>
+ <t id="1024">\033G   Skocz do sektora...\033X</t>
+ <t id="1025">\033G   Atakuj Cel...\033X</t>
+ <t id="1026">Wybierz pozycję</t>
+ <t id="1027">Wybierz Cel</t>
+ <t id="1028">\033G   Patroluj Sektory\033X</t>
+ <t id="1029">\033G   Atakuj Wszystkich\033X</t>
+ <t id="1030">Wybierz to co jest na celowniku i w pobliżu</t>
+ <t id="1031">%s rozmieść myśliwce w %s</t>
+ <t id="1032">\033WSprawozdanie :\033X %s | \033WKlasa :\033X %s\n\033WLokalizacja :\033X %s | \033WPoziom zagrożenia :\033X %s\n\n\033WAkcja :\033X Użyte myśliwce</t>
+ <t id="1033">\033G   Zadokuj w...\033X</t>
+ <t id="1034">\033WPanel Rozkazów\033X  \033Y&lt;\033G+\033X\033Y&gt;\033X</t>
+ <t id="1035">Zobacz statki będące własnością</t>
+ <t id="1036">\033G   Chroń...\033X</t>
+ <t id="1037">\033G   W gotowości\033X</t>
+ <t id="1038">\033WPanel Rozkazów\033X  \033Y&lt;\033G-\033X\033Y&gt;\033X</t>
+ <t id="1039">\033G   %s\033G</t>
+ <t id="1040">\033RADS:\033X \033WZarządzanie\033X</t>
+ <t id="1041">\033W%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Wkadłub\033X %s%% \033G|\033X \033Wosłony\033X %s%% \033G]\033X</t>
+
+ <t id="1042">Latające</t>
+ <t id="1043">Zadokowane</t> 
+ 
+ <t id="001">** KOMENTARZ ** Tu zaczyna się v2.60</t>
+ 
+ <t id="1044">Sieć Obrony</t>
+ <t id="1045">Główne Ustawienia</t>
+ <t id="1046">Zarządzanie Sektorami</t>
+ <t id="1047">Zobacz Statki  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1048">Satelita ADS (%s)</t>
+ <t id="1049">\033YSieć Obrony\033X</t>
+ 
+ <t id="1050">\033YLista Sektorów\033X</t>
+ <t id="1051">[\033G%s,%s\033X] \033W%s\033X | Stacja: \033G%s\033X | Poziom Zagrożenia: \033Y%s\033X</t>
+ <t id="1052">Filtr : %s</t>
+ <t id="1053">Wszystkie Sektory</t>
+ <t id="1054">Sektory chronione przez ADS</t>
+ <t id="1055">Zagrożone Sektory</t>
+
+ <t id="1056">\033YLista Statków\033X</t>
+ <t id="1057">[\033G%s\033X] \033W%s\033X - \033W%s\033X | Sieć Obrony : \033Y%s\033X</t>
+ <t id="1058">Sieć Obrony  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1059">Wykorzystywane przez Sieć Obrony  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ 
+ <t id="1060">[\033G%s\033X] [%s]  \033W%s\033X</t>
+ <t id="1061">\033WPanel Rozkazów\033X</t>
+ <t id="1062">\033GUruchom Skrzydło\033X</t>
+ <t id="1063">Zmień Cel  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1064">Statek główny</t>
+ <t id="1065">\033WRęczny wybór\033X</t>
+ <t id="1066">\033G%s\033X</t>
+ <t id="1067">\033Y%s\033X</t>
+ <t id="1068">\033R%s\033X</t>
+ 
+ <t id="1069">Uruchom</t>
+ <t id="1070">%s%%</t>
+ <t id="1071">Zadokowane</t>
+ <t id="1072">ręcznie</t>
+ <t id="1073">auto</t>
+ <t id="1074">Klasa: %s | Właściciel: %s | Relacje: %s</t>
+ 
+  <t id="001">** COMMENT ** v2.65 Begins Here</t> 
+ 
+ <t id="1075">Centrum Szkolenia Marines</t>
+ <t id="1076">Kwatery załogi</t>
+ <t id="1077">Standard szkolenia</t>
+ <t id="1078">Szkolenie bojowe</t>
+
+ <t id="001">** COMMENT ** Marine Statistics</t> 
+ <t id="1079">  \033Y[\033X Walka: \033W%s\033X - Mechanika: \033W%s\033X - Hacking: \033W%s\033X - Inżynieria: \033W%s\033X\033Y ]\033X</t>
+ 
+ <t id="001">** COMMENT ** Marine Name - Overall Skill</t> 
+ <t id="1080">\033G%s\033X - \033WPoziom:\033X \033G%s\033X</t>
+
+ <t id="1081">Nazwa</t>
+ <t id="1082">Walka</t>
+ <t id="1083">Mechanika</t>
+ <t id="1084">Hacking</t>
+ <t id="1085">Inżynieria</t>
+ <t id="1086">Koszary ...</t>
+ <t id="1087">\033GZapisz i zamknij\033X</t>
+ <t id="1088">\n\033RNaciśnij [Esc] aby zamknąc bez zapisywania\033X</t>
+ 
+ <t id="1089">\033WUstawienia Ogólne\033X</t>
+ <t id="1090">\033YUstawienia domyślne\033X</t>
+ <t id="1091">\033WEdycja ustawień domyślnych Lotniskowca\033W</t>
+ <t id="1092">\033WEdycja ustawień domyślnych Stacji\033W</t>
+ <t id="1093">\033YUstawienia Sieci Obrony\033X</t>
+ <t id="1094">\033WMaksymalny dystans w skokach\033X</t>
+ <t id="1095">\033WMinimalne zagrożenie wywołujące alert\033X</t>
+ <t id="1096">\033WPokaż Wiadomość otrzegawczą\033X</t>
+ <t id="1097">\033YZignoruj frakcję\033X</t>
+ <t id="1098">\033YUstawienia ogólne\033X</t>
+ <t id="1099">\033WSystem dynamicznych zmian nazw\033X</t>
+ <t id="1100">\033RResetuj Wszystkie ustawienia do domyślnych wartości\033X</t>
+ <t id="1101">Automatycznie</t>
+ <t id="1102">Ręcznie</t>
+ <t id="1103">Tylko Handlowcy</t>
+ <t id="1104">Ignoruj</t>
+
+ <t id="1105">\033W- Koszty treningu :\033X \033Y%s\033X \033Wkredytów na godzinę\033X</t>
+ <t id="1106">\033GZastosuj ustawienia\033X</t>
+ <t id="1107">Koszary</t>
+ <t id="1108">\033W- Twoich %s marines trenuje na pokładzie\033X</t>
+ <t id="1109">\033W- Pokój :\033X \033Y%s/%s\033X</t>
+ <t id="1110">Pasażerów</t>
+ <t id="1111">Zniewolić</t>
+ <t id="1112">Trenować</t>
+ <t id="1113">\033RADS:\033X \033Y%s\033X \033Wzostał zaatakowany [Zagrożenie :\033X \033Y%s\033X\033W]\033X</t>
+ <t id="1114">[\033G%s,%s\033X] \033W%s:\033X \033G%s</t>
+ <t id="1115">%s\033X \033W%s\033X [\033Gautomatycznie\033X|\033W%s\033X]</t>
+ <t id="1116">%s\033X \033W%s\033X [\033Wręcznie\033X|\033W%s\033X]</t>
+ <t id="1117">%s\033X \033W%s\033X</t>
+ <t id="1118">\033YCzłonkowie Sieci Obrony\033X</t>
+ <t id="1119">\033YNieprzypisani\033X</t>
+ <t id="1120">%s\033X \033W%s\033X [\033Ybitwa\033X|\033W%s\033X]</t>
+ <t id="1121">[\033G%s,%s\033X] \033W%s:\033X \033Y%s</t>
+ <t id="1122">[\033G%s,%s\033X] \033W%s:\033X %s</t>
+ <t id="1123">\033Y%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Wkadłub\033X %s%% \033G|\033X \033Wosłony\033X %s%% \033G]\033X</t>
+ 
+ </page>
+
+</language>

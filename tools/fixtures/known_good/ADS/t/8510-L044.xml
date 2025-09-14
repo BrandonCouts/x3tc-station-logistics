@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<language id="44">
+
+<page id="2008" title="Script Object Commands" descr="0">
+ <t id="830">ANARKIS_SETDOCKED</t>
+ <t id="831">ANARKIS_SELLWARES</t>
+ <t id="832">ANARKIS_BUYWARES</t>
+ <t id="833">ANARKIS_DEFENSIVEWING</t>
+ <t id="834">ANARKIS_ATTACKWING</t>
+ <t id="835">ANARKIS_CLEANSECTOR</t>
+ <t id="836">ANARKIS_DOCKALL</t>
+ <t id="1231">ANARKIS_SETTACTICS</t>
+ <t id="1232">ANARKIS_AUTOCARRIER</t>
+ <t id="1131">ANARKIS_SETUPSTATION</t>
+ <t id="1132">ANARKIS_STATIONDEFENSE</t>
+</page>
+
+<page id="2010" title="Script Cmd Names" descr="Long version of commandos. These are the commandos assigned to ships using the commandconsole. Page 2010 and 2011 belong together and hold short and long versions of the same commands"> 
+ <t id="830">\033RADS:\033X Homebase Settings</t>
+ <t id="831">\033RADS:\033X Sell wares...</t>
+ <t id="832">\033RADS:\033X Buy ware for carrier...</t>
+ <t id="833">\033RADS:\033X Send Defensive Wing</t>
+ <t id="834">\033RADS:\033X Attack Wing against...</t>
+ <t id="835">\033RADS:\033X Clear Sector</t>
+ <t id="836">\033RADS:\033X Dock all ships</t>
+ <t id="1231">\033RADS:\033X Carrier Setup</t>
+ <t id="1232">\033RADS:\033X Automated Carrier</t>
+ <t id="1131">\033RADS:\033X Setup Defense System</t>
+ <t id="1132">\033RADS:\033X Sector Defense</t>
+</page> 
+
+<page id="2011" title="Script Cmd Shorts" descr="Short version of commandos. These are the commandos assigned to ships using the commandconsole. Page 2010 and 2011 belong together and hold short and long versions of the same commands"> 
+ <t id="830">set.homebase</t>  
+ <t id="831">sell.ware</t>
+ <t id="832">buy.ware</t>
+ <t id="833">defense.wing</t>
+ <t id="834">attack.wing</t>
+ <t id="835">clean.sector</t>
+ <t id="836">dock.ships</t>
+ <t id="1131">set.defense</t>
+ <t id="1132">auto.station</t>
+ <t id="1231">set.tactics</t>
+ <t id="1232">auto.carrier</t>
+</page> 
+
+<page id="2022"> 
+ <t id="830">Allow to selected homebase settings for the docked ships at this carrier. Ships will be renamed and missile settings applied.</t>  
+ <t id="831">Send multiple ships to sell wares from the carrier</t>
+ <t id="832">Send multiple ships to buy a given amount of a ware to the nearest factory</t>
+ <t id="833">Send a squadron to defend your carrier or another ship</t>
+ <t id="834">Send a squadron to attack a ship or a factory</t>
+ <t id="835">Clean the sector from all enemy activity</t>
+ <t id="836">All ships with this homebase assigned will dock here. Distant jumpdrive equipped ships will try to jump to the carrier.</t>
+ <t id="1131">Setup Anarkis Defense Station on this station.</t>
+ <t id="1132">Enable a defensive mode for the station, it will send ships against incomings and repair its docked ships over time</t>
+ <t id="1231">This command will allow you to setup both your docked ships and the carrier in automated mode.</t>
+ <t id="1232">Automated Mode. The carrier will defend itself and send ships when needed.</t>
+</page> 
+
+<page id="8510" title="ACC" descr="Anarkis Command Carrier">
+ <t id="100">\033RADS:\033X Anarkis Defense System</t>
+ <t id="101">265</t>
+ <t id="102">Anarkis Federation</t>
+ <t id="103">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] v%s succesfully installed ! </t>
+ <t id="104">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] succesfully upgraded to v%s !</t>
+ <t id="105">[author][b]ADS - %s[/b][/author] You cannot use this command on your playership.</t>
+ <t id="106">[author][b]Anarkis Federation[/b][/author][b]Anarkis Defense System[/b] has been removed from the game.\nPlease save your game now, exit and run the 'uninstall acc.bat' file in your X3 folder.</t>
+ 
+ <t id="200">Anarkis Carrier Menu</t>
+
+ <t id="210">General</t>
+ <t id="211">Hangars ...</t>
+ <t id="212">Automated Carriers Report</t>
+ <t id="213">Missile Usage  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="214">Emergency Jump  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Shield Limit  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="215">Autojump  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X - Minimum Range  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="216">Fuel Resupply Quantity \(jumps\)  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="217">Setup docked ships</t>
+
+ <t id="220">Automated Carrier Setup</t>
+ <t id="221">\033WMinimal Threat Level\033X</t>
+ <t id="222">\033WDisplay Warning Message\033X</t>
+ <t id="223">\033WForce Damaged Ships to Retreat\033X</t>
+ <t id="224">\033WAttack Mode\033X</t>
+ <t id="225">\033WDefensive Wing Size\033X</t>
+ <t id="226">\033WRadar Range\033X</t>
+ <t id="227">Ignore Factions  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="228">Display</t>
+ <t id="229">\033WWarning Type\033X</t>
+  
+ <t id="230">ADS Plugin Settings</t>
+ <t id="231">Apply settings on \033Yall\033X docked ships</t>
+ <t id="232">Reset Settings to Default Values</t>
+ <t id="233">Subtitles</t>
+ <t id="234">Audio</t>
+ <t id="235">Popup</t>
+ <t id="236">Debug Logfile Output  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="237">Apply settings on \033Yactive\033X docked ships only</t>
+
+ <t id="238">\033WDelay before docking fighters in seconds\033X</t>
+
+ 
+ <t id="240">Carrier Management</t>
+ <t id="241">Automated Carrier ...</t>
+ <t id="242">Repair Bays ...</t>
+ <t id="243">Ship Supplies ...</t>
+ <t id="244">Turret Settings : \033Y%s\033X</t>
+ <t id="245">Protect Ship</t>
+ <t id="246">Attack Enemies</t>
+ <t id="247">Missile Defence</t>
+ <t id="248">\033RMARS:\033X Offense</t>
+ <t id="249">\033RMARS:\033X Defense</t>
+ 
+ <t id="201">Enabled</t>
+ <t id="202">Disabled</t>
+ <t id="203">Yes</t>
+ <t id="204">No</t>
+ <t id="205">Default</t>
+ <t id="206">Auto Select</t>
+ <t id="207">Strongest First</t>
+ <t id="208">Nearest First</t>
+ <t id="209">None</t>
+ 
+ <t id="250">Carrier : \033Y%s\033X [%s]</t>
+ <t id="251">Location : \033Y%s\033X</t>
+ <t id="252">Docked : %s/%s - Owned : %s</t>
+ <t id="260">© Serial Kicked / [\033YAnarkis Federation\033X]</t>
+ 
+ <t id="300">Select the amount of ship used for defence purpose</t>
+ <t id="301">Targeting Setup</t>
+ <t id="302">Select how attack ships will target enemy ships</t>
+ <t id="303">Force damaged ships to retreat ?</t>
+ <t id="304">Display a warning message when the carrier is in danger ?</t>
+ <t id="305">This menu allow you to choose what is the minimum threat level that trigger a launch of fighters. To understand how the level system work, you'll need to know the "threat" values used for each kind of ship and you should also know that the carrier will always send ships if an enemy M1/M2 ship is spotted. Fighter drones are ignored.</t>
+ <t id="306">M5: 1 - M4: 2  - M3: 5 - M8: 10 - M6: 14 - M7: 35\nTL: 15 - TM: 8 - TP/TS: 2\n\n\n\n</t>
+ <t id="307">Minimum Threat Level</t>
+ <t id="308">Select the fuel resupply quantity in jumps</t>
+ <t id="309">Do you want to enabled the autojump feature on docked ships ?</t>
+ <t id="310">Set the autojump minimum range</t>
+ <t id="311">Do you want to enabled the emergency jump feature on docked ships ?</t>
+ <t id="312">Set the emergency shield threshold in percent</t>
+ <t id="313">Set the missile usage in percent</t>
+ <t id="314">Select a new radar range in meters</t>
+ <t id="315">Select the new delay in seconds</t>
+ 
+ <t id="400">Mechanics</t>
+ <t id="401">You can use mechanics to repair damaged fighters in the carrier. You can hire mechanics for a cost in any friendly sector. When off duty they will cost you about 1000 credits per hour and per mechanic, and much more when repairing a ship. The more mechanics you have, they faster your ships will be repaired.\n\nCurrent off-duty cost : \033Y%s credits per hour\033X\nCurrent on-duty cost : \033Y%s credits per hour\033X\n\n\n\n</t>
+ <t id="402">You currently have : \033Y%s\033X mechanics (off duty cost : \033Y%s\033X credits per hour)</t>
+ <t id="403">Settings</t>
+ <t id="404">Allow to repair docked ships  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="405">Allow to repair the carrier  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="406">Management : \033Y%s mechanics\033X</t>
+ <t id="407">Hire new mechanics</t>
+ <t id="408">Fire mechanics</t>
+ <t id="409">Damaged Ships</t>
+ <t id="410">  [%s] \033Y%s\033X - hull : %s/100</t>
+ <t id="411">To hire a new mechanic will cost you 50.000 credits. Are you sure ?</t>
+ <t id="412">You do not have enough money to hire a new mechanic.</t>
+ <t id="413">You need a friendly Trading Station in the carrier current sector.</t>
+
+ <t id="420">Hangar Management</t>
+ <t id="421">Select the ships you want to be used by ACC commands</t>
+ <t id="422">Docked Ship List</t>
+ <t id="423">General Commands</t>
+ <t id="424">Apply homebase to all docked ships</t>
+ <t id="425">Management</t>
+ <t id="426">Add all ships</t>
+ <t id="427">Add M3 and M4 ships only</t>
+ <t id="428">Add M3 ships only</t>
+ <t id="429">Remove all ships</t>
+ <t id="430">  [%s] \033Y%s\033X - %s</t>
+ <t id="431">\033GActive\033X</t>
+ <t id="432">\033RInactive\033X</t>
+ <t id="433">\033YUnder Repairs\033X</t>
+ <t id="434">Rename docked ships</t>
+ <t id="435">Apply homebase to active ships only</t>
+
+ <t id="440">Ship Supplies</t>
+ <t id="441">This is where you can move cargo between your carrier and its docked ships\n\n\n</t>
+ <t id="442">Standard Actions</t>
+ <t id="443">Move wares from the carrier to docked ships</t>
+ <t id="444">Unload wares to the carrier</t>
+ <t id="445">Advanced</t>
+ <t id="446">Allow carrier to buy back destroyed fighters  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="447">Allow carrier to repair at SY  \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="448">Allow carrier to keep ships supplied \033R&lt;\033X \033Y%s\033X \033R&gt;\033X</t>
+ <t id="449">This menu allows to move wares from your docked ships to the carrier.</t>
+ <t id="450">\033YUnload :\033X %s</t>
+ <t id="451">Trade wares only [except energy cells]</t>
+ <t id="452">Trade wares only [including energy cells]</t>
+ <t id="453">Missiles</t>
+ <t id="454">Everything not equipped</t>
+ <t id="455">\033YFrom :\033X %s</t>
+ <t id="456">Active ships only</t>
+ <t id="457">All docked ships</t>
+ <t id="458">\033YValidate\033X</t>
+ <t id="459">Confirm Action</t>
+ 
+ <t id="460">Ignored Factions</t>
+ <t id="461">Manage</t>
+ <t id="462">Clear whole list</t>
+ <t id="463">Add a faction to the list</t>
+ <t id="464">\033Y%s\033X - remove</t>
+ <t id="465">Select a faction to ignore</t>
+
+ <t id="480">Rename Ships</t>
+ <t id="481">ShipType Class - Number</t>
+ <t id="482">CarrierName - ShipType - Number</t>
+ <t id="483">BuilderRace Class - Number</t>
+ <t id="484">Allows to mass rename your docked ships.</t>
+ <t id="485">Setup</t>
+ <t id="486">Apply to all docked ships</t>
+ <t id="487">Apply to all active ships</t>
+ <t id="488">\033YSelected : \033X%s</t>
+ <t id="489">\033YExample : \033X%s</t>
+
+ 
+ <t id="500">[author][b]Anarkis Carrier Commands[/b][/author] [b]Warning:[/b] Your [b]%s[/b] in sector [b]%s[/b] is in danger and could request your attention.</t>
+ <t id="501">[author][b]Anarkis Carrier Commands[/b][/author] [b]Canceled:[/b] You don't have enough ships in %s for this command</t>
+ <t id="502">[author][b]Anarkis Carrier Commands[/b][/author] [b]Canceled:[/b] You don't have enough ships in %s to clean a sector. At least 5 are needed.</t>
+ <t id="503">[author][b]Anarkis Carrier Commands[/b][/author] [b]Error:[/b] Not enough wares in cargo bay to equip any ship.</t>
+ <t id="504">[author][b]Anarkis Carrier Commands[/b][/author] [b]Success:[/b] %s has equiped %s/%s ships with %s %s.</t>
+ <t id="505">[author][b]Anarkis Carrier Commands[/b][/author] [b]Canceled:[/b] %s - No station in range has enough %s.</t>
+ <t id="506">\033RALERT:\033X \033W%s in sector %s needs help !\033X</t>
+ 
+ <t id="520">Equip Ships</t>
+ <t id="521">\033YWares\033X</t>
+ <t id="522">&lt; \033Yadd a new ware\033X &gt;</t>
+ <t id="523">\033W%s\033X [quantity: %s]  &lt;\033Rremove\033X&gt;</t>
+ <t id="524">\033YMode :\033X %s</t>
+ <t id="525">Same quantity to all ships [$quantity = max value]</t>
+ <t id="526">At least $quantity wares to each ship</t>
+ <t id="527">\033YDestination :\033X %s</t>
+ <t id="528">Docked ships</t>
+ <t id="529">Active ships</t>
+ <t id="530">\033YValidate\033X</t>
+ <t id="531">Confirm Action</t>
+ <t id="532">Select the ware you want to move</t>
+ <t id="533">Select the quantity</t>
+
+ <t id="540">Transfert Report</t>
+ <t id="541">Wares transfered</t>
+ <t id="542">\033W%s %s\033X transfered to \033Y%s\033X</t>
+ <t id="543">\033W%s %s\033X unloaded from \033Y%s\033X</t>
+ 
+ <t id="600">\033RADS:\033X Clear Sector</t>
+ <t id="601">\033RADS:\033X Dock all my ships</t>
+ <t id="602">\033RADS:\033X Attack My Target</t>
+ <t id="603">\033RADS\033X \033WManager\033W</t>
+
+ <t id="640">\033RADS:\033X Sell Wares</t>
+ <t id="641">Selected Wares</t>
+ <t id="642">Quick Select</t>
+ <t id="643">Clear the List</t>
+ <t id="644">Add all trading wares</t>
+ <t id="645">Begin Transfert</t>
+ <t id="646">&lt; \033Yadd a new ware\033X &gt;</t>
+ <t id="647">Settings</t>
+ <t id="648">Maximum Distance \033R&lt;\033X \033Y%s sectors\033X \033R&gt;\033X</t>
+ <t id="649">This command allows your carrier to sell its wares to the stations around using its docked ships. There is no check for enemy sectors so set your range carefully.\n\n\n\n</t>
+ <t id="650">\033W%s\033X - Amount: \033W%s\033X  &lt;\033Yremove\033X&gt;</t>
+ <t id="651">Select new jump range</t>
+ <t id="652">Select a ware to be added</t>
+ <t id="653">\033R[ADS]\033X \033Y%s\033X sells \033Y%s\033X to \033Y%s\033X</t> 
+ <t id="654">\033R[ADS]\033X No station buying \033Y%s\033X</t> 
+ <t id="655">\033R[ADS]\033X No ship able to load \033Y%s\033X</t>
+ <t id="656">\033R[ADS]\033X No station selling \033Y%s\033X in range</t> 
+ <t id="657">\033RADS:\033X Buy Wares</t>
+ <t id="658">This command allows your carrier to buy wares from the stations around using its docked ships. There is no check for enemy sectors so set your range carefully.\n\n\n\n</t>
+ <t id="659">Proceed</t>
+ <t id="660">\033W%s\033X - Quantity: \033W%s\033X  &lt;\033Yremove\033X&gt;</t>
+ <t id="661">\033R[ADS]\033X \033Y%s\033X buy \033Y%s %s\033X at \033Y%s\033X</t> 
+ <t id="662">Select the wanted amount</t>
+ <t id="663">Add all missile types</t>
+ 
+
+ <t id="700">\033R[ADS]\033X \033WWing %s: \033X %s &lt;%s&gt;</t> 
+ <t id="702">\033R[ADS]\033X %s - \033WRetreating...\033X</t>
+ <t id="703">\033R[ADS]\033X %s</t>
+ <t id="710">\033YLeader\033X</t>
+ <t id="711">Wingmate</t>
+ <t id="712">\033GEscort\033X</t>
+ <t id="713">\033WNo Target\033X</t>
+ <t id="714">\033R%s\033X</t>
+ <t id="715">\033B%s\033X</t>
+ 
+	
+ <t id="800">Automated Carriers Report</t>
+ <t id="801">\033WSelected : \033X %s [%s]</t>
+ <t id="802">\033WOrders : \033X %s - \033WAutomated :\033X %s</t>
+ <t id="803">Selection</t>
+ <t id="804">\033Y%s\033X [\033Y%s\033X] - Sector : \033Y%s\033X</t>
+ <t id="805">\033WLocation : \033X %s [%s]</t>
+ <t id="806">Actions</t>
+ <t id="807">Setup selected carrier</t>
+ <t id="808">Apply current settings to all carriers</t>
+
+
+ <t id="820">\033GYes\033X</t>
+ <t id="821">\033RNo\033X</t>
+
+<t id="001">** COMMENT ** v2.55 Begins Here</t>
+ 
+ <t id="1000">ADS Setup Menu</t>
+ <t id="1001">\033YSelected :\033X %s</t>
+ <t id="1002">Manage Stations</t>
+ <t id="1003">Manage Carriers</t>
+ <t id="1004">\033YMenu\033X</t>
+ <t id="1005">List ADS %ss</t>
+ <t id="1006">Recent Events</t>
+ <t id="1007">\033RUninstall ADS\033X</t>
+ <t id="1008">Apply default settings to all %ss</t>
+ <t id="1009">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X | auto: \033W%s\033X | Ships: \033W%s\033X</t>
+ 
+ <t id="1010">\033RADS Manager\033X</t>
+ <t id="1011">This menu gives you access to all \033YADS compatible\033X assets</t>
+ <t id="1012">\033Y[\033X\033G%s\033X\033Y]\033X \033W%s\033X</t>
+ <t id="1013">- \033GIntegrity:\033X Hull \033Y%s/100\033X - Shields \033Y%s/100\033X</t>
+ <t id="1014">- \033GStatus:\033X \033W%s\033X - \033Y%s\033X</t>
+ <t id="1015">- \033GCombat:\033X threat level \033Y%s\033X - attacked \033Y%s\033X - deployed \033Y%s\033X</t>
+ <t id="1016">- \033GFighters:\033X  owned \033Y%s\033X - docked \033Y%s\033X - ADS \033Y%s\033X</t>
+ <t id="1017">\033Y%s List\033X</t>
+ <t id="1018">ADS Automated Mode  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1019">Open ADS %s setup menu</t>
+
+ <t id="1020">\033Y[\033X\033G%s\033X\033Y]\033X \033G%s\033X | auto: \033W%s\033X | Ships: \033W%s\033X</t>
+ <t id="1021">\033Y[\033X\033G%s\033X\033Y]\033X \033Y%s\033X | auto: \033W%s\033X | Ships: \033W%s\033X</t>
+ <t id="1022">\033Y[\033X\033G%s\033X\033Y]\033X \033R%s\033X | auto: \033W%s\033X | Ships: \033W%s\033X</t>
+ <t id="1023">\033G   Jump to Me</t>
+ <t id="1024">\033G   Jump to Sector ...\033X</t>
+ <t id="1025">\033G   Attack Target ...\033X</t>
+ <t id="1026">Select Destination</t>
+ <t id="1027">Select Target</t>
+ <t id="1028">\033G   Patrol Sectors\033X</t>
+ <t id="1029">\033G   Attack All\033X</t>
+
+ <t id="1030">Select in crosshair and close</t>
+ <t id="1031">%s deployed fighters in %s</t>
+ <t id="1032">\033WReport From :\033X %s | \033WClass :\033X %s\n\033WLocation :\033X %s | \033WThreat Level :\033X %s\n\n\033WAction :\033X Fighters Launched</t>
+ <t id="1033">\033G   Dock at ...\033X</t>
+ <t id="1034">\033WCommand Panel\033X  \033Y&lt;\033G+\033X\033Y&gt;\033X</t>
+ <t id="1035">View owned ships</t>
+ <t id="1036">\033G   Protect ...\033X</t>
+ <t id="1037">\033G   Standby\033X</t>
+ <t id="1038">\033WCommand Panel\033X  \033Y&lt;\033G-\033X\033Y&gt;\033X</t>
+ <t id="1039">\033G   %s\033G</t>
+ 
+ <t id="1040">\033RADS:\033X \033WManager\033X</t>
+ <t id="1041">\033W%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Whull\033X %s%% \033G|\033X \033Wshield\033X %s%% \033G]\033X</t>
+ <t id="1042">Flying</t>
+ <t id="1043">Docked</t>
+ 
+<t id="001">** COMMENT ** v2.60 Begins Here</t>
+ 
+ <t id="1044">Defense Grid</t>
+ <t id="1045">General Settings</t>
+ <t id="1046">Manage Sectors</t>
+ <t id="1047">View Ships  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1048">ADS Satellite (%s)</t>
+ <t id="1049">\033YDefense Grid\033X</t>
+ 
+ <t id="1050">\033YSector List\033X</t>
+ <t id="1051">[\033G%s,%s\033X] \033W%s\033X | Stations: \033G%s\033X | Threat Level: \033Y%s\033X</t>
+ <t id="1052">Filter : %s</t>
+ <t id="1053">All Sectors</t>
+ <t id="1054">Sectors protected by ADS</t>
+ <t id="1055">Threatened sectors</t>
+ <t id="1056">\033YShip List\033X</t>
+ <t id="1057">[\033G%s\033X] \033W%s\033X - \033W%s\033X | Defense Grid : \033Y%s\033X</t>
+ <t id="1058">Defense Grid  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1059">Used by the Defense Grid  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ 
+ <t id="1060">[\033G%s\033X] [%s]  \033W%s\033X</t>
+ <t id="1061">\033WCommand Panel\033X</t>
+ <t id="1062">\033GLaunch Wing\033X</t>
+ <t id="1063">Change Target  \033Y&lt;\033X \033W%s\033X \033Y&gt;\033X</t>
+ <t id="1064">Ship Count</t>
+ <t id="1065">\033WManual Selection\033X</t>
+ <t id="1066">\033G%s\033X</t>
+ <t id="1067">\033Y%s\033X</t>
+ <t id="1068">\033R%s\033X</t> 
+ <t id="1069">Launch</t>
+ 
+ <t id="1070">%s%%</t>
+ <t id="1071">Stay Docked</t>
+ <t id="1072">manual</t>
+ <t id="1073">auto</t>
+ <t id="1074">Class: %s | Owner: %s | Relation: %s</t>
+
+ <t id="001">** COMMENT ** v2.65 Begins Here</t> 
+ 
+ <t id="1075">Marine Training Center</t>
+ <t id="1076">Crew Quarters</t>
+ <t id="1077">Standard Training</t>
+ <t id="1078">Combat Training</t>
+
+<t id="001">** COMMENT ** Marine Statistics</t> 
+ <t id="1079">  \033Y[\033X Fight: \033W%s\033X - Mech: \033W%s\033X - Hack: \033W%s\033X - Engineer: \033W%s\033X\033Y ]\033X</t>
+ 
+ <t id="001">** COMMENT ** Marine Name - Overall Skill</t> 
+ <t id="1080">\033G%s\033X - \033WOverall:\033X \033G%s\033X</t>
+
+<t id="1081">Name</t>
+ <t id="1082">Fightskill</t>
+ <t id="1083">Mechanical</t>
+ <t id="1084">Hacking</t>
+ <t id="1085">Engineering</t>
+ <t id="1086">Barracks ...</t>
+ <t id="1087">\033GSave and close\033X</t>
+ <t id="1088">\n\033RPress [Esc] to close without saving\033X</t>
+ 
+ <t id="1089">\033WGeneral Settings\033X</t>
+ <t id="1090">\033YDefault Setup\033X</t>
+ <t id="1091">\033WEdit Default Carrier Setup\033W</t>
+ <t id="1092">\033WEdit Default Station Setup\033W</t>
+ <t id="1093">\033YDefense Grid Settings\033X</t>
+ <t id="1094">\033WMaximum Jump Distance\033X</t>
+ <t id="1095">\033WMinimum Threat to trigger an alert\033X</t>
+ <t id="1096">\033WDisplay Warning Message\033X</t>
+ <t id="1097">\033YIgnore Factions\033X</t>
+ <t id="1098">\033YGeneral Settings\033X</t>
+ <t id="1099">\033WDynamic Renaming System\033X</t>
+ <t id="1100">\033RReset All Settings to default values\033X</t>
+ <t id="1101">Auto</t>
+ <t id="1102">Manual</t>
+ <t id="1103">Trade Only</t>
+ <t id="1104">Ignore</t>
+
+<t id="1105">\033W- Training Cost :\033X \033Y%s\033X \033Wcredits per hour\033X</t>
+<t id="1106">\033GApply Settings\033X</t>
+<t id="1107">Barracks</t>
+<t id="1108">\033W- There is %s marines training onboard\033X</t>
+<t id="1109">\033W- Room :\033X \033Y%s/%s\033X</t>
+<t id="1110">Passengers</t>
+<t id="1111">Enslave</t>
+<t id="1112">Train</t>
+<t id="1113">\033RADS:\033X \033Y%s\033X \033Wis under attack [threat :\033X \033Y%s\033X\033W]\033X</t>
+<t id="1114">[\033G%s,%s\033X] \033W%s:\033X \033G%s</t>
+<t id="1115">%s\033X \033W%s\033X [\033Gauto\033X|\033W%s\033X]</t>
+<t id="1116">%s\033X \033W%s\033X [\033Wmanual\033X|\033W%s\033X]</t>
+<t id="1117">%s\033X \033W%s\033X</t>
+<t id="1118">\033YGrid Members\033X</t>
+<t id="1119">\033YUnassigned\033X</t>
+<t id="1120">%s\033X \033W%s\033X [\033Ybattle\033X|\033W%s\033X]</t>
+<t id="1121">[\033G%s,%s\033X] \033W%s:\033X \033Y%s</t>
+<t id="1122">[\033G%s,%s\033X] \033W%s:\033X %s</t>
+<t id="1123">\033Y%s\033X  \033G[\033X%s\033G]\033X  \033G[\033X \033Whull\033X %s%% \033G|\033X \033Wshield\033X %s%% \033G]\033X</t>
+ 
+</page>
+
+</language>

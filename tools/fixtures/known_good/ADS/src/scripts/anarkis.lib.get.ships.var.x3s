@@ -1,0 +1,90 @@
+#name: anarkis.lib.get.ships.var
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.ships.var.xml
+
+* ===========================================
+* Find all ships according to the parameters
+* ===========================================
+
+$null = null
+$class.cnt =  size of array $class.array
+if $class.array == null
+$class.cnt = 0
+else if $class.cnt == 0
+$class.array = null
+end
+
+$military.array =  array alloc: size=0
+
+if $jump.range > 0
+$sector.list = $from -> find all sectors within $jump.range jumps: Only known sectors=[FALSE]
+else
+$sector.list =  array alloc: size=0
+append [SECTOR] to array $sector.list
+end
+$cnt =  size of array $sector.list
+
+* For all sectors
+$sl.cnt = 0
+while $cnt
+dec $cnt =
+$sector = $sector.list[$cnt]
+$ship.array = $sector -> get ship array from sector/ship/station
+$cnt.ship =  size of array $ship.array
+* - For each ship in sector
+while $cnt.ship
+inc $sl.cnt =
+if $sl.cnt == 75
+$sl.cnt = 0
+= wait 100 ms
+end
+dec $cnt.ship =
+$test.ship = $ship.array[$cnt.ship]
+* - - Check Race
+$owner = $test.ship -> get true owner
+if $force.race != null AND $owner != $force.race
+continue
+else if $force.race != null AND $owner == $force.race
+goto label skipracecheck
+end
+* - - Ignore Player
+if $ignore.player == [TRUE] AND $owner == Player
+continue
+end
+* - - Ignore Khaaks and Xenons ?
+if $ignore.aliens == [TRUE] AND ( $owner == Kha'ak OR $owner == Xenon )
+continue
+end
+* - - Ignore Pirates ?
+if $ignore.pirates == [TRUE] AND ( $owner == Pirates OR $owner == Yaki )
+continue
+end
+skipracecheck:
+* - - Ignore invincible
+skip if not $test.ship -> is invincible
+continue
+* - - Ignore civilians
+if $ignore.civilians
+skip if not $test.ship -> is civilian ship
+continue
+skip if $test.ship -> get current laser strength
+continue
+end
+* - - Check Local
+if $checkvar
+skip if $test.ship -> get local variable: name=$checkvar
+continue
+end
+
+* - - Check class
+$ship.class = $test.ship -> get object class
+$found =  find $ship.class in array: $class.array
+if $found == [TRUE] OR $class.array == null
+append $test.ship to array $military.array
+end
+
+end
+end
+
+return $military.array

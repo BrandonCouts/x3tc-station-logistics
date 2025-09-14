@@ -1,0 +1,69 @@
+#name: anarkis.lib.sectortakeover
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.sectortakeover.xml
+
+* ===========================================
+* Sector Takeover  Script
+* ===========================================
+* Takeover Type :
+* - 0 : No Changes
+* - 1 : Change ownership of old race stations
+* - 2 : Destroy Enemy Stations
+* - 3 : Destroy All non new owner stations
+* - 4 : Destroy All
+* ===========================================
+
+$old.owner = $sector -> get owner race
+$sector -> set owner race to $new.owner
+$sector -> set sector to core security $is.core
+$arr = $sector -> get station array from sector
+$cnt =  size of array $arr
+
+if $stationmode == 1
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$select.race = $select -> get owner race
+$name = $select -> get name
+if $select.race == $old.owner
+$select -> set owner race to $new.owner
+$select -> set local variable: name='anarkis.sector.oldrace' value=$old.owner
+$select -> set local variable: name='anarkis.sector.oldname' value=$name
+end
+end
+else if $stationmode == 2
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$select.race = $select -> get owner race
+skip if not $select.race == $old.owner
+$select -> destruct: show no explosion=[TRUE]
+end
+else if $stationmode == 3
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$select.race = $select -> get owner race
+skip if $select.race == $new.owner
+$select -> destruct: show no explosion=[TRUE]
+end
+else if $stationmode == 4
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$select -> destruct: show no explosion=[TRUE]
+end
+end
+
+if $destroy.old.ships == [TRUE]
+$arr = $sector -> get ship array from sector/ship/station
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+skip if not $select.race == $old.owner
+$select -> destruct: show no explosion=[TRUE]
+end
+end
+
+return null

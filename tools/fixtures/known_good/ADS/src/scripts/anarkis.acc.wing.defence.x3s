@@ -1,0 +1,76 @@
+#name: anarkis.acc.wing.defence
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.wing.defence.xml
+
+* ===========================================
+* Wing : Send a wing to protect a target
+* ===========================================
+
+skip if $target -> exists
+return null
+
+if  is datatyp[ $wing.size ] == DATATYP_ARRAY
+$cnt =  size of array $wing.size
+dec $cnt =
+$wing.array =  clone array $wing.size : index 0 ... $cnt
+$wing.size =  size of array $wing.array
+else
+$wing.array = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$cnt =  size of array $wing.array
+while $cnt
+dec $cnt =
+$v1 = $wing.array[$cnt]
+skip if not $v1 -> is of class Freighter
+remove element from array $wing.array at index $cnt
+end
+$cnt =  size of array $wing.array
+
+if $cnt > $wing.size
+resize array $wing.array to $wing.size
+end
+$wing.size =  size of array $wing.array
+end
+
+$leader = $wing.array[0]
+skip if $leader -> exists
+return null
+
+$setup = [THIS] -> get local variable: name='anarkis.acc.setup'
+$callback = $setup[3]
+$autorename = $setup[15]
+
+= [THIS] -> call script anarkis.acc.repairshields.single :  ship=$leader
+if $target -> is of class Moveable Ship
+START $leader -> call script anarkis.acc.cmd.protect :  protect target=$target
+*START $leader -> call script !ship.cmd.attacksame.std :  the target=$target  stop if leader is docked=[TRUE]
+else
+START $leader -> call script anarkis.acc.cmd.protect :  protect target=$target
+*START $leader -> call script !ship.cmd.protect.std :  target=$target  stop if leader docked=[TRUE]
+end
+$leader -> set local variable: name='anarkis.acc.wing' value='D'
+remove element from array $wing.array at index 0
+*if $autorename == [TRUE]
+*$leader -> start task 893 with script anarkis.acc.task.autoname and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+*end
+if $callback == [TRUE]
+$leader -> start task 900 with script anarkis.acc.task.hullcheck and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+= wait randomly from 1000 to 5000 ms
+
+$cnt =  size of array $wing.array
+while $cnt
+dec $cnt =
+$wingmate = $wing.array[$cnt]
+= [THIS] -> call script anarkis.acc.repairshields.single :  ship=$wingmate
+START $wingmate -> call script !ship.cmd.attacksame.std :  the target=$leader  stop if leader is docked=[TRUE]
+$wingmate -> set local variable: name='anarkis.acc.wing' value='D'
+*if $autorename == [TRUE]
+*$wingmate -> start task 893 with script anarkis.acc.task.autoname and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+*end
+if $callback == [TRUE]
+$wingmate -> start task 900 with script anarkis.acc.task.hullcheck and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+end
+
+return null

@@ -1,0 +1,21 @@
+#name: anarkis.lib.shipstate.save
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.shipstate.save.xml
+
+$array =  array alloc: size=0
+
+$v1 = $ref.object -> get destination
+append $v1 to array $array
+$v1 = $ref.object -> get command
+append $v1 to array $array
+$v1 = $ref.object -> get command target
+append $v1 to array $array
+$v1 = $ref.object -> get command target2
+append $v1 to array $array
+$v1 = $ref.object -> get name
+append $v1 to array $array
+
+$ref.object -> set local variable: name='anarkis.ship.state' value=$array
+
+return $array

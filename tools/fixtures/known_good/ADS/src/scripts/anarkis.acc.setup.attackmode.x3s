@@ -1,0 +1,28 @@
+#name: anarkis.acc.setup.attackmode
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.attackmode.xml
+
+$page.id = 8510
+
+$menu.result = -1
+while $menu.result == -1
+$menu =  create custom menu array
+
+$st = sprintf: pageid=$page.id textid=301, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=206, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=3
+$st = sprintf: pageid=$page.id textid=207, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=1
+$st = sprintf: pageid=$page.id textid=208, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=2
+
+$st = sprintf: pageid=$page.id textid=302, null, null, null, null, null
+add custom menu info line to array $menu: text=$st
+
+$v1 = sprintf: pageid=$page.id textid=301, null, null, null, null, null
+$menu.result =  open custom menu: title=$v1 description=null option array=$menu
+end
+
+return $menu.result

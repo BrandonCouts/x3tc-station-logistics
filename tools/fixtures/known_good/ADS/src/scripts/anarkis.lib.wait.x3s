@@ -1,0 +1,19 @@
+#name: anarkis.lib.wait
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.wait.xml
+
+$curr.time = playing time
+$end.time = $curr.time + $delay
+
+while $curr.time < $end.time
+= wait 2000 ms
+$curr.time = playing time
+
+if $global
+$exit = get global variable: name=$global
+skip if not $exit == [TRUE]
+return null
+end
+end
+return null

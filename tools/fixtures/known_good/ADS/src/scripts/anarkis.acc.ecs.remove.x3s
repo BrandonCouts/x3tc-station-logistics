@@ -1,0 +1,9 @@
+#name: anarkis.acc.ecs.remove
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.ecs.remove.xml
+
+
+= [THIS] -> call script plugin.sk.ecs.unregister :  Plugin ID='anarkis.acc.plugin'
+
+return null

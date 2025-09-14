@@ -1,0 +1,27 @@
+#name: anarkis.ads.crew.getrepair
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.crew.getrepair.xml
+
+$array = $ref.object -> get marines array
+$cnt =  size of array $array
+$result = 0
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$type = $select -> get local variable: name='anarkis.ads.marine'
+* - s
+if $type
+$mech = $select -> get marine mechanical skill
+if $mech > 50
+$result = $result + $mech - 50
+end
+$mech = $select -> get marine engineering skill
+if $mech > 50
+$result = $result + $mech - 50
+end
+end
+* - s
+
+end
+return $result

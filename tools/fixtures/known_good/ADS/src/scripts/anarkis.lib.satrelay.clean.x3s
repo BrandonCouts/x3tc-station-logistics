@@ -1,0 +1,29 @@
+#name: anarkis.lib.satrelay.clean
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.satrelay.clean.xml
+
+$m.x = get max sectors in x direction
+$m.y = get max sectors in y direction
+$x = 0
+while $x <= $m.x
+$y = 0
+while $y <= $m.y
+$sector = get sector from universe index: x=$x, y=$y
+if $sector -> exists
+$s.array =  find ship: sector=$sector class or type=Advanced Satellite race=Player flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+$s.count =  size of array $s.array
+while $s.count > 1
+dec $s.count =
+$sat = $s.array[$s.count]
+$sat -> destruct: show no explosion=[TRUE]
+end
+$sat = $s.array[0]
+$tmp = '(AIA) Adv.Sat. - ' + $sector
+$sat -> set name to $tmp
+end
+inc $y =
+end
+inc $x =
+end
+return null

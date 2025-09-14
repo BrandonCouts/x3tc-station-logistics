@@ -1,0 +1,77 @@
+#name: anarkis.lib.add.software
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.add.software.xml
+
+$r = [THIS]
+
+= $r -> install 1 units of Docking Computer
+= $r -> install 1 units of Boost Extension
+
+$rnd =  = random value from 0 to 2 - 1
+if $rnd == 1
+= $r -> install 1 units of Triplex Scanner
+else
+= $r -> install 1 units of Duplex Scanner
+end
+
+= $r -> install 1 units of Jumpdrive
+= $r -> install 1 units of Fight Command Software MK1
+= $r -> install 1 units of SETA Boost Extension
+= $r -> install 1 units of Singularity Engine Time Accelerator
+= $r -> install 1 units of Strafe Drive Extension
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Special Command Software MK1
+= $r -> install 1 units of Trade Command Software MK1
+= $r -> install 1 units of Navigation Command Software MK1
+
+if $r -> is of class Fighter
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Transporter Device
+= $r -> install 1 units of Fight Command Software MK2
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Explorer Command Software
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Patrol Command Software
+= $r -> install 1 units of Freight Scanner
+end
+
+if $r -> is of class Freighter
+= $r -> install 1 units of Trade Command Software MK2
+= $r -> install 1 units of Cargo Lifesupport System
+= $r -> install 1 units of Transporter Device
+= $r -> install 1 units of Trading System Extension
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Mineral Scanner
+end
+
+if $r -> is of class Big Ship
+= $r -> install 1 units of Carrier Command Software
+= $r -> install 1 units of Cargo Lifesupport System
+= $r -> install 1 units of Patrol Command Software
+end
+if $r -> is of class Huge Ship
+= $r -> install 1 units of Cargo Lifesupport System
+= $r -> install 1 units of Carrier Command Software
+= $r -> install 1 units of Patrol Command Software
+= $r -> install 1 units of Transporter Device
+end
+
+if $r -> is of class TS
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Best Buys Locator
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Best Selling Price Locator
+$rnd =  = random value from 0 to 2 - 1
+skip if $rnd == 1
+= $r -> install 1 units of Trade Command Software MK3
+end
+
+return null

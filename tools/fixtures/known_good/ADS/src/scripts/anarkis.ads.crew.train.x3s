@@ -1,0 +1,53 @@
+#name: anarkis.ads.crew.train
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.crew.train.xml
+
+$array = $ref.object -> get marines array
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$type = $select -> get local variable: name='anarkis.ads.marine'
+* - s
+if $type == 1
+
+$add =  = random value from 0 to 8 - 1
+$mech = $select -> get marine mechanical skill
+$add = $mech + $add + 4
+if $add > 100
+$add = 100
+end
+$select -> set marine skill: mechanical=$add
+
+$add =  = random value from 0 to 8 - 1
+$mech = $select -> get marine hacking skill
+$add = $mech + $add + 4
+if $add > 100
+$add = 100
+end
+$select -> set marine skill: hacking=$add
+
+$add =  = random value from 0 to 8 - 1
+$mech = $select -> get marine engineering skill
+$add = $mech + $add + 4
+if $add > 100
+$add = 100
+end
+$select -> set marine skill: engineering=$add
+
+else if $type == 2
+$add =  = random value from 0 to 7 - 1
+$mech = $select -> get marine fighting skill
+$add = $mech + $add + 4
+if $add > 100
+$add = 100
+$select -> set local variable: name='anarkis.ads.marine' value=0
+end
+$mech -> set marine skill: fighting=$add
+
+end
+* - s
+
+end
+return null

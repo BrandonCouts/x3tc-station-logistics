@@ -1,0 +1,26 @@
+#name: anarkis.lib.wing.getall
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.wing.getall.xml
+
+* ===========================================
+* select a ship and it will return all ships in is formation with the leader
+* as the first item of the array. If no formation for the selected ship
+* it will give back a single item array with the ship itself
+* ===========================================
+
+$result =  array alloc: size=0
+
+$leader = $ship -> get formation leader
+skip if $leader -> exists
+$leader = $ship
+append $leader to array $result
+
+$follower = $leader -> get formation follower ships
+$cnt =  size of array $follower
+while $cnt
+dec $cnt =
+$t = $follower[$cnt]
+append $t to array $result
+end
+return $result

@@ -1,0 +1,44 @@
+#name: anarkis.acc.lib.get.adsonly
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.get.adsonly.xml
+
+* ===========================================
+* Improved to handle NPC carriers too
+* ===========================================
+$null = null
+$isship = [THIS] -> is of class Moveable Ship
+
+$arr = null
+if $isship == [TRUE] AND [OWNER] != Player
+$ini = [THIS] -> call script anarkis.lib.custowned.getarray :
+if $ini
+$cnt =  size of array $ini
+dec $cnt =
+$arr =  clone array $ini : index 0 ... $cnt
+end
+end
+
+skip if $arr
+$arr = [THIS] -> get owned ships: class/type=Moveable Ship
+
+$cnt =  size of array $arr
+
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+if $select -> is of class Freighter
+remove element from array $arr at index $cnt
+continue
+end
+if $select -> get local variable: name='anarkis.acc.skipme'
+remove element from array $arr at index $cnt
+continue
+end
+if not $select -> get local variable: name='anarkis.acc.ship'
+remove element from array $arr at index $cnt
+continue
+end
+end
+
+return $arr

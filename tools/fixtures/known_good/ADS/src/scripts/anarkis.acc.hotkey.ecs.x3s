@@ -1,0 +1,12 @@
+#name: anarkis.acc.hotkey.ecs
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.hotkey.ecs.xml
+
+if [THIS] -> call script anarkis.acc.is.compatible :  target=$target
+$owner = $target -> get owner race
+if $owner == Player
+$target -> start task 892 with script anarkis.acc.setup and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+end
+return null

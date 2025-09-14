@@ -1,0 +1,22 @@
+#name: anarkis.lib.get.racesectors
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.racesectors.xml
+
+$res =  array alloc: size=0
+
+$m.x = get max sectors in x direction
+while $m.x
+dec $m.x =
+$m.y = get max sectors in y direction
+while $m.y
+dec $m.y =
+$sector = get sector from universe index: x=$m.x, y=$m.y
+if $sector -> exists
+$v1 = $sector -> get owner race
+skip if not $race == $v1
+append $sector to array $res
+end
+end
+end
+return $res

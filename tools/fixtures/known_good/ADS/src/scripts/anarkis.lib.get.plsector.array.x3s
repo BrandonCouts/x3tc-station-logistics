@@ -1,0 +1,39 @@
+#name: anarkis.lib.get.plsector.array
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.plsector.array.xml
+
+* ===========================================
+* Retrieve an array of sectors 'owned' by the player
+* ===========================================
+* This script may take a while to run given the amount of player owned stations
+
+$station.array =  get station array: of race Player class/type=Station
+$station.count =  size of array $station.array
+$sector.array =  array alloc: size=0
+
+while $station.count
+dec $station.count =
+$station = $station.array[$station.count]
+$station.sector = $station -> get sector
+$jump.distance = get jumps from sector [SECTOR] to sector $station.sector
+$sector.already =  find $station.sector in array: $sector.array
+skip if $jump.distance > $max.jump OR $sector.already == [TRUE]
+append $station.sector to array $sector.array
+= wait 100 ms
+end
+
+$sector.count =  size of array $sector.array
+
+while $sector.count
+dec $sector.count =
+$sector = $sector.array[$sector.count]
+$station.array =  find station: sector=$sector class or type=Station race=Player flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+$station.count =  size of array $station.array
+if $station.count < $min.station
+remove element from array $sector.array at index $sector.count
+end
+= wait 100 ms
+end
+
+return $sector.array

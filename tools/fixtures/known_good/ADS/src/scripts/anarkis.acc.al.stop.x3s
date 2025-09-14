@@ -1,0 +1,12 @@
+#name: anarkis.acc.al.stop
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.al.stop.xml
+
+$ads.setup = get global variable: name='anarkis.ads.setup'
+$ads.setup[3] = [FALSE]
+set global variable: name='anarkis.ads.setup' value=$ads.setup
+
+START [THIS] -> call script plugin.sk.ecs.manager :
+
+return null

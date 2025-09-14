@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<language id="48">
+
+<page id="8511" title="ECS" descr="Extended Communication System">
+ <t id="100">\033RECS:\033X \033WRozszerzony System Komunikacyjny\033X</t>
+ <t id="101">250</t>
+ <t id="102">Federacja Anarkis</t>
+ <t id="103">\033RECS:\033X Rozszerzony System Komunikacyjny</t>
+ <t id="104">© Serial Kicked / [\033YFederacja Anarkis\033X]</t>
+
+<t id="200">\033WECS 2.5 Menadżer\033X</t>
+<t id="201">Rozszerzony System Komunikacyjny jest teraz  %s</t>
+<t id="202">ECS wtyczka zainstalowana</t>
+<t id="203">\033W%s\033X  &lt; %s &gt;</t>
+<t id="204">Wybrany : \033W%s\033X</t>
+<t id="205">Wybrana wtyczka instalacyjna</t>
+<t id="206">Nie zarejestrowana wtyczka</t>
+<t id="207">Skrypt zwany : \033W%s\033X</t>
+<t id="208">Miejscowa zmienna : \033W%s\033X</t>
+<t id="209">Rasa : \033W%s\033X</t>
+<t id="210">Klasa : \033W%s\033X</t>
+<t id="211">ECS Ustawiony</t>
+<t id="212">Usunięcie ECS klawiszy i konfiguracji</t>
+<t id="213">Zamknij okno</t>
+<t id="214">[author][b]Anarkis Federation[/b][/author] [b]RSK[/b] zostało odinstalowane prawidłowo.</t>
+<t id="215">Wiadomości Systemowe : \033W%s\033X</t>
+<t id="216">[%s] - \033W%s\033X</t>
+<t id="217">Od: \033W%s\033X</t>
+<t id="218">%s \n\n- Opublikowany %s temu.\n\n\n\n</t>
+<t id="219">Zamknij</t>
+<t id="220">\033W%s\033X\n\n</t>
+<t id="221">Późniejsze wiadomości</t>
+<t id="222">Brak przekazu</t>
+<t id="223">\nWybór wiadomości\n\n\n</t>
+<t id="224">Wybierz</t>
+<t id="225">%s \n\n   -Od: \033W%s\033X\n\n\n\n</t>
+<t id="226">Liczba wiadomości : \033W%s\033X</t>
+<t id="227">Nazwa źródła informacji : \033W%s\033X</t>
+
+<t id="300">\033GWłączony\033X</t>
+<t id="301">\033RWyłączony\033X</t>
+<t id="302">\033RNie znaleziony\033X</t>
+<t id="303">\033GWykryty\033X</t>
+
+</page>
+
+</language>
+

@@ -1,0 +1,93 @@
+#name: anarkis.lib.task.autodocking
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.task.autodocking.xml
+
+* ===========================================
+* Securely Dock All Ships to a Carrier / Station
+* ===========================================
+
+
+$owner = [THIS] -> get owner race
+
+while [OWNER] == $owner
+= wait 5000 ms
+$array = [THIS] -> get owned ships: class/type=Moveable Ship
+$cnt =  size of array $array
+while $cnt
+= wait 50 ms
+dec $cnt =
+$ship = $array[$cnt]
+* - - Check existence
+if not $ship -> exists
+remove element from array $array at index $cnt
+continue
+end
+* - - Check environment
+$env = $ship -> get environment
+if not [THIS] -> is docking possible of $ship
+remove element from array $array at index $cnt
+continue
+end
+* - - Check if docked
+if $env == [THIS]
+gosub dodock
+remove element from array $array at index $cnt
+continue
+end
+* - - Ship has return flag or is doing nothing, order to go back
+if $ship -> get local variable: name='anarkis.flag.return'
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=[THIS] arg2=null arg3=null arg4=null arg5=null
+$ship -> set local variable: name='anarkis.flag.return' value=null
+remove element from array $array at index $cnt
+continue
+end
+if not $ship -> is task 0 in use
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=[THIS] arg2=null arg3=null arg4=null arg5=null
+remove element from array $array at index $cnt
+continue
+end
+* - - Ship is moving, skip it
+$speed = $ship -> get current speed
+if $speed > 0
+remove element from array $array at index $cnt
+continue
+end
+* - - Now handling returning stuck ships
+$cmd = $ship -> get command
+$r1 = $ship -> is script !move.returntohomebase on stack of task=0
+$r2 = $ship -> is script !ship.cmd.retreat.std on stack of task=0
+if $cmd == COMMAND_RETURN_HOME OR $r1 == [TRUE] OR $r2 == [TRUE]
+$transport.device = $ship -> get true amount of ware Transporter Device in cargo bay
+$distance = get distance between [THIS] and $ship
+* - - - If transport device teleport
+if $distance <= 5000 AND $transport.device >= 1
+$ship -> put into environment [THIS] ->
+gosub dodock
+remove element from array $array at index $cnt
+continue
+* - - - Else Re issue orders
+else
+START $ship -> call script !ship.cmd.idle.std :
+= wait 1000 ms
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=[THIS] arg2=null arg3=null arg4=null arg5=null
+end
+end
+
+end
+
+end
+
+return null
+
+
+dodock:
+$ship -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$ship -> set command: COMMAND_NONE  target=null target2=null par1=null par2=null
+$ship -> set destination to null
+$v1 = $ship -> get maximum shield strength
+$ship -> set current shield strength to $v1
+endsub
+
+
+return null

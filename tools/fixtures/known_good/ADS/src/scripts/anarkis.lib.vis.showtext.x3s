@@ -1,0 +1,9 @@
+#name: anarkis.lib.vis.showtext
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.vis.showtext.xml
+
+skip if $target -> is task 893 in use
+$target -> start task 893 with script anarkis.lib.vis.task.showtext and prio 0: arg1=$message arg2=$duration arg3=$stop.oos arg4=$check.local arg5=null
+
+return null

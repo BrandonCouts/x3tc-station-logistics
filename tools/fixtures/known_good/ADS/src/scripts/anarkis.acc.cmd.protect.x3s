@@ -1,0 +1,34 @@
+#name: anarkis.acc.cmd.protect
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.protect.xml
+
+[THIS] -> set command: COMMAND_PROTECT  target=$protect target2=[FALSE] par1=null par2=null
+$flag = [Find.Nearest] | [Find.Enemy]
+
+skip if not [THIS] -> is docked
+= [THIS] -> call script !move.undock :
+
+while $protect -> exists
+= wait 100 ms
+$distance = get distance between [THIS] and $protect
+$protect.sector = $protect -> get sector
+if $protect.sector == [SECTOR]
+if $distance > 5000
+= [THIS] -> call script !move.movetoobject :  Target=$protect  Range=4500
+end
+else if [OWNER] != Player
+= [THIS] -> add 80 units of Energy Cells
+= [THIS] -> call script anarkis.lib.cmd.jumpnearobject :  destination=$protect
+else
+= [THIS] -> call script anarkis.lib.cmd.jumpnearobject :  destination=$protect
+end
+$enemy =  find ship: sector=[SECTOR] class or type=Moveable Ship race=null flags=$flag refobj=$protect maxdist=10000 maxnum=1 refpos=null
+if $enemy -> exists
+= [THIS] -> call script !fight.attack.object :  the victim=$enemy  follow in new sector=[FALSE]  Only attack shields=[FALSE]
+else
+= [THIS] -> call script !move.idle.timeout :  timeout in sec=10  wait while docked=[FALSE]
+end
+end
+
+return null

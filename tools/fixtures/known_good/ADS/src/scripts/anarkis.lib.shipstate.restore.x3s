@@ -1,0 +1,20 @@
+#name: anarkis.lib.shipstate.restore
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.shipstate.restore.xml
+
+$array = $ref.object -> get local variable: name='anarkis.ship.state'
+$v1 = $array[0]
+$ref.object -> set destination to $v1
+$v1 = $array[1]
+$ref.object -> set command: $v1
+$v1 = $array[2]
+$ref.object -> set command target: $v1
+$v1 = $array[3]
+$ref.object -> set command target2: $v1
+$v1 = $array[4]
+$ref.object -> set name to $v1
+
+$ref.object -> set local variable: name='anarkis.ship.state' value=null
+
+return $array

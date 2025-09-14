@@ -1,0 +1,17 @@
+#name: anarkis.lib.race.to.id
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.race.to.id.xml
+
+$array = [THIS] -> call script anarkis.lib.get.race.array :
+$cnt =  size of array $array
+
+while $cnt
+dec $cnt =
+$test = $array[$cnt]
+if $test == $race
+return $cnt
+end
+end
+
+return null
