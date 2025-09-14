@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.8-internal
+- Added macro commands documentation.
 - Linter now rejects positional argument syntax and scripts use named parameters.
 - Fixed remaining positional-style references in ware config query.
 - Enforced numeric array indexing for ware configs and linter rejects string keys.
