@@ -50,6 +50,9 @@
 
 ### New Statements Recognized
 - **menu.open.info**: `open custom info menu: title=$txt description=null option array=$menu maxoptions=2`
+- **al.timer.vars**: `al engine: set plugin $plugin.ID timer interval to $interval s`
+- **speak.text**: `= speak text: page=13 id=1276 priority=0`
+- **speak.array**: `= speak array: $d prio=0`
 
 ## Fixtures
 

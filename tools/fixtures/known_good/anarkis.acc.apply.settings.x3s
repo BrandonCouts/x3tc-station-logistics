@@ -1,0 +1,60 @@
+#name: anarkis.acc.apply.settings
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.apply.settings.xml
+
+$setup = [THIS] -> get local variable: name='anarkis.acc.setup'
+
+$dock.list = [THIS] -> get ship array from sector/ship/station
+$cnt =  size of array $dock.list
+
+while $cnt
+dec $cnt =
+$curr.ship = $dock.list[$cnt]
+$enabled = $curr.ship -> get local variable: name='anarkis.acc.ship'
+
+if $only.active == [TRUE] AND $enabled != [TRUE]
+continue
+end
+
+$v1 = $setup[7]
+$curr.ship -> set autojump active: $v1
+$v1 = $setup[8]
+$curr.ship -> autojump minimum jumps= $v1
+$v1 = $setup[9]
+$curr.ship -> set jumpdrive fuel resupply: amount=$v1
+$v1 = $setup[10]
+$curr.ship -> set emergency jump active: $v1
+$v1 = $setup[11]
+$curr.ship -> autojump emergency jump shield threshold= $v1%
+$v1 = $setup[12]
+$curr.ship -> set fire missile probability to $v1
+
+$v1 = $setup[14]
+if $v1 == 245
+$turret.script = '!turret.protect.std'
+else if $v1 == 246
+$turret.script = '!turret.killenemies.std'
+else if $v1 == 247
+$turret.script = '!turret.missiledefense.std'
+else if $v1 == 248
+if $curr.ship -> get true amount of ware MARS - Motion Analysis Relay System in cargo bay
+$turret.script = 'plugin.gz.mars.turret'
+else
+$turret.script = '!turret.missiledefense.std'
+end
+else if $v1 == 249
+if $curr.ship -> get true amount of ware MARS - Motion Analysis Relay System in cargo bay
+$turret.script = 'plugin.gz.mars.turret.offense'
+else
+$turret.script = '!turret.killenemies.std'
+end
+end
+$turret.count = $curr.ship -> get number of turrets
+while $turret.count > 1
+dec $turret.count =
+$curr.ship -> start named script: task=$turret.count scriptname=$turret.script prio=0, $turret.count, null, null, null, null
+end
+end
+
+return null

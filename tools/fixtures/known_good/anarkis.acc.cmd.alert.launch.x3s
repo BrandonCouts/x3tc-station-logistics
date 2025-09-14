@@ -1,0 +1,17 @@
+#name: anarkis.acc.cmd.alert.launch
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.alert.launch.xml
+
+$ship.list = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$ship.count =  size of array $ship.list
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+
+$r = $ship -> is script !ship.cmd.killenemies.std on stack of task=0
+skip if $r == [TRUE]
+$ship -> start task 0 with script !ship.cmd.killenemies.std and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+= wait 50 ms
+end
+return null
