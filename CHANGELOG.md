@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.5-internal
+- Removed unused call to nonexistent `plugin.slx.Wares` from setup script.
+
 ## 0.1.4-internal
 - Manager tick now runs continuously every ~10 seconds.
 
