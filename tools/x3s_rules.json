@@ -587,6 +587,34 @@
             "examples": [
                 "append 'anarkis.lib.cmd.attackland' to array $cmd"
             ]
+        },
+        {
+            "name": "append.race",
+            "regex": "^append (Argon|Boron|Split|Paranid|Teladi|Xenon|Kha'ak|Pirates|Goner|Unknown|Race 1|Race 2|ATF|Terran|Yaki) to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append Argon to array $res"
+            ]
+        },
+        {
+            "name": "append.station",
+            "regex": "^append (Military Outpost|OTAS HQ|Terracorp HQ|Jonferco Headquarters|Plutarch Mining Corporation HQ|Atreus Headquarters|Strong Arms HQ|NMMC Headquarters|Duke's Haven|Orbital Defence Station|Military Base|Orbital Patrol Base|Headquarters) to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append Military Outpost to array $military.types"
+            ]
+        },
+        {
+            "name": "set.discovered.status",
+            "regex": "^set discovered status: type=\\$[A-Za-z0-9_.]+ status=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "set discovered status: type=$race status=$show"
+            ]
+        },
+        {
+            "name": "set.notoriety",
+            "regex": "^set notoriety of \\$[A-Za-z0-9_.]+ -> \\$[A-Za-z0-9_.]+ to \\$[A-Za-z0-9_.]+ points$",
+            "examples": [
+                "set notoriety of $base.race -> $target.race to $new.noto points"
+            ]
         }
     ]
 }
