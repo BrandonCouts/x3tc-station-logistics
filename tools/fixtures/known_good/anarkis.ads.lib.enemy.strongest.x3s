@@ -1,0 +1,32 @@
+#name: anarkis.ads.lib.enemy.strongest
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.lib.enemy.strongest.xml
+
+$refobject =  find station: sector=$sector class or type=Station race=$race flags=[Find.Random] refobj=null maxdist=null maxnum=1 refpos=null
+skip if $refobject -> exists
+$refobject =  find ship: sector=$sector class or type=Ship race=$race flags=[Find.Random] refobj=null maxdist=null maxnum=1 refpos=null
+skip if $refobject -> exists
+return null
+
+
+$flags = [Find.Enemy] | [Find.Multiple]
+$max.threat = 0
+$result.ship = null
+$ship.list =  find ship: sector=$sector class or type=Moveable Ship race=null flags=$flags refobj=$refobject maxdist=null maxnum=50 refpos=null
+$ship.count =  size of array $ship.list
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+skip if $ship -> is $refobject a enemy
+continue
+skip if not $ship -> is civilian ship
+continue
+$threat = [THIS] -> call script anarkis.ads.lib.get.shipthreat :  ship/class=$ship
+if $threat > $max.threat
+$max.threat = $threat
+$result.ship = $ship
+end
+end
+
+return $result.ship

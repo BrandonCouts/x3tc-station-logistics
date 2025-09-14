@@ -1,0 +1,407 @@
+#name: anarkis.ads.comm.manage.menu
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.comm.manage.menu.xml
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+$page.id = $gl.setup[0]
+
+$cmd.id = 2010
+$m.menumode = 'none'
+
+* While order /= quit
+while $m.menumode != 'quit'
+$select = get global variable: name='anarkis.ads.menu'
+
+$m.filter = $select[0]
+$m.selected = $select[1]
+$m.menumode = $select[2]
+$m.showcmd = $select[3]
+$m.viewgridship = $select[4]
+$m.viewowned = $select[5]
+
+*$debug = sprintf: fmt='%s - %s - %s - %s - %s', $m.filter, $m.selected, $m.menumode, $m.showcmd, $m.viewgridship
+*= [THIS] -> call script anarkis.debug.output :  msg=$debug
+
+resize array $menu to 0
+
+* - If something is selected
+if $m.selected -> exists
+* - - If viewship over something select
+* - - Well, let's show owned ships then
+if $m.viewowned == [TRUE]
+$list = $m.selected -> get owned ships: class/type=Ship
+$cnt =  size of array $list
+$st = sprintf: pageid=$page.id textid=1042, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$ok = [FALSE]
+while $cnt
+dec $cnt =
+$v1 = $list[$cnt]
+skip if not $v1 -> is docked
+continue
+$v2 = $v1 -> get ware type code of object
+$v3 = $v1 -> get command
+$v3 = [THIS] -> call script anarkis.lib.shortcmd :  command=$v3
+$v4 = $v1 -> get hull percent
+$v5 = $v1 -> get shield percent
+$ok = [TRUE]
+if $m.selected -> get attacker
+$st = sprintf: pageid=$page.id textid=1123, $v2, $v3, $v4, $v5, null
+else
+$st = sprintf: pageid=$page.id textid=1041, $v2, $v3, $v4, $v5, null
+end
+add custom menu item to array $menu: text=$st returnvalue=$v1
+end
+if not $ok
+$cnt =  size of array $menu
+dec $cnt =
+resize array $menu to $cnt
+end
+$ok = [FALSE]
+$cnt =  size of array $list
+$st = sprintf: pageid=$page.id textid=1043, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+while $cnt
+dec $cnt =
+$v1 = $list[$cnt]
+skip if $v1 -> is docked
+continue
+$v2 = $v1 -> get ware type code of object
+$v3 = $v1 -> get command
+$v3 = [THIS] -> call script anarkis.lib.shortcmd :  command=$v3
+$v4 = $v1 -> get hull percent
+$v5 = $v1 -> get shield percent
+$ok = [TRUE]
+$st = sprintf: pageid=$page.id textid=1041, $v2, $v3, $v4, $v5, null
+add custom menu item to array $menu: text=$st returnvalue=$v1
+end
+if not $ok
+$cnt =  size of array $menu
+dec $cnt =
+resize array $menu to $cnt
+end
+end
+* - - End Display : Owned Ships
+
+$st = sprintf: pageid=$page.id textid=1001, $m.selected, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$v1 = [PLAYERSHIP] -> get sector
+$v2 = $m.selected -> get sector
+if $v1 == $v2
+$st = sprintf: pageid=$page.id textid=1030, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='cursor'
+end
+
+* - - If the fucking selection is a ship display the comand panel
+if $m.selected -> is of class Moveable Ship
+if $m.showcmd == [FALSE]
+$st = sprintf: pageid=$page.id textid=1034, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='cmdon'
+else
+$st = sprintf: pageid=$page.id textid=1038, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='cmdoff'
+if $v1 != $v2
+$st = sprintf: pageid=$page.id textid=1023, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='jumptome'
+end
+$st = sprintf: pageid=$page.id textid=1024, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='jumpto'
+$st = sprintf: pageid=$page.id textid=1033, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='dockto'
+$st = sprintf: pageid=$page.id textid=1025, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='attack'
+$st = sprintf: pageid=$page.id textid=1036, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='protect'
+$st = sprintf: pageid=$page.id textid=1029, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='attackall'
+$st = sprintf: pageid=$page.id textid=1028, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='patrol'
+$st = sprintf: pageid=$page.id textid=1037, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='standby'
+$isadscompat = [THIS] -> call script anarkis.acc.is.compatible :  target=$m.selected
+$isadsactive = [THIS] -> call script anarkis.acc.lib.isadsactive :  target=$m.selected
+if $isadscompat == [TRUE] AND $isadsactive == [FALSE]
+$st = sprintf: pageid=$cmd.id textid=834, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='wingattack'
+$st = sprintf: pageid=$cmd.id textid=833, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='wingdefend'
+$st = sprintf: pageid=$cmd.id textid=835, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='clearsector'
+$st = sprintf: pageid=$cmd.id textid=836, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='dockall'
+$st = sprintf: pageid=$cmd.id textid=832, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='buywares'
+$st = sprintf: pageid=$cmd.id textid=831, null, null, null, null, null
+$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='sellwares'
+end
+end
+end
+* - - End
+
+* - - ACC Commands for Stations
+if $m.selected -> is of class Station
+$isadscompat = [THIS] -> call script anarkis.acc.is.compatible :  target=$m.selected
+$isadsactive = [THIS] -> call script anarkis.acc.lib.isadsactive :  target=$m.selected
+if $isadscompat == [TRUE] AND $isadsactive == [FALSE]
+$st = sprintf: pageid=$cmd.id textid=834, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='wingattack'
+
+$st = sprintf: pageid=$cmd.id textid=833, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='wingdefend'
+
+$st = sprintf: pageid=$cmd.id textid=835, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='clearsector'
+
+$st = sprintf: pageid=$cmd.id textid=836, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='dockall'
+$st = sprintf: pageid=$cmd.id textid=832, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='buywares'
+$st = sprintf: pageid=$cmd.id textid=831, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='sellwares'
+
+end
+end
+
+if [THIS] -> call script anarkis.acc.lib.isadsactive :  target=$m.selected
+$v1 = sprintf: pageid=$page.id textid=201, null, null, null, null, null
+else
+$v1 = sprintf: pageid=$page.id textid=202, null, null, null, null, null
+end
+* - - End
+
+* - - If the selected object has docking bays, show menu
+if $m.selected -> get dock bay size
+$st = sprintf: pageid=$page.id textid=1035, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='viewships'
+end
+* - - End
+
+* - - If the selected object is ADS compatible show setup and automode
+if [THIS] -> call script anarkis.acc.is.compatible :  target=$m.selected
+$st = sprintf: pageid=$page.id textid=1018, $v1, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='toggle.ads'
+$v2 = $m.selected -> get object class
+$st = sprintf: pageid=$page.id textid=1019, $v2, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='setup.object'
+end
+* - - End
+
+* - - Show the Grid Mode toggle for big ships
+if $m.selected -> is of class Big Ship
+if $m.selected -> get local variable: name='anarkis.ads.grid'
+$st =  read text: page=$page.id id=820
+else
+$st =  read text: page=$page.id id=821
+end
+$st = sprintf: pageid=$page.id textid=1059, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='toggle.grid'
+end
+* - - End
+end
+* - Ship Menu Done
+
+* - Show the main menu
+if $m.selected == null AND $m.menumode != 'grid.sector'
+if $m.filter == null
+$v1 =  read text: page=$page.id id=1044
+else
+$v1 = $m.filter
+end
+$st = sprintf: pageid=$page.id textid=1001, $v1, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=1003
+add custom menu item to array $menu: text=$st returnvalue=Carrier
+$st =  read text: page=$page.id id=1002
+add custom menu item to array $menu: text=$st returnvalue=Station
+$st =  read text: page=$page.id id=1044
+add custom menu item to array $menu: text=$st returnvalue='defense.grid'
+end
+* - End
+
+* - Defense Grid : Main Menu
+if $m.menumode == 'grid.sector'
+$st =  read text: page=$page.id id=1049
+add custom menu heading to array $menu: title=$st
+
+if $m.viewgridship == [TRUE]
+$st =  read text: page=$page.id id=820
+else
+$st =  read text: page=$page.id id=204
+end
+$st = sprintf: pageid=$page.id textid=1047, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='grid.ship'
+end
+
+* - Defense Grid : Ship List
+if $m.viewgridship == [TRUE]
+$st =  read text: page=$page.id id=1118
+add custom menu heading to array $menu: title=$st
+$v1 =  get ship array: of race Player class/type=Big Ship
+$v2 =  size of array $v1
+while $v2
+dec $v2 =
+$v3 = $v1[$v2]
+if $v3 -> get local variable: name='anarkis.ads.grid'
+$st = [THIS] -> call script anarkis.ads.lib.shiptostring :  target=$v3
+add custom menu item to array $menu: text=$st returnvalue=$v3
+end
+end
+$st =  read text: page=$page.id id=1119
+add custom menu heading to array $menu: title=$st
+$v1 =  get ship array: of race Player class/type=Big Ship
+$v2 =  size of array $v1
+while $v2
+dec $v2 =
+$v3 = $v1[$v2]
+if not $v3 -> get local variable: name='anarkis.ads.grid'
+$st = [THIS] -> call script anarkis.ads.lib.shiptostring :  target=$v3
+add custom menu item to array $menu: text=$st returnvalue=$v3
+end
+end
+
+end
+
+* - Defense Grid : Sector List
+if $m.menumode == 'grid.sector'
+$st =  read text: page=$page.id id=1050
+add custom menu heading to array $menu: title=$st
+$v1 = [THIS] -> call script anarkis.ads.lib.get.plsectors :
+$v2 =  size of array $v1
+while $v2
+dec $v2 =
+$v3 = $v1[$v2]
+$v4 = $v3 -> get player owned station array from sector
+$v4 =  size of array $v4
+$v5 = [THIS] -> call script anarkis.ads.lib.get.sectorthreat :  sector=$v3  race=Player
+$x = $v3 -> get universe x index
+$y = $v3 -> get universe y index
+$st = sprintf: pageid=$page.id textid=1051, $x, $y, $v3, $v4, $v5
+add custom menu item to array $menu: text=$st returnvalue=0
+end
+end
+
+* - Handle Carrier and Station Lists
+if $m.menumode == 'list'
+$st = sprintf: pageid=$page.id textid=1017, $m.filter, null, null, null, null
+add custom menu heading to array $menu: title=$st
+if $m.filter == Carrier
+$list = [THIS] -> call script anarkis.acc.get.acc.carriers :  active only?=[FALSE]
+else
+$list =  get station array: of race Player class/type=Dock
+end
+$cnt =  size of array $list
+while $cnt
+dec $cnt =
+$select = $list[$cnt]
+$st = [THIS] -> call script anarkis.ads.lib.shiptostring :  target=$select
+add custom menu item to array $menu: text=$st returnvalue=$select
+end
+
+end
+
+* - If nothing selected
+if $m.selected == null
+$st =  read text: page=$page.id id=1004
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=1006, $m.filter, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='alert'
+
+$st =  read text: page=$page.id id=1089
+add custom menu item to array $menu: text=$st returnvalue='gen.set'
+
+
+if get global variable: name='anarkis.ads.grid.mode'
+$st =  read text: page=$page.id id=201
+else
+$st =  read text: page=$page.id id=202
+end
+
+
+$st = sprintf: pageid=$page.id textid=1058, $st, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='grid.toggle'
+
+if $m.filter != null
+$st = sprintf: pageid=$page.id textid=1008, $m.filter, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='applyall'
+end
+$st = sprintf: pageid=$page.id textid=1007, $m.filter, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='uninstall'
+
+end
+
+* - Info Lines
+if $m.selected != null
+$v1 = $m.selected -> get hull percent
+$v2 = $m.selected -> get shield percent
+$st = sprintf: pageid=$page.id textid=1013, $v1, $v2, null, null, null
+add custom menu info line to array $menu: text=$st
+if $m.selected -> is of class Moveable Ship
+$v1 = $m.selected -> get command
+$v1 = [THIS] -> call script anarkis.lib.shortcmd :  command=$v1
+$v2 = $m.selected -> get command target
+skip if $v2 -> exists
+$v2 = $m.selected -> get destination
+if $v2 -> exists
+$v2 = $v2 -> get name
+else
+$v2 = ' '
+end
+*$v2 = [THIS] -> call script anarkis.lib.shortstring :  string=$v2  max=18
+$st = sprintf: pageid=$page.id textid=1014, $v1, $v2, null, null, null
+add custom menu info line to array $menu: text=$st
+end
+
+$v1 = $m.selected -> get sector
+$v1 = [THIS] -> call script anarkis.acc.evalute.danger :  sector=$v1  checker=$m.selected
+
+if $m.selected -> get attacker
+$v2 =  read text: page=$page.id id=203
+else
+$v2 =  read text: page=$page.id id=204
+end
+
+if $m.selected -> get local variable: name='anarkis.acc.battle'
+$v3 =  read text: page=$page.id id=203
+else
+$v3 =  read text: page=$page.id id=204
+end
+
+$st = sprintf: pageid=$page.id textid=1015, $v1, $v2, $v3, null, null
+add custom menu info line to array $menu: text=$st
+$v1 = $m.selected -> get owned ships: class/type=Ship
+$v1 =  size of array $v1
+$v2 = $m.selected -> get number of landed ships
+$v3 = [THIS] -> call script anarkis.acc.lib.get.adsonly.from :  from=$m.selected
+$v3 =  size of array $v3
+$st = sprintf: pageid=$page.id textid=1016, $v1, $v2, $v3, null, null
+add custom menu info line to array $menu: text=$st
+
+else
+$st =  read text: page=$page.id id=1010
+add custom menu info line to array $menu: text=$st
+$st =  read text: page=$page.id id=1011
+add custom menu info line to array $menu: text=$st
+end
+
+if $m.selected
+$v1 = $m.selected -> get name
+$v1 = [THIS] -> call script anarkis.lib.shortstring :  string=$v1  max=25
+$v2 = $m.selected -> get sector
+$v2 = sprintf: pageid=$page.id textid=1012, $v2, $v1, null, null, null
+else
+$v2 =  read text: page=$page.id id=100
+end
+$v1 =  read text: page=$page.id id=1000
+
+= wait 100 ms
+end
+
+
+return null

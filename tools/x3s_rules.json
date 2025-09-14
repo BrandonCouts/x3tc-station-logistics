@@ -650,6 +650,20 @@
             "examples": [
                 "$p.face = = random value from 0 to 4 - 1"
             ]
+        },
+        {
+            "name": "array.alloc",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*array alloc: size=(\\$[A-Za-z0-9_.]+|\\d+)$",
+            "examples": [
+                "$sel.role = array alloc: size=0"
+            ]
+        },
+        {
+            "name": "menu.create",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*create custom menu array$",
+            "examples": [
+                "$menu = create custom menu array"
+            ]
         }
     ]
 }
