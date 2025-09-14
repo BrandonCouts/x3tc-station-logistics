@@ -21,7 +21,13 @@ def run_fail(cmd: list[str]):
 
 
 if __name__ == '__main__':
-  run([sys.executable, 'tools/x3s_lint.py', 'src/scripts', 'tools/fixtures/known_good'])
+  run([
+      sys.executable,
+      'tools/x3s_lint.py',
+      'src/scripts',
+      'tools/fixtures/known_good',
+      'tools/fixtures/known_good/ADS/src/scripts',
+  ])
 
   fail_dir = ROOT / 'tools/fixtures/should_fail'
   if list(fail_dir.rglob('*.x3s')):

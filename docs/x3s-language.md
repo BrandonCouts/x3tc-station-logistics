@@ -100,3 +100,9 @@ via `python tools/convert_mods.py` and are used by the test suite.
 ### New Statements Recognized
 - **write.log.num**: `write to log file #8513  append=1  value=$m`
 - **append.string**: `append 'anarkis.lib.cmd.attackland' to array $cmd`
+
+### New Statements Recognized
+- **append.race**: `append Argon to array $res`
+- **append.station**: `append Military Outpost to array $military.types`
+- **set.discovered.status**: `set discovered status: type=$race status=$show`
+- **set.notoriety**: `set notoriety of $base.race -> $target.race to $new.noto points`
