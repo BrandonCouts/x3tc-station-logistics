@@ -1,0 +1,7 @@
+* ******************************************************************************
+* SCRIPT NAME: plugin.slx.manager.tick
+* DESCRIPTION: Periodic manager loop for SLX logistics
+* AUTHOR:      Brandon              DATE: 8 September 2025
+* ******************************************************************************
+
+return null

@@ -1,0 +1,7 @@
+* ******************************************************************************
+* SCRIPT NAME: plugin.slx.station.menu
+* DESCRIPTION: Station configuration menu for SLX
+* AUTHOR:      Brandon              DATE: 8 September 2025
+* ******************************************************************************
+
+return null
