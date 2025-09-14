@@ -56,8 +56,6 @@ $st = array alloc: size=0
 set global variable: name='slx.stations' value=$st
 end
 
-= [THIS]-> call script 'plugin.slx.Wares' : argument1=null
-
 * Register AL plugin for SLX
 al engine: register script='al.plugin.slx'
 al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'
