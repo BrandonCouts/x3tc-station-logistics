@@ -2,6 +2,7 @@
 
 ## 0.1.8-internal
 - Linter now rejects positional argument syntax and scripts use named parameters.
+- Fixed remaining positional-style references in ware config query.
 
 ## 0.1.7-internal
 - Added overview section to SLX README for clarity.

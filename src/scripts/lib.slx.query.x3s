@@ -39,12 +39,12 @@ if $function == 'GetStationWareConfig'
   $minArr = $station -> get local variable: name='slx.ware.min_pct'
   $maxArr = $station -> get local variable: name='slx.ware.max_pct'
   $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
-  $cfg = array alloc: size=0
-  $cfg['role'] = $roleArr[$ware]
-  $cfg['min_pct'] = $minArr[$ware]
-  $cfg['max_pct'] = $maxArr[$ware]
-  $cfg['chunk_pct'] = $chunkArr[$ware]
-  return $cfg
+  $map = array alloc: size=0
+  $map['role'] = $roleArr[$ware]
+  $map['min_pct'] = $minArr[$ware]
+  $map['max_pct'] = $maxArr[$ware]
+  $map['chunk_pct'] = $chunkArr[$ware]
+  return $map
 end
 
 if $function == 'SetStationWareConfig'
