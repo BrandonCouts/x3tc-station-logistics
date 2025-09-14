@@ -1,0 +1,60 @@
+#name: anarkis.acc.setup.default.st
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.default.st.xml
+
+$setup =  array alloc: size=0
+
+* 0 threat level
+append 5 to array $setup
+* 1 Radar Range
+append 100000 to array $setup
+* 2 Defense Ship count
+append 5 to array $setup
+* 3 Damaged ships retreat
+append [TRUE] to array $setup
+* 4 Display warning
+append [TRUE] to array $setup
+* 5 warning type (0 subtitle, 1 audio, 2 text)
+append 2 to array $setup
+* 6 attack mode (3 auto, 1 nearest first, 2 strongest first)
+append 3 to array $setup
+* 7 docked ship autojump on / off
+append [TRUE] to array $setup
+* 8 docked ship autojump distance
+append 1 to array $setup
+* 9 docked ship fuel resupply (jumps)
+append 10 to array $setup
+* 10 docked ship emergency jump/escape
+append [TRUE] to array $setup
+* 11 docked ship shield threshold (in percent)
+append 10 to array $setup
+* 12 docked ship missile usage
+append 15 to array $setup
+* 13 use logfile
+append [FALSE] to array $setup
+* 14 turret settings
+append 246 to array $setup
+* 15 enable auto rename
+append [TRUE] to array $setup
+
+* 16 Ignore List (array)
+$ignore =  array alloc: size=0
+append $ignore to array $setup
+
+* 17 Mechanics
+$mechanists =  array alloc: size=0
+* - 0 Count
+append 4 to array $mechanists
+* - 1 Allow ship repairs
+append [FALSE] to array $mechanists
+* - 2 Allow carrier repairs
+append [FALSE] to array $mechanists
+append $mechanists to array $setup
+
+* 18 Delay before the autocarrier docks its ships
+append 600 to array $setup
+
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup
+
+return $setup

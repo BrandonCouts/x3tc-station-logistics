@@ -1,0 +1,172 @@
+#name: anarkis.acc.setup.supplies.c2s
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.supplies.c2s.xml
+
+$page.id = 8510
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$supply.setup = $setup.array[15]
+
+$trans.ship = 529
+$trans.mode = 525
+
+$ware.list =  array alloc: size=0
+$ware.limit =  array alloc: size=0
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=521
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=522
+add custom menu item to array $menu: text=$st returnvalue='add'
+
+$v1 =  size of array $ware.list
+while $v1
+dec $v1 =
+$v2 = $ware.list[$v1]
+$v3 = $ware.limit[$v1]
+$st = sprintf: pageid=$page.id textid=523, $v2, $v3, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=$v2
+end
+
+$st =  read text: page=$page.id id=$trans.mode
+$st = sprintf: pageid=$page.id textid=524, $st, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=525
+add custom menu item to array $menu: text=$st returnvalue=525
+$st =  read text: page=$page.id id=526
+add custom menu item to array $menu: text=$st returnvalue=526
+
+$st =  read text: page=$page.id id=$trans.ship
+$st = sprintf: pageid=$page.id textid=527, $st, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=528
+add custom menu item to array $menu: text=$st returnvalue=528
+$st =  read text: page=$page.id id=529
+add custom menu item to array $menu: text=$st returnvalue=529
+
+$st =  read text: page=$page.id id=530
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=531
+add custom menu item to array $menu: text=$st returnvalue='proceed'
+
+$v1 =  read text: page=$page.id id=520
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result < 527
+$trans.mode = $menu.result
+
+else if $menu.result < 530
+$trans.ship = $menu.result
+
+else if  is datatyp[ $menu.result ] == DATATYP_WARE
+$v1 =  get index of $menu.result in array $ware.list offset=-1 + 1
+remove element from array $ware.list at index $v1
+remove element from array $ware.limit at index $v1
+
+else if $menu.result == 'add'
+$st =  read text: page=$page.id id=532
+if [THIS] -> is of class Station
+$v1 = [THIS] -> get user input: type=Var/Station and Ware, title=$st
+else
+$v1 = [THIS] -> get user input: type=Var/Ware of Ship, title=$st
+end
+$v1 = $v1[0]
+skip if not  find $v1 in array: $ware.list
+continue
+skip if not $v1 == null
+continue
+$st =  read text: page=$page.id id=533
+$v2 = [THIS] -> get user input: type=Var/Number, title=$st
+skip if $v2 > 0
+continue
+append $v1 to array $ware.list
+append $v2 to array $ware.limit
+
+else if $menu.result == 'proceed'
+* - - Proceed
+
+$report.menu =  create custom menu array
+$st =  read text: page=$page.id id=541
+add custom menu heading to array $report.menu: title=$st
+
+if $trans.ship == 528
+$array = [THIS] -> get ship array from sector/ship/station
+else
+$array = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[FALSE]
+end
+$total.ship =  size of array $array
+$cnt =  size of array $array
+* - - Mode : 525 - Same Quant
+if $trans.mode == 525
+$ware.count =  size of array $ware.list
+while $ware.count
+dec $ware.count =
+$ware = $ware.list[$ware.count]
+$ware.quant = $ware.limit[$ware.count]
+$curr.amt = [THIS] -> get amount of ware $ware in cargo bay
+$add.amt = $curr.amt / $total.ship
+skip if $add.amt
+inc $add.amt =
+skip if $add.amt <= $ware.quant
+$add.amt = $ware.quant
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$ship = $array[$cnt]
+$left = $ship -> add $add.amt units of $ware
+$st = sprintf: pageid=$page.id textid=542, $left, $ware, $ship, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+
+$rem = 0 - $add.amt
+= [THIS] -> add $rem units of $ware
+skip if [THIS] -> get amount of ware $ware in cargo bay
+break
+end
+end
+* - - Mode : 526 - At least
+else if $trans.mode == 526
+$ware.count =  size of array $ware.list
+while $ware.count
+dec $ware.count =
+$ware = $ware.list[$ware.count]
+$ware.quant = $ware.limit[$ware.count]
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$ship = $array[$cnt]
+$curr.amt = [THIS] -> get amount of ware $ware in cargo bay
+skip if $curr.amt >= $ware.quant
+$ware.quant = $curr.amt
+$left = $ship -> add $ware.quant units of $ware
+
+$st = sprintf: pageid=$page.id textid=542, $left, $ware, $ship, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+
+$rem = 0 - $ware.quant
+= [THIS] -> add $rem units of $ware
+
+
+
+skip if [THIS] -> get amount of ware $ware in cargo bay
+break
+end
+end
+end
+* - - And exit
+$v1 =  read text: page=$page.id id=540
+$v2 =  read text: page=$page.id id=260
+$x =  open custom menu: title=$v1 description=$v2 option array=$report.menu
+return null
+end
+
+end
+
+return null

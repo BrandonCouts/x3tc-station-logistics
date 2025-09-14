@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 80 known-good ADS scripts:
+The linter is validated against these 100 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -84,3 +84,23 @@ The linter is validated against these 80 known-good ADS scripts:
 - anarkis.acc.setup.autocarrier.x3s
 - anarkis.acc.setup.buywares.x3s
 - anarkis.acc.setup.copy.x3s
+- anarkis.acc.setup.default.st.x3s
+- anarkis.acc.setup.default.x3s
+- anarkis.acc.setup.hangars.x3s
+- anarkis.acc.setup.ignorerace.x3s
+- anarkis.acc.setup.rename.x3s
+- anarkis.acc.setup.reports.x3s
+- anarkis.acc.setup.sellwares.x3s
+- anarkis.acc.setup.ships.x3s
+- anarkis.acc.setup.supplies.c2s.x3s
+- anarkis.acc.setup.supplies.s2c.x3s
+- anarkis.acc.setup.supplies.x3s
+- anarkis.acc.setup.threatsetup.x3s
+- anarkis.acc.setup.x3s
+- anarkis.acc.signal.killed.npc.x3s
+- anarkis.acc.task.autocarrier.npc.x3s
+- anarkis.acc.task.autocarrier.x3s
+- anarkis.acc.task.autoname.plus.x3s
+- anarkis.acc.task.hullcheck.x3s
+- anarkis.acc.upgrade.disable.x3s
+- anarkis.acc.upgrade.enable.x3s

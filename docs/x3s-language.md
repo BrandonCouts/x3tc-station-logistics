@@ -77,6 +77,10 @@
 - **append.class**: `append M2 to array $class.list`
 - **menu.value.selection**: `add value selection to menu: $menu, text=$st, value array=$sel.threat, default=$sel.threat.selection, return id=$sel.threat.id`
 
+### New Statements Recognized
+- **play.sample.named**: `play sample [IncomingTransmission.SOS]`
+- **menu.item.textnum**: `add custom menu item to array $menu: text='1' returnvalue=1`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod

@@ -407,6 +407,13 @@
             ]
         },
         {
+            "name": "play.sample.named",
+            "regex": "^play sample \\[[A-Za-z0-9_.]+\\]$",
+            "examples": [
+                "play sample [IncomingTransmission.SOS]"
+            ]
+        },
+        {
             "name": "send.message.literal",
             "regex": "^send incoming message '[^']+' to player: display it=\\[(TRUE|FALSE)\\]$",
             "examples": [
@@ -488,6 +495,13 @@
             "regex": "^add custom menu item to array\\s+\\$[A-Za-z0-9_.]+:\\s*text=\\$[A-Za-z0-9_.]+\\s+returnvalue=-?\\d+$",
             "examples": [
                 "add custom menu item to array $menu: text=$dialog.yes returnvalue=1"
+            ]
+        },
+        {
+            "name": "menu.item.textnum",
+            "regex": "^add custom menu item to array\\s+\\$[A-Za-z0-9_.]+:\\s*text='[^']+'\\s+returnvalue=-?\\d+$",
+            "examples": [
+                "add custom menu item to array $menu: text='1' returnvalue=1"
             ]
         },
         {

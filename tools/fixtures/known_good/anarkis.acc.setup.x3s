@@ -1,0 +1,113 @@
+#name: anarkis.acc.setup
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.xml
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+$page.id = $gl.setup[0]
+
+
+* Retrieve setup, apply default if not found
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$cnt =  size of array $setup.array
+if not $cnt == 19
+$setup.array = [THIS] -> call script anarkis.ads.setup.createdefault :  ref.object=[THIS]
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup.array
+end
+
+*= [THIS] -> call script anarkis.acc.apply.active :
+
+skip if [THIS] -> is script anarkis.acc.task.repairs on stack of task=900
+[THIS] -> start task 900 with script anarkis.acc.task.repairs and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=240
+add custom menu heading to array $menu: title=$st
+
+$st = sprintf: pageid=$page.id textid=211, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='setup.home'
+$st = sprintf: pageid=$page.id textid=242, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='repairbay'
+
+if [THIS] -> is of class Station
+$st = sprintf: pageid=$page.id textid=1086, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='barracks'
+else if [THIS] -> is of class M1
+$st = sprintf: pageid=$page.id textid=1086, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='barracks'
+end
+
+$st = sprintf: pageid=$page.id textid=241, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='autocarrier'
+
+
+$st = sprintf: pageid=$page.id textid=440, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+
+$st = sprintf: pageid=$page.id textid=443, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='c2s'
+$st = sprintf: pageid=$page.id textid=444, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='s2c'
+
+$st = sprintf: pageid=$page.id textid=210, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=232, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='reset'
+
+$v1 = [THIS] -> get object class
+$v2 = [THIS] -> get name
+$st = sprintf: pageid=$page.id textid=250, $v2, $v1, null, null, null
+add custom menu info line to array $menu: text=$st
+$st = [THIS] -> call script anarkis.lib.sector.format :  sector=[SECTOR]
+$st = sprintf: pageid=$page.id textid=251, $st, null, null, null, null
+add custom menu info line to array $menu: text=$st
+$v1 = [THIS] -> get number of landed ships
+$v2 = [THIS] -> get dock bay size
+$v3 = [THIS] -> get owned ships: class/type=Ship
+$v3 =  size of array $v3
+$st = sprintf: pageid=$page.id textid=252, $v1, $v2, $v3, null, null
+add custom menu info line to array $menu: text=$st
+
+$v1 =  read text: page=$page.id id=200
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result == 'autocarrier'
+= [THIS] -> call script anarkis.acc.setup.autocarrier :
+
+else if $menu.result == 'c2s'
+= [THIS] -> call script anarkis.acc.setup.supplies.c2s :
+
+else if $menu.result == 's2c'
+= [THIS] -> call script anarkis.acc.setup.supplies.s2c :
+
+else if $menu.result == 'setup.home'
+= [THIS] -> call script anarkis.acc.setup.hangars :
+
+else if $menu.result == 'repairbay'
+= [THIS] -> call script anarkis.acc.setup.repair :
+
+else if $menu.result == 'supplies'
+= [THIS] -> call script anarkis.acc.setup.supplies :
+else if $menu.result == 'barracks'
+= [THIS] -> call script anarkis.ads.comm.barracks :  ship or station=[THIS]
+
+* dont loop here
+
+else if $menu.result == 'reset'
+$setup.array = [THIS] -> call script anarkis.acc.setup.default :
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup.array
+
+
+end
+
+end
+
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup.array
+return $setup.array

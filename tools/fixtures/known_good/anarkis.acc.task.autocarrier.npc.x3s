@@ -1,0 +1,363 @@
+#name: anarkis.acc.task.autocarrier.npc
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.task.autocarrier.npc.xml
+
+* ===========================================
+* Automated Carrier : Main Task
+* Can be run on NPC carriers without the ship respawning
+* ===========================================
+
+$null = null
+$fightinprogress = [FALSE]
+$page.id = 8510
+
+if [OWNER] == Player
+return null
+end
+
+$save.owner = [OWNER]
+
+while [OWNER] == $save.owner
+
+* - Reload setup
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$var1 =  size of array $setup.array
+if not $var1 == 19
+$setup.array = [THIS] -> call script anarkis.ads.setup.createdefault :  ref.object=[THIS]
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup.array
+= [THIS] -> call script anarkis.acc.apply.active :
+end
+
+* - Start Repair task if needed
+*skip if [THIS] -> is script anarkis.acc.task.repairs on stack of task=900
+*[THIS] -> start task 900 with script anarkis.acc.task.repairs and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+
+$display.warning = $setup.array[4]
+$alert.level = $setup.array[0]
+$defence.ships = $setup.array[2]
+$attack.mode = $setup.array[6]
+$autorename = $setup.array[15]
+$dock.delay = $setup.array[18]
+
+*$curr.threat = $null -> call script anarkis.acc.evalute.danger :  sector=[SECTOR]  checker=[THIS]
+$curr.threat = $null -> call script anarkis.acc.evalute.danger.npc :  sector=[SECTOR]  checker=[THIS]
+$shield = [THIS] -> get shield percent
+$attacker = [THIS] -> get attacker
+if $curr.threat > 3
+$strongest = $null -> call script anarkis.acc.evaluate.findstrong :  sector=[SECTOR]  checker=[THIS]
+end
+
+* - The carrier is attacked by an incoming
+if $attacker != null AND $shield <= 80 AND $fightinprogress == [FALSE]
+gosub alert
+gosub counterattack
+
+* - The threat level is reached
+else if $curr.threat >= $alert.level AND $fightinprogress == [FALSE]
+gosub alert
+gosub rename
+* - - Nearest First (usual command will work)
+if $attack.mode == 1
+gosub clearsector
+* - - Strongest First
+else if $attack.mode == 2
+gosub strongestfirst
+* - - Let ACC decide
+else
+gosub decide
+end
+
+* - Battle in progress, handle wings and deploy docked fighters
+else if $curr.threat > 0 AND $fightinprogress == [TRUE]
+gosub handlewings
+
+* - Threat eliminated, lets dock if no new enemies
+else if $curr.threat == 0 AND $fightinprogress == [TRUE]
+$pl.time = playing time
+$end.time = $pl.time + $dock.delay
+skip if not $dock.delay
+gosub protect.carrier
+while $pl.time < $end.time AND $curr.threat == 0
+= wait randomly from 1000 to 2000 ms
+$curr.threat = $null -> call script anarkis.acc.evalute.danger.npc :  sector=[SECTOR]  checker=[THIS]
+*$curr.threat = $null -> call script anarkis.acc.evalute.danger :  sector=[SECTOR]  checker=[THIS]
+$pl.time = playing time
+end
+if $curr.threat == 0
+$fightinprogress = [FALSE]
+[THIS] -> set local variable: name='anarkis.acc.battle' value=null
+= [THIS] -> call script anarkis.acc.cmd.alert.dock :
+gosub stoprename
+else
+gosub stop.protect
+end
+
+* - Not supposed to happen, but it happens :/ so we dock
+else if [THIS] -> call script anarkis.acc.lib.get.flyads :
+$fightinprogress = [FALSE]
+[THIS] -> set local variable: name='anarkis.acc.battle' value=null
+= [THIS] -> call script anarkis.acc.cmd.alert.dock :
+gosub stoprename
+end
+
+= wait 8000 ms
+end
+return null
+
+
+* ====================================
+* AutoRename v2
+* ====================================
+rename:
+if $autorename == [TRUE]
+if not [THIS] -> is script anarkis.acc.task.autoname.plus on stack of task=893
+= [THIS] -> call script anarkis.acc.lib.name.save :
+[THIS] -> start task 893 with script anarkis.acc.task.autoname.plus and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+end
+end
+endsub
+* ====================================
+stoprename:
+if [THIS] -> is script anarkis.acc.task.autoname.plus on stack of task=893
+[THIS] -> start task 893 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+= [THIS] -> call script anarkis.acc.lib.name.load :
+end
+endsub
+* ====================================
+
+
+* ====================================
+* Wings ordered to resume battle
+* ====================================
+stop.protect:
+$arr = [THIS] -> call script anarkis.acc.lib.get.leaderlist :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$leader = $arr[$cnt]
+START $leader -> call script !ship.cmd.killenemies.std :
+end
+endsub
+* ====================================
+
+
+* ====================================
+* Wings ordered to protect carrier
+* ====================================
+protect.carrier:
+$arr = [THIS] -> call script anarkis.acc.lib.get.leaderlist :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$leader = $arr[$cnt]
+START $leader -> call script anarkis.acc.cmd.protect :  protect target=[THIS]
+end
+$arr = [THIS] -> call script anarkis.acc.lib.get.lonely :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$leader = $arr[$cnt]
+START $leader -> call script !ship.cmd.returnhome.std :
+end
+endsub
+* ====================================
+
+
+* ====================================
+* Handle wings during battle
+* ====================================
+handlewings:
+if $attack.mode != 1
+$my.attacker = [THIS] -> get attacker
+$leader = [THIS] -> call script anarkis.acc.lib.get.leader.big :
+if $my.attacker -> is of class Big Ship
+if $leader
+$var1 = $leader -> get attack target
+skip if $var1 == $my.attacker
+START $leader -> call script anarkis.acc.cmd.attack.return :  victim=$my.attacker  dst=[THIS]
+end
+else
+$strongest = $null -> call script anarkis.acc.evaluate.findstrong :  sector=[SECTOR]  checker=[THIS]
+if $strongest AND $leader
+$var1 = $leader -> get attack target
+skip if $var1 == $strongest
+START $leader -> call script anarkis.acc.cmd.attack.return :  victim=$strongest  dst=[THIS]
+end
+end
+end
+= wait 100 ms
+= [THIS] -> call script anarkis.acc.lib.givetarget :
+= wait 100 ms
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+endsub
+* ====================================
+
+
+* ====================================
+* Display warning if needed
+* ====================================
+alert:
+skip if $display.warning == [TRUE]
+endsub
+$enemy.class = $strongest -> get object class
+$var1 = [THIS] -> call script anarkis.acc.get.all :  ship class=Moveable Ship  no damaged ships?=[TRUE]  active only?=[TRUE]
+$var1 =  size of array $var1
+if ( $var1 < $curr.threat AND $curr.threat > 40 ) OR ( $enemy.class == M2 ) OR ( $shield < 30 AND $attacker )
+
+$display.mode = $setup.array[5]
+if $display.mode == 1
+else if $display.mode == 1
+play sample [IncomingTransmission.SOS]
+$st = sprintf: pageid=$page.id textid=506, [THIS], [SECTOR], null, null, null
+display subtitle text: text=$st duration=15000 ms
+else if $display.mode == 2
+START $null -> call script anarkis.acc.audio.alert :  ship=[THIS]
+else if $display.mode == 3
+$st = sprintf: pageid=$page.id textid=500, [THIS], [SECTOR], null, null, null
+send incoming message $st to player: display it=[TRUE]
+end
+end
+endsub
+* ====================================
+
+
+* ====================================
+* Will choose to attack the stronger if M6 or + found else will go for usual
+* ====================================
+decide:
+$enemy.class = $strongest -> get object class
+if $enemy.class == M1 OR $enemy.class == M2 OR $enemy.class == M7 OR $enemy.class == M6
+goto label advanced.mode
+*goto label strongestfirst
+else
+goto label clearsector
+end
+endsub
+* ====================================
+
+
+* ====================================
+* Most efficient way
+* ====================================
+* - Each wing will be sent with a size according to the threat
+* ====================================
+advanced.mode:
+[THIS] -> set local variable: name='anarkis.acc.battle' value=[TRUE]
+$fightinprogress = [TRUE]
+$enemy.list = [THIS] -> call script anarkis.acc.lib.get.enemies :  sector=[SECTOR]  checker=[THIS]
+$enemy.count =  size of array $enemy.list
+$wing.id = 0
+while $enemy.count
+dec $enemy.count =
+$enemy.ship = $enemy.list[$enemy.count]
+$enemy.class = $enemy.ship -> get object class
+$min.fighter = [THIS] -> call script anarkis.lib.get.shipcount :  class=$enemy.class
+$dock.list = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$dock.count =  size of array $dock.list
+if $dock.count >= $min.fighter
+inc $wing.id =
+$wing.name = sprintf: fmt='A%s', $wing.id, null, null, null, null
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$enemy.ship  wing size=$min.fighter  wing ID=$wing.name
+end
+end
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+endsub
+* ====================================
+
+
+strongestfirst:
+* ====================================
+* Will attack the strongest enemy in range first
+* ====================================
+* - A defensive wing will be deployed
+* - An offensive wing against the strongest enemy will be deployed
+* - Other ships if any are ordered to clear sector
+* ====================================
+* No strong, fall back to clear sector
+skip if $strongest -> exists
+goto label clearsector
+$fightinprogress = [TRUE]
+[THIS] -> set local variable: name='anarkis.acc.battle' value=[TRUE]
+= [THIS] -> call script anarkis.acc.apply.relations :  active ships only?=[TRUE]
+* Repair Shields
+= [THIS] -> call script anarkis.acc.repairshields :
+* A defensive wing will be deployed
+if $defence.ships > 0
+= [THIS] -> call script anarkis.acc.wing.defence :  target=[THIS]  wing size=$defence.ships
+= wait 2000 ms
+end
+* An offensive wing against the strongest enemy will be deployed
+$enemy.class = $strongest -> get object class
+$min.fighter = [THIS] -> call script anarkis.lib.get.shipcount :  class=$enemy.class
+$dock.list = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$dock.count =  size of array $dock.list
+if $dock.count > $min.fighter
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$strongest  wing size=$min.fighter  wing ID='A'
+else
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$strongest  wing size=$dock.count  wing ID='A'
+end
+* Other ships if any are ordered to clear sector
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+endsub
+* ====================================
+
+
+clearsector:
+* ====================================
+* Used in non critical situation
+* ====================================
+* - A defensive wing will be deployed
+* - Other ships if any are ordered to clear sector
+* ====================================
+$fightinprogress = [TRUE]
+[THIS] -> set local variable: name='anarkis.acc.battle' value=[TRUE]
+= [THIS] -> call script anarkis.acc.apply.relations :  active ships only?=[TRUE]
+= [THIS] -> call script anarkis.acc.repairshields :
+if $defence.ships > 0
+= [THIS] -> call script anarkis.acc.wing.defence :  target=[THIS]  wing size=$defence.ships
+= wait 2000 ms
+end
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+endsub
+* ====================================
+
+
+counterattack:
+* ====================================
+* Used when the carrier is attacked by an incoming
+* ====================================
+* - A defensive wing will be deployed
+* - An offensive wing against the attacker will be deployed too
+* - Other ships if any are ordered to clear sector
+* ====================================
+skip if $attacker -> exists
+endsub
+$fightinprogress = [TRUE]
+[THIS] -> set local variable: name='anarkis.acc.battle' value=[TRUE]
+= [THIS] -> call script anarkis.acc.repairshields :
+= [THIS] -> call script anarkis.acc.apply.relations :  active ships only?=[TRUE]
+* A defensive wing will be deployed
+if $defence.ships > 0
+= [THIS] -> call script anarkis.acc.wing.defence :  target=[THIS]  wing size=$defence.ships
+= wait 2000 ms
+end
+* An offensive wing against the attacker will be deployed too
+$enemy.class = $attacker -> get object class
+$min.fighter = $null -> call script anarkis.lib.get.shipcount :  class=$enemy.class
+$dock.list = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$dock.count =  size of array $dock.list
+if $dock.count > $min.fighter
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$attacker  wing size=$min.fighter  wing ID='A'
+else
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$attacker  wing size=$dock.count  wing ID='A'
+end
+* Other ships if any are ordered to clear sector
+= [THIS] -> call script anarkis.acc.wing.clearsector :
+endsub
+* ====================================
+
+
+
+return null
+
