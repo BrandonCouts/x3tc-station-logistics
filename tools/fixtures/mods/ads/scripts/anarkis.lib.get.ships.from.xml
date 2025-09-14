@@ -1,0 +1,138 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.get.ships.from</name>
+<version>110</version>
+<engineversion>43</engineversion>
+<description>Lib - (outdated)</description>
+<arguments>
+<argument index="1" name="class.array" type="Value" desc="array of class" />
+<argument index="2" name="force.race" type="Var/Race" desc="force race" />
+<argument index="3" name="jump.range" type="Var/Number" desc="jump.range" />
+<argument index="4" name="ignore.aliens" type="Var/Boolean" desc="ignore khaak/xenon?" />
+<argument index="5" name="ignore.pirates" type="Var/Boolean" desc="ignore pirate/yaki?" />
+<argument index="6" name="ignore.civilians" type="Var/Boolean" desc="ignore civilians?" />
+<argument index="7" name="ignore.player" type="Var/Boolean" desc="ignore player?" />
+<argument index="8" name="from" type="Var/Ship" desc="from" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>Find&#160;all&#160;ships&#160;according&#160;to&#160;the&#160;parameters</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" interruptable="@" indent=""><var>$military.array&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.get.ships.var</call><text>&#160;:&#160;</text><text>&#160;array&#160;of&#160;class=</text><var>$class.array</var><text>&#160;</text><text>&#160;force&#160;race=</text><var>$force.race</var><text>&#160;</text><text>&#160;jump.range=</text><var>$jump.range</var><text>&#160;</text><text>&#160;ignore&#160;khaak/xenon?=</text><var>$ignore.aliens</var><text>&#160;</text><text>&#160;ignore&#160;pirate/yaki?=</text><var>$ignore.pirates</var><text>&#160;</text><text>&#160;ignore&#160;civilians?=</text><var>$ignore.civilians</var><text>&#160;</text><text>&#160;ignore&#160;player?=</text><var>$ignore.player</var><text>&#160;</text><text>&#160;local.var=</text><var>$null</var><text>&#160;</text><text>&#160;from=</text><var>$from</var></line>
+<line linenr="005" indent=""></line>
+<line linenr="006" indent=""><text>return&#160;</text><var>$military.array</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.get.ships.from"/>
+  <sval type="int" val="43"/>
+  <sval type="string" val="Lib - (outdated)"/>
+  <sval type="int" val="110"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="10">
+    <sval type="string" val="class.array"/>
+    <sval type="string" val="force.race"/>
+    <sval type="string" val="jump.range"/>
+    <sval type="string" val="ignore.aliens"/>
+    <sval type="string" val="ignore.pirates"/>
+    <sval type="string" val="ignore.civilians"/>
+    <sval type="string" val="ignore.player"/>
+    <sval type="string" val="from"/>
+    <sval type="string" val="military.array"/>
+    <sval type="string" val="null"/>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="24">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.get.ships.var"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+    </sval>
+  </sval>
+  <sval type="array" size="8">
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="string" val="array of class"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="string" val="force race"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="jump.range"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="ignore khaak/xenon?"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="ignore pirate/yaki?"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="ignore civilians?"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="ignore player?"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="from"/>
+    </sval>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Find all ships according to the parameters"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

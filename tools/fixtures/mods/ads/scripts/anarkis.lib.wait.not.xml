@@ -1,0 +1,148 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.wait.not</name>
+<version>100</version>
+<engineversion>44</engineversion>
+<description>Lib - wait function used for long periods</description>
+<arguments>
+<argument index="1" name="delay" type="Var/Number" desc="wait time (in sec)" />
+<argument index="2" name="global" type="Var/String" desc="global to check" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$curr.time&#160;=&#160;</var><text>playing&#160;time</text></line>
+<line linenr="002" indent=""><var>$end.time&#160;=&#160;</var><var>$curr.time</var><text>&#160;</text><var>+</var><text>&#160;</text><var>$delay</var></line>
+<line linenr="003" indent=""></line>
+<line linenr="004" indent=""><var>while&#160;</var><var>$curr.time</var><text>&#160;</text><var>&lt;</var><text>&#160;</text><var>$end.time</var></line>
+<line linenr="005" interruptable="@" indent="&#160;"><var>=&#160;</var><text>wait&#160;</text><var>2000</var><text>&#160;ms</text></line>
+<line linenr="006" indent="&#160;"><var>$curr.time&#160;=&#160;</var><text>playing&#160;time</text></line>
+<line linenr="007" indent="&#160;"></line>
+<line linenr="008" indent="&#160;"><var>if&#160;</var><var>$global</var></line>
+<line linenr="009" indent="&#160;&#160;"><var>skip&#160;if&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>$global</var></line>
+<line linenr="010" indent="&#160;&#160;&#160;"><text>return&#160;</text><var>null</var></line>
+<line linenr="011" indent="&#160;"><text>end</text></line>
+<line linenr="012" indent=""><text>end</text></line>
+<line linenr="013" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.wait.not"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="Lib - wait function used for long periods"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="delay"/>
+    <sval type="string" val="global"/>
+    <sval type="string" val="curr.time"/>
+    <sval type="string" val="end.time"/>
+  </sval>
+  <sval type="array" size="10">
+    <sval type="array" size="2">
+      <sval type="int" val="141"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610423"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="105"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2000"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="141"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610685"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-536868857"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="wait time (in sec)"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="global to check"/>
+    </sval>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="5"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

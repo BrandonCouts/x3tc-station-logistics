@@ -1,0 +1,137 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.lib.arr.remove.ads</name>
+<version>201</version>
+<engineversion>42</engineversion>
+<description>ACC - Lib : Remove ads ships from an array</description>
+<arguments>
+<argument index="1" name="arr" type="Value" desc="array" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>Remove&#160;ADS&#160;ships&#160;from&#160;an&#160;array&#160;of&#160;ships</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" indent=""><var>$null&#160;=&#160;</var><var>null</var></line>
+<line linenr="005" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$arr</var></line>
+<line linenr="006" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="007" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="008" indent="&#160;"><var>$select&#160;=&#160;</var><var>$arr</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="009" indent="&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$select&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.acc.ship'</var></line>
+<line linenr="010" indent="&#160;&#160;"><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$arr</var><text>&#160;at&#160;index&#160;</text><var>$cnt</var></line>
+<line linenr="011" indent=""><text>end</text></line>
+<line linenr="012" indent=""></line>
+<line linenr="013" indent=""><text>return&#160;</text><var>$arr</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.lib.arr.remove.ads"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="ACC - Lib : Remove ads ships from an array"/>
+  <sval type="int" val="201"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="arr"/>
+    <sval type="string" val="null"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="select"/>
+  </sval>
+  <sval type="array" size="9">
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610679"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.ship"/>
+      <sval type="int" val="-1610610936"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="string" val="array"/>
+    </sval>
+  </sval>
+  <sval type="array" size="5">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Remove ADS ships from an array of ships"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

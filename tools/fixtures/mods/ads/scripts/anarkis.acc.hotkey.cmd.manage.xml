@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.hotkey.cmd.manage</name>
+<version>255</version>
+<engineversion>44</engineversion>
+<description>ACC - Hotkeys : Manage Carriers</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.ads.comm.manage.call</call><text>&#160;:&#160;</text></line>
+<line linenr="002" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.hotkey.cmd.manage"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="ACC - Hotkeys : Manage Carriers"/>
+  <sval type="int" val="255"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="2">
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.ads.comm.manage.call"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

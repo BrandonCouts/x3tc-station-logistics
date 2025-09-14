@@ -1,0 +1,225 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>plugin.sk.ecs.unregister</name>
+<version>250</version>
+<engineversion>43</engineversion>
+<description>ECS - Remove a script from ECS</description>
+<arguments>
+<argument index="1" name="plugin.id" type="Var/String" desc="Plugin ID" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>Extended&#160;Communication&#160;System&#160;2.5</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" indent=""><comment><text>*&#160;</text><var>Use&#160;this&#160;function&#160;to&#160;remove&#160;your&#160;plugin&#160;or&#160;script&#160;from&#160;ECS</var></comment></line>
+<line linenr="005" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="006" indent=""><comment><text>*&#160;</text><var>Parameter&#160;:</var></comment></line>
+<line linenr="007" indent=""><comment><text>*&#160;</text><var>-&#160;plugin.id&#160;:&#160;The&#160;global&#160;variable&#160;you&#160;used&#160;to&#160;register&#160;(string)</var></comment></line>
+<line linenr="008" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="009" indent=""><comment><text>*&#160;</text><var>Output&#160;:</var></comment></line>
+<line linenr="010" indent=""><comment><text>*&#160;</text><var>-&#160;null&#160;:&#160;Script&#160;isn't&#160;registered</var></comment></line>
+<line linenr="011" indent=""><comment><text>*&#160;</text><var>-&#160;TRUE&#160;:&#160;Script&#160;removed&#160;succesfully</var></comment></line>
+<line linenr="012" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="013" indent=""></line>
+<line linenr="014" indent=""><var>$ecs.setup&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'plugin.ecs.setup'</var></line>
+<line linenr="015" indent=""><var>$ecs.installed&#160;=&#160;</var><var>$ecs.setup</var><text>[</text><var>1</var><text>]</text></line>
+<line linenr="016" indent=""><var>$ecs.configs&#160;=&#160;</var><var>$ecs.setup</var><text>[</text><var>2</var><text>]</text></line>
+<line linenr="017" indent=""><var>$ecs.news&#160;=&#160;</var><var>$ecs.setup</var><text>[</text><var>5</var><text>]</text></line>
+<line linenr="018" indent=""></line>
+<line linenr="019" indent=""><var>skip&#160;if&#160;</var><text>&#160;find&#160;</text><var>$plugin.id</var><text>&#160;in&#160;array:&#160;</text><var>$ecs.installed</var></line>
+<line linenr="020" indent="&#160;"><text>return&#160;</text><var>null</var></line>
+<line linenr="021" indent=""></line>
+<line linenr="022" indent=""><var>$index&#160;=&#160;</var><text>&#160;get&#160;index&#160;of&#160;</text><var>$plugin.id</var><text>&#160;in&#160;array&#160;</text><var>$ecs.installed</var><text>&#160;offset=</text><var>-1</var><text>&#160;+&#160;1</text></line>
+<line linenr="023" indent=""><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$ecs.installed</var><text>&#160;at&#160;index&#160;</text><var>$index</var></line>
+<line linenr="024" indent=""><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$ecs.configs</var><text>&#160;at&#160;index&#160;</text><var>$index</var></line>
+<line linenr="025" indent=""><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$ecs.news</var><text>&#160;at&#160;index&#160;</text><var>$index</var></line>
+<line linenr="026" indent=""></line>
+<line linenr="027" indent=""><text>return&#160;</text><var>[TRUE]</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="plugin.sk.ecs.unregister"/>
+  <sval type="int" val="43"/>
+  <sval type="string" val="ECS - Remove a script from ECS"/>
+  <sval type="int" val="250"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="6">
+    <sval type="string" val="plugin.id"/>
+    <sval type="string" val="ecs.setup"/>
+    <sval type="string" val="ecs.installed"/>
+    <sval type="string" val="ecs.configs"/>
+    <sval type="string" val="ecs.news"/>
+    <sval type="string" val="index"/>
+  </sval>
+  <sval type="array" size="11">
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="plugin.ecs.setup"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="1406"/>
+      <sval type="int" val="-536869369"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="1083"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="Plugin ID"/>
+    </sval>
+  </sval>
+  <sval type="array" size="16">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Extended Communication System 2.5"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Use this function to remove your plugin or script from ECS"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Parameter :"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- plugin.id : The global variable you used to register (string)"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Output :"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- null : Script isn't registered"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- TRUE : Script removed succesfully"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="6"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

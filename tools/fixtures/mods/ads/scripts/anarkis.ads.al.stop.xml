@@ -1,0 +1,82 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.ads.al.stop</name>
+<version>300</version>
+<engineversion>44</engineversion>
+<description>ADS - AL Engine - Stop the plugin when AL ECS is toggled OFF</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$ads.setup&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'anarkis.ads.setup'</var></line>
+<line linenr="002" indent=""><var>$ads.setup</var><text>[</text><var>3</var><text>]&#160;=&#160;</text><var>[FALSE]</var></line>
+<line linenr="003" indent=""><text>set&#160;global&#160;variable:&#160;name=</text><var>'anarkis.ads.setup'</var><text>&#160;value=</text><var>$ads.setup</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" interruptable="@" indent=""><var>START&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.sk.ecs.manager</call><text>&#160;:&#160;</text></line>
+<line linenr="006" indent=""></line>
+<line linenr="007" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.ads.al.stop"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="ADS - AL Engine - Stop the plugin when AL ECS is toggled OFF"/>
+  <sval type="int" val="300"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="1">
+    <sval type="string" val="ads.setup"/>
+  </sval>
+  <sval type="array" size="5">
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.setup"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="130"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="157"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.setup"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.sk.ecs.manager"/>
+      <sval type="int" val="-2147483646"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="3"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

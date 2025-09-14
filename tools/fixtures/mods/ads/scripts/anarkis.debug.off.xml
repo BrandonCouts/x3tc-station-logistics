@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.debug.off</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Debug - Desactivate debug mode</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><text>set&#160;global&#160;variable:&#160;name=</text><var>'anarkis.debug'</var><text>&#160;value=</text><var>null</var></line>
+<line linenr="002" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.debug.off"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Debug - Desactivate debug mode"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="2">
+    <sval type="array" size="5">
+      <sval type="int" val="157"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.debug"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

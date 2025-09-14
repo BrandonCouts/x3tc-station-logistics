@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.unknown</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Set status to unknown</description>
+<arguments>
+<argument index="1" name="sec" type="Var/Sector" desc="sec" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$sec&#160;-&gt;</var><text>&#160;set&#160;known&#160;status&#160;to&#160;</text><var>[FALSE]</var></line>
+<line linenr="002" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.unknown"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Set status to unknown"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="1">
+    <sval type="string" val="sec"/>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="5">
+      <sval type="int" val="1062"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="string" val="sec"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

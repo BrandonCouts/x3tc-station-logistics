@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.change.race</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Change the owner of a ships (and every ships docked to)</description>
+<arguments>
+<argument index="1" name="tg" type="Var/Ship" desc="s" />
+<argument index="2" name="race" type="Var/Race" desc="r" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$l&#160;=&#160;</var><var>$tg&#160;-&gt;</var><text>&#160;get&#160;ship&#160;array&#160;from&#160;sector/ship/station</text></line>
+<line linenr="002" indent=""><var>$c&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$l</var></line>
+<line linenr="003" indent=""><var>while&#160;</var><var>$c</var></line>
+<line linenr="004" indent="&#160;"><text>dec&#160;</text><var>$c&#160;=&#160;</var></line>
+<line linenr="005" indent="&#160;"><var>$s&#160;=&#160;</var><var>$l</var><text>[</text><var>$c</var><text>]</text></line>
+<line linenr="006" indent="&#160;"><var>$s&#160;-&gt;</var><text>&#160;set&#160;owner&#160;race&#160;to&#160;</text><var>$race</var></line>
+<line linenr="007" indent=""><text>end</text></line>
+<line linenr="008" indent=""><var>$tg&#160;-&gt;</var><text>&#160;set&#160;owner&#160;race&#160;to&#160;</text><var>$race</var></line>
+<line linenr="009" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.change.race"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Change the owner of a ships (and every ships docked to)"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="5">
+    <sval type="string" val="tg"/>
+    <sval type="string" val="race"/>
+    <sval type="string" val="l"/>
+    <sval type="string" val="c"/>
+    <sval type="string" val="s"/>
+  </sval>
+  <sval type="array" size="9">
+    <sval type="array" size="4">
+      <sval type="int" val="1008"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610935"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1030"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1030"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="s"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="string" val="r"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

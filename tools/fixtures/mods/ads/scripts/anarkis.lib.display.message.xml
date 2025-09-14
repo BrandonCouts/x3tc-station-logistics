@@ -1,0 +1,137 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.display.message</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Display a simple 'Ok' window</description>
+<arguments>
+<argument index="1" name="title" type="Var/String" desc="title" />
+<argument index="2" name="page.id" type="Var/Number" desc="page number" />
+<argument index="3" name="text.id" type="Var/Number" desc="page.id" />
+<argument index="4" name="v1" type="Value" desc="text arg1" />
+<argument index="5" name="v2" type="Value" desc="text arg2" />
+<argument index="6" name="v3" type="Value" desc="text arg3" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$menu&#160;=&#160;</var><text>&#160;create&#160;custom&#160;menu&#160;array</text></line>
+<line linenr="002" indent=""><var>$message&#160;=&#160;</var><text>sprintf:&#160;pageid=</text><var>$page.id</var><text>&#160;textid=</text><var>$text.id</var><text>,&#160;</text><var>$v1</var><text>,&#160;</text><var>$v2</var><text>,&#160;</text><var>$v3</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="003" indent=""><text>add&#160;custom&#160;menu&#160;heading&#160;to&#160;array&#160;</text><var>$menu</var><text>:&#160;title=</text><var>'-'</var></line>
+<line linenr="004" indent=""><text>add&#160;custom&#160;menu&#160;item&#160;to&#160;array&#160;</text><var>$menu</var><text>:&#160;text=</text><var>'OK'</var><text>&#160;returnvalue=</text><var>-1</var></line>
+<line linenr="005" indent=""><text>add&#160;custom&#160;menu&#160;info&#160;line&#160;to&#160;array&#160;</text><var>$menu</var><text>:&#160;text=</text><var>$message</var></line>
+<line linenr="006" indent=""><var>$res&#160;=&#160;</var><text>&#160;open&#160;custom&#160;menu:&#160;title=</text><var>$title</var><text>&#160;description=</text><var>null</var><text>&#160;option&#160;array=</text><var>$menu</var></line>
+<line linenr="007" indent=""><text>return&#160;</text><var>$res</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.display.message"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Display a simple 'Ok' window"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="9">
+    <sval type="string" val="title"/>
+    <sval type="string" val="page.id"/>
+    <sval type="string" val="text.id"/>
+    <sval type="string" val="v1"/>
+    <sval type="string" val="v2"/>
+    <sval type="string" val="v3"/>
+    <sval type="string" val="menu"/>
+    <sval type="string" val="message"/>
+    <sval type="string" val="res"/>
+  </sval>
+  <sval type="array" size="7">
+    <sval type="array" size="2">
+      <sval type="int" val="1445"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="16">
+      <sval type="int" val="150"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1448"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="-"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="1447"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="OK"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1446"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="1230"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+    </sval>
+  </sval>
+  <sval type="array" size="6">
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="title"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="page number"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="page.id"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="string" val="text arg1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="string" val="text arg2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="string" val="text arg3"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

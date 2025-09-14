@@ -1,0 +1,2048 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en-us"><head>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+
+
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Anarkis Defense System - Documentation [French]</title><meta content="Serial Kicked / [Anarkis Federation]" name="author">
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <meta content="Full HTML documentation for this X3TC script" name="description"></head>
+<body style="color: rgb(239, 239, 239); background-color: rgb(0, 0, 0);" alink="#ff0000" link="#ff0000" vlink="#cc0000">
+
+
+
+
+
+
+
+<div style="text-align: center;"><img style="width: 766px; height: 200px;" alt="" src="img/anarkis.jpg"><br>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: center;">
+<h1><span style="font-weight: bold;">- <span style="color: rgb(255, 0, 0);">Anarkis Defense System</span>
+-</span>
+</h1>
+
+
+
+
+
+
+
+<h3 style="color: rgb(242, 242, 0);">An english <a href="http://afmodding.comli.com/wiki/doku.php?id=ads:start">up to date documentation</a> file is available <a href="http://afmodding.comli.com/news/">the website</a></h3><span style="font-weight: bold;">&nbsp;Cette version ne couvre que la version 2.50</span><h3 style="font-weight: normal;">Ecrit par <span style="color: rgb(255, 0, 0);">Serial Kicked </span><span style="color: rgb(255, 0, 0);">[</span><span style="color: rgb(235, 235, 47);">Anarkis Federation</span><span style="color: rgb(255, 0, 0);">]</span><br>
+
+
+
+
+
+
+
+- Script de gestion de navires porteurs et de défense de secteur pour X3 Terran Conflict -<br>
+
+
+
+
+<small>(connu auparavant sous le nom de Anarkis Carrier Commands)</small></h3>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<ol style="font-family: monospace; text-align: left;">
+
+
+
+
+
+
+
+  <br>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;"><span style="font-family: monospace;"></span>Détails Techniques</span><br>
+
+
+
+
+
+
+
+1.1. Installation<br>
+
+
+
+
+
+
+
+1.2. Mise à jour<br>
+
+
+
+
+
+
+
+1.3. Désinstallation<br>
+
+
+
+
+
+
+
+1.4. Notes de compatibilité</li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Anarkis Defense System</span><br>
+
+
+
+
+
+
+
+2.1. Déscription générale<br>
+
+
+
+
+
+
+
+2.2. Commandes pour les navires porteurs<br>
+
+
+
+
+
+
+
+2.3. Reglages des navires porteurs<br>
+
+
+
+
+
+
+
+2.4. Mode Automatique<br>
+
+
+
+
+
+
+
+2.5. Défense de secteur<br>
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Autres Détails</span><br>
+
+
+
+
+
+
+
+3.1. Questions - Réponses<br>
+
+
+
+
+
+
+
+3.2.&nbsp;Notes pour les scripteurs et moddeurs<br></li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Copyright</span></li>
+
+
+
+
+
+
+
+</ol>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<br>
+
+
+
+
+
+
+
+<div>
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Détails Techniques</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+1.1 Installation</span><br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Dézipper / Installer dans le dossier de X3:TC (program files\egosoft\x3tc...)</li>
+
+
+
+
+
+
+
+        <li>Lancez X3 et chargez votre sauvegarde (ou commencez une nouvelle partie, c'est sans importance)</li>
+
+
+
+
+
+
+
+        <li>Si vous n'avez pas encore activé le moteur de script c'est le moment de le faire :&nbsp;</li>
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        <ol>
+
+
+
+
+
+
+
+          <li>Renommez votre joueur en tant que&nbsp; " Thereshallbewings "
+(notez le "T" majuscule et les 2 "L" minuscules)</li><li>Le jeu va bloquer quelques secondes</li>
+
+
+
+
+
+
+
+          <li>Sauvegardez la partie</li>
+
+
+
+
+
+
+
+          <li>Rechargez votre partie</li>
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        </ol>
+
+
+
+
+
+
+
+        <li>Une fenêtre de confirmation apparaitra pour vous informer que ADS est installé</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">1.2 Mise à jour<br>
+
+
+
+
+
+
+
+      </span>
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Dézipper / Installer dans le dossier de X3:TC (program files\egosoft\x3tc...)</li>
+
+
+
+
+
+
+
+        <li>Lancez X3 et chargez votre sauvegarde</li>
+
+
+
+
+
+
+
+        <li>Suivez les instructions s'il y en a.</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">1.3
+Désinstallation</span><span style="text-decoration: underline;"><br>
+
+
+
+
+
+
+
+      </span>
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Lancez le fichier&nbsp;"uninstall ads.bat" situé dans votre dossier de X3:TC.</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+1.4 Notes de compatibilité<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>Ce
+plugin est compatible avec n'importe qu'elle configuration tant
+qu'aucun autre script n'empiète sur mes slots de commande. Les scripts
+remplissant plus ou moins le même role que ADS, comme par exemple
+CODEA, peuvent poser quelques problèmes. Vous pouvez utiliser les deux,
+mais ne lancez aucune commande de CODEA sur un navire géré par ADS, et
+réciproquement.<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"></span>
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<div>
+<br>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Anarkis Defense System</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+2.1&nbsp;Description Générale</span><br>
+
+
+
+
+
+
+
+      <br>Il
+est bien connu que le monde de X3 manque dramatiquement de commandes
+liées aux navires porteurs (TL, M1,...) et ADS essaie de combler ce
+manque. Ce script rajoute divers commandes pour les vaisseaux de classe
+M7, M1, TM et TL afin de gérer plus efficacement les chasseurs que
+transportent ces navires. Grâce à ADS vous pouvez facilement renommer,
+équiper, changer la base et parametrer les chasseurs en quelques clics.
+ADS vous permet aussi d'envoyer des flotilles offensives et défensives
+contre des cibles spécifiques, de nétoyer un secteur, ou de commercer.
+De plus vous pouvez aussi complétement automatiser la gestion des
+chasseurs de vos navires porteurs en patrouille, dès que ce dernier
+détecte un danger potentiel, les chasseurs seront envoyés pour
+s'occuper du problème.<br><br>Pour que ceci fonctionne vous devrez
+equipper votre navire porteur avec le logiciel de gestion de navire
+porteur (Carrier Command Software) que vous pouvez trouvez dans la
+plupart des docks d'equipement. <br><br>Ce script est complémentaire au script&nbsp;<span style="font-weight: bold;">M.A.R.S.</span> (<span style="font-style: italic;">Motion Analysis Relay System</span>)
+de gestion de tourelles et de drones. Utilisez simultanément les
+commandes ADS:Mode-Auto et MARS:auto-collect-loot dans un secteur Xenon
+pour comprendre ce que je veux dire ;)<br><br>De plus, les stations de
+commerces, les equipement docks et les bases militaires détenues par le
+joueur peuvent aussi utiliser le mode automatique de ADS afin de
+protéger le secteur contre des attaques hostiles.<br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.2
+Commandes pour les navires porteurs<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>ADS ajoutes les commandes suivantes dans le menu&nbsp;<span style="font-weight: bold;">[general]</span> de votre vaisseau porteur (TL,TM,M1,M7) à partir du moment où celui ci a le logiciel de gestion correspondant:<br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Vendre Marchandises ....<br>
+          </span>Ordonne
+aux chasseurs de vendre les marchandises voulues et transportées par le
+porteur aux stations à portée. Les navires utiliseront éventuellement
+le moteur de saut si les stations sont éloignées.</li>
+        <li><span style="font-weight: bold;"></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Acheter Marchandises ....<br>
+          </span>Ordonne
+aux chasseurs d'acheter une quantité voulue de marchandises à la
+station la plus proche. Là encore, ils utiliseront le moteur de saut si
+besoin.<span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><br>
+        </li>
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Amarrer Chasseurs</span><br>Cette
+commande ordonne à tous les chasseurs de retourner au navire porteur
+immédiatement. Les vaisseaux pourront utiliser leur moteur de saut si
+c'est possible et ceux qui disposent d'un "Transporter Device" pourront
+directement se téléporter dans le porteur une fois qu'ils se trouveront
+à moins de 5km de celui ci.<br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Defendre ...<br>
+
+
+
+
+
+
+
+          </span>Cette
+commande permet d'ordonner à un nombre voulu de chasseurs de défendre
+la cible indiquée. Marche aussi bien pour des navires que des stations.<br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Attaquer ...&nbsp;<br>
+
+
+
+
+
+
+
+          </span>Cette commande ordonne à une nombre voulu de chasseurs d'attaquer la cible sélectionnée.<br>
+
+
+
+
+
+
+
+          <span style="font-weight: bold;"></span></li>
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Nettoyer Secteur !<br>
+
+
+
+
+
+
+
+          </span>Le
+porteur lancera tous ses vaisseaux pour nettoyer le secteur de toute
+présence adverse. Les chasseurs endommagés pourront fuire et s'ammarer
+au porteur.<br>
+
+
+
+
+
+
+
+          <span style="font-weight: bold;"></span></li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>En plus de ces commandes de base, vous en trouverez deux supplémentaires dans le menu "<span class="postbody">commandes additionnelles</span>" de vos navires porteurs:<br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Configuration<br>
+
+
+
+
+
+
+
+          </span>Cette
+commande affichera un menu. Celui-ci permet de configurer&nbsp;vos
+chasseurs, de regler le comportement du porteur en mode automatique,
+d'embaucher des méchanos pour réparer vos vaisseaux, etc. Lisez la
+suite pour plus de détails.</li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Mode Automatique<br>
+
+
+
+
+
+
+
+          </span>Le
+navire porteur qui a cette commande activée sera capable de déployer et
+récupérer ses chasseurs automatiquement, de se protéger efficacement.
+Le but principal de cette commande est d'être utilisée en plus d'un
+ordre de patrouille afin de rendre votre porteur réellement efficace.
+Lisez la suite pour plus de détails.</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.3 Configuration du navire porteur<br>
+
+
+
+
+
+
+
+      </span><br>Le
+menu ADS: Configuration permet de configurer à la fois vos chasseurs et
+le comportement du navire porteur. Il permet aussi de transférer
+facilement du matériel dans un sens ou dans l'autre.<br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><br>
+
+
+
+
+
+
+      <img style="width: 380px; height: 365px;" alt="" src="img/main.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><br>Le menu des&nbsp;[<span style="font-weight: bold;">Hangars</span>] permet de configurer vos chasseurs. La [<span style="font-weight: bold;">Zone de Réparation</span>] permet de réparer les dommages subis par vos chasseurs et votre porteur. [<span style="font-weight: bold;">Mode Automatique</span>] permet de définir le comportement du porteur et comment il va gérer ses chasseurs. [<span style="font-weight: bold;">Equipement</span>] permet de transferer des marchandises et/ou armements dans un sens ou dans l'autre. Et enfin,&nbsp; [<span style="font-weight: bold;">Rapport</span>] permet de localiser et configurer tous vos porteurs simultanément.<br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+
+
+        <li>2.3.1 Hangars</li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 378px; height: 403px;" alt="" src="img/hangar.gif"> <img style="width: 380px; height: 408px;" alt="" src="img/ships.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>Ceci
+est l'endroit qui permet de configurer tous vos chasseurs de façon
+simultanée. Vous pouvez définir quels navires seront utilisés par ADS
+ou nom (ceux endommagés sont automatiquement ignorés), vous pouvez
+aussi les renommer selon plusieurs modèles différents. Le menu [<span style="font-weight: bold;">Configurer Chasseurs</span>]
+permet de définir pour ceux-ci leurs reglages de base, la configuration
+des tourelles, l'utilisation du moteur de saut, et j'en passe.<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+
+
+        <li>2.3.2&nbsp;<span style="font-weight: bold;">Zone de Réparation</span></li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;">&nbsp;<img style="width: 380px; height: 357px;" alt="" src="img/repairs.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>Vous
+pouvez embaucher des mécanos afin de garder votre porteur et ses
+chasseurs en pleine forme. Cependant, celà coute de l'argent, même
+quand il n'y a rien à réparer. Pour pouvoir embaucher un mécano vous
+devez vous trouver dans un secteur allié disposant d'une station
+commerciale. Vous devrez aussi payer 50.000 crédits en tant que prime
+d'embauche. Ceci payé, chaque mécano vous coutera 1.000 crédits / heure
+quand il n'a rien à faire, et 15.000 crédits / heure quand il a du
+travail. Si pour une raison ou une autre, vous n'avez plus d'argent
+pour les payer ils quitteront le navire sans avertissement. Surveillez
+vos finances si vous comptez embaucher des mécanos. Les mécanos sont
+bien moins couteux qu'une réparation dans un chantier, mais ils sont
+aussi beaucoup plus lents: 15 points d'intégrité de la coque par minute
+et par mécano. Celà prendrait à un seul mécano à peu près 10 heures
+pour réparer un Nova endommagé à 90%. Par contre celà ne vous coutera
+que 150.000 crédits (au lieu d'environ 10x plus si vous réparez dans un
+chantier). Vous ne pouvez pas cummuler plus de 20 mécanos par porteur. <br><br>Notez
+que si vous autorisez la réparation pour le porteur ET pour les
+chasseurs, les mécanos commençeront toujours par le porteur. Réparer un
+M1, M7 ou TL, même peu endommagé peut prendre un temps très important.
+Ceci fait que vous pouvez envisager de désactiver la réparation du
+porteur le temps de vous occuper des chasseurs.<br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+        <li>2.3.3 Equipement</li>
+
+
+
+
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 377px; height: 388px;" alt="" src="img/c2s.gif"> <img style="width: 382px; height: 341px;" alt="" src="img/s2c.gif"></div>
+
+
+
+
+
+
+      <br>C'est
+ici que vous pouvez transférer des marchandises ou armes entre votre
+porteur et vos chasseurs. Comme tout le reste de ce script tout ce
+déroule via des menu et le processus est assez simple pour se passer
+d'explications :)<br><br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+        <li><span style="font-weight: bold;">2.3.4 Configurer le Mode Automatique</span></li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 382px; height: 365px;" alt="" src="img/autocarrier.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Niveau </span><span style="font-weight: bold; color: rgb(255, 204, 102);">Minimal </span><span style="font-weight: bold; color: rgb(255, 204, 102);">de Menace :</span>
+C'est ici que vous pouvez définir comment le porteur va se comporter en
+mode automatique. Ce reglage permet de définir à partir de quel niveau
+de menace le porteur va deployer ses chasseurs. Pour comprendre comment
+regler cette valeur, il faut connaitre le niveau de menace attribué à
+chaque type de vaisseau et savoir que le porteur va deployer ses
+chasseurs dès qu'il rencontre un M1 ou un M2 quelque soit votre
+réglage. Voici la liste des valeurs:<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold;">M5</span>: 1 - <span style="font-weight: bold;">M4</span>: 2&nbsp;- <span style="font-weight: bold;">M3</span>: 5 - <span style="font-weight: bold;">M8</span>: 10 - <span style="font-weight: bold;">M6</span>: 14 - <span style="font-weight: bold;">M7</span>: 35 - <span style="font-weight: bold;">TL</span>: 15 - <span style="font-weight: bold;">TM</span>: 8 - <span style="font-weight: bold;">TP</span>/<span style="font-weight: bold;">TS</span>: 2<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Portée Radar :</span>
+Vous pouvez choisir la portée de détection (en metres) de votre
+porteur. Regler cette valeur de façon trop élevée peut être une
+mauvaise idée étant donné que les chasseurs auront une longue route à
+parcourir et que le porteur les rejoindra probablement trop tard étant
+plus lent qu'eux. Gardez cette valeur entre 15.000 et 50.000 metres. <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Forcer les chasseurs endommagés à fuire :</span>
+Vous pouvez forcer les chasseurs ayant moins de 10% de bouclier à fuir
+(ou quand le coque est touchée). Si le chasseur évite alors de se faire
+endommager encore plus et que son niveau bouclier remonte assez, il
+repartira à l'assaut de sa cible. Si vous désactivez cette option, les
+chasseurs se battront jusqu'à la mort. Ce reglage fonctionne aussi pour
+les commandes comme "ADS: Attaquer" ou "Nettoyer Secteur".<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Type d'attaque :</span>
+Vous pouvez choisir la façon dont le porteur va choisir ses cibles
+prioritaires. Il est fortement conseillé de laisser le reglage par
+défaut car il est de loin le plus efficace.<br><br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Nombre de chasseurs défensifs :</span>
+Permet de choisir le nombre de vaisseaux qui seront purement utilisés
+pour défendre le porteur quelque soit la situation. Celà permet
+d'assurer que le porteur ne se trouvera pas isolé en plein combat
+contre des hostiles multiples.<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Ignorer Faction :</span>
+Vous pouvez aussi définir une liste de faction à ignorer même si elles
+sont hostiles. Le porteur se défendra si attaqué, mais il n'ira pas
+attaquer les vaisseaux de cette faction tant que ceux ci restent bien
+sages. Ce reglage est particulièrement utile quand vous voulez garder
+une relation amicale avec des factions comme les pirates ou les yakis.<br><br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Message d'avertissement :</span>
+Permet à votre porteur de vous envoyer un message de notification quand
+il juge que sa situation actuelle est dangereuse et peut occasionner
+des pertes lourdes. Ces messages seront actuellement envoyés *avant*
+que le mal ne soit fait (contrairement à X3 qui vous prévient quand
+c'est trop tard). Il y a 3 méthodes d'avertissement : la fenetre
+"popup", le message audio et le text en bas d'ecran (avec un bip).<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.4
+Mode Automatique<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>Cette
+commande, bien qu'elle puisse être utilisée en d'autres circonstances,
+a été construite pour être utilisée sur des navires porteurs en
+patrouille. &nbsp;Une fois activée, votre porteur sera capable de
+deployer automatiquement ses chasseurs et de les utiliser efficacement
+contre toute menace potentielle à portée de radar. Une fois la menace
+supprimée, les chasseurs retourneront automatiquement au porteur. Cette
+commande est TRES efficace, un M1 avant le plein de chasseurs pour
+facilement nettoye un secteur Xenon avec des pertes acceptables. Mais <span style="font-weight: bold;">cette commande ne triche pas</span>,
+elle optimise juste le comportement des chasseurs en coordinant leurs
+attaques. Vous ne pouvez pas utiliser cette commande sur votre vaisseau
+personnel et vous avez besoin d'au moins 3 chasseurs non endommagés
+pour qu'elle fonctionne.<br><br><span style="font-weight: bold; text-decoration: underline;">2.5 Défense de Secteur<br>
+
+
+
+
+
+
+
+      </span><br>Deux
+nouvelles commandes sont disponibles sur vos stations. Notez qu'ici
+station signifie : Station Commerciale, Base militaire ou dock
+d'equipement. Les usines ne peuvent pas stocker assez de chasseurs pour
+que ces commandes soient utiles.<br>
+
+
+
+
+      
+      
+      
+      
+      <ul>
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Configuration<br>
+
+
+
+
+
+
+
+          </span>Affiche
+le même menu de configuration que pour les porteurs, les reglages par
+défauts sont adaptés à la défense de secteur. En gros la portée radar
+est augmentée et le niveau de menace minimal diminué.<br>
+
+
+
+          <br>
+
+
+
+
+        </li>
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Defendre Secteur<br>
+
+
+
+
+
+
+
+          </span>Cette
+commande lancera le mode automatique de ADS pour la station. Celà
+fonctionne à peu près comme pour les navires porteurs. La station
+pourra donc lancer des chasseurs contre toute menace potentielle dans
+le secteur et vous avertir quand la situation devient critique. Et ici
+encore la station a besoin d'au moins 3 chasseurs pour que celà ai le
+moindre effet.</li></ul>
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Autres Détails</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+3.1 Questions - Réponses</span><br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Puis-je gérer mes groupes de chasseur manuellement ?</span><br>Non.
+Bien que je pourrais&nbsp; rajouter une tonne de jolis menus pour ce
+faire, ce n'est pas le but de ADS. Le système de combat de ADS est
+assez perfectionné et se trouve être parfaitement efficace sans que le
+joueur ai à configurer des tas de groupes. Vous pouvez cependant
+empecher ADS d'utiliser certains des vaisseaux amarré à votre porteur
+via le menu de configuration.<br><br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Pouvez vous permettre à mes porteurs d'amarrer des TP/TS/... avec ADS ?!</span><br>Je
+peux. Mais je ne veux pas rajouter cette fonctionnalité (de triche)
+dans mon script. Cependant si vous utilisez un mod avec des porteurs
+qui peuvent amarrer "légalement" des vaisseaux de ce type, ADS devrait
+déjà etre capable de les gérer à peu près correctement.<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Il n'y a pas assez de commandes de commerce !</span><br>Oui,
+mais ce n'est pas le but du script. Une commande pour tuer tout le
+monde, une autre pour récupérer les cargos abandonnées via MARS et une
+autre pour revendre le tout. Ca c'est l'esprit :)<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 102, 0);"></span><span style="font-style: italic; color: rgb(255, 255, 153);">Certains de mes chasseurs semblent être téleportés dans le porteur sans réellement s'amarrer!</span><br>Ce
+n'est pas un bug, c'est une nouvelle fonctionnalité ! :) Les chasseurs
+avec un "Transporter Device" sont capables de se teleporter directement
+dans le porteur une fois qu'ils sont à une distance inférieure à 5km,
+tout comme vous.<br>
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">ADS
+ou CODEA pour mes vaisseaux porteurs ?</span><br>Bon..
+Les deux scripts sont bons et peuvent même être complémentaires. Codea
+est bien plus customisable, il dispose d'options souvent demandées mais
+que je refuse de mettre dans ADS. Par contre il nécessite bien
+plus&nbsp;de micro-gestion. D'un autre coté ADS est simple à
+configurer, offre une liste de commandes simples et rapides pour les
+fonctions de base. Et d'un point de vue concernant l'efficacité pure au
+niveau du combat en mode automatique (bref, le kill/death ratio), ADS
+est largement plus efficace.<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Puis-je inclure ADS dans mon mod ?</span><br>Oui
+tant que les problème de compatibilité avec les autres scripts inclus
+dans votre mod sont gérés par vous. Votre projet doit aussi être non
+commercial et gratuit.<br>
+
+
+
+          <br>
+
+
+
+
+        </li>
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Puis-je utiliser ADS en tant que librairie dans mes scripts ?</span><br>Oui.
+ADS a été développé de façon à être très facile à utiliser pour
+n'importe quel autre script ou plugin. Par exemple Pirate Guild se sert
+de ADS (si installé) afin de défendre ses bases pirates.<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 102, 0);"><span style="color: rgb(255, 255, 153);">Ca marche pas ! Rien ne se passe ! C'est quoi un zip ? ou est mon dossier X3, et c'est koi un dossier ?</span><br>
+
+
+
+
+
+
+
+          </span>Achète
+une Wii et passe ton chemin gamin. Plus sérieusement, si vous répérez
+un bug rapportez le dans le topic officiel. Si vous ne comprenez pas
+comment on installe ce script, demandez à quelqu'un qui sait comment un
+ordinateur marche (même s'il ne connait pas X3).</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+3.2 Notes de compatibilité pour les scripteurs et moddeurs</span><br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li>Les taches entre&nbsp;890 et 900 (inclus) sont réservées par mes scripts sur tous les objets du jeu</li>
+
+
+
+
+
+
+
+        <li>Vérifiez la variable globale&nbsp;<span style="font-weight: bold; color: rgb(255, 255, 153);">anarkis.acc.plugin</span>
+pour détecter si ADS est installé</li>
+
+
+
+
+      
+      
+      
+      
+      </ul>
+
+
+
+
+      
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"></span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</body></html>

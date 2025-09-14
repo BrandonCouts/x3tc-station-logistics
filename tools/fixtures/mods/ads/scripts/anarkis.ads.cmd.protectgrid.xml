@@ -1,0 +1,948 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.ads.cmd.protectgrid</name>
+<version>265</version>
+<engineversion>44</engineversion>
+<description>ADS - Cmd : Jump to a sector and defend it</description>
+<arguments>
+<argument index="1" name="attacker" type="Var/Ship" desc="attacker" />
+<argument index="2" name="tg.sector" type="Var/Sector" desc="sector" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>CMD&#160;:&#160;Defense&#160;Grid&#160;-&#160;Interrupt&#160;Cmd&#160;:&#160;Protect&#160;Sector</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" indent=""><comment><text>*&#160;</text><var>-&#160;Should&#160;work&#160;for&#160;both&#160;AI&#160;and&#160;player&#160;owned&#160;ships</var></comment></line>
+<line linenr="005" indent=""><comment><text>*&#160;</text><var>-&#160;Jump&#160;beacon&#160;support</var></comment></line>
+<line linenr="006" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="007" indent=""></line>
+<line linenr="008" indent=""><var>skip&#160;if&#160;</var><var>$tg.sector&#160;-&gt;</var><text>&#160;exists</text></line>
+<line linenr="009" indent="&#160;"><text>return&#160;</text><var>null</var></line>
+<line linenr="010" indent=""></line>
+<line linenr="011" indent=""><var>$previous.sector&#160;=&#160;</var><var>[SECTOR]</var></line>
+<line linenr="012" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;local&#160;variable:&#160;name=</text><var>'anarkis.ads.grid.busy'</var><text>&#160;value=</text><var>[TRUE]</var></line>
+<line linenr="013" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.shipstate.save</call><text>&#160;:&#160;</text><text>&#160;ship=</text><var>[THIS]</var></line>
+<line linenr="014" indent=""></line>
+<line linenr="015" indent=""><var>$string&#160;=&#160;</var><text>sprintf:&#160;fmt=</text><var>'(ADS)&#160;%s&#160;Jump&#160;to&#160;protect&#160;%s'</var><text>,&#160;</text><var>[THIS]</var><text>,&#160;</text><var>$tg.sector</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="016" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.debug.output</call><text>&#160;:&#160;</text><text>&#160;msg=</text><var>$string</var></line>
+<line linenr="017" indent=""></line>
+<line linenr="018" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="019" indent=""><comment><text>*&#160;</text><var>Energy&#160;Handling</var></comment></line>
+<line linenr="020" indent=""><var>$energy.needed&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;needed&#160;jump&#160;drive&#160;energy&#160;for&#160;jump&#160;to&#160;sector&#160;</text><var>$tg.sector</var></line>
+<line linenr="021" indent=""><var>$v1&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;amount&#160;of&#160;ware&#160;</text><var>Energy&#160;Cells</var><text>&#160;in&#160;cargo&#160;bay</text></line>
+<line linenr="022" indent=""><var>$energy.needed&#160;=&#160;</var><var>$energy.needed</var><text>&#160;</text><var>-</var><text>&#160;</text><var>$v1</var></line>
+<line linenr="023" indent=""><var>$free.space&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;free&#160;amount&#160;of&#160;ware&#160;</text><var>Energy&#160;Cells</var><text>&#160;in&#160;cargo&#160;bay</text></line>
+<line linenr="024" indent=""><var>if&#160;</var><var>$free.space</var><text>&#160;</text><var>&lt;</var><text>&#160;</text><var>$energy.needed</var></line>
+<line linenr="025" indent="&#160;"><var>$string&#160;=&#160;</var><text>sprintf:&#160;fmt=</text><var>'(ADS)&#160;Grid&#160;-&#160;%s&#160;can't&#160;jump&#160;to&#160;%s&#160;:&#160;Not&#160;enough&#160;cargo&#160;space&#160;for&#160;fuel'</var><text>,&#160;</text><var>[THIS]</var><text>,&#160;</text><var>$tg.sector</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="026" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.debug.output</call><text>&#160;:&#160;</text><text>&#160;msg=</text><var>$string</var></line>
+<line linenr="027" indent="&#160;"><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;local&#160;variable:&#160;name=</text><var>'anarkis.ads.grid.busy'</var><text>&#160;value=</text><var>null</var></line>
+<line linenr="028" indent="&#160;"><text>return&#160;</text><var>[FALSE]</var></line>
+<line linenr="029" indent=""><text>end</text></line>
+<line linenr="030" indent=""><comment><text>*&#160;</text><var>Player&#160;has&#160;to&#160;pay,&#160;not&#160;the&#160;AI.&#160;Pay&#160;the&#160;double&#160;price.&#160;for&#160;going&#160;and&#160;wayback.</var></comment></line>
+<line linenr="031" indent=""><comment><text>*&#160;</text><var>All&#160;expenses&#160;are&#160;here&#160;to&#160;prevent&#160;ships&#160;from&#160;behind&#160;stuck&#160;where&#160;they&#160;shouldn't&#160;be</var></comment></line>
+<line linenr="032" indent=""><var>if&#160;</var><var>[OWNER]</var><text>&#160;</text><var>==</var><text>&#160;</text><var>Player</var></line>
+<line linenr="033" indent="&#160;"><var>$pl.money&#160;=&#160;</var><text>get&#160;player&#160;money</text></line>
+<line linenr="034" indent="&#160;"><var>$price&#160;=&#160;</var><text>get&#160;average&#160;price&#160;of&#160;ware&#160;</text><var>Energy&#160;Cells</var></line>
+<line linenr="035" indent="&#160;"><var>$price&#160;=&#160;</var><var>$price</var><text>&#160;</text><var>*</var><text>&#160;</text><var>4</var><text>&#160;</text><var>*</var><text>&#160;</text><var>$energy.needed</var></line>
+<line linenr="036" indent=""><comment><text>*&#160;</text><var>-&#160;Check&#160;for&#160;funds</var></comment></line>
+<line linenr="037" indent="&#160;"><var>if&#160;</var><var>$price</var><text>&#160;</text><var>&gt;</var><text>&#160;</text><var>$pl.money</var></line>
+<line linenr="038" indent="&#160;&#160;"><var>$string&#160;=&#160;</var><text>sprintf:&#160;fmt=</text><var>'(ADS)&#160;Grid&#160;-&#160;%s&#160;can't&#160;jump&#160;to&#160;%s&#160;:&#160;Not&#160;enough&#160;money'</var><text>,&#160;</text><var>[THIS]</var><text>,&#160;</text><var>$tg.sector</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="039" interruptable="@" indent="&#160;&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.debug.output</call><text>&#160;:&#160;</text><text>&#160;msg=</text><var>$string</var></line>
+<line linenr="040" indent="&#160;&#160;"><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;local&#160;variable:&#160;name=</text><var>'anarkis.ads.grid.busy'</var><text>&#160;value=</text><var>null</var></line>
+<line linenr="041" indent="&#160;&#160;"><text>return&#160;</text><var>[FALSE]</var></line>
+<line linenr="042" indent="&#160;"><text>end</text></line>
+<line linenr="043" indent="&#160;"><var>$price&#160;=&#160;</var><var>0</var><text>&#160;</text><var>-</var><text>&#160;</text><var>$price</var></line>
+<line linenr="044" indent="&#160;"><text>add&#160;money&#160;to&#160;player:&#160;</text><var>$price</var></line>
+<line linenr="045" indent=""><text>end</text></line>
+<line linenr="046" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;add&#160;</text><var>$energy.needed</var><text>&#160;units&#160;of&#160;</text><var>Energy&#160;Cells</var></line>
+<line linenr="047" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="048" indent=""></line>
+<line linenr="049" indent=""><var>$string&#160;=&#160;</var><text>sprintf:&#160;fmt=</text><var>'(ADS)&#160;%s&#160;jump&#160;to&#160;protect&#160;%s'</var><text>,&#160;</text><var>[THIS]</var><text>,&#160;</text><var>$tg.sector</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="050" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.debug.output</call><text>&#160;:&#160;</text><text>&#160;msg=</text><var>$string</var></line>
+<line linenr="051" indent=""></line>
+<line linenr="052" indent=""></line>
+<line linenr="053" indent=""><var>$attacker.owner&#160;=&#160;</var><var>$attacker&#160;-&gt;</var><text>&#160;get&#160;true&#160;owner</text></line>
+<line linenr="054" indent=""><var>skip&#160;if&#160;</var><var>$attacker.owner</var></line>
+<line linenr="055" indent="&#160;"><var>$attacker.owner&#160;=&#160;</var><var>$attacker&#160;-&gt;</var><text>&#160;get&#160;owner&#160;race</text></line>
+<line linenr="056" indent=""></line>
+<line linenr="057" indent=""><var>$previous.relation&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;relation&#160;to&#160;race&#160;</text><var>$attacker.owner</var></line>
+<line linenr="058" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;relation&#160;against&#160;</text><var>$attacker.owner</var><text>&#160;to&#160;</text><var>Foe</var></line>
+<line linenr="059" indent=""></line>
+<line linenr="060" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="061" indent=""><comment><text>*&#160;</text><var>Do&#160;the&#160;jump</var></comment></line>
+<line linenr="062" indent=""><var>if&#160;</var><var>[SECTOR]</var><text>&#160;</text><var>!=</var><text>&#160;</text><var>$tg.sector</var></line>
+<line linenr="063" indent="&#160;"><var>$beacon&#160;=&#160;</var><text>&#160;find&#160;ship:&#160;sector=</text><var>$tg.sector</var><text>&#160;class&#160;or&#160;type=</text><var>Jump&#160;Beacon</var><text>&#160;race=</text><var>[OWNER]</var><text>&#160;flags=</text><var>[Find.Random]</var><text>&#160;refobj=</text><var>null</var><text>&#160;maxdist=</text><var>null</var><text>&#160;maxnum=</text><var>1</var><text>&#160;refpos=</text><var>null</var></line>
+<line linenr="064" indent="&#160;"><var>if&#160;</var><var>$beacon</var></line>
+<line linenr="065" interruptable="@" indent="&#160;&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.cmd.jumptobeacon</call><text>&#160;:&#160;</text><text>&#160;jump.beacon=</text><var>$beacon</var></line>
+<line linenr="066" indent="&#160;"><text>else</text></line>
+<line linenr="067" indent="&#160;&#160;"><var>$gate&#160;=&#160;</var><text>&#160;find&#160;gate:&#160;flags=</text><var>[Find.Nearest]</var><text>,&#160;refobj=</text><var>$attacker</var><text>,&#160;max&#160;dist=</text><var>null</var><text>,&#160;refpos=</text><var>null</var></line>
+<line linenr="068" indent=""><comment>*$gate&#160;=&#160;<text>&#160;get&#160;next&#160;gate&#160;on&#160;route&#160;from&#160;</text>$tg.sector<text>&#160;to&#160;</text>[SECTOR]</comment></line>
+<line linenr="069" interruptable="@" indent="&#160;&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!ship.cmd.jump.std</call><text>&#160;:&#160;</text><text>&#160;target&#160;gate&#160;or&#160;sector=</text><var>$gate</var><text>&#160;</text><text>&#160;followers&#160;should&#160;jump&#160;too=</text><var>[TRUE]</var></line>
+<line linenr="070" indent="&#160;"><text>end</text></line>
+<line linenr="071" indent=""><text>end</text></line>
+<line linenr="072" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="073" indent=""></line>
+<line linenr="074" indent=""></line>
+<line linenr="075" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="076" indent=""><comment><text>*&#160;</text><var>Battling&#160;Part&#160;-&#160;room&#160;for&#160;improvement</var></comment></line>
+<line linenr="077" indent=""><var>if&#160;</var><var>$attacker&#160;-&gt;</var><text>&#160;exists</text></line>
+<line linenr="078" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!ship.cmd.attack.std</call><text>&#160;:&#160;</text><text>&#160;the&#160;victim=</text><var>$attacker</var><text>&#160;</text><text>&#160;do&#160;not&#160;follow&#160;in&#160;new&#160;sector=</text><var>[TRUE]</var></line>
+<line linenr="079" indent=""><text>end</text></line>
+<line linenr="080" indent=""><var>$my.pos&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;position&#160;as&#160;array</text></line>
+<line linenr="081" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.cmd.killandland.timeout</call><text>&#160;:&#160;</text><text>&#160;object&#160;to&#160;land&#160;on=</text><var>null</var><text>&#160;</text><text>&#160;the&#160;range=</text><var>100000</var><text>&#160;</text><text>&#160;refpos&#160;array&#160;&#160;&#160;x&#160;y&#160;z=</text><var>$my.pos</var><text>&#160;</text><text>&#160;no&#160;idle,&#160;simply&#160;stand&#160;still=</text><var>null</var><text>&#160;</text><text>&#160;timeout=</text><var>360</var></line>
+<line linenr="082" indent=""></line>
+<line linenr="083" indent=""><var>while&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.acc.battle'</var></line>
+<line linenr="084" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!move.idle.timeout</call><text>&#160;:&#160;</text><text>&#160;timeout&#160;in&#160;sec=</text><var>30</var><text>&#160;</text><text>&#160;wait&#160;while&#160;docked=</text><var>[FALSE]</var></line>
+<line linenr="085" indent=""><text>end</text></line>
+<line linenr="086" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="087" indent=""></line>
+<line linenr="088" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="089" indent=""><comment><text>*&#160;</text><var>Restore&#160;previous&#160;settings&#160;and&#160;go&#160;back&#160;to&#160;original&#160;sector</var></comment></line>
+<line linenr="090" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;relation&#160;against&#160;</text><var>$attacker.owner</var><text>&#160;to&#160;</text><var>$previous.relation</var></line>
+<line linenr="091" indent=""><var>$energy.needed&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;needed&#160;jump&#160;drive&#160;energy&#160;for&#160;jump&#160;to&#160;sector&#160;</text><var>$previous.sector</var></line>
+<line linenr="092" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;add&#160;</text><var>$energy.needed</var><text>&#160;units&#160;of&#160;</text><var>Energy&#160;Cells</var></line>
+<line linenr="093" indent=""></line>
+<line linenr="094" indent=""><var>skip&#160;if&#160;</var><var>[SECTOR]</var><text>&#160;</text><var>==</var><text>&#160;</text><var>$previous.sector</var></line>
+<line linenr="095" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!move.jumptosector</call><text>&#160;:&#160;</text><text>&#160;sector=</text><var>$previous.sector</var><text>&#160;</text><text>&#160;should&#160;followers&#160;jump&#160;too=</text><var>[TRUE]</var></line>
+<line linenr="096" indent=""></line>
+<line linenr="097" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;local&#160;variable:&#160;name=</text><var>'anarkis.ads.grid.busy'</var><text>&#160;value=</text><var>null</var></line>
+<line linenr="098" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.shipstate.restore</call><text>&#160;:&#160;</text><text>&#160;ship=</text><var>[THIS]</var></line>
+<line linenr="099" indent=""><comment><text>*&#160;</text><var>=====</var></comment></line>
+<line linenr="100" indent=""></line>
+<line linenr="101" indent=""><text>return&#160;</text><var>[TRUE]</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.ads.cmd.protectgrid"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="ADS - Cmd : Jump to a sector and defend it"/>
+  <sval type="int" val="265"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="14">
+    <sval type="string" val="attacker"/>
+    <sval type="string" val="tg.sector"/>
+    <sval type="string" val="previous.sector"/>
+    <sval type="string" val="string"/>
+    <sval type="string" val="energy.needed"/>
+    <sval type="string" val="v1"/>
+    <sval type="string" val="free.space"/>
+    <sval type="string" val="pl.money"/>
+    <sval type="string" val="price"/>
+    <sval type="string" val="attacker.owner"/>
+    <sval type="string" val="previous.relation"/>
+    <sval type="string" val="beacon"/>
+    <sval type="string" val="gate"/>
+    <sval type="string" val="my.pos"/>
+  </sval>
+  <sval type="array" size="57">
+    <sval type="array" size="4">
+      <sval type="int" val="706"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-536870393"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="155"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.grid.busy"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.shipstate.save"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="149"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="(ADS) %s Jump to protect %s"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.debug.output"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="567"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="618"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="720896"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="620"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="720896"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610608637"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="149"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="(ADS) Grid - %s can't jump to %s : Not enough cargo space for fuel"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.debug.output"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="155"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.grid.busy"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610605821"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="626"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="629"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="720896"/>
+    </sval>
+    <sval type="array" size="19">
+      <sval type="int" val="104"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="-2"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="-4"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610606333"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="149"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="(ADS) Grid - %s can't jump to %s : Not enough money"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.debug.output"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="155"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.grid.busy"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="662"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="646"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="720896"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="149"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="(ADS) %s jump to protect %s"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.debug.output"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="1187"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536862457"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="701"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="724"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="744"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610601981"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="18">
+      <sval type="int" val="757"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="459111"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="105"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610602493"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.cmd.jumptobeacon"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="11"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="42"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="1336"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="106"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!ship.cmd.jump.std"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="706"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-1610601469"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!ship.cmd.attack.std"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="795"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="13"/>
+    </sval>
+    <sval type="array" size="16">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.cmd.killandland.timeout"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100000"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="360"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.battle"/>
+      <sval type="int" val="-1610600183"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!move.idle.timeout"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="30"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="46"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="744"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="567"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="646"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="720896"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536857081"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!move.jumptosector"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="155"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.grid.busy"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.shipstate.restore"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="attacker"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="string" val="sector"/>
+    </sval>
+  </sval>
+  <sval type="array" size="46">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="CMD : Defense Grid - Interrupt Cmd : Protect Sector"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- Should work for both AI and player owned ships"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- Jump beacon support"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="5"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="7"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="7"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Energy Handling"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="16"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Player has to pay, not the AI. Pay the double price. for going and wayback."/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="16"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="All expenses are here to prevent ships from behind stuck where they shouldn't be"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="20"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- Check for funds"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="25"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="27"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="28"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="28"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="30"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="30"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="33"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="35"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="35"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="35"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Do the jump"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="40"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="41"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1074"/>
+      <sval type="string" val="gate"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="tg.sector"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="42"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="42"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="42"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="42"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="42"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="42"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="42"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Battling Part - room for improvement"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="44"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="46"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="49"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="49"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="49"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="49"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="49"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Restore previous settings and go back to original sector"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="52"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="54"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="56"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="====="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="56"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="67"/>
+</sval>
+
+</codearray>
+</script>

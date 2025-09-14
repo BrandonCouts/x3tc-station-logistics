@@ -1,0 +1,465 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>plugin.sk.ecs.al.register</name>
+<version>250</version>
+<engineversion>43</engineversion>
+<description>ECS - AL Engine - Registration</description>
+<arguments>
+<argument index="1" name="plugin.ID" type="Var/String" desc="plugin ID" />
+<argument index="2" name="plugin.Event" type="Var/String" desc="plugin event" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$text.id&#160;=&#160;</var><var>8511</var></line>
+<line linenr="002" indent=""></line>
+<line linenr="003" indent=""><var>$plugin.Vars&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>$plugin.ID</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" indent=""><comment><text>*&#160;</text><var>setup&#160;new&#160;data&#160;structure&#160;and&#160;init&#160;it</var></comment></line>
+<line linenr="006" indent=""><var>if&#160;not&#160;</var><var>$plugin.Vars</var></line>
+<line linenr="007" indent="&#160;"><var>$plugin.Vars&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>2</var></line>
+<line linenr="008" indent="&#160;"><text>set&#160;global&#160;variable:&#160;name=</text><var>$plugin.ID</var><text>&#160;value=</text><var>$plugin.Vars</var></line>
+<line linenr="009" indent="&#160;"><var>$plugin.Vars</var><text>[</text><var>0</var><text>]&#160;=&#160;</text><var>0</var></line>
+<line linenr="010" indent="&#160;"><var>$plugin.Vars</var><text>[</text><var>1</var><text>]&#160;=&#160;</text><var>[TRUE]</var></line>
+<line linenr="011" indent=""><text>end</text></line>
+<line linenr="012" indent=""></line>
+<line linenr="013" indent=""><comment><text>*&#160;</text><var>init&#160;and&#160;reinit&#160;are&#160;run&#160;every&#160;time&#160;the&#160;game&#160;loads</var></comment></line>
+<line linenr="014" indent=""><var>if&#160;</var><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'init'</var><text>&#160;</text><var>OR</var><text>&#160;</text><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'reinit'</var></line>
+<line linenr="015" indent="&#160;"><var>$desc&#160;=&#160;</var><text>sprintf:&#160;pageid=</text><var>$text.id</var><text>&#160;textid=</text><var>100</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="016" indent="&#160;"><text>al&#160;engine:&#160;set&#160;plugin&#160;</text><var>$plugin.ID</var><text>&#160;description&#160;to&#160;</text><var>$desc</var></line>
+<line linenr="017" indent="&#160;"><var>$interval&#160;=&#160;</var><var>30</var><text>&#160;</text><var>*</var><text>&#160;</text><var>60</var></line>
+<line linenr="018" indent="&#160;"><text>al&#160;engine:&#160;set&#160;plugin&#160;</text><var>$plugin.ID</var><text>&#160;timer&#160;interval&#160;to&#160;</text><var>$interval</var><text>&#160;s</text></line>
+<line linenr="019" indent="&#160;"><var>skip&#160;if&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'plugin.ecs.setup'</var></line>
+<line linenr="020" interruptable="@" indent="&#160;&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.sk.ecs.al.init</call><text>&#160;:&#160;</text></line>
+<line linenr="021" indent="&#160;"></line>
+<line linenr="022" indent=""><var>else&#160;if&#160;</var><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'isenabled'</var></line>
+<line linenr="023" indent="&#160;"><var>$desc&#160;=&#160;</var><text>sprintf:&#160;pageid=</text><var>$text.id</var><text>&#160;textid=</text><var>100</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="024" indent="&#160;"><text>al&#160;engine:&#160;set&#160;plugin&#160;</text><var>$plugin.ID</var><text>&#160;description&#160;to&#160;</text><var>$desc</var></line>
+<line linenr="025" indent="&#160;"><var>$enabled&#160;=&#160;</var><var>$plugin.Vars</var><text>[</text><var>1</var><text>]</text></line>
+<line linenr="026" indent="&#160;"><text>return&#160;</text><var>$enabled</var></line>
+<line linenr="027" indent="&#160;"></line>
+<line linenr="028" indent=""><comment><text>*&#160;</text><var>Use&#160;this&#160;area&#160;to&#160;process&#160;special&#160;instructions&#160;when&#160;the&#160;plugin&#160;is&#160;toggled&#160;on</var></comment></line>
+<line linenr="029" indent=""><var>else&#160;if&#160;</var><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'start'</var></line>
+<line linenr="030" indent="&#160;"><var>$plugin.Vars</var><text>[</text><var>1</var><text>]&#160;=&#160;</text><var>[TRUE]</var></line>
+<line linenr="031" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.sk.ecs.al.init</call><text>&#160;:&#160;</text></line>
+<line linenr="032" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.sk.ecs.manager</call><text>&#160;:&#160;</text></line>
+<line linenr="033" indent=""><comment><text>*&#160;</text><var>Use&#160;this&#160;area&#160;to&#160;process&#160;special&#160;instructions&#160;when&#160;the&#160;plugin&#160;is&#160;toggled&#160;off</var></comment></line>
+<line linenr="034" indent=""><var>else&#160;if&#160;</var><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'stop'</var></line>
+<line linenr="035" indent="&#160;"><var>$plugin.Vars</var><text>[</text><var>1</var><text>]&#160;=&#160;</text><var>[FALSE]</var></line>
+<line linenr="036" interruptable="@" indent="&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.sk.ecs.al.stop</call><text>&#160;:&#160;</text></line>
+<line linenr="037" indent="&#160;"></line>
+<line linenr="038" indent=""><comment><text>*&#160;</text><var>The&#160;event&#160;script&#160;is&#160;called&#160;every&#160;interval</var></comment></line>
+<line linenr="039" indent=""><var>else&#160;if&#160;</var><var>$plugin.Event</var><text>&#160;</text><var>==</var><text>&#160;</text><var>'timer'</var></line>
+<line linenr="040" indent="&#160;"><var>$enabled&#160;=&#160;</var><var>$plugin.Vars</var><text>[</text><var>1</var><text>]</text></line>
+<line linenr="041" indent=""><text>end</text></line>
+<line linenr="042" indent=""></line>
+<line linenr="043" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="plugin.sk.ecs.al.register"/>
+  <sval type="int" val="43"/>
+  <sval type="string" val="ECS - AL Engine - Registration"/>
+  <sval type="int" val="250"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="7">
+    <sval type="string" val="plugin.ID"/>
+    <sval type="string" val="plugin.Event"/>
+    <sval type="string" val="text.id"/>
+    <sval type="string" val="plugin.Vars"/>
+    <sval type="string" val="desc"/>
+    <sval type="string" val="interval"/>
+    <sval type="string" val="enabled"/>
+  </sval>
+  <sval type="array" size="33">
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="8511"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536869116"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="157"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="130"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="130"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="25">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610608893"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="init"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="reinit"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="-4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-5"/>
+    </sval>
+    <sval type="array" size="16">
+      <sval type="int" val="150"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1024"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="30"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="60"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1025"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="plugin.ecs.setup"/>
+      <sval type="int" val="-536867321"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.sk.ecs.al.init"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="32"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610607355"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="isenabled"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="16">
+      <sval type="int" val="150"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1024"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="32"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610606075"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="start"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="130"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.sk.ecs.al.init"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.sk.ecs.manager"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="32"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610605051"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="stop"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="130"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.sk.ecs.al.stop"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="32"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610604539"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="timer"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="plugin ID"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="plugin event"/>
+    </sval>
+  </sval>
+  <sval type="array" size="14">
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="setup new data structure and init it"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="7"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="init and reinit are run every time the game loads"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="20"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="20"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Use this area to process special instructions when the plugin is toggled on"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="25"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Use this area to process special instructions when the plugin is toggled off"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="29"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="29"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="The event script is called every interval"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="32"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="32"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

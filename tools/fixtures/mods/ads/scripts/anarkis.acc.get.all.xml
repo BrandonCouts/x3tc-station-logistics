@@ -1,0 +1,299 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.get.all</name>
+<version>202</version>
+<engineversion>42</engineversion>
+<description>ACC - Lib : Get ship list according to params including flying</description>
+<arguments>
+<argument index="1" name="ship.class" type="Var/Class" desc="ship class" />
+<argument index="2" name="no.hull.dmg" type="Var/Boolean" desc="no damaged ships?" />
+<argument index="3" name="active.only" type="Var/Boolean" desc="active only?" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$array&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;owned&#160;ships:&#160;class/type=</text><var>$ship.class</var></line>
+<line linenr="002" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$array</var></line>
+<line linenr="003" indent=""></line>
+<line linenr="004" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="005" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="006" indent="&#160;"><var>$select&#160;=&#160;</var><var>$array</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="007" indent="&#160;"><var>if&#160;</var><var>$select&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.skipme'</var></line>
+<line linenr="008" indent="&#160;&#160;"><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$array</var><text>&#160;at&#160;index&#160;</text><var>$cnt</var></line>
+<line linenr="009" indent="&#160;&#160;"><text>continue</text></line>
+<line linenr="010" indent="&#160;"><text>end</text></line>
+<line linenr="011" indent="&#160;"><var>if&#160;</var><var>$select&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.acc.skipme'</var></line>
+<line linenr="012" indent="&#160;&#160;"><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$array</var><text>&#160;at&#160;index&#160;</text><var>$cnt</var></line>
+<line linenr="013" indent="&#160;&#160;"><text>continue</text></line>
+<line linenr="014" indent="&#160;"><text>end</text></line>
+<line linenr="015" indent="&#160;"><var>if&#160;</var><var>$no.hull.dmg</var><text>&#160;</text><var>==</var><text>&#160;</text><var>[TRUE]</var></line>
+<line linenr="016" indent="&#160;&#160;"><var>$hull&#160;=&#160;</var><var>$select&#160;-&gt;</var><text>&#160;get&#160;hull&#160;percent</text></line>
+<line linenr="017" indent="&#160;&#160;"><var>if&#160;</var><var>$hull</var><text>&#160;</text><var>&lt;</var><text>&#160;</text><var>100</var></line>
+<line linenr="018" indent="&#160;&#160;&#160;"><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$array</var><text>&#160;at&#160;index&#160;</text><var>$cnt</var></line>
+<line linenr="019" indent="&#160;&#160;&#160;"><text>continue</text></line>
+<line linenr="020" indent="&#160;&#160;"><text>end</text></line>
+<line linenr="021" indent="&#160;"><text>end</text></line>
+<line linenr="022" indent="&#160;"><var>if&#160;</var><var>$active.only</var><text>&#160;</text><var>==</var><text>&#160;</text><var>[TRUE]</var></line>
+<line linenr="023" indent="&#160;&#160;"><var>if&#160;not&#160;</var><var>$select&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.acc.ship'</var></line>
+<line linenr="024" indent="&#160;&#160;&#160;"><text>remove&#160;element&#160;from&#160;array&#160;</text><var>$array</var><text>&#160;at&#160;index&#160;</text><var>$cnt</var></line>
+<line linenr="025" indent="&#160;&#160;&#160;"><text>continue</text></line>
+<line linenr="026" indent="&#160;&#160;"><text>end</text></line>
+<line linenr="027" indent="&#160;"><text>end</text></line>
+<line linenr="028" indent=""><text>end</text></line>
+<line linenr="029" indent=""></line>
+<line linenr="030" indent=""><text>return&#160;</text><var>$array</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.get.all"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="ACC - Lib : Get ship list according to params including flying"/>
+  <sval type="int" val="202"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="7">
+    <sval type="string" val="ship.class"/>
+    <sval type="string" val="no.hull.dmg"/>
+    <sval type="string" val="active.only"/>
+    <sval type="string" val="array"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="select"/>
+    <sval type="string" val="hull"/>
+  </sval>
+  <sval type="array" size="22">
+    <sval type="array" size="6">
+      <sval type="int" val="1067"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610607351"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.skipme"/>
+      <sval type="int" val="-1610610685"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.skipme"/>
+      <sval type="int" val="-1610609917"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610608637"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="900"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610608637"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610607613"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.ship"/>
+      <sval type="int" val="-536865788"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="136"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+  </sval>
+  <sval type="array" size="3">
+    <sval type="array" size="2">
+      <sval type="int" val="23"/>
+      <sval type="string" val="ship class"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="no damaged ships?"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="active only?"/>
+    </sval>
+  </sval>
+  <sval type="array" size="13">
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="20"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="20"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="20"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

@@ -1,0 +1,130 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.create.passenger</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Create a passenger</description>
+<arguments>
+<argument index="1" name="ship" type="Var/Ship" desc="ship" />
+<argument index="2" name="race" type="Var/Race" desc="race" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>skip&#160;if&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;exists</text></line>
+<line linenr="002" indent="&#160;"><text>return&#160;</text><var>null</var></line>
+<line linenr="003" indent=""><var>skip&#160;if&#160;</var><var>$race</var></line>
+<line linenr="004" indent="&#160;"><var>$race&#160;=&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;get&#160;true&#160;owner</text></line>
+<line linenr="005" indent=""></line>
+<line linenr="006" indent=""><var>$p.name&#160;=&#160;</var><text>get&#160;random&#160;name:&#160;race=</text><var>$race</var></line>
+<line linenr="007" indent=""><var>$p.face&#160;=&#160;</var><text>&#160;=&#160;random&#160;value&#160;from&#160;0&#160;to&#160;</text><var>4</var><text>&#160;-&#160;1</text></line>
+<line linenr="008" indent=""><var>$p.voice&#160;=&#160;</var><text>&#160;=&#160;random&#160;value&#160;from&#160;0&#160;to&#160;</text><var>4</var><text>&#160;-&#160;1</text></line>
+<line linenr="009" indent=""><var>$pass&#160;=&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;create&#160;passenger&#160;in&#160;ship:&#160;name=</text><var>$p.name</var><text>&#160;race=</text><var>$race</var><text>&#160;voice=</text><var>$p.voice</var><text>&#160;face=</text><var>$p.face</var></line>
+<line linenr="010" indent=""></line>
+<line linenr="011" indent=""><text>return&#160;</text><var>$pass</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.create.passenger"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Create a passenger"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="6">
+    <sval type="string" val="ship"/>
+    <sval type="string" val="race"/>
+    <sval type="string" val="p.name"/>
+    <sval type="string" val="p.face"/>
+    <sval type="string" val="p.voice"/>
+    <sval type="string" val="pass"/>
+  </sval>
+  <sval type="array" size="9">
+    <sval type="array" size="4">
+      <sval type="int" val="706"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-536870393"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536869881"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="1187"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="1039"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="106"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="106"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="12">
+      <sval type="int" val="1231"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="ship"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="string" val="race"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

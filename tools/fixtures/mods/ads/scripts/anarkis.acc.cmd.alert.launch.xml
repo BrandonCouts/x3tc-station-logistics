@@ -1,0 +1,153 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.cmd.alert.launch</name>
+<version>200</version>
+<engineversion>42</engineversion>
+<description>ACC - AutoCarrier : Launch fighters against threat</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" interruptable="@" indent=""><var>$ship.list&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.acc.get.dockedships</call><text>&#160;:&#160;</text><text>&#160;ship&#160;class=</text><var>Moveable&#160;Ship</var><text>&#160;</text><text>&#160;no&#160;hull&#160;damaged&#160;ships=</text><var>[TRUE]</var></line>
+<line linenr="002" indent=""><var>$ship.count&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$ship.list</var></line>
+<line linenr="003" indent=""><var>while&#160;</var><var>$ship.count</var></line>
+<line linenr="004" indent="&#160;"><text>dec&#160;</text><var>$ship.count&#160;=&#160;</var></line>
+<line linenr="005" indent="&#160;"><var>$ship&#160;=&#160;</var><var>$ship.list</var><text>[</text><var>$ship.count</var><text>]</text></line>
+<line linenr="006" indent="&#160;"></line>
+<line linenr="007" indent="&#160;"><var>$r&#160;=&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;is&#160;script&#160;</text><call>!ship.cmd.killenemies.std</call><text>&#160;on&#160;stack&#160;of&#160;task=</text><var>0</var></line>
+<line linenr="008" indent="&#160;"><var>skip&#160;if&#160;</var><var>$r</var><text>&#160;</text><var>==</var><text>&#160;</text><var>[TRUE]</var></line>
+<line linenr="009" indent="&#160;&#160;"><var>$ship&#160;-&gt;</var><text>&#160;start&#160;task&#160;</text><var>0</var><text>&#160;with&#160;script&#160;</text><call>!ship.cmd.killenemies.std</call><text>&#160;and&#160;prio&#160;</text><var>0</var><text>:&#160;arg1=</text><var>null</var><text>&#160;arg2=</text><var>null</var><text>&#160;arg3=</text><var>null</var><text>&#160;arg4=</text><var>null</var><text>&#160;arg5=</text><var>null</var></line>
+<line linenr="010" interruptable="@" indent="&#160;"><var>=&#160;</var><text>wait&#160;</text><var>50</var><text>&#160;ms</text></line>
+<line linenr="011" indent=""><text>end</text></line>
+<line linenr="012" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.cmd.alert.launch"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="ACC - AutoCarrier : Launch fighters against threat"/>
+  <sval type="int" val="200"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="ship.list"/>
+    <sval type="string" val="ship.count"/>
+    <sval type="string" val="ship"/>
+    <sval type="string" val="r"/>
+  </sval>
+  <sval type="array" size="11">
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.acc.get.dockedships"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="2134"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610167"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="1072"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+      <sval type="string" val="!ship.cmd.killenemies.std"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536868857"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="18">
+      <sval type="int" val="1017"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="string" val="!ship.cmd.killenemies.std"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="105"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="50"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="5"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

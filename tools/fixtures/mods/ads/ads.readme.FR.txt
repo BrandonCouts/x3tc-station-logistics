@@ -1,0 +1,103 @@
+===============================================================================
+== Anarkis Defense System (ADS / ACC)           == Written by Serial Kicked  ==
+===============================================================================
+== Defensive Script for X3: Terran Conflict v2.0 (and over)                  ==
+===============================================================================
+Ce plugin est en Open Source. Vous pouvez l'utiliser ou altérer son code de là
+façon de votre choix pourvu que votre propre projet soit entièrement gratuit,
+il ne peut etre inclus dans une distribution payante sans mon accord. La
+documention ainsi qu'une référence à l'auteur doit être aussi incluse dans 
+votre release. Si vous comptez inclure ce script dans votre mod (non commercial
+et gratuit) pour X3, notez que les problèmes de compatibilité sont votre 
+affaire, pas la mienne.
+===============================================================================
+== AF Modding - http://afmodding.comli.com                                   ==
+===============================================================================
+
+
+===============================================================================
+Script Description
+===============================================================================
+
+Il est bien connu que le monde de X3 manque dramatiquement de commandes liées 
+aux navires porteurs (TL, M1,...) et ADS essaie de combler ce manque. Ce script 
+rajoute divers commandes pour les vaisseaux de classe M7, M1, TM et TL afin de 
+gérer plus efficacement les chasseurs que transportent ces navires. Grâce à ADS 
+vous pouvez facilement renommer, équiper, changer la base et parametrer les 
+chasseurs en quelques clics. ADS vous permet aussi d'envoyer des flotilles 
+offensives et défensives contre des cibles spécifiques, de nétoyer un secteur, 
+ou de commercer. De plus vous pouvez aussi complétement automatiser la gestion 
+des chasseurs de vos navires porteurs en patrouille, dès que ce dernier détecte
+un danger potentiel, les chasseurs seront envoyés pour s'occuper du problème.
+
+Pour que ceci fonctionne vous devrez equipper votre navire porteur avec le 
+logiciel de gestion de navire porteur (Carrier Command Software) que vous 
+pouvez trouvez dans la plupart des docks d'equipement.
+
+Ce script est complémentaire au script M.A.R.S. (Motion Analysis Relay System)
+de gestion de tourelles et de drones. Utilisez simultanément les commandes 
+ADS:Mode-Auto et MARS:auto-collect-loot dans un secteur Xenon pour comprendre 
+ce que je veux dire ;)
+
+De plus, les stations de commerces, les equipement docks et les bases 
+militaires détenues par le joueur peuvent aussi utiliser le mode automatique 
+de ADS afin de protéger le secteur contre des attaques hostiles.
+
+Consultez la documentation HTML pour plus de détails.
+
+===============================================================================
+Version History
+===============================================================================
+
+v2.65 - Barracks and Menu Overhaul (Beta)
+ (+) [Automated Defense System] Options Générales ajoutées
+ (+) [Commands - Carriers and ships] On peut mettre le vaisseau du joueur en mode Automatique
+ (+) [Commands - Carriers and ships] Caserne de Soldats (entrainement et réparations)
+ (*) [Commands - Carriers and ships] Ordres de docking ignorant parfois la présence d'un Transporter Device
+ (+) [Defense Grid] Les vaisseaux de la grille utiliseront le jump point le plus proche de leur cible
+ (+) [Defense Grid] Un message peut être affiché quand un secteur est attaqué
+ (*) [Defense Grid] Mauvaise gestion des porteurs en mode automatique
+ (*) [Defense Grid] Incapacité à utiliser des vaisseaux n'ayant pas d'ordre
+ (+) [Menu System] Menu mis à jour
+ (*) [Menu System] Presser la touche du Manager plusieur fois ne faira plus apparaitre plusieurs menus
+ (*) [Menu System] Indicateur de menace défectueux dans certaines fenêtres du Manager
+
+v2.60 - Defense Grid Beta
+ (+) [Commands - Carriers and ships] Add a selection menu to attack / defend wing orders
+ (+) [Commands - Carriers and ships] ADS should handle carriers able to dock big ships better
+ (+) [Automated Defense System] Implement the Defensive Grid system
+ (+) [Menu System] Defense Grid menu for the ADS Manager
+ (*) [Commands - Carriers and ships] Docking order not always using the Transporter Device
+
+v2.55 - SuperBox Release (Stable)
+ (+) Compatibility check with X3TC 2.7.1 done
+ (+) Nouveau menu ADS Manager pour gérer sa flotte
+ (+) Nouveaux raccourcis clavier (pour ads manager, important, à regler)
+ (+) Utilise la librairie ECS
+ (+) Désinstalleur ajouté
+ (+) Réglage par défaut des stations automatisées amélioré
+ (+) Meilleure efficacité de la commande "Protéger" 
+ (*) Fixé : Problème de renommage des vaisseaux après un ordre ADS
+ (*) Fixé : Refus pour certaines commandes d'accepter l'ordre "Docker tous les navires".
+ (*) Fixé : Le mechanisme de vérification de l'integrité des vaisseaux pose un soucis avec "Dock All".
+
+v2.50 - Compatibilité avec Yaki Armada.
+
+v2.10 - Release initiale pour le forum français.
+
+
+===============================================================================
+Remerciements
+===============================================================================
+
+ * Egosoft pour ce merveilleux système de script
+ * Cycrow et XaiCorp pour leurs nombreux fix dans les fichier de script d'egosoft
+ * Unknown object 003 pour la traduction allemande de mes anciens scripts
+ * ru4pt pour la traduction russe de mes anciens scripts
+ * Nem pour avoir m'avoir facilité la tache dans le decryptage des fichier 'fight' officiels
+ * Tous ceux qui ont participé au beta test de mes scripts et plugins
+ * Fildar pour l'hébergement
+ * Gazz pour le script MARS
+ * Xangar pour la traduction italienne de ADS
+ * Marodeur pour la traduction allemande de ADS
+ 

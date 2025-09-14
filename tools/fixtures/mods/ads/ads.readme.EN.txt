@@ -1,0 +1,183 @@
+===============================================================================
+== Anarkis Defense System (ADS / ACC)           == Written by Serial Kicked  ==
+===============================================================================
+== Defensive Script for X3: Terran Conflict v2.0 (and over)                  ==
+===============================================================================
+This plugin is Open Source. You may use, alter, include this code in any non 
+commercial and free project as long as proper credits are made and this 
+documentation is included in your release. If you want to include ACC in your
+(non commercial and free) mod for X3:TC, notice that compatibility issues are 
+your concern, not mine.
+===============================================================================
+== AF Modding - http://afmodding.comli.com                                   ==
+===============================================================================
+
+
+===============================================================================
+Release Notes 2.65
+===============================================================================
+
+Major release. 
+
+General Settings have been added. It allows you to set the default settings for
+your automated carriers and stations. You can setup the Defense Grid here, and
+the option to Ignore Faction has been moved to this menu too. 
+
+Basic Marine support added. You can now use your Docks and M1 (and M1 only) to 
+train your marines either in theorical or combat training. This option costs 
+money (refer to the manual for additional details). Marines with a high 
+mechanical or Engineering skill will help with ship repairs, granted they are
+not training on your ship. This feature is not yet balanced, and will probably
+need some improvement.
+
+The menu system has been altered to be more user friendly, this is especially
+visible in the General Settings, Attack/Defend wing orders and the Automated
+Carrier Settings. There's still a few things to improve.
+
+Now, you can enable the "Automated Mode" on the [playership]. Yse this option
+with caution. Don't put your docking bay next to an asteroid for example. 
+
+Several issues related to the Grid System have been corrected. Also, docking 
+orders will now take the Transporter Device into account correctly. 
+
+
+===============================================================================
+Script Description
+===============================================================================
+
+There is a lack of carrier related commands in the X-Universe series, and ADS 
+tries to fill this hole. The script adds various commands for the M7, M1, TM 
+and TL class ships to easily manage docked ships. You can easily rename, assign 
+homebase to, and setup your docked fighters in a few clicks. You can also send 
+offensive and defensive wings, clear a sector, or dock all your ships at once. 
+Moreover, you can have fully automated carrier for your patrols, fighters will 
+be repaired and/or replaced, wings will be sent against foes automatically and 
+warnings will be sent to the player when the carrier is in danger.
+
+On carrier ships you'll need to install the "Carrier Command Software" for ADS
+to work. You can find this software in most equipement docks.
+
+This script is complementary to the M.A.R.S. (Motion Analysis Relay System)
+turret and drone script. Use both ACC:AutoCarrier and MARS:auto-collect-loot 
+commands in a Xenon sector to see what I mean. Moreover, ACC allows to setup 
+docked ships turrets to MARS. 
+
+Moreover, player owned Trading Stations, Equipement Docks and military outposts
+now have a real use as you can enable ADS on them to protect your sector from 
+any enemy activity.
+
+
+===============================================================================
+BUG REPORT & GENERAL RULES ABOUT POSTING
+===============================================================================
+
+If you want to report a bug related to ADS or suggest a new feature, please go 
+to http://afmodding.comli.com/ and click on the bug report button or post in 
+the related Topic on the Official Egosoft Board.
+
+
+===============================================================================
+Version History
+===============================================================================
+
+v2.65 - Barracks and Menu Overhaul (Beta)
+ (+) [Automated Defense System] General settings added
+ (+) [Commands - Carriers and ships] Allows automated mode on the playership
+ (+) [Commands - Carriers and ships] Marine Barracks (training and repairs)
+ (*) [Commands - Carriers and ships] Docking order not always using the Transporter Device
+ (+) [Defense Grid] Defense Grid ships jump to the nearest gate from the threat
+ (+) [Defense Grid] A message can be displayed when a sector protected by the grid is under attack
+ (*) [Defense Grid] Bad carrier management
+ (*) [Defense Grid] Defense Grid unable to use ships who don't have orders
+ (+) [Menu System] Menu Overhaul
+ (*) [Menu System] Pressing the manager hotkey several times shouldn't trigger several menu
+ (*) [Menu System] Inaccurate threat level diplayed on the Defense Grid Manager
+
+v2.60 - Defense Grid Beta
+ (+) [Commands - Carriers and ships] Add a selection menu to attack / defend wing orders
+ (+) [Commands - Carriers and ships] ADS should handle carriers able to dock big ships better
+ (+) [Automated Defense System] Implement the Defensive Grid system 
+ (+) [Menu System] Defense Grid menu for the ADS Manager
+ (*) [Commands - Carriers and ships] Docking order not always using the Transporter Device
+
+v2.55 - Superbox Release (Stable)
+ (+) Compatibility check with X3TC 2.7.1 done
+ (+) New "ADS Manager" Menu System
+ (+) Now uses the ECS library (included)
+ (+) Added ECS newsfeed displaying recent alerts
+ (+) Added uninstaller
+ (+) More efficient default settings for stations
+ (+) The "Defend Wing" order is more efficient at protecting the target.
+ (+) Lib: Ion disruptor weapon probability reduced to 1/3 [anarkis.lib.armturret]
+ (*) Fixed : Manually renamed ships are reset to default after a carrier command [2.05]
+ (*) Fixed : Ships on "Defend Wing" order ignoring the "dock all" command [2.10]
+ (*) Fixed : "Hull check" task  slow down the "Dock All" procedure
+ 
+v2.50 - Stable Release [YA Release]
+ (+) Polish translation added (thanks to BlueBerry SheWolf and Yacek)
+ (+) Compatibility with NPC ships
+ (+) Libraries upgraded, may improve CPU usage and correct some trivial bugs
+
+V2.10 - Stable Release
+ (+) Ability for the auto.carrier/station to wait before docking ships (idea from Marodeur and Ezra)
+ (+) While waiting, ship wings will regroup around the carrier / station
+ (+) Target selection mechanism improved so you won't have far away wings doing nothing
+ (*) Fixed : The "Audio" alert message was delaying the carrier response to threat
+ (*) Fixed : Bug preventing the biggest wing to protect endangered carrier in some situations
+ (*) Fixed : Debug log was enabled by default
+
+v2.05 - Stable Release
+ (+) Automated Carrier / Station Defense logic is more efficient
+ (+) New carrier command : Sell Wares
+ (+) New carrier command : Buy Wares
+ (+) Rewritten management menu
+ (+) Improved library making ADS easier to use in 3rd party plugins
+ (*) Fixed : Issues with wing number in Auto Mode (no more duplicate / null wings)
+ (*) Fixed : Minor text issues
+ (*) Fixed : TS/TP.. ships with the carrier as homebase were put into it when using a Dock All order
+ 
+v2.01 - ADS Library update
+ (+) Can now be used on any dock owned by the player
+ (+) Wings dispatched by the AutoStation/AutoCarrier command are a bit more clever
+ (+) This script can now be used as a library to enable ADS in a 3rd party script/plugin
+ (+) Biggest wing sent will favor attacking big ships if any
+ (*) Fixed : Rare docking bug
+
+v2.00 - Initial Release (comparative to ACC 1.41 for X3 Reunion)
+ (+) Uses the new menu system
+ (+) You can now hire mechanics to repair the docked ships and the carrier
+ (+) Improved mass renaming and mass homebase assignement
+ (+) Allows to setup docked ships in mass (auto/emergency jump, missile, turrets, ...)
+ (+) Handle MARS turret script if installed
+ (+) Allows to select what ships will be used by the Auto.Carrier command
+ (+) More options to setup the auto.carrier command (radar range, targeting mode)
+ (+) Auto.Carrier battle AI has been improved
+ (+) Easy transfert of wares between the carrier and its ships
+ (+) Ships fly in formation
+ (+) Ships will take advantage of the transporter device if installed
+ (+) Menu to locate your carriers running ACC
+ (+) You can copy ACC settings to all your carriers at once
+ (+) Additional shortcuts (attack wing, setup carriers)
+ (+) Auto update added (you won't need to reset auto-carriers anymore)
+ (+) Dynamic ship naming when performing commands
+ (*) Fixed : Minor turret issue
+ 
+
+===============================================================================
+Thanks
+===============================================================================
+
+I want to thank the following people:
+
+ * Egosoft for the release of the X-Universe game serie and this great script system
+ * Cycrow and XaiCorp for the bunch of fixes they made in Egosoft' scripts and the various advices they gave me
+ * Unknown object 003 for the German translation of previous plugins
+ * ru4pt for the Russian translation of previous plugins
+ * Nem who looked over the X3:Reunion official 'fight' scripts 
+ * Everyone who participed in the beta testing of my scripts and plugins
+ * Fildar for archive hosting !
+ * Gazz for the MARS turret and drone script
+ * Marodeur for the German translation of ADS 
+ * BlueBerry SheWolf (Jagoda) and Yacek for Polish translation of my X3TC scripts and plugins
+ * Xangar for the Italian translation of ADS and PG.
+ * JMan77 who provided a testing ground for Pirate Guild.

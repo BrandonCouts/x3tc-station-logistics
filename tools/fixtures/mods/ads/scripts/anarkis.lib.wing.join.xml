@@ -1,0 +1,169 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.wing.join</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Wing: Join 2 wings in one</description>
+<arguments>
+<argument index="1" name="leader.a" type="Var/Ship" desc="leader 1" />
+<argument index="2" name="leader.b" type="Var/Ship" desc="leader 2" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>Merge&#160;2&#160;wings&#160;in&#160;one</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" interruptable="@" indent=""><var>$wing2&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.wing.getall</call><text>&#160;:&#160;</text><text>&#160;ship=</text><var>$leader.b</var></line>
+<line linenr="006" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$wing2</var></line>
+<line linenr="007" indent=""></line>
+<line linenr="008" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="009" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="010" indent="&#160;"><var>$ship&#160;=&#160;</var><var>$wing2</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="011" indent="&#160;"><var>$ship&#160;-&gt;</var><text>&#160;remove&#160;from&#160;any&#160;formation</text></line>
+<line linenr="012" indent="&#160;"><var>$ship&#160;-&gt;</var><text>&#160;add&#160;to&#160;formation&#160;with&#160;leader&#160;</text><var>$leader.a</var></line>
+<line linenr="013" interruptable="@" indent="&#160;"><var>START&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!ship.cmd.attacksame.std</call><text>&#160;:&#160;</text><text>&#160;the&#160;target=</text><var>$leader.a</var><text>&#160;</text><text>&#160;stop&#160;if&#160;leader&#160;is&#160;docked=</text><var>[TRUE]</var></line>
+<line linenr="014" indent=""><text>end</text></line>
+<line linenr="015" indent=""></line>
+<line linenr="016" indent=""></line>
+<line linenr="017" indent=""><text>return&#160;</text><var>$leader.a</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.wing.join"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Wing: Join 2 wings in one"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="5">
+    <sval type="string" val="leader.a"/>
+    <sval type="string" val="leader.b"/>
+    <sval type="string" val="wing2"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="ship"/>
+  </sval>
+  <sval type="array" size="10">
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.wing.getall"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610423"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="511"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="510"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!ship.cmd.attacksame.std"/>
+      <sval type="int" val="-2147483646"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="leader 1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="leader 2"/>
+    </sval>
+  </sval>
+  <sval type="array" size="8">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Merge 2 wings in one"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

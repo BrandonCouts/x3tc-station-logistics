@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.get.fighter.array</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Retrieve fighter array from a dock</description>
+<arguments>
+<argument index="1" name="dock" type="Var/Ship/Station" desc="dock" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$selected.array&#160;=&#160;</var><var>$dock&#160;-&gt;</var><text>&#160;get&#160;owned&#160;ships:&#160;class/type=</text><var>Fighter</var></line>
+<line linenr="002" indent=""><text>return&#160;</text><var>$selected.array</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.get.fighter.array"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Retrieve fighter array from a dock"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="2">
+    <sval type="string" val="dock"/>
+    <sval type="string" val="selected.array"/>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="6">
+      <sval type="int" val="1067"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="2034"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="string" val="dock"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

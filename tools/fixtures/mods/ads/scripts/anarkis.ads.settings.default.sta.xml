@@ -1,0 +1,399 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.ads.settings.default.sta</name>
+<version>265</version>
+<engineversion>44</engineversion>
+<description>ADS - Settings : Init Default Setup - station</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$setup&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>0</var></line>
+<line linenr="002" indent=""></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>0&#160;threat&#160;level</var></comment></line>
+<line linenr="004" indent=""><text>append&#160;</text><var>5</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="005" indent=""><comment><text>*&#160;</text><var>1&#160;Radar&#160;Range</var></comment></line>
+<line linenr="006" indent=""><text>append&#160;</text><var>100000</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="007" indent=""><comment><text>*&#160;</text><var>2&#160;Defense&#160;Ship&#160;count</var></comment></line>
+<line linenr="008" indent=""><text>append&#160;</text><var>5</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="009" indent=""><comment><text>*&#160;</text><var>3&#160;Damaged&#160;ships&#160;retreat</var></comment></line>
+<line linenr="010" indent=""><text>append&#160;</text><var>[TRUE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="011" indent=""><comment><text>*&#160;</text><var>4&#160;Display&#160;warning</var></comment></line>
+<line linenr="012" indent=""><text>append&#160;</text><var>[TRUE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="013" indent=""><comment><text>*&#160;</text><var>5&#160;warning&#160;type&#160;(0&#160;subtitle,&#160;1&#160;audio,&#160;2&#160;text)</var></comment></line>
+<line linenr="014" indent=""><text>append&#160;</text><var>2</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="015" indent=""><comment><text>*&#160;</text><var>6&#160;attack&#160;mode&#160;(3&#160;auto,&#160;1&#160;nearest&#160;first,&#160;2&#160;strongest&#160;first)</var></comment></line>
+<line linenr="016" indent=""><text>append&#160;</text><var>3</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="017" indent=""><comment><text>*&#160;</text><var>7&#160;docked&#160;ship&#160;autojump&#160;on&#160;/&#160;off</var></comment></line>
+<line linenr="018" indent=""><text>append&#160;</text><var>[TRUE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="019" indent=""><comment><text>*&#160;</text><var>8&#160;docked&#160;ship&#160;autojump&#160;distance</var></comment></line>
+<line linenr="020" indent=""><text>append&#160;</text><var>1</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="021" indent=""><comment><text>*&#160;</text><var>9&#160;docked&#160;ship&#160;fuel&#160;resupply&#160;(jumps)</var></comment></line>
+<line linenr="022" indent=""><text>append&#160;</text><var>10</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="023" indent=""><comment><text>*&#160;</text><var>10&#160;docked&#160;ship&#160;emergency&#160;jump/escape</var></comment></line>
+<line linenr="024" indent=""><text>append&#160;</text><var>[TRUE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="025" indent=""><comment><text>*&#160;</text><var>11&#160;docked&#160;ship&#160;shield&#160;threshold&#160;(in&#160;percent)</var></comment></line>
+<line linenr="026" indent=""><text>append&#160;</text><var>10</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="027" indent=""><comment><text>*&#160;</text><var>12&#160;docked&#160;ship&#160;missile&#160;usage</var></comment></line>
+<line linenr="028" indent=""><text>append&#160;</text><var>15</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="029" indent=""><comment><text>*&#160;</text><var>13&#160;use&#160;logfile</var></comment></line>
+<line linenr="030" indent=""><text>append&#160;</text><var>[FALSE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="031" indent=""><comment><text>*&#160;</text><var>14&#160;turret&#160;settings</var></comment></line>
+<line linenr="032" indent=""><text>append&#160;</text><var>246</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="033" indent=""><comment><text>*&#160;</text><var>15&#160;enable&#160;auto&#160;rename</var></comment></line>
+<line linenr="034" indent=""><text>append&#160;</text><var>[TRUE]</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="035" indent=""></line>
+<line linenr="036" indent=""><comment><text>*&#160;</text><var>16&#160;Ignore&#160;List&#160;(array)</var></comment></line>
+<line linenr="037" indent=""><var>$ignore&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>0</var></line>
+<line linenr="038" indent=""><text>append&#160;</text><var>$ignore</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="039" indent=""></line>
+<line linenr="040" indent=""><comment><text>*&#160;</text><var>17&#160;Mechanics</var></comment></line>
+<line linenr="041" indent=""><var>$mechanists&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>0</var></line>
+<line linenr="042" indent=""><comment><text>*&#160;</text><var>-&#160;0&#160;Count</var></comment></line>
+<line linenr="043" indent=""><text>append&#160;</text><var>0</var><text>&#160;to&#160;array&#160;</text><var>$mechanists</var></line>
+<line linenr="044" indent=""><comment><text>*&#160;</text><var>-&#160;1&#160;Allow&#160;ship&#160;repairs</var></comment></line>
+<line linenr="045" indent=""><text>append&#160;</text><var>[FALSE]</var><text>&#160;to&#160;array&#160;</text><var>$mechanists</var></line>
+<line linenr="046" indent=""><comment><text>*&#160;</text><var>-&#160;2&#160;Allow&#160;carrier&#160;repairs</var></comment></line>
+<line linenr="047" indent=""><text>append&#160;</text><var>[FALSE]</var><text>&#160;to&#160;array&#160;</text><var>$mechanists</var></line>
+<line linenr="048" indent=""><text>append&#160;</text><var>$mechanists</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="049" indent=""></line>
+<line linenr="050" indent=""><comment><text>*&#160;</text><var>18&#160;Delay&#160;before&#160;the&#160;autocarrier&#160;docks&#160;its&#160;ships</var></comment></line>
+<line linenr="051" indent=""><text>append&#160;</text><var>300</var><text>&#160;to&#160;array&#160;</text><var>$setup</var></line>
+<line linenr="052" indent=""></line>
+<line linenr="053" indent=""></line>
+<line linenr="054" indent=""><text>return&#160;</text><var>$setup</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.ads.settings.default.sta"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="ADS - Settings : Init Default Setup - station"/>
+  <sval type="int" val="265"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="3">
+    <sval type="string" val="setup"/>
+    <sval type="string" val="ignore"/>
+    <sval type="string" val="mechanists"/>
+  </sval>
+  <sval type="array" size="26">
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100000"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="15"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="246"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="300"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="28">
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="0 threat level"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="1 Radar Range"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="2 Defense Ship count"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="3 Damaged ships retreat"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="5"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="4 Display warning"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="6"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="5 warning type (0 subtitle, 1 audio, 2 text)"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="7"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="6 attack mode (3 auto, 1 nearest first, 2 strongest first)"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="8"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="7 docked ship autojump on / off"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="9"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="8 docked ship autojump distance"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="10"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="9 docked ship fuel resupply (jumps)"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="11"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="10 docked ship emergency jump/escape"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="12"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="11 docked ship shield threshold (in percent)"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="13"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="12 docked ship missile usage"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="14"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="13 use logfile"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="15"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="14 turret settings"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="16"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="15 enable auto rename"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="17"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="17"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="16 Ignore List (array)"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="19"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="19"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="17 Mechanics"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="20"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- 0 Count"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="21"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- 1 Allow ship repairs"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="22"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="- 2 Allow carrier repairs"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="24"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="24"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="18 Delay before the autocarrier docks its ships"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="25"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="25"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

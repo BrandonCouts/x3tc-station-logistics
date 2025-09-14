@@ -1,0 +1,110 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.get.sector</name>
+<version>110</version>
+<engineversion>43</engineversion>
+<description>Lib - (outdated)</description>
+<arguments>
+<argument index="1" name="max.jump" type="Var/Number" desc="max jump" />
+<argument index="2" name="race" type="Var/Race" desc="race" />
+<argument index="3" name="only.core" type="Var/Boolean" desc="only core sectors" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>Get&#160;a&#160;sector&#160;according&#160;to&#160;the&#160;params</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" interruptable="@" indent=""><var>$sector&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.lib.get.sector.plus</call><text>&#160;:&#160;</text><text>&#160;ref&#160;object=</text><var>[THIS]</var><text>&#160;</text><text>&#160;max&#160;jump=</text><var>$max.jump</var><text>&#160;</text><text>&#160;race=</text><var>$race</var><text>&#160;</text><text>&#160;remove&#160;border&#160;sectors=</text><var>$only.core</var><text>&#160;</text><text>&#160;remove&#160;core=</text><var>[FALSE]</var><text>&#160;</text><text>&#160;remove&#160;xenon/khaak&#160;sectors=</text><var>[TRUE]</var><text>&#160;</text><text>&#160;remove&#160;unknown=</text><var>[TRUE]</var><text>&#160;</text><text>&#160;ignore&#160;pirate/yaki=</text><var>[TRUE]</var></line>
+<line linenr="006" indent=""></line>
+<line linenr="007" indent=""><text>return&#160;</text><var>$sector</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.get.sector"/>
+  <sval type="int" val="43"/>
+  <sval type="string" val="Lib - (outdated)"/>
+  <sval type="int" val="110"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="max.jump"/>
+    <sval type="string" val="race"/>
+    <sval type="string" val="only.core"/>
+    <sval type="string" val="sector"/>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="22">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.lib.get.sector.plus"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+  </sval>
+  <sval type="array" size="3">
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="max jump"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="16"/>
+      <sval type="string" val="race"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="only core sectors"/>
+    </sval>
+  </sval>
+  <sval type="array" size="5">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="Get a sector according to the params"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

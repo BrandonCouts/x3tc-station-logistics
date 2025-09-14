@@ -1,0 +1,256 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.evaluate.enemy</name>
+<version>265</version>
+<engineversion>44</engineversion>
+<description>ACC - Lib : Check if a ship is a potential target</description>
+<arguments>
+<argument index="1" name="refobject" type="Var/Ship/Station" desc="checker" />
+<argument index="2" name="target" type="Var/Ship" desc="ship to check" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$gl.setup&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'anarkis.ads.setup'</var></line>
+<line linenr="002" indent=""><var>$setup.array&#160;=&#160;</var><var>$refobject&#160;-&gt;</var><text>&#160;get&#160;local&#160;variable:&#160;name=</text><var>'anarkis.acc.setup'</var></line>
+<line linenr="003" indent=""></line>
+<line linenr="004" indent=""><var>$owner&#160;=&#160;</var><var>$refobject&#160;-&gt;</var><text>&#160;get&#160;owner&#160;race</text></line>
+<line linenr="005" indent=""><var>if&#160;</var><var>$owner</var><text>&#160;</text><var>==</var><text>&#160;</text><var>Player</var></line>
+<line linenr="006" indent="&#160;"><var>$ignore.list&#160;=&#160;</var><var>$gl.setup</var><text>[</text><var>7</var><text>]</text></line>
+<line linenr="007" indent=""><text>else</text></line>
+<line linenr="008" indent="&#160;"><var>$ignore.list&#160;=&#160;</var><var>$setup.array</var><text>[</text><var>16</var><text>]</text></line>
+<line linenr="009" indent=""><text>end</text></line>
+<line linenr="010" indent=""><var>$class&#160;=&#160;</var><var>$target&#160;-&gt;</var><text>&#160;get&#160;object&#160;class</text></line>
+<line linenr="011" indent=""><var>$owner&#160;=&#160;</var><var>$target&#160;-&gt;</var><text>&#160;get&#160;owner&#160;race</text></line>
+<line linenr="012" indent=""></line>
+<line linenr="013" indent=""><var>if&#160;</var><text>&#160;find&#160;</text><var>$owner</var><text>&#160;in&#160;array:&#160;</text><var>$ignore.list</var></line>
+<line linenr="014" indent="&#160;"><text>return&#160;</text><var>[FALSE]</var></line>
+<line linenr="015" indent=""><text>end</text></line>
+<line linenr="016" indent=""></line>
+<line linenr="017" indent=""><var>if&#160;not&#160;</var><var>$target&#160;-&gt;</var><text>&#160;is&#160;</text><var>$refobject</var><text>&#160;a&#160;enemy</text></line>
+<line linenr="018" indent="&#160;"><text>return&#160;</text><var>[FALSE]</var></line>
+<line linenr="019" indent=""><text>end</text></line>
+<line linenr="020" indent=""></line>
+<line linenr="021" indent=""><var>if&#160;</var><var>$class</var><text>&#160;</text><var>==</var><text>&#160;</text><var>Fighter&#160;Drone</var><text>&#160;</text><var>OR</var><text>&#160;</text><var>$class</var><text>&#160;</text><var>==</var><text>&#160;</text><var>All&#160;Satellites</var><text>&#160;</text><var>OR</var><text>&#160;</text><var>$class</var><text>&#160;</text><var>==</var><text>&#160;</text><var>Freight&#160;Drone</var></line>
+<line linenr="022" indent="&#160;"><text>return&#160;</text><var>[FALSE]</var></line>
+<line linenr="023" indent=""><text>end</text></line>
+<line linenr="024" indent=""></line>
+<line linenr="025" indent=""><text>return&#160;</text><var>[TRUE]</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.evaluate.enemy"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="ACC - Lib : Check if a ship is a potential target"/>
+  <sval type="int" val="265"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="7">
+    <sval type="string" val="refobject"/>
+    <sval type="string" val="target"/>
+    <sval type="string" val="gl.setup"/>
+    <sval type="string" val="setup.array"/>
+    <sval type="string" val="owner"/>
+    <sval type="string" val="ignore.list"/>
+    <sval type="string" val="class"/>
+  </sval>
+  <sval type="array" size="16">
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.ads.setup"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="156"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.setup"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="701"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610611197"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="16"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="700"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="701"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="1406"/>
+      <sval type="int" val="-1610609917"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="727"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-536867580"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="37">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610608893"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="2067"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="2079"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="2092"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-2"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="-4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-5"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="-8"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-9"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="string" val="checker"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="ship to check"/>
+    </sval>
+  </sval>
+  <sval type="array" size="10">
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="6"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="13"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="13"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="15"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="15"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

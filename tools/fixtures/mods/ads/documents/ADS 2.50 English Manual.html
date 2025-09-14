@@ -1,0 +1,2260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en-us"><head>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+
+
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Anarkis Defense System - Documentation [English]</title><meta content="Serial Kicked / [Anarkis Federation]" name="author">
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <meta content="Full HTML documentation for this X3TC script" name="description"></head>
+
+<body style="color: rgb(239, 239, 239); background-color: rgb(0, 0, 0);" alink="#ff0000" link="#ff0000" vlink="#cc0000">
+
+
+
+
+
+
+
+<div style="text-align: center;"><img style="width: 766px; height: 200px;" alt="" src="img/anarkis.jpg"><br>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: center;">
+<h1><span style="font-weight: bold;">- <span style="color: rgb(255, 0, 0);">Anarkis Defense System</span>
+-</span></h1><h3 style="color: rgb(242, 242, 0);">An <a href="http://afmodding.comli.com/wiki/doku.php?id=ads:start">up to date documentation</a> file is available <a href="http://afmodding.comli.com/news/">the website</a></h3><span style="font-weight: bold;">Offline&nbsp;2.50 Documentation</span>
+
+
+
+
+
+
+
+<h3 style="font-weight: normal;">Written by
+<span style="color: rgb(255, 0, 0);">Serial Kicked </span><span style="color: rgb(255, 0, 0);">[</span><span style="color: rgb(235, 235, 47);">Anarkis Federation</span><span style="color: rgb(255, 0, 0);">]</span><br>
+
+
+
+
+
+
+
+- Carrier Management and Sector Defense Script for X3 Terran Conflict -<br>
+
+
+
+
+<small>(previoulsy known as Anarkis Carrier Commands)</small></h3>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<ol style="font-family: monospace; text-align: left;">
+
+
+
+
+
+
+
+  <br>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;"><span style="font-family: monospace;"></span>Technical
+Details</span><br>
+
+
+
+
+
+
+
+1.1. Installation details<br>
+
+
+
+
+
+
+
+1.2. Upgrade from a previous version<br>
+
+
+
+
+
+
+
+1.3. Uninstallation details<br>
+
+
+
+
+
+
+
+1.4. Compatibility Notes</li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Anarkis Defense System</span><br>
+
+
+
+
+
+
+
+2.1. Script Description<br>
+
+
+
+
+
+
+
+2.2. General Carrier Commands<br>
+
+
+
+
+
+
+
+2.3. Carrier Settings<br>
+
+
+
+
+
+
+
+2.4. Automated Carrier<br>
+
+
+
+
+
+
+
+2.5. Sector Defense System<br>
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Other Details</span><br>
+
+
+
+
+
+
+
+3.1. Compatibility details and notes to scripters and modders<br>
+
+
+
+
+
+
+
+3.2. Full Changelog<br>
+
+
+
+
+
+
+
+3.2. Libraries</li>
+
+
+
+
+
+
+
+  <li><span style="font-weight: bold;">Copyright</span></li>
+
+
+
+
+
+
+
+</ol>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<br>
+
+
+
+
+
+
+
+<div>
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Technical Details</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+1.1 Installation Details</span><br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Unzip / Install in your X3:TC folder (should be
+already done by now)</li>
+
+
+
+
+
+
+
+        <li>Run X3 and load your save game (or start a new game,
+as you wish)</li>
+
+
+
+
+
+
+
+        <li>If you haven't activated the Script Editor yet</li>
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        <ol>
+
+
+
+
+
+
+
+          <li>Rename your player name to " Thereshallbewings "
+(notice the big 'T' and the 2 small 'L')</li>
+
+
+
+
+
+
+
+          <li>Save your Game</li>
+
+
+
+
+
+
+
+          <li>Reload your Game</li>
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        </ol>
+
+
+
+
+
+
+
+        <li>A window will appear when the loading is completed</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">1.2
+Upgrade from a previous version<br>
+
+
+
+
+
+
+
+      </span>
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Unzip / Install new version in your X3:TC folder</li>
+
+
+
+
+
+
+
+        <li>Run X3, Load savegame</li>
+
+
+
+
+
+
+
+        <li>Follow instructions if any</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">1.3
+Uninstall the Plugin</span><span style="text-decoration: underline;"><br>
+
+
+
+
+
+
+
+      </span>
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li>Run the "uninstall ads.bat" file in your X3:TC
+Directory or use Cycrow's Plugin Manager if you've used a .spk</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+1.4 Compatibility Notes<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>This plugin is compatible with any other
+scripts and
+plugins as long as they do not use the same command slot. However some
+scripts doing more or less the same thing like CODEA may cause issues.
+You can use both, but do not run any CODEA command on an ADS carrier,
+nor the opposite.<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"></span>
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<div>
+<br>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Anarkis Defense System</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+2.1 Script Description</span><br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+There is a lack of carrier related commands in the X-Universe series,
+and ADS tries to fill this hole. The script adds various commands for
+the M7, M1, TM and TL class ships to easily manage docked ships. You
+can easily rename, assign homebase to, and setup your docked fighters
+in a few clicks. You can also send offensive and defensive wings, clear
+a sector, or dock all your ships at once. Moreover, you can have fully
+automated carrier for your patrols, fighters will be repaired (if you
+hire mechanics) wings will be sent against foes automatically and
+warnings will be sent to the player when the carrier is in danger.<br>
+
+
+
+
+      <br>
+
+
+
+
+Your carrier needs the "Carrier Command Software" installed for ADS to be enabled on your carriers.<br>
+
+
+
+
+      <br>
+
+
+
+
+This script is complementary to the <span style="font-weight: bold;">M.A.R.S.</span> (<span style="font-style: italic;">Motion Analysis Relay System</span>)
+turret and drone script. Use both ADS:AutoCarrier and
+MARS:auto-collect-loot commands in a Xenon sector to see what I mean.
+ADS also allows to setup docked ships turrets to MARS easily.<br>
+
+
+
+
+      <br>
+
+
+
+
+Moreover, player owned Trading Stations, Equipement Docks and military
+outposts now have a real use as you can enable ADS on them to protect
+your sector from <br>
+
+
+
+
+any enemy activity.<br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.2
+General Carrier Commands<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>ADS adds the following commands in the <span style="font-weight: bold;">[general]</span> ship's
+command menu to any TL/TM/M1/M7 with the "Carrier Command Software"
+installed :<br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Sell Wares ....<br>
+          </span>Orders docked fighters (or ts/tp in
+mods)&nbsp;to sell wares from the carrier to the factories in range, ships will use the jumpdrive if needed.</li>
+        <li><span style="font-weight: bold;"></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Buy Wares ....<br>
+          </span>Orders docked fighters (or ts/tp in
+mods)&nbsp;to buy
+a given amount of a ware to the nearest factory, ships will use the
+jumpdrive if needed.<span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><br>
+        </li>
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Dock All
+Ships&nbsp;</span><br>
+
+
+
+
+
+
+
+This command will order all the ships with this carrier set as an
+homebase to return home immediatly. Ships with a jumpdrive and correct
+settings will try to jump back when a distant sector. Ships with a
+teleporter device at less than 5km of the carrier will be beamed in
+immediately.<br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Send
+Defensive Wing to ...<br>
+
+
+
+
+
+
+
+          </span>This command will send a wing to protect the
+selected object from enemies. Works for both ships and stations.<br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Send
+Offensive Wing against ...<br>
+
+
+
+
+
+
+
+          </span>This command will send a wing to attack the
+selected target. <br>
+
+
+
+
+
+
+
+          <span style="font-weight: bold;"></span></li>
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Clear Sector !<br>
+
+
+
+
+
+
+
+          </span>The
+carrier will launch all his ships and clear the sector from enemies.&nbsp;Damaged ships will automatically try to
+dock back to the carrier.<br>
+
+
+
+
+
+
+
+          <span style="font-weight: bold;"></span></li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+
+In addition to those basic commands you will find two advanced commands
+in the additional command slots of your carriers:<br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Carrier
+Settings<br>
+
+
+
+
+
+
+
+          </span>This command will display a setup menu. It will
+allow
+you to change your docked ships settings, setup the Automated Carrier
+logic, hire/fire and use mechanics. Read below for additional
+documentation.</li>
+
+
+
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Automated
+Carrier<br>
+
+
+
+
+
+
+
+          </span>The carrier will automatically send wings
+against
+enemies and protect itself from incomings based on your settings.
+Excellent fire and forget command on patroling carriers. Read below for
+additional documentation.</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.3
+Carrier Settings<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>The Carrier Settings menu allow to setup both your
+docked ships and your carrier. Most of this script advanced features can be found here:<br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><br>
+
+
+
+
+
+
+      <img style="width: 380px; height: 365px;" alt="" src="img/main.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);"></span></span><br>
+
+
+
+
+
+
+
+The [<span style="font-weight: bold;">Hangars</span>] allows you to setup your docked ships. The [<span style="font-weight: bold;">Repair Bays</span>] allow you to repair both your carrier and your docked ships. [<span style="font-weight: bold;">Automated Carrier</span>] is used to setup the carrier's battle logic. [<span style="font-weight: bold;">Ship Supplies</span>] is used to transfert wares from and to the carrier. And with [<span style="font-weight: bold;">Carrier Report</span>] you can locate and setup all your carriers at once.<br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+
+
+        <li>2.3.1 Hangars</li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 378px; height: 403px;" alt="" src="img/hangar.gif"> <img style="width: 380px; height: 408px;" alt="" src="img/ships.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+The hangar is the place where you can setup your docked ships in mass.
+You can also select which ships will be used or not by the commands and
+tasks.&nbsp;Damaged ships will always be ignored. The [<span style="font-weight: bold;">Setup Docked Ships</span>]
+menu allows to set the missile usage, the jump and turret settings. If
+the MARS turret script is installed, you can even setup your docked
+ships' turrets to this system. Ships without the&nbsp;<span style="font-style: italic;">Motion Analysis Relay System</span> will fall back to standard turret settings (mars offense = attack enemies | mars defense = missile defence).<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+
+
+        <li>2.3.2 Repair Bays</li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;">&nbsp;<img style="width: 380px; height: 357px;" alt="" src="img/repairs.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+You can hire mechanics to keep your carrier and fighters at full
+strength. However, they will cost you money, even when they are not
+doing anything. To hire a new mechanic, your carrier needs to be in a
+sector with a friendly trading station and you will need to pay 50.000
+as an initial hiring cost. This initial fee paid, each mechanic will
+cost you 1.000 credits per hour when off-duty, and 15.000 credits when
+on-duty. If, for a reason or another you don't have enough money, they
+will immediately quit the carrier, so pay attention to you finances
+when using this features. Mechanics are very cheap, but they are also
+really slow : 15 hull point per minute per mechanic. It would take
+about 10 game hours for a single mechanic to repair a 90%&nbsp; damaged
+Nova, on the other hand it will only cost you&nbsp;150.000 credits
+(instead of 10 times more at a shipyard). You can't have more than 20
+mechanics on the same carrier.<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+Notice that if you allow to repair both the carrier and the docked
+ships, mechanics will always start with the carrier. Repairing
+a&nbsp;M1,&nbsp;M7 or a TL - even lightly damaged - can take ages so
+you may want to disable carrier repairs temporarly to do&nbsp;your
+fighter wings first.<br>
+
+
+
+
+      <br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul style="font-weight: bold;">
+
+
+
+
+        <li>2.3.3 Ship Supplies</li>
+
+
+
+
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 377px; height: 388px;" alt="" src="img/c2s.gif"> <img style="width: 382px; height: 341px;" alt="" src="img/s2c.gif"></div>
+
+
+
+
+
+
+      <br>
+
+
+
+
+This is where you can transfert wares between your carrier and your
+docked ships. Like everything else the whole process is intuitive and
+menu driven :)<br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+        <li><span style="font-weight: bold;">2.3.4 Automated Carrier Setup</span></li>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <div style="text-align: center;"><img style="width: 382px; height: 365px;" alt="" src="img/autocarrier.gif"><br>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Minimal Threat Level :</span>
+This is where you can modify how the carrier will act in 'Automated'
+mode. You can set the minimum threat level that will trigger
+a&nbsp;launch of fighters. To understand how the level system work,
+you'll need to know the "threat" values used for each kind of ship and
+you should also know that the carrier will always send ships if an
+enemy M1/M2 ship is spotted. Fighter drones are ignored. Here's the
+values for each class:<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold;">M5</span>: 1 - <span style="font-weight: bold;">M4</span>: 2&nbsp;- <span style="font-weight: bold;">M3</span>: 5 - <span style="font-weight: bold;">M8</span>: 10 - <span style="font-weight: bold;">M6</span>: 14 - <span style="font-weight: bold;">M7</span>: 35 - <span style="font-weight: bold;">TL</span>: 15 - <span style="font-weight: bold;">TM</span>: 8 - <span style="font-weight: bold;">TP</span>/<span style="font-weight: bold;">TS</span>: 2<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Radar Range :</span>
+You can also select the radar range (in meters). Setting this value too
+high may not be a so good idea as fighters will have a long road ahead
+without support from the homebase,&nbsp;the carrier beeing much slower
+than the fighter wings.&nbsp;You should keep the radar range between
+15.000 and 50.000 meters. <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Force damaged ships to retreat :</span>
+You can allow&nbsp;fighters sent by the carrier to retreat when shield
+is below 10% or when the hull is damaged. If the retreating ship
+successfully evades taking hull damages, as soon as his shield is above
+a decent level, it will resume the assault. If you disable this
+feature, fighter wings will fight to death. This feature also works
+with manual commands like "Send attack wing against" or &nbsp;"Clear
+Sector'' <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Attack Mode :</span>&nbsp;You
+can select the default attack mode for the automated carrier. If you
+let ACC decide what's best, it will attack the strongest if an enemy
+capital ship (M7 or bigger)&nbsp; is found, and it will attack the
+nearest in the other scenarios. <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Defense Ship Count :</span>
+When the automated carrier is in battle it will deploy some ships with
+the mission to protect the carrier itself. You can set here how many
+ships you want to be used for this task.<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Ignore Factions :</span>
+With this list you can allow your carrier to ignore all ships from one
+or more faction, even hostile ones. It will fight back when under
+attack, but it won't intercept non aggressive red ships. This is
+especially useful if you try to stay friendly to the Pirate
+faction,&nbsp;as some pirate ships spawn red no matter your current
+standing toward this faction. <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <span style="font-weight: bold; color: rgb(255, 204, 102);">- Display Warning Message :</span>
+Allows your carrier to send you a message when&nbsp;in danger so you
+can react before anything really bad happen. You can ask for 3 kinds of
+warnings: a text popup, an audio message, or a subtitle message (with a
+beep).<br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.4
+Automated Carrier<br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      </span>This command has mainly be designed to be used on
+you patroling carriers. When toggled ON, your carrier will start
+sending wings against detected enemies using the settings you've set in
+the previously explained menu. However, for various (good) reasons
+(like&nbsp;dock/undocking fighters going boom) this feature cannot be
+enabled on your own personal&nbsp;ship. You will also need at least 3
+undamaged docked&nbsp; fighters (set as active) for &nbsp;this command
+to do anything.<br>
+
+
+
+
+      <br>
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">2.5 Sector Defense System<br>
+
+
+
+
+
+
+
+      </span><br>
+
+
+
+
+Two new commands are added to your docks. Notice that 'dock' means
+&nbsp;Trading Stations, Equipement Docks or Military Outposts.
+Factories aren't docks and cannot hold enough fighters anyway. <br>
+
+
+
+
+      
+      
+      
+      
+      <ul>
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Setup Defense System<br>
+
+
+
+
+
+
+
+          </span>This command will display the same&nbsp;setup
+menu as for your carriers, default settings are changed (basically the
+scanning range is increased, and the threat level reduced).<br>
+
+
+
+          <br>
+
+
+
+
+        </li>
+
+
+
+
+        <li><span style="font-weight: bold;"><span style="color: rgb(255, 0, 0);">ADS:</span> Sector Defense<br>
+
+
+
+
+
+
+
+          </span>This command will start ADS on this station, and its functions are similar to the <span style="font-weight: bold;">Automated Carrier</span>
+command. Meaning that the station will launch fighter wings to
+obliterate any enemy ship found in sector and warn you with a message
+if the situation is critical. You will also need at least 3 undamaged
+and active fighters for this command to work properly.</li>
+
+
+
+
+      
+      
+      
+      
+      </ul>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;">
+      </span> <br>
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+<table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+
+    <tr align="center">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(153, 0, 0);"><span style="font-weight: bold;">Other Details</span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr align="justify">
+
+
+
+
+
+
+
+      <td style="background-color: rgb(51, 0, 0);"><span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+3.1 Frequently Asked Questions</span><br>
+
+
+
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ol>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Can
+you allow me to manage my fighter wings myself ?</span><br>
+
+
+
+
+
+
+
+Well, yes i could add a bunch of menus for this, and you could spend
+hours using them, but i probably won't because it's much more efficient
+and fast to let ADS dynamically pick the best method according to the situation itself.&nbsp;You can
+however prevent ADS from using some of your docked ships.<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Can
+you allow ACC to dock TP/TS/whatever to a carrier ?!</span><br>
+
+
+
+
+
+
+
+I don't want to include this (cheaty)&nbsp;feature in my script.
+However, if you're using a mod with true docking bays for TS/TP ships
+on carriers (afaik it's possible), then ADS should handle these just fine
+(trade commands will use the transport ship instead of a bunch of fighters).<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">There's
+not enough trade commands</span><br>
+
+
+
+
+
+
+
+Indeed, but I don't care, i just loot :)<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 102, 0);"></span><span style="font-style: italic; color: rgb(255, 255, 153);">Some
+of my ships seems to be teleported in and out of the carrier without
+using the docking bays</span><br>
+
+
+
+
+
+Ain't a bug, it's a feature :) Fighters with the Teleporter Device installed are able to teleport
+inside the carrier when located at less than 5km from it. Same thing
+applies when wings are sent from the carrier.<br>
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">ADS
+or CODEA on my carriers ?</span><br>
+
+
+
+
+
+Both are good and may be complementary. Codea has more
+settings,&nbsp;supply related commands, and wing management settings,
+there's also features related
+to the docking of non fighter class ships that I will never put
+in my own carrier script. On the other hand,&nbsp;ADS is easier to
+setup, offer quick access to basic wing commands, and is stronger in
+brute force (read kill/death ratio during patrols).&nbsp;<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Can i
+include Anarkis Defense System in my mod ?</span><br>
+
+
+
+
+
+
+
+Yes, as long as compatibility issues with the other scripts included in
+your mod are your concern. Be sure to read the part <span style="font-weight: bold;">[3.2]</span> of this
+document.<br>
+
+
+
+          <br>
+
+
+
+
+        </li>
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 255, 153);">Can I use ADS as a library in my own script ?</span><br>
+
+
+
+
+Yes, it has been designed to be easily used by any 3rd party plugin or
+script, you should take a look at the Pirate Guild source code to see
+how to do it properly.<br>
+
+
+
+
+
+
+
+          <br>
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+
+
+
+        <li><span style="font-style: italic; color: rgb(255, 102, 0);"><span style="color: rgb(255, 255, 153);">It doesn't work ! Nothing
+happen ! What's a .zip file ?! where is my X3 folder ? and what's a
+folder anyway ?</span><br>
+
+
+
+
+
+
+
+          </span>Find
+someone who know how computers work, and even if he never played X3
+before, i'm pretty sure he'll be able to at least install this script in
+less than five minutes :p</li>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      </ol>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"><br>
+
+
+
+
+
+
+
+3.2 Compatibility Notes for Scripters and Modders</span><br>
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      <ul>
+
+
+
+
+
+
+
+        <li>Tasks between 890 and 900 (included) are reserved by
+all my scripts and plugins on any ship or station.</li>
+
+
+
+
+
+
+
+        <li>You can check the&nbsp;global variable&nbsp;<span style="font-weight: bold; color: rgb(255, 255, 153);">anarkis.acc.plugin</span>
+to see if ACC is currently enabled</li>
+
+
+
+
+      
+      
+      
+      
+      </ul>
+
+
+
+
+      <br>
+
+
+
+
+
+
+
+      <span style="font-weight: bold; text-decoration: underline;"></span></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</body></html>

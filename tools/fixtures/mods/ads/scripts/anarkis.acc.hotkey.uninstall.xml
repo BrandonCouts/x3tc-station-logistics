@@ -1,0 +1,112 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.hotkey.uninstall</name>
+<version>200</version>
+<engineversion>42</engineversion>
+<description>ACC - Hotkeys : Remove Hotkeys</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$page.id&#160;=&#160;</var><var>8510</var></line>
+<line linenr="002" indent=""><var>$installed&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'anarkis.acc.hotkey'</var></line>
+<line linenr="003" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$installed</var></line>
+<line linenr="004" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="005" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="006" indent="&#160;"><var>$hotkey.id&#160;=&#160;</var><var>$installed</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="007" indent="&#160;"><text>unregister&#160;hotkey&#160;</text><var>$hotkey.id</var></line>
+<line linenr="008" indent=""><text>end</text></line>
+<line linenr="009" indent=""><text>set&#160;global&#160;variable:&#160;name=</text><var>'anarkis.acc.hotkey'</var><text>&#160;value=</text><var>null</var></line>
+<line linenr="010" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.hotkey.uninstall"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="ACC - Hotkeys : Remove Hotkeys"/>
+  <sval type="int" val="200"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="page.id"/>
+    <sval type="string" val="installed"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="hotkey.id"/>
+  </sval>
+  <sval type="array" size="10">
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="8510"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.hotkey"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610679"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="1101"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="157"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.acc.hotkey"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

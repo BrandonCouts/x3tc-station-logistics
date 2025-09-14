@@ -1,0 +1,66 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.acc.cmd.dock.all.pl</name>
+<version>200</version>
+<engineversion>42</engineversion>
+<description>ACC - Cmd : Dock all my ships (preload)</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;set&#160;command:&#160;</text><var>ANARKIS_DOCKALL</var><text>&#160;&#160;target=</text><var>null</var><text>&#160;target2=</text><var>null</var><text>&#160;par1=</text><var>null</var><text>&#160;par2=</text><var>null</var></line>
+<line linenr="002" interruptable="@" indent=""><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>anarkis.acc.cmd.dock.all</call><text>&#160;:&#160;</text></line>
+<line linenr="003" indent=""></line>
+<line linenr="004" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.acc.cmd.dock.all.pl"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="ACC - Cmd : Dock all my ships (preload)"/>
+  <sval type="int" val="200"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="3">
+    <sval type="array" size="13">
+      <sval type="int" val="538"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="18"/>
+      <sval type="int" val="836"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="anarkis.acc.cmd.dock.all"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="836"/>
+</sval>
+
+</codearray>
+</script>

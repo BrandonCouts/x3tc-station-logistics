@@ -1,0 +1,122 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.shortstring</name>
+<version>101</version>
+<engineversion>44</engineversion>
+<description>Lib - Reduce String size clean</description>
+<arguments>
+<argument index="1" name="string" type="Var/String" desc="string" />
+<argument index="2" name="max" type="Var/Number" desc="max" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$length&#160;=&#160;</var><text>&#160;get&#160;length&#160;of&#160;string&#160;</text><var>$string</var></line>
+<line linenr="002" indent=""><var>if&#160;</var><var>$length</var><text>&#160;</text><var>&gt;</var><text>&#160;</text><var>$max</var></line>
+<line linenr="003" indent="&#160;"><var>$length&#160;=&#160;</var><var>$max</var><text>&#160;</text><var>-</var><text>&#160;</text><var>3</var></line>
+<line linenr="004" indent="&#160;"><var>$string&#160;=&#160;</var><text>&#160;get&#160;substring&#160;of&#160;</text><var>$string</var><text>&#160;offset=</text><var>0</var><text>&#160;length=</text><var>$length</var></line>
+<line linenr="005" indent="&#160;"><var>$string&#160;=&#160;</var><var>$string</var><text>&#160;</text><var>+</var><text>&#160;</text><var>'..'</var></line>
+<line linenr="006" indent=""><text>end</text></line>
+<line linenr="007" indent=""><text>return&#160;</text><var>$string</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.shortstring"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="Lib - Reduce String size clean"/>
+  <sval type="int" val="101"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="3">
+    <sval type="string" val="string"/>
+    <sval type="string" val="max"/>
+    <sval type="string" val="length"/>
+  </sval>
+  <sval type="array" size="6">
+    <sval type="array" size="4">
+      <sval type="int" val="1075"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610611453"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="1077"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val=".."/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="string"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="max"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="5"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

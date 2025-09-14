@@ -1,0 +1,172 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.get.race.array</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Get the race list as an array</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$res&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>0</var></line>
+<line linenr="002" indent=""><text>append&#160;</text><var>Argon</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="003" indent=""><text>append&#160;</text><var>Boron</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="004" indent=""><text>append&#160;</text><var>Split</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="005" indent=""><text>append&#160;</text><var>Paranid</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="006" indent=""><text>append&#160;</text><var>Teladi</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="007" indent=""><text>append&#160;</text><var>Xenon</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="008" indent=""><text>append&#160;</text><var>Kha'ak</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="009" indent=""><text>append&#160;</text><var>Pirates</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="010" indent=""><text>append&#160;</text><var>Goner</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="011" indent=""><text>append&#160;</text><var>Player</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="012" indent=""><text>append&#160;</text><var>Unknown</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="013" indent=""><text>append&#160;</text><var>Race&#160;1</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="014" indent=""><text>append&#160;</text><var>Race&#160;2</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="015" indent=""><text>append&#160;</text><var>ATF</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="016" indent=""><text>append&#160;</text><var>Terran</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="017" indent=""><text>append&#160;</text><var>Yaki</var><text>&#160;to&#160;array&#160;</text><var>$res</var></line>
+<line linenr="018" indent=""><text>return&#160;</text><var>$res</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.get.race.array"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Get the race list as an array"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="1">
+    <sval type="string" val="res"/>
+  </sval>
+  <sval type="array" size="18">
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="8"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="14"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="15"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="16"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="17"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="18"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="19"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

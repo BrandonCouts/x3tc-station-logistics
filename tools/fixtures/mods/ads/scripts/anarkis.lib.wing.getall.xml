@@ -1,0 +1,188 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.wing.getall</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Wing: Get all ships in formation with selected</description>
+<arguments>
+<argument index="1" name="ship" type="Var/Ship" desc="ship" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="002" indent=""><comment><text>*&#160;</text><var>select&#160;a&#160;ship&#160;and&#160;it&#160;will&#160;return&#160;all&#160;ships&#160;in&#160;is&#160;formation&#160;with&#160;the&#160;leader</var></comment></line>
+<line linenr="003" indent=""><comment><text>*&#160;</text><var>as&#160;the&#160;first&#160;item&#160;of&#160;the&#160;array.&#160;If&#160;no&#160;formation&#160;for&#160;the&#160;selected&#160;ship</var></comment></line>
+<line linenr="004" indent=""><comment><text>*&#160;</text><var>it&#160;will&#160;give&#160;back&#160;a&#160;single&#160;item&#160;array&#160;with&#160;the&#160;ship&#160;itself</var></comment></line>
+<line linenr="005" indent=""><comment><text>*&#160;</text><var>===========================================</var></comment></line>
+<line linenr="006" indent=""></line>
+<line linenr="007" indent=""><var>$result&#160;=&#160;</var><text>&#160;array&#160;alloc:&#160;size=</text><var>0</var></line>
+<line linenr="008" indent=""></line>
+<line linenr="009" indent=""><var>$leader&#160;=&#160;</var><var>$ship&#160;-&gt;</var><text>&#160;get&#160;formation&#160;leader</text></line>
+<line linenr="010" indent=""><var>skip&#160;if&#160;</var><var>$leader&#160;-&gt;</var><text>&#160;exists</text></line>
+<line linenr="011" indent="&#160;"><var>$leader&#160;=&#160;</var><var>$ship</var></line>
+<line linenr="012" indent=""><text>append&#160;</text><var>$leader</var><text>&#160;to&#160;array&#160;</text><var>$result</var></line>
+<line linenr="013" indent=""></line>
+<line linenr="014" indent=""><var>$follower&#160;=&#160;</var><var>$leader&#160;-&gt;</var><text>&#160;get&#160;formation&#160;follower&#160;ships</text></line>
+<line linenr="015" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$follower</var></line>
+<line linenr="016" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="017" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="018" indent="&#160;"><var>$t&#160;=&#160;</var><var>$follower</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="019" indent="&#160;"><text>append&#160;</text><var>$t</var><text>&#160;to&#160;array&#160;</text><var>$result</var></line>
+<line linenr="020" indent=""><text>end</text></line>
+<line linenr="021" indent=""><text>return&#160;</text><var>$result</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.wing.getall"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Wing: Get all ships in formation with selected"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="6">
+    <sval type="string" val="ship"/>
+    <sval type="string" val="result"/>
+    <sval type="string" val="leader"/>
+    <sval type="string" val="follower"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="t"/>
+  </sval>
+  <sval type="array" size="13">
+    <sval type="array" size="4">
+      <sval type="int" val="128"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="512"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="706"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="-536869881"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="559"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610609655"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="135"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="string" val="ship"/>
+    </sval>
+  </sval>
+  <sval type="array" size="9">
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="select a ship and it will return all ships in is formation with the leader"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="as the first item of the array. If no formation for the selected ship"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="it will give back a single item array with the ship itself"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="==========================================="/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="5"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="12"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

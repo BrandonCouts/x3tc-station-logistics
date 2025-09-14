@@ -1,0 +1,110 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.kill.civies.sector</name>
+<version>100</version>
+<engineversion>42</engineversion>
+<description>Lib - Kill all civilian ships in a sector</description>
+<arguments>
+<argument index="1" name="sector" type="Var/Sector" desc="sector" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$ar&#160;=&#160;</var><var>$sector&#160;-&gt;</var><text>&#160;get&#160;ship&#160;array&#160;from&#160;sector/ship/station</text></line>
+<line linenr="002" indent=""><var>$cnt&#160;=&#160;</var><text>&#160;size&#160;of&#160;array&#160;</text><var>$ar</var></line>
+<line linenr="003" indent=""><var>while&#160;</var><var>$cnt</var></line>
+<line linenr="004" indent="&#160;"><text>dec&#160;</text><var>$cnt&#160;=&#160;</var></line>
+<line linenr="005" indent="&#160;"><var>$select&#160;=&#160;</var><var>$ar</var><text>[</text><var>$cnt</var><text>]</text></line>
+<line linenr="006" indent="&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$select&#160;-&gt;</var><text>&#160;is&#160;civilian&#160;ship</text></line>
+<line linenr="007" interruptable="@" indent="&#160;&#160;"><var>START&#160;</var><var>$select&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!ship.cmd.destroy.std</call><text>&#160;:&#160;</text></line>
+<line linenr="008" indent=""><text>end</text></line>
+<line linenr="009" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.kill.civies.sector"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Lib - Kill all civilian ships in a sector"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="sector"/>
+    <sval type="string" val="ar"/>
+    <sval type="string" val="cnt"/>
+    <sval type="string" val="select"/>
+  </sval>
+  <sval type="array" size="9">
+    <sval type="array" size="4">
+      <sval type="int" val="1008"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="131"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610679"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="143"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="1353"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1610610936"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!ship.cmd.destroy.std"/>
+      <sval type="int" val="-2147483646"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="string" val="sector"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

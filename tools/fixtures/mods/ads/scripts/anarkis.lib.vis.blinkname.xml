@@ -1,0 +1,107 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.vis.blinkname</name>
+<version>102</version>
+<engineversion>44</engineversion>
+<description>Visual Lib - Blink object name</description>
+<arguments>
+<argument index="1" name="target" type="Var/Ship/Station" desc="target" />
+<argument index="2" name="duration" type="Var/Number" desc="duration (sec)" />
+<argument index="3" name="stop.oos" type="Var/Boolean" desc="stop if object is oos" />
+<argument index="4" name="check.local" type="Var/String" desc="local to check" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$target&#160;-&gt;</var><text>&#160;set&#160;local&#160;variable:&#160;name=</text><var>'anarkis.isblinking'</var><text>&#160;value=</text><var>[TRUE]</var></line>
+<line linenr="002" indent=""><var>skip&#160;if&#160;</var><var>$target&#160;-&gt;</var><text>&#160;is&#160;task&#160;</text><var>893</var><text>&#160;in&#160;use</text></line>
+<line linenr="003" indent="&#160;"><var>$target&#160;-&gt;</var><text>&#160;start&#160;task&#160;</text><var>893</var><text>&#160;with&#160;script&#160;</text><call>anarkis.lib.vis.task.blink</call><text>&#160;and&#160;prio&#160;</text><var>0</var><text>:&#160;arg1=</text><var>$duration</var><text>&#160;arg2=</text><var>$stop.oos</var><text>&#160;arg3=</text><var>$check.local</var><text>&#160;arg4=</text><var>null</var><text>&#160;arg5=</text><var>null</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.vis.blinkname"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="Visual Lib - Blink object name"/>
+  <sval type="int" val="102"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="target"/>
+    <sval type="string" val="duration"/>
+    <sval type="string" val="stop.oos"/>
+    <sval type="string" val="check.local"/>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="7">
+      <sval type="int" val="155"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.isblinking"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="1073"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-536870137"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="893"/>
+    </sval>
+    <sval type="array" size="18">
+      <sval type="int" val="1017"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="string" val="anarkis.lib.vis.task.blink"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="893"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="string" val="target"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="duration (sec)"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="63"/>
+      <sval type="string" val="stop if object is oos"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="local to check"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="3"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

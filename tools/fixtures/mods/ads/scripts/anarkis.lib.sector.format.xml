@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.lib.sector.format</name>
+<version>0</version>
+<engineversion>44</engineversion>
+<description>Description</description>
+<arguments>
+<argument index="1" name="sect" type="Var/Sector" desc="sector" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$x&#160;=&#160;</var><var>$sect&#160;-&gt;</var><text>&#160;get&#160;universe&#160;x&#160;index</text></line>
+<line linenr="002" indent=""><var>$y&#160;=&#160;</var><var>$sect&#160;-&gt;</var><text>&#160;get&#160;universe&#160;y&#160;index</text></line>
+<line linenr="003" indent=""><var>$st&#160;=&#160;</var><text>sprintf:&#160;fmt=</text><var>'%s&#160;(%s,%s)'</var><text>,&#160;</text><var>[SECTOR]</var><text>,&#160;</text><var>$x</var><text>,&#160;</text><var>$y</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" indent=""><text>return&#160;</text><var>$st</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.lib.sector.format"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="Description"/>
+  <sval type="int" val="0"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="sect"/>
+    <sval type="string" val="x"/>
+    <sval type="string" val="y"/>
+    <sval type="string" val="st"/>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="4">
+      <sval type="int" val="804"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="805"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="149"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="%s (%s,%s)"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="string" val="sector"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="3"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

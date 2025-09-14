@@ -1,0 +1,154 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>anarkis.debug.output</name>
+<version>100</version>
+<engineversion>44</engineversion>
+<description>Debug - Add message to logfile</description>
+<arguments>
+<argument index="1" name="message" type="Var/String" desc="msg" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$debug.on&#160;=&#160;</var><text>get&#160;global&#160;variable:&#160;name=</text><var>'anarkis.debug'</var></line>
+<line linenr="002" indent=""><var>if&#160;</var><var>$debug.on</var></line>
+<line linenr="003" indent=""><comment>*<text>write&#160;to&#160;player&#160;logbook&#160;</text>$message</comment></line>
+<line linenr="004" indent="&#160;"><var>$playtime&#160;=&#160;</var><text>playing&#160;time</text></line>
+<line linenr="005" indent="&#160;"><var>$playtime&#160;=&#160;</var><text>&#160;format&#160;time:&#160;</text><var>$playtime</var></line>
+<line linenr="006" indent=""><comment>*$playtime&#160;=&#160;$playtime&#160;/&#160;60</comment></line>
+<line linenr="007" indent="&#160;"></line>
+<line linenr="008" indent="&#160;"><var>$m&#160;=&#160;</var><var>'('</var><text>&#160;</text><var>+</var><text>&#160;</text><var>$playtime</var><text>&#160;</text><var>+</var><text>&#160;</text><var>')&#160;'</var><text>&#160;</text><var>+</var><text>&#160;</text><var>$message</var></line>
+<line linenr="009" indent="&#160;"><text>write&#160;to&#160;log&#160;file&#160;#</text><var>8513</var><text>&#160;&#160;append=</text><var>1</var><text>&#160;&#160;value=</text><var>$m</var></line>
+<line linenr="010" indent="&#160;"><text>display&#160;subtitle&#160;text:&#160;text=</text><var>$m</var><text>&#160;duration=</text><var>5000</var><text>&#160;ms</text></line>
+<line linenr="011" indent=""><text>end</text></line>
+<line linenr="012" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="anarkis.debug.output"/>
+  <sval type="int" val="44"/>
+  <sval type="string" val="Debug - Add message to logfile"/>
+  <sval type="int" val="100"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="4">
+    <sval type="string" val="message"/>
+    <sval type="string" val="debug.on"/>
+    <sval type="string" val="playtime"/>
+    <sval type="string" val="m"/>
+  </sval>
+  <sval type="array" size="8">
+    <sval type="array" size="4">
+      <sval type="int" val="158"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="anarkis.debug"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610610941"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="141"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="1477"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="25">
+      <sval type="int" val="104"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="("/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val=") "/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-2"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-4"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="-6"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="404"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="8513"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="5">
+      <sval type="int" val="1418"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="5000"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="1">
+    <sval type="array" size="2">
+      <sval type="int" val="11"/>
+      <sval type="string" val="msg"/>
+    </sval>
+  </sval>
+  <sval type="array" size="4">
+    <sval type="array" size="5">
+      <sval type="int" val="2"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="400"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="message"/>
+    </sval>
+    <sval type="array" size="11">
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="104"/>
+      <sval type="string" val="playtime"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="playtime"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="60"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>
