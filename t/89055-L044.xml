@@ -20,5 +20,9 @@
     <t id="215">Enroll Station</t>
     <t id="216">Unenroll Station</t>
     <t id="217">Store balanced</t>
+    <t id="218">Exported to peer store</t>
+    <t id="219">Imported from peer store</t>
+    <t id="220">No peer store</t>
+    <t id="221">Balance OK</t>
   </page>
 </language>
