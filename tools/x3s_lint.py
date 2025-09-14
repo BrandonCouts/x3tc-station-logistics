@@ -93,7 +93,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
         errors.append(f"{path.name}:{ln}: 'else' without matching 'if'")
     elif low.startswith("while "):
       var = None
-      if m := re.match(r"while\s+\$([A-Za-z0-9_.]+)\s*>\s*0$", low):
+      if m := re.match(r"while\s+\$([A-Za-z0-9_.]+)", low):
         var = m.group(1)
       stack.append(Block("while", ln, var=var))
     elif low == "end":
@@ -111,8 +111,14 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
           break
 
     # mark decrement progress in while loops
-    if low.startswith("dec $"):
+    if low.startswith("dec $") or low.startswith("inc $"):
       var = low.split()[1].lstrip("$")
+      for b in reversed(stack):
+        if b.kind == "while" and b.var == var:
+          b.has_progress = True
+          break
+    if m := re.match(r"\$([A-Za-z0-9_.]+)\s*=\s*\$\1\s*[-+*/]", low):
+      var = m.group(1)
       for b in reversed(stack):
         if b.kind == "while" and b.var == var:
           b.has_progress = True
@@ -133,11 +139,17 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
             b.has_progress = True
             break
 
+    if low == "break":
+      for b in reversed(stack):
+        if b.kind == "while":
+          b.has_progress = True
+          break
+
     # line-shape validation (warn on unknown shapes)
-    recognizable = any(pat.match(line) for pat in patterns)
+    recognizable = any(pat.match(line.strip()) for pat in patterns)
     if not recognizable and not (low.startswith("if ") or low.startswith("else if ") or low == "else" or low == "end" or low.startswith("while ")):
       # Allow variable assignments and general calls as free-form to reduce false positives
-      if not re.match(r"^\s*\$[A-Za-z0-9_.]+(\[[^\]]+\])*\s*(=|->)", line) and "call script" not in low:
+      if not re.match(r"^\s*=?\s*(?:\$[A-Za-z0-9_.]+|\[[A-Za-z]+\])(\[[^\]]+\])*\s*(=|->)", line) and "call script" not in low:
         warnings.append(f"{path.name}:{ln}: unrecognized line (check syntax): {line}")
 
   if stack:
@@ -145,7 +157,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
     errors.append(f"{path.name}:{opener.line_no}: '{opener.kind}' not closed with 'end'")
 
   # setup rule
-  if setup_like and not any(re.match(r"^load text:\s*id=(\d+|\$[A-Za-z0-9_.]+)$", l, re.I) for _, l in body):
+  if setup_like and not any(re.match(r"^load text:\s*id=(\d+|\$[A-Za-z0-9_.]+)$", l.strip(), re.I) for _, l in body):
     errors.append(f"{path.name}: setup script missing 'load text: id=<...>'")
 
   # emit
