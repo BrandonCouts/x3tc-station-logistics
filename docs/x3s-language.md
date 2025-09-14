@@ -86,6 +86,10 @@
 - **set.player.tracking.aim**: `set player tracking aim to $m.selected ->`
 - **menu.item.enum**: `add custom menu item to array $menu: text=$st returnvalue=Carrier`
 
+### New Statements Recognized
+- **append.player**: `append Player to array $ignore`
+- **append.null**: `append null to array $setup`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
