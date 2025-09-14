@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 40 known-good ADS scripts:
+The linter is validated against these 60 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -44,3 +44,23 @@ The linter is validated against these 40 known-good ADS scripts:
 - anarkis.acc.hotkey.install.x3s
 - anarkis.acc.hotkey.setup.x3s
 - anarkis.acc.hotkey.uninstall.x3s
+- anarkis.lib.get.sector.x3s
+- anarkis.lib.task.autodocking.x3s
+- anarkis.lib.wing.join.x3s
+- setup.anarkis.acc.x3s
+- anarkis.lib.cmd.attack.x3s
+- anarkis.lib.unknown.x3s
+- anarkis.acc.uninstall.x3s
+- anarkis.lib.wait.x3s
+- anarkis.lib.get.bycargovalue.adv.x3s
+- anarkis.ads.crew.getrepair.x3s
+- anarkis.lib.get.ships.var.x3s
+- anarkis.lib.ask.shiparray.x3s
+- anarkis.acc.setup.default.to.x3s
+- anarkis.lib.guild.register.x3s
+- anarkis.acc.setup.repair.x3s
+- anarkis.lib.shipstate.restore.x3s
+- anarkis.acc.lib.get.leaderlist.x3s
+- anarkis.lib.custowned.init.x3s
+- anarkis.lib.vis.task.blink.x3s
+- anarkis.acc.task.autoname.x3s

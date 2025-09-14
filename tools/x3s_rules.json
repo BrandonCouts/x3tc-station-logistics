@@ -1,438 +1,515 @@
 {
-  "patterns": [
-    {
-      "name": "load.text",
-      "regex": "^load text:\\s*id=(\\d+|\\$[A-Za-z0-9_.]+)$",
-      "examples": [
-        "load text: id=9055"
-      ]
-    },
-    {
-      "name": "al.register",
-      "regex": "^al engine:\\s*register script='[^']+'$",
-      "examples": [
-        "al engine: register script='al.plugin.slx'"
-      ]
-    },
-    {
-      "name": "al.description",
-      "regex": "^al engine:\\s*set plugin '[^']+' description to '.*'$",
-      "examples": [
-        "al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'"
-      ]
-    },
-    {
-      "name": "al.timer",
-      "regex": "^al engine:\\s*set plugin '[^']+' timer interval to \\d+\\s*s$",
-      "examples": [
-        "al engine: set plugin 'al.plugin.slx' timer interval to 30 s"
-      ]
-    },
-    {
-      "name": "stop.task",
-      "regex": "^\\[THIS]->stop task \\d+$",
-      "examples": [
-        "[THIS]->stop task 0"
-      ]
-    },
-    {
-      "name": "start.task",
-      "regex": "^start task \\d+\\s+with script='[^']+'\\s+on=\\[THIS\\]$",
-      "examples": [
-        "start task 123 with script='plugin.example' on=[THIS]"
-      ]
-    },
-    {
-      "name": "call.script",
-      "regex": "^=?\\s*\\[THIS]->\\s*call script '[^']+'( : .*)?$",
-      "examples": [
-        "= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt"
-      ]
-    },
-    {
-      "name": "wait",
-      "regex": "^\\s*=?\\s*wait (\\d+|\\$[A-Za-z0-9_.]+)\\s*ms$",
-      "examples": [
-        "wait 1000 ms"
-      ]
-    },
-    {
-      "name": "set.global",
-      "regex": "^set global variable:\\s*name='[^']+'\\s*value=.*$",
-      "examples": [
-        "set global variable: name='g.slx.foo' value=$bar"
-      ]
-    },
-    {
-      "name": "return",
-      "regex": "^return (null|value .+)$",
-      "examples": [
-        "return null"
-      ]
-    },
-    {
-      "name": "write.log",
-      "regex": "^write to log file \\$[A-Za-z0-9_.]+\\s+append=\\[(TRUE|FALSE)\\]\\s+value=(\\$[A-Za-z0-9_.]+|'[^']+')$",
-      "examples": [
-        "write to log file $DebugID append=[FALSE] value=$txt"
-      ]
-    },
-    {
-      "name": "dec",
-      "regex": "^dec \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
-      "examples": [
-        "dec $s ="
-      ]
-    },
-    {
-      "name": "remove.array.elem",
-      "regex": "^remove element from array \\$[A-Za-z0-9_.]+ at index \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "remove element from array $config.Array at index $s"
-      ]
-    },
-    {
-      "name": "skip.if",
-      "regex": "^skip if \\$[A-Za-z0-9_.]+(\\[[^\\]]+\\])?$",
-      "examples": [
-        "skip if $section"
-      ]
-    },
-    {
-      "name": "al.description.var",
-      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ description to \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "al engine: set plugin $al.PluginID description to $plugin.description"
-      ]
-    },
-    {
-      "name": "al.timer.var",
-      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\d+\\s*s$",
-      "examples": [
-        "al engine: set plugin $al.PluginID timer interval to 25 s"
-      ]
-    },
-    {
-      "name": "al.timer.vars",
-      "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\$[A-Za-z0-9_.]+\\s*s$",
-      "examples": [
-        "al engine: set plugin $plugin.ID timer interval to $interval s"
-      ]
-    },
-    {
-      "name": "set.global.var",
-      "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=\\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "set global variable: name=$al.PluginID value=$al.Settings"
-      ]
-    },
-    {
-      "name": "return.var",
-      "regex": "^return \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "return $al.Ret"
-      ]
-    },
-    {
-      "name": "append.array",
-      "regex": "^append \\$[A-Za-z0-9_.]+ to array \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "append $station to array $exclude.array"
-      ]
-    },
-    {
-      "name": "gosub",
-      "regex": "^gosub [A-Za-z0-9_.]+:$",
-      "examples": [
-        "gosub Debug.Sub:"
-      ]
-    },
-    {
-      "name": "label",
-      "regex": "^[A-Za-z0-9_.]+:$",
-      "examples": [
-        "Debug.Sub:"
-      ]
-    },
-    {
-      "name": "endsub",
-      "regex": "^endsub$",
-      "examples": [
-        "endsub"
-      ]
-    },
-    {
-      "name": "obj.add.units",
-      "regex": "^\\s*=?\\s*\\$[A-Za-z0-9_.]+\\s*->\\s*add (\\$[A-Za-z0-9_.]+|[-]?\\d+) units of \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "= $station-> add $amount units of $ware"
-      ]
-    },
-    {
-      "name": "wait.random",
-      "regex": "^\\s*=?\\s*wait randomly from (\\d+|\\$[A-Za-z0-9_.]+) to (\\d+|\\$[A-Za-z0-9_.]+) ms$",
-      "examples": [
-        "= wait randomly from 500 to 1000 ms"
-      ]
-    },
-    {
-      "name": "al.register.noquote",
-      "regex": "^al engine:\\s*register script=[A-Za-z0-9_.]+$",
-      "examples": [
-        "al engine: register script=al.LI.FDN.event"
-      ]
-    },
-    {
-      "name": "inc",
-      "regex": "^inc \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
-      "examples": [
-        "inc $sector.count ="
-      ]
-    },
-    {
-      "name": "set.global.var.null",
-      "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=null$",
-      "examples": [
-        "set global variable: name=$var value=null"
-      ]
-    },
-    {
-      "name": "menu.info",
-      "regex": "^add custom menu info line to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
-      "examples": [
-        "add custom menu info line to array $menu: text=$txt"
-      ]
-    },
-    {
-      "name": "menu.heading",
-      "regex": "^add custom menu heading to array \\$[A-Za-z0-9_.]+: title=(\\$[A-Za-z0-9_.]+|'[^']*')$",
-      "examples": [
-        "add custom menu heading to array $menu: title=$txt"
-      ]
-    },
-    {
-      "name": "menu.item",
-      "regex": "^add custom menu item to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*') returnvalue=(\\$[A-Za-z0-9_.]+|'[^']*'|null)$",
-      "examples": [
-        "add custom menu item to array $menu: text=$txt returnvalue=$return.array"
-      ]
-    },
-    {
-      "name": "menu.section",
-      "regex": "^add section to custom menu: \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "add section to custom menu: $menu"
-      ]
-    },
-    {
-      "name": "menu.group.start",
-      "regex": "^add new grouping to menu: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*'), open=\\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "add new grouping to menu: $menu, text=$txt, open=$check"
-      ]
-    },
-    {
-      "name": "menu.group.end",
-      "regex": "^add end grouping to menu: \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "add end grouping to menu: $menu"
-      ]
-    },
-    {
-      "name": "menu.nonselect",
-      "regex": "^add non selectable menu item: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
-      "examples": [
-        "add non selectable menu item: $menu, text=$temp.array"
-      ]
-    },
-    {
-      "name": "display.subtitle",
-      "regex": "^display subtitle text: text=\\$[A-Za-z0-9_.]+ duration=\\d+\\s*ms$",
-      "examples": [
-        "display subtitle text: text=$txt duration=2000 ms"
-      ]
-    },
-    {
-      "name": "menu.open",
-      "regex": "^\\s*=?\\s*open custom menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "open custom menu: title=$txt description=null option array=$menu"
-      ]
-    },
-    {
-      "name": "menu.open.info",
-      "regex": "^\\s*=?\\s*open custom info menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+(?: maxoptions=\\d+)?$",
-      "examples": [
-        "open custom info menu: title=$txt description=null option array=$menu maxoptions=2"
-      ]
-    },
-    {
-      "name": "skip.if.eq",
-      "regex": "^skip if \\$[A-Za-z0-9_.]+ == \\d+$",
-      "examples": [
-        "skip if $open.menu == 1"
-      ]
-    },
-    {
-      "name": "break",
-      "regex": "^break$",
-      "examples": [
-        "break"
-      ]
-    },
-    {
-      "name": "continue",
-      "regex": "^continue$",
-      "examples": [
-        "continue"
-      ]
-    },
-    {
-      "name": "do.if",
-      "regex": "^do if .+$",
-      "examples": [
-        "do if $Config[$Config.Debug.Enabled]"
-      ]
-    },
-    {
-      "name": "resize.array",
-      "regex": "^resize array \\$[A-Za-z0-9_.]+ to (\\d+|\\$[A-Za-z0-9_.]+)$",
-      "examples": [
-        "resize array $State to 30"
-      ]
-    },
-    {
-      "name": "append.const",
-      "regex": "^append (\\d+|\\[[A-Za-z0-9_ '()]+\\]|\\{[^}]+\\}) to array \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "append 0 to array $Mins"
-      ]
-    },
-    {
-      "name": "copy.array",
-      "regex": "^copy array \\$[A-Za-z0-9_.]+ index 0 \\.{3} \\$[A-Za-z0-9_.]+\\.Length into array \\$[A-Za-z0-9_.]+ at index (0|\\$[A-Za-z0-9_.]+)$",
-      "examples": [
-        "copy array $Arg2 index 0 ... $Arg2.Length into array $rc at index $Arg1.Length"
-      ]
-    },
-    {
-      "name": "return.int",
-      "regex": "^return -?\\d+$",
-      "examples": [
-        "return 0"
-      ]
-    },
-    {
-      "name": "skip.if.any",
-      "regex": "^skip if .+$",
-      "examples": [
-        "skip if $rc >= 0"
-      ]
-    },
-    {
-      "name": "write.log.printf",
-      "regex": "^write to log file \\$[A-Za-z0-9_.]+ append=\\d+ printf: .+$",
-      "examples": [
-        "write to log file $PageId append=1 printf: fmt='New install', null, null"
-      ]
-    },
-    {
-      "name": "write.logbook.printf",
-      "regex": "^write to player logbook: printf: .+$",
-      "examples": [
-        "write to player logbook: printf: pageid=$PageId textid=$Id.Logbook.Installed, null, null"
-      ]
-    },
-    {
-      "name": "set.command.upgrade",
-      "regex": "^set script command upgrade: command=\\[[A-Za-z0-9_ ]+\\]\\s+upgrade=\\[(TRUE|FALSE)\\]$",
-      "examples": [
-        "set script command upgrade: command=[GLEN_OK_TRADE]  upgrade=[TRUE]"
-      ]
-    },
-    {
-      "name": "global.script.map",
-      "regex": "^global script map: set: key=\\[[A-Za-z0-9_ ]+\\], class=\\[[A-Za-z0-9_ ]+\\], race=\\[[A-Za-z0-9_ ]+\\], script=[A-Za-z0-9_.]+, prio=\\d+$",
-      "examples": [
-        "global script map: set: key=[GLEN_OK_TRADE], class=[Moveable Ship], race=[Player], script=glen.trade.ok.cmd, prio=0"
-      ]
-    },
-    {
-      "name": "set.command.preload",
-      "regex": "^set ship command preload script: command=\\[[A-Za-z0-9_ ]+\\] script=[A-Za-z0-9_.]+$",
-      "examples": [
-        "set ship command preload script: command=[GLEN_OK_TRADE] script=glen.trade.ok.menu"
-      ]
-    },
-    {
-      "name": "add.money",
-      "regex": "^add money to player: \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "add money to player: $Cost"
-      ]
-    },
-    {
-      "name": "set.script.command",
-      "regex": "^set script command: \\[[A-Za-z0-9_ ]+\\]$",
-      "examples": [
-        "set script command: [GLEN_OK_TRADE]"
-      ]
-    },
-    {
-      "name": "send.message",
-      "regex": "^send incoming message \\$[A-Za-z0-9_.]+ to player: display it=\\d+$",
-      "examples": [
-        "send incoming message $Msg to player: display it=0"
-      ]
-    },
-    {
-      "name": "speak.text",
-      "regex": "^=?\\s*speak text: page=\\d+ id=\\d+ priority=\\d+$",
-      "examples": [
-        "= speak text: page=13 id=1276 priority=0"
-      ]
-    },
-    {
-      "name": "speak.array",
-      "regex": "^=?\\s*speak array: \\$[A-Za-z0-9_.]+ prio=\\d+$",
-      "examples": [
-        "= speak array: $d prio=0"
-      ]
-    },
-    {
-      "name": "play.sample",
-      "regex": "^play sample \\d+$",
-      "examples": [
-        "play sample 972"
-      ]
-    },
-    {
-      "name": "send.message.literal",
-      "regex": "^send incoming message '[^']+' to player: display it=\\[(TRUE|FALSE)\\]$",
-      "examples": [
-        "send incoming message 'ECS Not Detected - Comms with ships and stations will be disabled !' to player: display it=[TRUE]"
-      ]
-    },
-    {
-      "name": "return.bool",
-      "regex": "^return \\[(TRUE|FALSE)\\]$",
-      "examples": [
-        "return [TRUE]"
-      ]
-    },
-    {
-      "name": "start.speak.text",
-      "regex": "^START speak text: page=\\d+ id=\\d+ priority=\\d+$",
-      "examples": [
-        "START speak text: page=13 id=131 priority=0"
-      ]
-    },
-    {
-      "name": "unregister.hotkey",
-      "regex": "^unregister hotkey \\$[A-Za-z0-9_.]+$",
-      "examples": [
-        "unregister hotkey $hotkey.id"
-      ]
-    }
-  ]
+    "patterns": [
+        {
+            "name": "load.text",
+            "regex": "^load text:\\s*id=(\\d+|\\$[A-Za-z0-9_.]+)$",
+            "examples": [
+                "load text: id=9055"
+            ]
+        },
+        {
+            "name": "al.register",
+            "regex": "^al engine:\\s*register script='[^']+'$",
+            "examples": [
+                "al engine: register script='al.plugin.slx'"
+            ]
+        },
+        {
+            "name": "al.description",
+            "regex": "^al engine:\\s*set plugin '[^']+' description to '.*'$",
+            "examples": [
+                "al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'"
+            ]
+        },
+        {
+            "name": "al.timer",
+            "regex": "^al engine:\\s*set plugin '[^']+' timer interval to \\d+\\s*s$",
+            "examples": [
+                "al engine: set plugin 'al.plugin.slx' timer interval to 30 s"
+            ]
+        },
+        {
+            "name": "stop.task",
+            "regex": "^\\[THIS]->stop task \\d+$",
+            "examples": [
+                "[THIS]->stop task 0"
+            ]
+        },
+        {
+            "name": "start.task",
+            "regex": "^start task \\d+\\s+with script='[^']+'\\s+on=\\[THIS\\]$",
+            "examples": [
+                "start task 123 with script='plugin.example' on=[THIS]"
+            ]
+        },
+        {
+            "name": "call.script",
+            "regex": "^=?\\s*\\[THIS]->\\s*call script '[^']+'( : .*)?$",
+            "examples": [
+                "= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt"
+            ]
+        },
+        {
+            "name": "wait",
+            "regex": "^\\s*=?\\s*wait (\\d+|\\$[A-Za-z0-9_.]+)\\s*ms$",
+            "examples": [
+                "wait 1000 ms"
+            ]
+        },
+        {
+            "name": "set.global",
+            "regex": "^set global variable:\\s*name='[^']+'\\s*value=.*$",
+            "examples": [
+                "set global variable: name='g.slx.foo' value=$bar"
+            ]
+        },
+        {
+            "name": "return",
+            "regex": "^return (null|value .+)$",
+            "examples": [
+                "return null"
+            ]
+        },
+        {
+            "name": "write.log",
+            "regex": "^write to log file \\$[A-Za-z0-9_.]+\\s+append=\\[(TRUE|FALSE)\\]\\s+value=(\\$[A-Za-z0-9_.]+|'[^']+')$",
+            "examples": [
+                "write to log file $DebugID append=[FALSE] value=$txt"
+            ]
+        },
+        {
+            "name": "dec",
+            "regex": "^dec \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
+            "examples": [
+                "dec $s ="
+            ]
+        },
+        {
+            "name": "remove.array.elem",
+            "regex": "^remove element from array \\$[A-Za-z0-9_.]+ at index \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "remove element from array $config.Array at index $s"
+            ]
+        },
+        {
+            "name": "skip.if",
+            "regex": "^skip if \\$[A-Za-z0-9_.]+(\\[[^\\]]+\\])?$",
+            "examples": [
+                "skip if $section"
+            ]
+        },
+        {
+            "name": "al.description.var",
+            "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ description to \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "al engine: set plugin $al.PluginID description to $plugin.description"
+            ]
+        },
+        {
+            "name": "al.timer.var",
+            "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\d+\\s*s$",
+            "examples": [
+                "al engine: set plugin $al.PluginID timer interval to 25 s"
+            ]
+        },
+        {
+            "name": "al.timer.vars",
+            "regex": "^al engine:\\s*set plugin \\$[A-Za-z0-9_.]+ timer interval to \\$[A-Za-z0-9_.]+\\s*s$",
+            "examples": [
+                "al engine: set plugin $plugin.ID timer interval to $interval s"
+            ]
+        },
+        {
+            "name": "set.global.var",
+            "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "set global variable: name=$al.PluginID value=$al.Settings"
+            ]
+        },
+        {
+            "name": "return.var",
+            "regex": "^return \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "return $al.Ret"
+            ]
+        },
+        {
+            "name": "append.array",
+            "regex": "^append \\$[A-Za-z0-9_.]+ to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append $station to array $exclude.array"
+            ]
+        },
+        {
+            "name": "gosub",
+            "regex": "^gosub [A-Za-z0-9_.]+:$",
+            "examples": [
+                "gosub Debug.Sub:"
+            ]
+        },
+        {
+            "name": "label",
+            "regex": "^[A-Za-z0-9_.]+:$",
+            "examples": [
+                "Debug.Sub:"
+            ]
+        },
+        {
+            "name": "endsub",
+            "regex": "^endsub$",
+            "examples": [
+                "endsub"
+            ]
+        },
+        {
+            "name": "obj.add.units",
+            "regex": "^\\s*=?\\s*\\$[A-Za-z0-9_.]+\\s*->\\s*add (\\$[A-Za-z0-9_.]+|[-]?\\d+) units of \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "= $station-> add $amount units of $ware"
+            ]
+        },
+        {
+            "name": "wait.random",
+            "regex": "^\\s*=?\\s*wait randomly from (\\d+|\\$[A-Za-z0-9_.]+) to (\\d+|\\$[A-Za-z0-9_.]+) ms$",
+            "examples": [
+                "= wait randomly from 500 to 1000 ms"
+            ]
+        },
+        {
+            "name": "al.register.noquote",
+            "regex": "^al engine:\\s*register script=[A-Za-z0-9_.]+$",
+            "examples": [
+                "al engine: register script=al.LI.FDN.event"
+            ]
+        },
+        {
+            "name": "inc",
+            "regex": "^inc \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
+            "examples": [
+                "inc $sector.count ="
+            ]
+        },
+        {
+            "name": "set.global.var.null",
+            "regex": "^set global variable:\\s*name=\\$[A-Za-z0-9_.]+\\s*value=null$",
+            "examples": [
+                "set global variable: name=$var value=null"
+            ]
+        },
+        {
+            "name": "menu.info",
+            "regex": "^add custom menu info line to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+            "examples": [
+                "add custom menu info line to array $menu: text=$txt"
+            ]
+        },
+        {
+            "name": "menu.heading",
+            "regex": "^add custom menu heading to array \\$[A-Za-z0-9_.]+: title=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+            "examples": [
+                "add custom menu heading to array $menu: title=$txt"
+            ]
+        },
+        {
+            "name": "menu.item",
+            "regex": "^add custom menu item to array \\$[A-Za-z0-9_.]+: text=(\\$[A-Za-z0-9_.]+|'[^']*') returnvalue=(\\$[A-Za-z0-9_.]+|'[^']*'|null)$",
+            "examples": [
+                "add custom menu item to array $menu: text=$txt returnvalue=$return.array"
+            ]
+        },
+        {
+            "name": "menu.section",
+            "regex": "^add section to custom menu: \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "add section to custom menu: $menu"
+            ]
+        },
+        {
+            "name": "menu.group.start",
+            "regex": "^add new grouping to menu: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*'), open=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "add new grouping to menu: $menu, text=$txt, open=$check"
+            ]
+        },
+        {
+            "name": "menu.group.end",
+            "regex": "^add end grouping to menu: \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "add end grouping to menu: $menu"
+            ]
+        },
+        {
+            "name": "menu.nonselect",
+            "regex": "^add non selectable menu item: \\$[A-Za-z0-9_.]+, text=(\\$[A-Za-z0-9_.]+|'[^']*')$",
+            "examples": [
+                "add non selectable menu item: $menu, text=$temp.array"
+            ]
+        },
+        {
+            "name": "display.subtitle",
+            "regex": "^display subtitle text: text=\\$[A-Za-z0-9_.]+ duration=\\d+\\s*ms$",
+            "examples": [
+                "display subtitle text: text=$txt duration=2000 ms"
+            ]
+        },
+        {
+            "name": "menu.open",
+            "regex": "^\\s*=?\\s*open custom menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "open custom menu: title=$txt description=null option array=$menu"
+            ]
+        },
+        {
+            "name": "menu.open.info",
+            "regex": "^\\s*=?\\s*open custom info menu: title=\\$[A-Za-z0-9_.]+ description=(\\$[A-Za-z0-9_.]+|null) option array=\\$[A-Za-z0-9_.]+(?: maxoptions=\\d+)?$",
+            "examples": [
+                "open custom info menu: title=$txt description=null option array=$menu maxoptions=2"
+            ]
+        },
+        {
+            "name": "skip.if.eq",
+            "regex": "^skip if \\$[A-Za-z0-9_.]+ == \\d+$",
+            "examples": [
+                "skip if $open.menu == 1"
+            ]
+        },
+        {
+            "name": "break",
+            "regex": "^break$",
+            "examples": [
+                "break"
+            ]
+        },
+        {
+            "name": "continue",
+            "regex": "^continue$",
+            "examples": [
+                "continue"
+            ]
+        },
+        {
+            "name": "do.if",
+            "regex": "^do if .+$",
+            "examples": [
+                "do if $Config[$Config.Debug.Enabled]"
+            ]
+        },
+        {
+            "name": "resize.array",
+            "regex": "^resize array \\$[A-Za-z0-9_.]+ to (\\d+|\\$[A-Za-z0-9_.]+)$",
+            "examples": [
+                "resize array $State to 30"
+            ]
+        },
+        {
+            "name": "append.const",
+            "regex": "^append (\\d+|\\[[A-Za-z0-9_ '()]+\\]|\\{[^}]+\\}) to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append 0 to array $Mins"
+            ]
+        },
+        {
+            "name": "copy.array",
+            "regex": "^copy array \\$[A-Za-z0-9_.]+ index 0 \\.{3} \\$[A-Za-z0-9_.]+\\.Length into array \\$[A-Za-z0-9_.]+ at index (0|\\$[A-Za-z0-9_.]+)$",
+            "examples": [
+                "copy array $Arg2 index 0 ... $Arg2.Length into array $rc at index $Arg1.Length"
+            ]
+        },
+        {
+            "name": "return.int",
+            "regex": "^return -?\\d+$",
+            "examples": [
+                "return 0"
+            ]
+        },
+        {
+            "name": "skip.if.any",
+            "regex": "^skip if .+$",
+            "examples": [
+                "skip if $rc >= 0"
+            ]
+        },
+        {
+            "name": "write.log.printf",
+            "regex": "^write to log file \\$[A-Za-z0-9_.]+ append=\\d+ printf: .+$",
+            "examples": [
+                "write to log file $PageId append=1 printf: fmt='New install', null, null"
+            ]
+        },
+        {
+            "name": "write.logbook.printf",
+            "regex": "^write to player logbook: printf: .+$",
+            "examples": [
+                "write to player logbook: printf: pageid=$PageId textid=$Id.Logbook.Installed, null, null"
+            ]
+        },
+        {
+            "name": "set.command.upgrade",
+            "regex": "^set script command upgrade: command=\\[[A-Za-z0-9_ ]+\\]\\s+upgrade=\\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "set script command upgrade: command=[GLEN_OK_TRADE]  upgrade=[TRUE]"
+            ]
+        },
+        {
+            "name": "global.script.map",
+            "regex": "^global script map: set: key=\\[[A-Za-z0-9_ ]+\\], class=\\[[A-Za-z0-9_ ]+\\], race=\\[[A-Za-z0-9_ ]+\\], script=[A-Za-z0-9_.]+, prio=\\d+$",
+            "examples": [
+                "global script map: set: key=[GLEN_OK_TRADE], class=[Moveable Ship], race=[Player], script=glen.trade.ok.cmd, prio=0"
+            ]
+        },
+        {
+            "name": "set.command.preload",
+            "regex": "^set ship command preload script: command=\\[[A-Za-z0-9_ ]+\\] script=[A-Za-z0-9_.]+$",
+            "examples": [
+                "set ship command preload script: command=[GLEN_OK_TRADE] script=glen.trade.ok.menu"
+            ]
+        },
+        {
+            "name": "add.money",
+            "regex": "^add money to player: \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "add money to player: $Cost"
+            ]
+        },
+        {
+            "name": "set.script.command",
+            "regex": "^set script command: \\[[A-Za-z0-9_ ]+\\]$",
+            "examples": [
+                "set script command: [GLEN_OK_TRADE]"
+            ]
+        },
+        {
+            "name": "send.message",
+            "regex": "^send incoming message \\$[A-Za-z0-9_.]+ to player: display it=\\d+$",
+            "examples": [
+                "send incoming message $Msg to player: display it=0"
+            ]
+        },
+        {
+            "name": "speak.text",
+            "regex": "^=?\\s*speak text: page=\\d+ id=\\d+ priority=\\d+$",
+            "examples": [
+                "= speak text: page=13 id=1276 priority=0"
+            ]
+        },
+        {
+            "name": "speak.array",
+            "regex": "^=?\\s*speak array: \\$[A-Za-z0-9_.]+ prio=\\d+$",
+            "examples": [
+                "= speak array: $d prio=0"
+            ]
+        },
+        {
+            "name": "play.sample",
+            "regex": "^play sample \\d+$",
+            "examples": [
+                "play sample 972"
+            ]
+        },
+        {
+            "name": "send.message.literal",
+            "regex": "^send incoming message '[^']+' to player: display it=\\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "send incoming message 'ECS Not Detected - Comms with ships and stations will be disabled !' to player: display it=[TRUE]"
+            ]
+        },
+        {
+            "name": "return.bool",
+            "regex": "^return \\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "return [TRUE]"
+            ]
+        },
+        {
+            "name": "start.speak.text",
+            "regex": "^START speak text: page=\\d+ id=\\d+ priority=\\d+$",
+            "examples": [
+                "START speak text: page=13 id=131 priority=0"
+            ]
+        },
+        {
+            "name": "unregister.hotkey",
+            "regex": "^unregister hotkey \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "unregister hotkey $hotkey.id"
+            ]
+        },
+        {
+            "name": "gosub.label",
+            "regex": "^gosub\\s+[A-Za-z0-9_.]+$",
+            "examples": [
+                "gosub dodock"
+            ]
+        },
+        {
+            "name": "send.message.var.bool",
+            "regex": "^send incoming message\\s+\\$[A-Za-z0-9_.]+\\s+to player: display it=\\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "send incoming message $msg to player: display it=[TRUE]"
+            ]
+        },
+        {
+            "name": "set.command.upgrade.software",
+            "regex": "^set script command upgrade: command=[A-Za-z0-9_]+\\s+upgrade=Carrier Command Software$",
+            "examples": [
+                "set script command upgrade: command=ANARKIS_DOCKALL  upgrade=Carrier Command Software"
+            ]
+        },
+        {
+            "name": "set.command.upgrade.bool",
+            "regex": "^set script command upgrade: command=[A-Za-z0-9_]+\\s+upgrade=\\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "set script command upgrade: command=ANARKIS_STATIONDEFENSE  upgrade=[TRUE]"
+            ]
+        },
+        {
+            "name": "global.script.map.simple",
+            "regex": "^global script map: set: key=[A-Za-z0-9_]+, class=[A-Za-z0-9]+, race=Player, script=[A-Za-z0-9_.]+, prio=\\d+$",
+            "examples": [
+                "global script map: set: key=ANARKIS_DOCKALL, class=M1, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0"
+            ]
+        },
+        {
+            "name": "goto.label",
+            "regex": "^goto label [A-Za-z0-9_.]+$",
+            "examples": [
+                "goto label exit"
+            ]
+        },
+        {
+            "name": "add.money.literal",
+            "regex": "^add money to player: -?\\d+$",
+            "examples": [
+                "add money to player: -50000"
+            ]
+        },
+        {
+            "name": "menu.item.num",
+            "regex": "^add custom menu item to array\\s+\\$[A-Za-z0-9_.]+:\\s*text=\\$[A-Za-z0-9_.]+\\s+returnvalue=-?\\d+$",
+            "examples": [
+                "add custom menu item to array $menu: text=$dialog.yes returnvalue=1"
+            ]
+        },
+        {
+            "name": "insert.array",
+            "regex": "^insert\\s+\\$[A-Za-z0-9_.]+\\s+into array\\s+\\$[A-Za-z0-9_.]+\\s+at index\\s+-?\\d+$",
+            "examples": [
+                "insert $my.news into array $news.list at index 0"
+            ]
+        },
+        {
+            "name": "copy.array.literal",
+            "regex": "^copy array\\s+\\$[A-Za-z0-9_.]+\\s+index\\s+\\d+\\s+\\.\\.\\.\\s+\\d+\\s+into array\\s+\\$[A-Za-z0-9_.]+\\s+at index\\s+\\d+$",
+            "examples": [
+                "copy array $setup index 0 ... 6 into array $config.to.update at index 0"
+            ]
+        },
+        {
+            "name": "start.command.args",
+            "regex": "^START\\s+\\$[A-Za-z0-9_.]+\\s+->\\s+command\\s+\\$[A-Za-z0-9_.]+\\s+:\\s+arg1=\\$[A-Za-z0-9_.]+,\\s+arg2=\\$[A-Za-z0-9_.]+,\\s+arg3=\\$[A-Za-z0-9_.]+,\\s+arg4=(\\$[A-Za-z0-9_.]+|null)$",
+            "examples": [
+                "START $new.leader -> command $cmd.name : arg1=$arg1, arg2=$arg2, arg3=$arg3, arg4=null"
+            ]
+        }
+    ]
 }
