@@ -118,15 +118,24 @@ def has_lang_44(t_dir: Path) -> bool:
     return any("-L044" in p.name for p in t_dir.glob("*.xml"))
 
 def write_x3s(out_path: Path, header: dict[str, str], lines: list[str]) -> None:
+    """Write a .x3s file with a small header and one line per script line."""
+
+    # Defensive: ``lines`` should be a list of strings, but older callers
+    # accidentally passed a single string which caused one output line per
+    # character.  Handle that gracefully to keep converters idempotent.
+    if isinstance(lines, str):
+        lines = [lines]
+
     with out_path.open("w", encoding="utf-8", newline="\n") as f:
         # Header (only write keys that exist)
         for key in ("name", "page", "lang", "origin_mod", "source"):
             if key in header and header[key]:
                 f.write(f"#{key}: {header[key]}\n")
         f.write("\n")
-        # Write exactly one line for each XML <line> node
+
+        # Body: exactly one output line per XML <line> node
         for line in lines:
-            f.write(line.rstrip() + "\n")
+            f.write(f"{line.rstrip()}\n")
 
 def copy_tree(src: Path, dst: Path, summary: ModSummary) -> None:
     if not src.exists():
@@ -144,8 +153,11 @@ def copy_tree(src: Path, dst: Path, summary: ModSummary) -> None:
             if src.name == "t":
                 summary.t_copied += 1
 
-def convert_mod(mod_dir: Path, out_root: Path) -> ModSummary:
-    mod_name = mod_dir.name
+def convert_mod(mod_dir: Path, out_root: Path, mod_name: str | None = None) -> ModSummary:
+    """Convert a single mod directory to .x3s fixtures."""
+
+    if mod_name is None:
+        mod_name = mod_dir.name
     paths = ensure_dirs(out_root, mod_name)
     summary = ModSummary()
 
@@ -240,14 +252,16 @@ def main() -> int:
         if not mod_dir.exists():
             print(f"ERROR: mod path not found: {mod_dir}", file=sys.stderr)
             return 2
-        mods = [mod_dir]
+        # Preserve the caller's mod name casing for the output folder.
+        input_name = Path(args.single_mod.replace("\\", "/")).name
+        mods = [(mod_dir, input_name)]
         print(f"Converting from {mod_dir} -> {out_root}")
     else:
         mods_root = _norm_path(args.mods_dir)
         if not mods_root.exists():
             print(f"ERROR: mods root not found: {mods_root}", file=sys.stderr)
             return 2
-        mods = discover_mods(mods_root)
+        mods = [(m, m.name) for m in discover_mods(mods_root)]
         if not mods:
             print(f"ERROR: no mod folders in {mods_root}", file=sys.stderr)
             return 2
@@ -255,14 +269,14 @@ def main() -> int:
 
     total = ModSummary()
     failed_mods: list[str] = []
-    for mod in mods:
-        print(f"- [{mod.name}] …", end="", flush=True)
-        s = convert_mod(mod, out_root)
+    for mod, mod_name in mods:
+        print(f"- [{mod_name}] …", end="", flush=True)
+        s = convert_mod(mod, out_root, mod_name)
         print(
             f" converted={s.scripts_converted} skipped={s.scripts_skipped} t={s.t_copied} director={'y' if s.director_copied else 'n'}"
         )
         if (mod / "scripts").exists() and s.scripts_converted == 0:
-            failed_mods.append(mod.name)
+            failed_mods.append(mod_name)
         total.scripts_converted += s.scripts_converted
         total.scripts_skipped += s.scripts_skipped
         total.t_copied += s.t_copied

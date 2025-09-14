@@ -1,0 +1,22 @@
+#name: anarkis.acc.lib.get.leader.big
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.get.leader.big.xml
+
+$arr = [THIS] -> call script anarkis.acc.lib.get.leaderlist :
+$res = null
+$follow.count = 0
+
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$formation = $select -> get formation follower ships
+$formation =  size of array $formation
+if $formation >= $follow.count
+$res = $select
+$follow.count = $formation
+end
+end
+
+return $res

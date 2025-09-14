@@ -1,0 +1,12 @@
+#name: anarkis.acc.wing.attack.pl
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.wing.attack.pl.xml
+
+* ===========================================
+* Wing : Send a wing to attack a given target
+* ===========================================
+[THIS] -> set command: ANARKIS_ATTACKWING  target=$target target2=$wing.size par1=null par2=null
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$target  wing size=$wing.size  wing ID='A'
+
+return null

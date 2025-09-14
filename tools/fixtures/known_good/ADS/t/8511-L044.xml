@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<language id="44">
+
+<page id="8511" title="ECS" descr="Extended Communication System">
+ <t id="100">\033RECS:\033X \033WExtended Communication System\033X</t>
+ <t id="101">250</t>
+ <t id="102">Anarkis Federation</t>
+ <t id="103">\033RECS:\033X Extended Comm. System</t>
+ <t id="104">© Serial Kicked / [\033YAnarkis Federation\033X]</t>
+
+<t id="200">\033WECS 2.5 Manager\033X</t>
+<t id="201">The Extended Communication System is now %s</t>
+<t id="202">ECS Installed Plugins</t>
+<t id="203">\033W%s\033X  &lt; %s &gt;</t>
+<t id="204">Selected : \033W%s\033X</t>
+<t id="205">Selected Plugin Setup</t>
+<t id="206">Unregister Plugin</t>
+<t id="207">Script called : \033W%s\033X</t>
+<t id="208">Local variable : \033W%s\033X</t>
+<t id="209">Race : \033W%s\033X</t>
+<t id="210">Class : \033W%s\033X</t>
+<t id="211">ECS Setup</t>
+<t id="212">Remove ECS hotkey and config</t>
+<t id="213">Close this window</t>
+<t id="214">[author][b]Anarkis Federation[/b][/author] [b]ECS[/b] has been uninstalled succesfully.</t>
+<t id="215">News System : \033W%s\033X</t>
+<t id="216">[%s] - \033W%s\033X</t>
+<t id="217">From: \033W%s\033X</t>
+<t id="218">%s \n\n- Published %s ago.\n\n\n\n</t>
+<t id="219">Close</t>
+<t id="220">\033W%s\033X\n\n</t>
+<t id="221">Latest News</t>
+<t id="222">Nothing to display</t>
+<t id="223">\nPlease, select a message\n\n\n</t>
+<t id="224">Select</t>
+<t id="225">%s \n\n   -From: \033W%s\033X\n\n\n\n</t>
+<t id="226">Newsfeed Count : \033W%s\033X</t>
+<t id="227">Newsfeed Name : \033W%s\033X</t>
+
+<t id="300">\033GEnabled\033X</t>
+<t id="301">\033RDisabled\033X</t>
+<t id="302">\033RNot Found\033X</t>
+<t id="303">\033GDetected\033X</t>
+
+</page>
+
+</language>
+

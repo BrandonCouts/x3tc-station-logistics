@@ -1,0 +1,233 @@
+#name: anarkis.acc.setup.autocarrier
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.autocarrier.xml
+
+$page.id = 8510
+
+* ====
+* Retrieve setup, apply default if not found
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$cnt =  size of array $setup.array
+if not $cnt == 19
+$setup.array = [THIS] -> call script anarkis.ads.setup.createdefault :  ref.object=[THIS]
+[THIS] -> set local variable: name='anarkis.acc.setup' value=$setup.array
+end
+* ====
+
+* ====
+* Init selection arrays
+* - Alert Level
+$threat.level = $setup.array[0]
+$sel.threat =  array alloc: size=0
+append 1 to array $sel.threat
+append 3 to array $sel.threat
+append 5 to array $sel.threat
+append 8 to array $sel.threat
+append 10 to array $sel.threat
+append 15 to array $sel.threat
+append 20 to array $sel.threat
+append 25 to array $sel.threat
+append 30 to array $sel.threat
+append 35 to array $sel.threat
+append 40 to array $sel.threat
+$sel.threat.selection =  get index of $threat.level in array $sel.threat offset=-1 + 1
+$sel.threat.id = 'threat'
+* - Radar Range
+$radar.range = $setup.array[1]
+$sel.radar =  array alloc: size=0
+$v1 = 0
+while $v1 < 100000
+$v1 = $v1 + 5000
+append $v1 to array $sel.radar
+end
+$sel.radar.selection =  get index of $radar.range in array $sel.radar offset=-1 + 1
+$sel.radar.id = 'radar'
+* - Retreat Yes/No
+$retreat = $setup.array[3]
+$sel.yesno =  array alloc: size=0
+$v1 =  read text: page=$page.id id=820
+append $v1 to array $sel.yesno
+$v1 =  read text: page=$page.id id=821
+append $v1 to array $sel.yesno
+if $retreat == [TRUE]
+$sel.retreat.selection = 0
+else
+$sel.retreat.selection = 1
+end
+$sel.retreat.id = 'retreat'
+* - Attack Mode
+$sel.attack =  array alloc: size=0
+$v1 =  read text: page=$page.id id=206
+append $v1 to array $sel.attack
+$v1 =  read text: page=$page.id id=207
+append $v1 to array $sel.attack
+$v1 =  read text: page=$page.id id=208
+append $v1 to array $sel.attack
+$sel.attack.selection = $setup.array[6]
+skip if $sel.attack.selection != 3
+$sel.attack.selection = 0
+$sel.attack.id = 'attack'
+* - Defense ship count
+$defence = $setup.array[2]
+$sel.defense =  array alloc: size=0
+append 0 to array $sel.defense
+append 1 to array $sel.defense
+append 3 to array $sel.defense
+append 5 to array $sel.defense
+append 8 to array $sel.defense
+append 10 to array $sel.defense
+append 15 to array $sel.defense
+$sel.defense.selection =  get index of $defence in array $sel.defense offset=-1 + 1
+$sel.defense.id = 'defense'
+* - Delay before docking ships
+$delay = $setup.array[18]
+$sel.delay =  array alloc: size=0
+append 0 to array $sel.delay
+$v1 = 0
+while $v1 < 600
+$v1 = $v1 + 30
+append $v1 to array $sel.delay
+end
+$sel.delay.selection =  get index of $delay in array $sel.delay offset=-1 + 1
+$sel.delay.id = 'delay'
+* - Display Warning message Yes/No
+$warning = $setup.array[4]
+if $warning == [TRUE]
+$sel.warning.selection = 0
+else
+$sel.warning.selection = 1
+end
+$sel.warning.id = 'warning'
+* - Alert Type
+$sel.alert =  array alloc: size=0
+$v1 =  read text: page=$page.id id=233
+append $v1 to array $sel.alert
+$v1 =  read text: page=$page.id id=234
+append $v1 to array $sel.alert
+$v1 =  read text: page=$page.id id=235
+append $v1 to array $sel.alert
+$sel.alert.selection = $setup.array[5]
+skip if $sel.alert.selection != 3
+$sel.alert.selection = 0
+$sel.alert.id = 'warning.type'
+* End of init selection arrays
+* ====
+
+
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=220
+add custom menu heading to array $menu: title=$st
+
+$st = sprintf: pageid=$page.id textid=221, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.threat, default=$sel.threat.selection, return id=$sel.threat.id
+
+$st = sprintf: pageid=$page.id textid=226, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.radar, default=$sel.radar.selection, return id=$sel.radar.id
+
+$st = sprintf: pageid=$page.id textid=223, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.yesno, default=$sel.retreat.selection, return id=$sel.retreat.id
+
+$st = sprintf: pageid=$page.id textid=224, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.attack, default=$sel.attack.selection, return id=$sel.attack.id
+
+$st = sprintf: pageid=$page.id textid=225, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.defense, default=$sel.defense.selection, return id=$sel.defense.id
+
+$st = sprintf: pageid=$page.id textid=238, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.delay, default=$sel.delay.selection, return id=$sel.delay.id
+
+$st =  read text: page=$page.id id=228
+add custom menu heading to array $menu: title=$st
+
+$st = sprintf: pageid=$page.id textid=222, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.yesno, default=$sel.warning.selection, return id=$sel.warning.id
+
+$st = sprintf: pageid=$page.id textid=229, null, null, null, null, null
+add value selection to menu: $menu, text=$st, value array=$sel.alert, default=$sel.alert.selection, return id=$sel.alert.id
+
+$st =  read text: page=$page.id id=403
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=1087
+add custom menu item to array $menu: text=$st returnvalue='save'
+
+$v1 = [THIS] -> get object class
+$st = sprintf: pageid=$page.id textid=250, [THIS], $v1, null, null, null
+add custom menu info line to array $menu: text=$st
+$st = sprintf: pageid=$page.id textid=251, [SECTOR], null, null, null, null
+add custom menu info line to array $menu: text=$st
+$v1 = [THIS] -> get number of landed ships
+$v2 = [THIS] -> get dock bay size
+$v3 = [THIS] -> get owned ships: class/type=Ship
+$v3 =  size of array $v3
+$st = sprintf: pageid=$page.id textid=252, $v1, $v2, $v3, null, null
+add custom menu info line to array $menu: text=$st
+$st = sprintf: pageid=$page.id textid=1088, null, null, null, null, null
+add custom menu info line to array $menu: text=$st
+
+$st = sprintf: fmt='%s - Carrier Setup', [THIS], null, null, null, null
+$v1 =  read text: page=$page.id id=200
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if  is datatyp[ $menu.result ] == DATATYP_ARRAY
+$cnt =  size of array $menu.result
+while $cnt
+dec $cnt =
+$r.id = $menu.result[$cnt][0]
+$r.val = $menu.result[$cnt][1]
+* - - - Defense Ships
+if $r.id == $sel.defense.id
+$setup.array[2] = $sel.defense[$r.val]
+$sel.defense.selection = $r.val
+* - - - Radar Range
+else if $r.id == $sel.radar.id
+$setup.array[1] = $sel.radar[$r.val]
+$sel.radar.selection = $r.val
+* - - - Warning Type
+else if $r.id == $sel.alert.id
+$setup.array[5] = $r.val
+$sel.alert.selection = $r.val
+* - - - Attack Mode
+else if $r.id == $sel.attack.id
+skip if not $r.val == 0
+$r.val = 0
+$setup.array[6] = $r.val
+$sel.attack.selection = $r.val
+* - - - Retreat Mode
+else if $r.id == $sel.retreat.id
+if $r.val == 0
+$setup.array[3] = [TRUE]
+else
+$setup.array[3] = [FALSE]
+end
+$sel.retreat.selection = $r.val
+* - - - Delay before dock
+else if $r.id == $sel.delay.id
+$setup.array[18] = $sel.delay[$r.val]
+$sel.delay.selection = $r.val
+* - - - Warning Toggle
+else if $r.id == $sel.warning.id
+if $r.val == 0
+$setup.array[4] = [TRUE]
+else
+$setup.array[4] = [FALSE]
+end
+$sel.warning.selection = $r.val
+* - - - Threat Setting
+else if $r.id == $sel.threat.id
+$setup.array[0] = $sel.threat[$r.val]
+$sel.threat.selection = $r.val
+
+end
+end
+
+
+end
+
+return null

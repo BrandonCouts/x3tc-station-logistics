@@ -1,0 +1,9 @@
+#name: anarkis.lib.disable.ai
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.disable.ai.xml
+
+[THIS] -> set race logic control enabled to [FALSE]
+[THIS] -> disable ship rebuild
+[THIS] -> set StartAction enabled to [FALSE]
+return null

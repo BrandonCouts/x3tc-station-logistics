@@ -1,0 +1,53 @@
+#name: anarkis.ads.wing.attack.pl
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.wing.attack.pl.xml
+
+* ===========================================
+* Wing : Send a wing to attack a given target
+* ===========================================
+
+$title =  read text: page=2010 id=834
+$obj.class = $target -> get object class
+$wing.size = 5
+if $target -> is of class Fighter
+$wing.size = 5
+else if $target -> is of class Freighter
+$wing.size = 3
+else if $obj.class == TL
+$wing.size = 10
+else if $obj.class == M8
+$wing.size = 7
+else if $obj.class == M6
+$wing.size = 12
+else if $obj.class == M7
+$wing.size = 15
+else if $obj.class == M2
+$wing.size = 30
+else if $obj.class == M1
+$wing.size = 25
+end
+
+$res = [THIS] -> call script anarkis.lib.get.dockedowned :  ship class=Moveable Ship  local to check='anarkis.acc.ship'
+$res =  size of array $res
+skip if not $res < $wing.size
+$wing.size = $res
+
+skip if [THIS] -> call script anarkis.ads.comm.wingmenu :  title=$title  target=$target  default count=$wing.size
+return null
+
+$res = [THIS] -> get local variable: name='anarkis.menu.result'
+$target = $res[0]
+$wing.size = $res[1]
+$wing.list = $res[2]
+
+$wing.count =  size of array $wing.list
+[THIS] -> set command: ANARKIS_ATTACKWING  target=$target target2=$wing.size par1=null par2=null
+if $wing.count > 0
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$target  wing size=$wing.list  wing ID='A'
+else
+= [THIS] -> call script anarkis.acc.wing.attack :  target=$target  wing size=$wing.size  wing ID='A'
+end
+[THIS] -> set local variable: name='anarkis.menu.result' value=null
+
+return [TRUE]

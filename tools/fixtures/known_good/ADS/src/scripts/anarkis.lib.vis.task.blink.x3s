@@ -1,0 +1,45 @@
+#name: anarkis.lib.vis.task.blink
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.vis.task.blink.xml
+
+$page.id = 8513
+
+$saved.name = [THIS] -> get name
+$save.owner = [THIS] -> get owner race
+
+$blink1 = sprintf: pageid=$page.id textid=150, [THIS], null, null, null, null
+$blink2 = sprintf: pageid=$page.id textid=151, [THIS], null, null, null, null
+$cnt = 0
+while [TRUE]
+if $check.local
+skip if [THIS] -> get local variable: name=$check.local
+break
+end
+if $stop.oos
+$pl.sector = [PLAYERSHIP] -> get sector
+skip if [SECTOR] == $pl.sector
+break
+end
+
+$curr.owner = [THIS] -> get owner race
+if $curr.owner != $save.owner
+break
+end
+
+[THIS] -> set name to $blink1
+= wait 1000 ms
+[THIS] -> set name to $blink2
+= wait 1000 ms
+if $duration
+inc $cnt =
+inc $cnt =
+skip if $cnt <= $duration
+break
+end
+end
+
+[THIS] -> set name to $saved.name
+[THIS] -> set local variable: name='anarkis.isblinking' value=null
+
+return null

@@ -1,0 +1,33 @@
+#name: anarkis.lib.wing.split
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.wing.split.xml
+
+* ===========================================
+* Split a wing in two and returns secondary leader
+* Input : any ship of the wing + size of new wing
+* Output : New leader
+* ===========================================
+
+$old.wing = [THIS] -> call script anarkis.lib.wing.getall :  ship=$wing.leader
+$old.wing.size =  size of array $old.wing
+
+$cnt =  = random value from 1 to $old.wing.size - 1
+$new.leader = $old.wing[$cnt]
+$new.leader -> remove from any formation
+remove element from array $old.wing at index $cnt
+
+$cnt = $new.size
+$old.wing.size =  size of array $old.wing
+
+while $cnt
+dec $cnt =
+dec $old.wing.size =
+$ship = $old.wing[$old.wing.size]
+$ship -> remove from any formation
+$ship -> add to formation with leader $new.leader
+START $ship -> call script !ship.cmd.attacksame.std :  the target=$new.leader  stop if leader is docked=[TRUE]
+end
+
+
+return $new.leader

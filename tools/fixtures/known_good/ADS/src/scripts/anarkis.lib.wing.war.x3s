@@ -1,0 +1,23 @@
+#name: anarkis.lib.wing.war
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.wing.war.xml
+
+* ===========================================
+* All ships in the wing will turn red and will attack the selected object
+* Input : any ship of the wing, the target.
+* ===========================================
+
+$wing = [THIS] -> call script anarkis.lib.wing.getall :  ship=$ship
+$cnt =  size of array $wing
+
+while $cnt
+dec $cnt =
+$select = $wing[$cnt]
+$select -> set relation against $target to Foe
+$select -> set attack target to $target
+$select -> set attacker to $target
+$select -> send signal SIGNAL_ATTACKED : arg1=$target, arg2=[ACTION_KILL_ALL_ENEMIES], arg3=null, arg4=null
+end
+
+return null

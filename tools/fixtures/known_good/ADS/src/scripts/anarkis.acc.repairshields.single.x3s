@@ -1,0 +1,8 @@
+#name: anarkis.acc.repairshields.single
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.repairshields.single.xml
+
+$max = $ship -> get maximum shield strength
+$ship -> set current shield strength to $max
+return null

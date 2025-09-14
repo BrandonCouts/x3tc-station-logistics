@@ -1,0 +1,48 @@
+#name: plugin.sk.ecs.al.register
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.al.register.xml
+
+$text.id = 8511
+
+$plugin.Vars = get global variable: name=$plugin.ID
+
+* setup new data structure and init it
+if not $plugin.Vars
+$plugin.Vars =  array alloc: size=2
+set global variable: name=$plugin.ID value=$plugin.Vars
+$plugin.Vars[0] = 0
+$plugin.Vars[1] = [TRUE]
+end
+
+* init and reinit are run every time the game loads
+if $plugin.Event == 'init' OR $plugin.Event == 'reinit'
+$desc = sprintf: pageid=$text.id textid=100, null, null, null, null, null
+al engine: set plugin $plugin.ID description to $desc
+$interval = 30 * 60
+al engine: set plugin $plugin.ID timer interval to $interval s
+skip if get global variable: name='plugin.ecs.setup'
+= [THIS] -> call script plugin.sk.ecs.al.init :
+
+else if $plugin.Event == 'isenabled'
+$desc = sprintf: pageid=$text.id textid=100, null, null, null, null, null
+al engine: set plugin $plugin.ID description to $desc
+$enabled = $plugin.Vars[1]
+return $enabled
+
+* Use this area to process special instructions when the plugin is toggled on
+else if $plugin.Event == 'start'
+$plugin.Vars[1] = [TRUE]
+= [THIS] -> call script plugin.sk.ecs.al.init :
+= [THIS] -> call script plugin.sk.ecs.manager :
+* Use this area to process special instructions when the plugin is toggled off
+else if $plugin.Event == 'stop'
+$plugin.Vars[1] = [FALSE]
+= [THIS] -> call script plugin.sk.ecs.al.stop :
+
+* The event script is called every interval
+else if $plugin.Event == 'timer'
+$enabled = $plugin.Vars[1]
+end
+
+return null

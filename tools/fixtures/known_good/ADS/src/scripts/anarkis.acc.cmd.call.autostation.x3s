@@ -1,0 +1,13 @@
+#name: anarkis.acc.cmd.call.autostation
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.call.autostation.xml
+
+* ===========================================
+* Automated Carrier : Main Task
+* ===========================================
+= [THIS] -> call script anarkis.acc.task.autocarrier :
+
+
+return null
+

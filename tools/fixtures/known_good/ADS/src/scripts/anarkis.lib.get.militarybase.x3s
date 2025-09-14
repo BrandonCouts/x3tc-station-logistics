@@ -1,0 +1,47 @@
+#name: anarkis.lib.get.militarybase
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.militarybase.xml
+
+$military.types =  array alloc: size=0
+append Military Outpost to array $military.types
+append OTAS HQ to array $military.types
+append Terracorp HQ to array $military.types
+append Jonferco Headquarters to array $military.types
+append Plutarch Mining Corporation HQ to array $military.types
+append Atreus Headquarters to array $military.types
+append Military Outpost to array $military.types
+append Military Outpost to array $military.types
+append Strong Arms HQ to array $military.types
+append Military Outpost to array $military.types
+append Military Outpost to array $military.types
+append NMMC Headquarters to array $military.types
+append Duke's Haven to array $military.types
+append Orbital Defence Station to array $military.types
+append Orbital Defence Station to array $military.types
+append Military Base to array $military.types
+append Orbital Defence Station to array $military.types
+append Orbital Patrol Base to array $military.types
+append Headquarters to array $military.types
+append Military Base to array $military.types
+append Orbital Defence Station to array $military.types
+$military.cnt =  size of array $military.types
+
+
+$result =  array alloc: size=0
+
+$sector.stations =  find station: sector=$sector class or type=Dock race=$race flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+$cnt =  size of array $sector.stations
+while $cnt
+dec $cnt =
+$select = $sector.stations[$cnt]
+$type = $select -> get ware type code of object
+skip if not  find $type in array: $military.types
+append $select to array $result
+end
+
+$cnt =  size of array $result
+skip if $cnt
+return null
+
+return $result

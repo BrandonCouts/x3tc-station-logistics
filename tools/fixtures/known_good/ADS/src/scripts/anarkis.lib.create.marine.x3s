@@ -1,0 +1,21 @@
+#name: anarkis.lib.create.marine
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.create.marine.xml
+
+skip if $ship -> exists
+return null
+
+$pass = [THIS] -> call script anarkis.lib.create.passenger :  ship=$ship  race=$race
+$pass -> train passenger to marine
+
+$skill =  = random value from 20 to 80 - 1
+$pass -> set marine skill: fighting=$skill
+$skill =  = random value from 20 to 80 - 1
+$pass -> set marine skill: hacking=$skill
+$skill =  = random value from 20 to 80 - 1
+$pass -> set marine skill: mechanical=$skill
+$skill =  = random value from 20 to 80 - 1
+$ship -> set marine skill: engineering=$skill
+
+return $pass

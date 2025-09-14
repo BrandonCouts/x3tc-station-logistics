@@ -1,0 +1,14 @@
+#name: anarkis.lib.guild.register
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.guild.register.xml
+
+$global.name = sprintf: fmt='anarkis.guild.%s', $plugin.name, null, null, null, null
+$array =  array alloc: size=4
+$array[0] = $page.id
+$array[1] = 0
+$array[2] = 0
+$array[3] = [FALSE]
+set global variable: name=$global.name value=$array
+
+return $array

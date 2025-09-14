@@ -1,0 +1,108 @@
+#name: setup.anarkis.acc
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/setup.anarkis.acc.xml
+
+$PageID = 8510
+load text: id=$PageID
+
+$ver =  read text: page=$PageID id=101
+$ver =  string $ver to integer
+$c.ver = get global variable: name='anarkis.acc.plugin'
+$update = [FALSE]
+set global variable: name='anarkis.ads.manager.open' value=null
+
+* New install, add hotkeys
+if $c.ver == null
+= [THIS] -> call script anarkis.acc.hotkey.install :
+$gl.setup = [THIS] -> call script anarkis.ads.setup.init :
+$msg = sprintf: pageid=$PageID textid=103, $ver, null, null, null, null
+send incoming message $msg to player: display it=[TRUE]
+set global variable: name='anarkis.acc.plugin' value=$ver
+START [THIS] -> call script anarkis.acc.ecs.register :
+* Upgrade Needed
+else if $ver > $c.ver
+$update = [TRUE]
+if $ver == 255
+= [THIS] -> call script anarkis.acc.hotkey.uninstall :
+end
+= [THIS] -> call script anarkis.acc.ecs.remove :
+
+skip if get global variable: name='anarkis.ads.setup'
+$gl.setup = [THIS] -> call script anarkis.ads.setup.init :
+
+= [THIS] -> call script anarkis.acc.upgrade.disable :
+
+
+end
+= wait 1000 ms
+
+set script command upgrade: command=ANARKIS_DOCKALL  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_DOCKALL, class=M1, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0
+global script map: set: key=ANARKIS_DOCKALL, class=M7, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0
+global script map: set: key=ANARKIS_DOCKALL, class=TL, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0
+global script map: set: key=ANARKIS_DOCKALL, class=TM, race=Player, script=anarkis.acc.cmd.dock.all.pl, prio=0
+
+
+set script command upgrade: command=ANARKIS_BUYWARES  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_BUYWARES, class=M1, race=Player, script=anarkis.acc.cmd.buywares.pl, prio=0
+global script map: set: key=ANARKIS_BUYWARES, class=M7, race=Player, script=anarkis.acc.cmd.buywares.pl, prio=0
+global script map: set: key=ANARKIS_BUYWARES, class=TL, race=Player, script=anarkis.acc.cmd.buywares.pl, prio=0
+global script map: set: key=ANARKIS_BUYWARES, class=TM, race=Player, script=anarkis.acc.cmd.buywares.pl, prio=0
+
+set script command upgrade: command=ANARKIS_SELLWARES  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_SELLWARES, class=M1, race=Player, script=anarkis.acc.cmd.sellwares.pl, prio=0
+global script map: set: key=ANARKIS_SELLWARES, class=M7, race=Player, script=anarkis.acc.cmd.sellwares.pl, prio=0
+global script map: set: key=ANARKIS_SELLWARES, class=TL, race=Player, script=anarkis.acc.cmd.sellwares.pl, prio=0
+global script map: set: key=ANARKIS_SELLWARES, class=TM, race=Player, script=anarkis.acc.cmd.sellwares.pl, prio=0
+
+set script command upgrade: command=ANARKIS_STATIONDEFENSE  upgrade=[TRUE]
+global script map: set: key=ANARKIS_STATIONDEFENSE, class=Dock, race=Player, script=anarkis.acc.cmd.call.autostation, prio=0
+
+set script command upgrade: command=ANARKIS_SETUPSTATION  upgrade=[TRUE]
+global script map: set: key=ANARKIS_SETUPSTATION, class=Dock, race=Player, script=anarkis.acc.setup, prio=0
+
+set script command upgrade: command=ANARKIS_AUTOCARRIER  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_AUTOCARRIER, class=M1, race=Player, script=anarkis.acc.cmd.call.autocarrier, prio=0
+global script map: set: key=ANARKIS_AUTOCARRIER, class=M7, race=Player, script=anarkis.acc.cmd.call.autocarrier, prio=0
+global script map: set: key=ANARKIS_AUTOCARRIER, class=TL, race=Player, script=anarkis.acc.cmd.call.autocarrier, prio=0
+global script map: set: key=ANARKIS_AUTOCARRIER, class=TM, race=Player, script=anarkis.acc.cmd.call.autocarrier, prio=0
+
+set script command upgrade: command=ANARKIS_SETTACTICS  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_SETTACTICS, class=M1, race=Player, script=anarkis.acc.setup, prio=0
+global script map: set: key=ANARKIS_SETTACTICS, class=M7, race=Player, script=anarkis.acc.setup, prio=0
+global script map: set: key=ANARKIS_SETTACTICS, class=TL, race=Player, script=anarkis.acc.setup, prio=0
+global script map: set: key=ANARKIS_SETTACTICS, class=TM, race=Player, script=anarkis.acc.setup, prio=0
+
+set script command upgrade: command=ANARKIS_ATTACKWING  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_ATTACKWING, class=M1, race=Player, script=anarkis.ads.wing.attack.pl, prio=0
+global script map: set: key=ANARKIS_ATTACKWING, class=M7, race=Player, script=anarkis.ads.wing.attack.pl, prio=0
+global script map: set: key=ANARKIS_ATTACKWING, class=TL, race=Player, script=anarkis.ads.wing.attack.pl, prio=0
+global script map: set: key=ANARKIS_ATTACKWING, class=TM, race=Player, script=anarkis.ads.wing.attack.pl, prio=0
+
+set script command upgrade: command=ANARKIS_DEFENSIVEWING  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_DEFENSIVEWING, class=M1, race=Player, script=anarkis.ads.wing.defense.pl, prio=0
+global script map: set: key=ANARKIS_DEFENSIVEWING, class=M7, race=Player, script=anarkis.ads.wing.defense.pl, prio=0
+global script map: set: key=ANARKIS_DEFENSIVEWING, class=TL, race=Player, script=anarkis.ads.wing.defense.pl, prio=0
+global script map: set: key=ANARKIS_DEFENSIVEWING, class=TM, race=Player, script=anarkis.ads.wing.defense.pl, prio=0
+
+set script command upgrade: command=ANARKIS_CLEANSECTOR  upgrade=Carrier Command Software
+global script map: set: key=ANARKIS_CLEANSECTOR, class=M1, race=Player, script=anarkis.acc.wing.clearsector.pl, prio=0
+global script map: set: key=ANARKIS_CLEANSECTOR, class=M7, race=Player, script=anarkis.acc.wing.clearsector.pl, prio=0
+global script map: set: key=ANARKIS_CLEANSECTOR, class=TL, race=Player, script=anarkis.acc.wing.clearsector.pl, prio=0
+global script map: set: key=ANARKIS_CLEANSECTOR, class=TM, race=Player, script=anarkis.acc.wing.clearsector.pl, prio=0
+
+* Restore cmds if doing update
+if $update == [TRUE]
+= [THIS] -> call script anarkis.acc.upgrade.enable :
+= [THIS] -> call script anarkis.acc.ecs.register :
+if $ver == 255
+= [THIS] -> call script anarkis.acc.hotkey.install :
+end
+
+set global variable: name='anarkis.acc.plugin' value=$ver
+$msg = sprintf: pageid=$PageID textid=104, $ver, null, null, null, null
+send incoming message $msg to player: display it=[TRUE]
+end
+
+return null

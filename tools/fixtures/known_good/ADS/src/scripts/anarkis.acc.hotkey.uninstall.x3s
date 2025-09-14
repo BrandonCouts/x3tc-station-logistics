@@ -1,0 +1,15 @@
+#name: anarkis.acc.hotkey.uninstall
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.hotkey.uninstall.xml
+
+$page.id = 8510
+$installed = get global variable: name='anarkis.acc.hotkey'
+$cnt =  size of array $installed
+while $cnt
+dec $cnt =
+$hotkey.id = $installed[$cnt]
+unregister hotkey $hotkey.id
+end
+set global variable: name='anarkis.acc.hotkey' value=null
+return null

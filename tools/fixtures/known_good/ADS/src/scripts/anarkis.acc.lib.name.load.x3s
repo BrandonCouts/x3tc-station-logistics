@@ -1,0 +1,21 @@
+#name: anarkis.acc.lib.name.load
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.name.load.xml
+
+$arr = [THIS] -> call script anarkis.acc.lib.get.adsonly :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$name = $select -> get local variable: name='anarkis.acc.oldname'
+if $name
+$select -> set name to $name
+else
+$name = $select -> get ware type code of object
+$select -> set name to $name
+end
+$select -> set local variable: name='anarkis.acc.oldname' value=null
+end
+
+return $arr

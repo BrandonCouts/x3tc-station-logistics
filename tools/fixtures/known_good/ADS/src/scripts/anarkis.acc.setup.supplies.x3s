@@ -1,0 +1,61 @@
+#name: anarkis.acc.setup.supplies
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.supplies.xml
+
+$page.id = 8510
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$supply.setup = $setup.array[15]
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=442
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=443
+add custom menu item to array $menu: text=$st returnvalue='c2s'
+$st =  read text: page=$page.id id=444
+add custom menu item to array $menu: text=$st returnvalue='s2c'
+
+$st =  read text: page=$page.id id=445
+add custom menu heading to array $menu: title=$st
+
+$replace.ship = $supply.setup[0]
+if $replace.ship == [TRUE]
+$v1 = 203
+else
+$v1 = 204
+end
+$st =  read text: page=$page.id id=$v1
+$st = sprintf: pageid=$page.id textid=446, $st, null, null, null, null
+*add custom menu item to array $menu: text=$st returnvalue='replace.ship'
+
+$keep.supply = $supply.setup[1]
+if $keep.supply == [TRUE]
+$v1 = 203
+else
+$v1 = 204
+end
+$st =  read text: page=$page.id id=$v1
+$st = sprintf: pageid=$page.id textid=447, $st, null, null, null, null
+*add custom menu item to array $menu: text=$st returnvalue='keep.supply'
+
+$st =  read text: page=$page.id id=441
+add custom menu info line to array $menu: text=$st
+$v1 =  read text: page=$page.id id=440
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result == 's2c'
+= [THIS] -> call script anarkis.acc.setup.supplies.s2c :
+else if $menu.result == 'c2s'
+= [THIS] -> call script anarkis.acc.setup.supplies.c2s :
+end
+
+end
+
+return null

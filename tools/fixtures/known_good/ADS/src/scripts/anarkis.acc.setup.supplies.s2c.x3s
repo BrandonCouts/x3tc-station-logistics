@@ -1,0 +1,111 @@
+#name: anarkis.acc.setup.supplies.s2c
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.supplies.s2c.xml
+
+$page.id = 8510
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$supply.setup = $setup.array[15]
+
+$trans.type = 451
+$trans.ship = 456
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=$trans.type
+$st = sprintf: pageid=$page.id textid=450, $st, null, null, null, null
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=451
+add custom menu item to array $menu: text=$st returnvalue=451
+$st =  read text: page=$page.id id=452
+add custom menu item to array $menu: text=$st returnvalue=452
+$st =  read text: page=$page.id id=453
+add custom menu item to array $menu: text=$st returnvalue=453
+$st =  read text: page=$page.id id=454
+add custom menu item to array $menu: text=$st returnvalue=454
+
+$st =  read text: page=$page.id id=$trans.ship
+$st = sprintf: pageid=$page.id textid=455, $st, null, null, null, null
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=456
+add custom menu item to array $menu: text=$st returnvalue=456
+$st =  read text: page=$page.id id=457
+add custom menu item to array $menu: text=$st returnvalue=457
+
+$st =  read text: page=$page.id id=458
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=459
+add custom menu item to array $menu: text=$st returnvalue='proceed'
+
+$st =  read text: page=$page.id id=449
+add custom menu info line to array $menu: text=$st
+
+$v1 =  read text: page=$page.id id=440
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result < 456
+$trans.type = $menu.result
+
+else if $menu.result < 460
+$trans.ship = $menu.result
+
+else if $menu.result == 'proceed'
+if $trans.ship == 457
+$array = [THIS] -> get ship array from sector/ship/station
+else
+$array = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[FALSE]
+end
+$cnt =  size of array $array
+$report.menu =  create custom menu array
+$st =  read text: page=$page.id id=541
+add custom menu heading to array $report.menu: title=$st
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$wares = $select -> get tradeable ware array from ship
+$v1 =  size of array $wares
+while $v1
+dec $v1 =
+$cur.ware = $wares[$v1]
+$v2 =  get maintype of ware $cur.ware
+if $trans.type == 451 AND ( $v2 != 8 AND $v2 != 16 AND $v2 != 10 AND $v2 != 11 )
+$amt = $select -> get amount of ware $cur.ware in cargo bay
+$left = $select -> unload $amt units of $cur.ware
+$st = sprintf: pageid=$page.id textid=543, $left, $cur.ware, $select, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+else if $trans.type == 452 AND ( $v2 != 8 AND $v2 != 10 AND $v2 != 16 )
+$amt = $select -> get amount of ware $cur.ware in cargo bay
+$left = $select -> unload $amt units of $cur.ware
+$st = sprintf: pageid=$page.id textid=543, $left, $cur.ware, $select, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+else if $trans.type == 453 AND ( $v2 == 10 )
+$amt = $select -> get amount of ware $cur.ware in cargo bay
+$left = $select -> unload $amt units of $cur.ware
+$st = sprintf: pageid=$page.id textid=543, $left, $cur.ware, $select, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+else if $trans.type == 454
+$amt = $select -> get amount of ware $cur.ware in cargo bay
+$left = $select -> unload $amt units of $cur.ware
+$st = sprintf: pageid=$page.id textid=543, $left, $cur.ware, $select, null, null
+add custom menu item to array $report.menu: text=$st returnvalue=0
+end
+end
+end
+$v1 =  read text: page=$page.id id=540
+$v2 =  read text: page=$page.id id=260
+$x =  open custom menu: title=$v1 description=$v2 option array=$report.menu
+
+return null
+
+end
+end
+
+return null

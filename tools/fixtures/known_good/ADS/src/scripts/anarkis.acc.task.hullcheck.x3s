@@ -1,0 +1,56 @@
+#name: anarkis.acc.task.hullcheck
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.task.hullcheck.xml
+
+while [ENVIRONMENT] == [HOMEBASE]
+= wait 4000 ms
+end
+
+$newleader = [THIS] -> get formation leader
+
+while [ENVIRONMENT] != [HOMEBASE]
+= wait 1000 ms
+
+skip if [HOMEBASE] -> exists
+return null
+*skip if [HOMEBASE] -> get local variable: name='anarkis.acc.battle'
+*return null
+
+$shield = [THIS] -> get shield percent
+$hull = [THIS] -> get hull percent
+
+if [THIS] -> is script !ship.cmd.retreat.std on stack of task=0
+$leader.ok = $newleader -> exists
+$lead.env = $newleader -> get environment
+if $shield > 80 AND $hull >= 100 AND $newleader != [THIS] AND $leader.ok == [TRUE] AND $lead.env != [HOMEBASE]
+[THIS] -> start task 0 with script !ship.cmd.attacksame.std and prio 0: arg1=$newleader arg2=[TRUE] arg3=null arg4=null arg5=null
+else
+if [THIS] -> get true amount of ware Transporter Device in cargo bay
+$v1 = get distance between [THIS] and [HOMEBASE]
+if $v1 < 5000
+[THIS] -> put into environment [HOMEBASE] ->
+[THIS] -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+[THIS] -> set command: COMMAND_NONE
+[THIS] -> set destination to null
+[THIS] -> set command target: null
+[THIS] -> set command target2: null
+end
+end
+end
+continue
+end
+
+if $hull < 100 OR $shield < 20
+if [THIS] -> has formation ships
+$newleader = [THIS] -> call script anarkis.lib.wing.changeleader :
+else
+$newleader = null
+end
+[THIS] -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=[HOMEBASE] arg2=null arg3=null arg4=null arg5=null
+end
+
+end
+
+
+return null

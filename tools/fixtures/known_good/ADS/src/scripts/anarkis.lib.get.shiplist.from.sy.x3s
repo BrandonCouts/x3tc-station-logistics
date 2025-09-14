@@ -1,0 +1,25 @@
+#name: anarkis.lib.get.shiplist.from.sy
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.shiplist.from.sy.xml
+
+* Fix 1 : Performance increased, one less loop
+
+$trade.array = $sy -> get tradeable ware array from station
+$cnt =  size of array $trade.array
+while $cnt
+dec $cnt =
+$test.ware = $trade.array[$cnt]
+* - Remove Stations
+$transport.class = get transport class of ware $test.ware
+if $transport.class == Station Containers ST
+remove element from array $trade.array at index $cnt
+continue
+end
+* - Quick and Dirty method to check ship class
+$ship =  create ship: type=$test.ware owner=Friendly Race addto=$sy x=0 y=0 z=0
+skip if $ship -> is of class $ship.class
+remove element from array $trade.array at index $cnt
+$ship -> destruct: show no explosion=[TRUE]
+end
+return $trade.array

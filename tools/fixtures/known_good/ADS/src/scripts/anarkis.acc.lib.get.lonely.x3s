@@ -1,0 +1,23 @@
+#name: anarkis.acc.lib.get.lonely
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.get.lonely.xml
+
+$arr = [THIS] -> call script anarkis.acc.lib.get.adsonly :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$env = $select -> get environment
+skip if not $env == [THIS]
+remove element from array $arr at index $cnt
+skip if not $select -> has formation ships
+remove element from array $arr at index $cnt
+skip if not $select -> get formation leader
+remove element from array $arr at index $cnt
+end
+$cnt =  size of array $arr
+skip if $cnt
+return null
+
+return $arr

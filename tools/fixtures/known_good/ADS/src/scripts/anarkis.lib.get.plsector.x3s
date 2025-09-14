@@ -1,0 +1,51 @@
+#name: anarkis.lib.get.plsector
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.plsector.xml
+
+* ===========================================
+* Retrieve a sector with the most player stations given a distance to object
+* ===========================================
+* This script may take a while to run given the amount of player owned stations
+* TC Fix : Speed improvement
+* TODO : Speed hack through 2 row array
+
+$station.array =  get station array: of race Player class/type=Station
+$station.count =  size of array $station.array
+$sector.array =  array alloc: size=0
+
+while $station.count
+dec $station.count =
+$station = $station.array[$station.count]
+$station.sector = $station -> get sector
+$jump.distance = get jumps from sector [SECTOR] to sector $station.sector
+$sector.already =  find $station.sector in array: $sector.array
+skip if $jump.distance > $max.jump OR $sector.already == [TRUE]
+append $station.sector to array $sector.array
+= wait 100 ms
+end
+
+$s.amount = 0
+$s.sector = null
+$sector.count =  size of array $sector.array
+
+* If no station, fall back to ship
+if $sector.count == 0
+$s.sector = [THIS] -> call script anarkis.lib.get.plsector.pership :  max jump distance=$max.jump
+return $s.sector
+end
+
+while $sector.count
+dec $sector.count =
+$sector = $sector.array[$sector.count]
+$station.array =  find station: sector=$sector class or type=Station race=Player flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+$station.count =  size of array $station.array
+$rnd =  = random value from 0 to 2 - 1
+if ( $s.amount < $station.count ) OR ( $s.amount == $station.count AND $rnd == 1 )
+$s.amount = $station.count
+$s.sector = $sector
+end
+= wait 100 ms
+end
+
+return $s.sector

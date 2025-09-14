@@ -1,0 +1,14 @@
+#name: anarkis.acc.audio.alert
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.audio.alert.xml
+
+$sector = $ship -> get sector
+= speak text: page=13 id=1276 priority=0
+$d = $sector -> get object name array
+=  speak array: $d prio=0
+= speak text: page=13 id=1279 priority=0
+$d = $ship -> get object name array
+=  speak array: $d prio=0
+
+return null

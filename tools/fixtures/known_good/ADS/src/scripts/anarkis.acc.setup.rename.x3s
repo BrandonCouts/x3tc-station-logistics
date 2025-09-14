@@ -1,0 +1,76 @@
+#name: anarkis.acc.setup.rename
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.rename.xml
+
+$page.id = 8510
+$rename.mode = 481
+
+while $menu.result != -1
+
+$menu =  create custom menu array
+
+$v1 =  read text: page=$page.id id=$rename.mode
+$st = sprintf: pageid=$page.id textid=488, $v1, null, null, null, null
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=481
+add custom menu item to array $menu: text=$st returnvalue=481
+$st =  read text: page=$page.id id=482
+add custom menu item to array $menu: text=$st returnvalue=482
+$st =  read text: page=$page.id id=483
+add custom menu item to array $menu: text=$st returnvalue=483
+
+$st =  read text: page=$page.id id=485
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=486
+add custom menu item to array $menu: text=$st returnvalue='ren.docked'
+$st =  read text: page=$page.id id=487
+add custom menu item to array $menu: text=$st returnvalue='ren.active'
+
+$st =  read text: page=$page.id id=484
+add custom menu info line to array $menu: text=$st
+
+$v1 =  read text: page=$page.id id=480
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result > 480
+$rename.mode = $menu.result
+
+else if $menu.result == 'ren.docked' OR $menu.result == 'ren.active'
+$dock.list = [THIS] -> get ship array from sector/ship/station
+$cnt =  size of array $dock.list
+$nb = 0
+while $cnt
+dec $cnt =
+$curr.ship = $dock.list[$cnt]
+$enabled = $curr.ship -> get local variable: name='anarkis.acc.ship'
+if $menu.result == 'ren.active' AND $enabled != [TRUE]
+continue
+end
+inc $nb =
+$v1 = $curr.ship -> get ware type code of object
+$v2 = $curr.ship -> get object class
+$v3 = $curr.ship -> get maker race
+$v4 = [THIS] -> get name
+if $rename.mode == 481
+$newname = sprintf: fmt='%s %s - %s', $v1, $v2, $nb, null, null
+else if $rename.mode == 482
+$newname = sprintf: fmt='%s - %s - %s', $v4, $v1, $nb, null, null
+else if $rename.mode == 483
+$newname = sprintf: fmt='%s %s - %s', $v3, $v2, $nb, null, null
+end
+$curr.ship -> set local variable: name='anarkis.acc.oldname' value=$newname
+$curr.ship -> set name to $newname
+end
+end
+
+end
+
+return null

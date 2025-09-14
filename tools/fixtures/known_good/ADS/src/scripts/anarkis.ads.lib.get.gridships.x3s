@@ -1,0 +1,37 @@
+#name: anarkis.ads.lib.get.gridships
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.ads.lib.get.gridships.xml
+
+$arr =  get ship array: of race $race class/type=Big Ship
+$cnt =  size of array $arr
+
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+if $select == [PLAYERSHIP]
+remove element from array $arr at index $cnt
+continue
+end
+if not $select -> get local variable: name='anarkis.ads.grid'
+remove element from array $arr at index $cnt
+continue
+end
+$grid.state = $select -> get local variable: name='anarkis.ads.grid.busy'
+if $grid.state == [TRUE] AND $avail == [TRUE]
+remove element from array $arr at index $cnt
+continue
+end
+
+
+if $sector.base -> exists
+$select.sector = $select -> get sector
+$distance = get jumps from sector $select.sector to sector $sector.base
+if $distance > $sector.dist
+remove element from array $arr at index $cnt
+continue
+end
+end
+end
+
+return $arr

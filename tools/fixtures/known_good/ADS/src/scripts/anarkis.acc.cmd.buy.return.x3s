@@ -1,0 +1,9 @@
+#name: anarkis.acc.cmd.buy.return
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.buy.return.xml
+
+[THIS] -> set command: COMMAND_GET_WARE_BEST  target=$ware target2=$dest par1=$amount par2=$minprice
+= [THIS] -> call script !trade.getwareandreturnhome :  ware=$ware  destination station=$dest  amount=$amount  max.price=$minprice  stay if unable to buy=[FALSE]
+
+return null

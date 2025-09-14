@@ -1,0 +1,23 @@
+#name: anarkis.lib.kcnt.findtop
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.kcnt.findtop.xml
+
+$global.name = sprintf: fmt='anarkis.kcnt.%s', $plugin.name, null, null, null, null
+$array = get global variable: name=$global.name
+$cnt =  size of array $array
+
+$m.id = 0
+$m.val = 0
+while $cnt
+dec $cnt =
+$test = $array[$cnt]
+$x =  = random value from 0 to 2 - 1
+if ( $test > $m.val ) OR ( $test == $m.val AND $x == 1 )
+$m.val = $test
+$m.id = $cnt
+end
+end
+
+$result = [THIS] -> call script anarkis.lib.id.to.race :  ID=$m.id
+return $result

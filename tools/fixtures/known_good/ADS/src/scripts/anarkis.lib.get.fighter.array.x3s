@@ -1,0 +1,7 @@
+#name: anarkis.lib.get.fighter.array
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.fighter.array.xml
+
+$selected.array = $dock -> get owned ships: class/type=Fighter
+return $selected.array

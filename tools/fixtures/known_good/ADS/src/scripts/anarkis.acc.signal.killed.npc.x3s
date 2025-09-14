@@ -1,0 +1,11 @@
+#name: anarkis.acc.signal.killed.npc
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.signal.killed.npc.xml
+
+* Prevent ship respawn
+
+[THIS] -> set owner race to Neutral Race
+[THIS] -> set homebase to null
+
+return null
