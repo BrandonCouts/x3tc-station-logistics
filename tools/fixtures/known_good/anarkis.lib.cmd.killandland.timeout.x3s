@@ -1,0 +1,111 @@
+#name: anarkis.lib.cmd.killandland.timeout
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.cmd.killandland.timeout.xml
+
+* ===========================================
+* Altered 2.0a official script to allow a timeout
+* ===========================================
+* Added :
+* - Timeout
+* - Runaway code if damaged
+* - Uses jumptostation instead of movetostation
+* ===========================================
+* Removed : OWP, resupply, player code
+* ===========================================
+
+skip if [THIS] -> is of class Ship
+return null
+
+skip if not [THIS] -> is docked
+= [THIS] -> call script !move.undock :
+
+$returntostation = [FALSE]
+
+$isBig = [THIS] -> is of class M2
+skip if $isBig
+$isBig = [THIS] -> is of class M1
+
+
+* pirate fighter in pirate sector..
+$secowner = [SECTOR] -> get owner race
+$ispirate = $secowner == Pirates AND [OWNER] == Pirates
+
+skip if $range
+$range = [THIS] -> get scanner range
+$halfrange = $range / 2
+$refuel.runs = 0
+
+* Added : timeout
+$pltime = playing time
+$endtime = $pltime + $timeout
+
+while $pltime < $endtime
+= wait 10 ms
+$pltime = playing time
+
+* -------------------------------------------------------------------------
+* Targeting
+* -------------------------------------------------------------------------
+* find enemy in range.
+$enemy = [THIS] -> call script !fight.targeting :  the max scan range=$range  refpos array   x y z=$arefpos  Target Class=null
+
+* Pirates target a station nearby if no other target
+if ! $enemy AND $ispirate
+if not  = random value from 0 to 20 - 1
+$enemy = [THIS] -> call script !fight.targeting :  the max scan range=5000  refpos array   x y z=$arefpos  Target Class=Station
+end
+end
+
+* -------------------------------------------------------------------------
+* engage enemy if found
+* -------------------------------------------------------------------------
+$hull = [THIS] -> get hull percent
+$enemy.exists = $enemy -> exists
+if $hull > 92 AND $enemy.exists
+= [THIS] -> call script !fight.attack.object :  the victim=$enemy  follow in new sector=null
+$returntostation = [FALSE]
+inc $refuel.runs =
+else
+$stok = $station -> exists
+if not ( $stok AND $returntostation )
+$returntostation = [TRUE]
+if $arefpos AND $range
+$dist = [THIS] -> get distance to: position array=$arefpos
+if $dist > $range AND $moveable.ship
+$x = $arefpos[0]
+$y = $arefpos[1]
+$z = $arefpos[2]
+= [THIS] -> move to position: x=$x y=$y z=$z with precision $halfrange m
+continue
+end
+end
+if [THIS] -> is in active sector
+$time =  = random value from 10000 to 20000 - 1
+else
+$time =  = random value from 50000 to 59000 - 1
+end
+if $noidle
+= wait $time ms
+else
+$time = $time / 1000
+= [THIS] -> call script !move.idle.timeout :  timeout in sec=$time  wait while docked=[FALSE]
+end
+else if [ENVIRONMENT] != $station AND $moveable.ship
+$station.sector = $station -> get sector
+if $station.sector != [SECTOR]
+= [THIS] -> call script !move.jumptostation :  station=$station  should followers jump too=[TRUE]
+else
+= [THIS] -> call script !move.movetostation :  station=$station
+end
+skip if not [ENVIRONMENT] == $station
+return null
+= wait randomly from 1000 to 3000 ms
+else
+return null
+end
+end
+
+$pltime = playing time
+end
+return null

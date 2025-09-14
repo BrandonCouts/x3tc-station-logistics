@@ -1,0 +1,22 @@
+#name: anarkis.lib.cmd.jumptobeacon
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.cmd.jumptobeacon.xml
+
+
+skip if $beacon -> exists
+return null
+
+$object.sector = $beacon -> get sector
+$pos.array = $beacon -> get position as array
+$p.x = $pos.array[0]
+$p.y = $pos.array[1]
+$p.z = $pos.array[2]
+append $object.sector to array $pos.array
+
+= [THIS] -> use jump drive: target=$object.sector
+if [SECTOR] == $object.sector
+[THIS] -> set position: x=$p.x y=$p.y z=$p.z
+end
+
+return null

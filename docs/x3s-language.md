@@ -96,3 +96,7 @@ Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each 
 provides `src/scripts/*.x3s` as the canonical source along with any `t/` text pages
 or optional `director/` XML. These fixtures are generated from `tools/fixtures/mods/<mod_name>`
 via `python tools/convert_mods.py` and are used by the test suite.
+
+### New Statements Recognized
+- **write.log.num**: `write to log file #8513  append=1  value=$m`
+- **append.string**: `append 'anarkis.lib.cmd.attackland' to array $cmd`

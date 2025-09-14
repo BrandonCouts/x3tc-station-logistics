@@ -1,0 +1,7 @@
+#name: anarkis.lib.cmd.donothing
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.cmd.donothing.xml
+
+= wait 20 ms
+return null

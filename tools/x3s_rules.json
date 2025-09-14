@@ -573,6 +573,20 @@
             "examples": [
                 "append null to array $setup"
             ]
+        },
+        {
+            "name": "write.log.num",
+            "regex": "^write to log file #\\d+\\s+append=(0|1)\\s+value=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "write to log file #8513  append=1  value=$m"
+            ]
+        },
+        {
+            "name": "append.string",
+            "regex": "^append '[^']+' to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append 'anarkis.lib.cmd.attackland' to array $cmd"
+            ]
         }
     ]
 }

@@ -1,0 +1,16 @@
+#name: anarkis.lib.clear.shiparray
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.clear.shiparray.xml
+
+*$result =  array alloc: size=0
+$cnt =  size of array $ship.list
+while $cnt
+dec $cnt =
+$ship = $ship.list[$cnt]
+if not $ship -> exists
+remove element from array $ship.list at index $cnt
+end
+end
+
+return $ship.list
