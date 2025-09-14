@@ -538,6 +538,27 @@
             "examples": [
                 "add value selection to menu: $menu, text=$st, value array=$sel.threat, default=$sel.threat.selection, return id=$sel.threat.id"
             ]
+        },
+        {
+            "name": "remove.array.elem.num",
+            "regex": "^remove element from array \\$[A-Za-z0-9_.]+ at index -?\\d+$",
+            "examples": [
+                "remove element from array $wing.array at index 0"
+            ]
+        },
+        {
+            "name": "set.player.tracking.aim",
+            "regex": "^set player tracking aim to \\$[A-Za-z0-9_.]+ ->$",
+            "examples": [
+                "set player tracking aim to $m.selected ->"
+            ]
+        },
+        {
+            "name": "menu.item.enum",
+            "regex": "^add custom menu item to array \\$[A-Za-z0-9_.]+: text=\\$[A-Za-z0-9_.]+ returnvalue=[A-Za-z0-9_]+$",
+            "examples": [
+                "add custom menu item to array $menu: text=$st returnvalue=Carrier"
+            ]
         }
     ]
 }

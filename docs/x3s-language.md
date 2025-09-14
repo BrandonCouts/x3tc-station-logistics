@@ -81,6 +81,11 @@
 - **play.sample.named**: `play sample [IncomingTransmission.SOS]`
 - **menu.item.textnum**: `add custom menu item to array $menu: text='1' returnvalue=1`
 
+### New Statements Recognized
+- **remove.array.elem.num**: `remove element from array $wing.array at index 0`
+- **set.player.tracking.aim**: `set player tracking aim to $m.selected ->`
+- **menu.item.enum**: `add custom menu item to array $menu: text=$st returnvalue=Carrier`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
