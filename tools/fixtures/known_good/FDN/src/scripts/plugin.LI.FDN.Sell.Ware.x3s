@@ -1,3 +1,7 @@
+#name: plugin.LI.FDN.Sell.Ware
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Sell.Ware.xml
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * This script is called by LI.FDN.Supply.Factory
@@ -20,7 +24,7 @@
 
 * Fetch values saved in the AL Plugin global variable:
 * - DC
-$script = get script name
+$script = = get script name
 $al.Settings = get global variable: name='al.LI.FDN.event'
 if $al.Settings
 $PageID = $al.Settings[1]
@@ -31,19 +35,19 @@ return null
 end
 * -----------------------------------------------------------------------------------
 
-$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=3
-$pointer = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
-$ware.settings = $dock-> get local variable: name=$pointer
+$sector.array = null -> call script plugin.LI.FDN.Sector.Array : search=3
+$pointer = = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
+$ware.settings = $dock  ->  get local variable: name=$pointer
 $sell.at = $ware.settings[6]
 * -----------------------------------------------------------------------------------
 
 $s = size of array $sector.array
 while $s > 0
-dec $s
+dec $s =
 
-$ware.settings = $dock-> get local variable: name=$pointer
+$ware.settings = $dock  ->  get local variable: name=$pointer
 $virtual.stock = $ware.settings[0]
-$physical.stock = $dock-> get amount of ware $ware in cargo bay
+$physical.stock = $dock  ->  get amount of ware $ware in cargo bay
 $stock = $virtual.stock + $physical.stock
 $sell = $ware.settings[5]
 $amount = $stock - $sell
@@ -64,16 +68,16 @@ return null
 end
 
 $sector = $sector.array[$s]
-$sell.Station = find factory: buys $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array
+$sell.Station = find station: resource $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array
 * -----------------------------------------------------------------------------------
 
 if $sell.Station
-$relation = $dock-> get relation to object $sell.Station
-if not $relation == [Foe]
+$relation = $dock  ->  get relation to object $sell.Station
+if not $relation == Foe
 
-$drone = create ship: type={Argon Mercury Super Freighter XL} owner=[Player] addto=$sell.Station x=null y=null z=null
-$drone-> set homebase to $dock
-$drone.max = $drone-> get max amount of ware $ware that can be stored in cargo bay
+$drone = = create ship: type=Argon Mercury Super Freighter XL owner=Player addto=$sell.Station x=null y=null z=null
+$drone  ->  set homebase to $dock
+$drone.max = $drone  ->  get max amount of ware $ware that can be stored in cargo bay
 * -----------------------------------------------------------------------------------
 
 if $amount > $drone.max
@@ -93,9 +97,9 @@ end
 end
 * -----------------------------------------------------------------------------------
 
-= $drone-> add $sell.amount units of $ware
-$sold = $drone-> sell $sell.amount units of $ware
-$drone-> destruct: show no explosion=[TRUE]
+ = $drone  ->  add $sell.amount units of $ware
+$sold = $drone  ->  sell $sell.amount units of $ware
+$drone  ->  destruct: show no explosion=[TRUE]
 * -----------------------------------------------------------------------------------
 if $sold > 0
 
@@ -111,7 +115,7 @@ $txt.debug = 'To sell amount is now ' + $amount + ' for ' + $ware
 gosub Debug.Sub:
 end
 
-= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$sold station=$dock action='remove'
+ = null -> call script plugin.LI.FDN.Update.Ware : ware=$ware  amount=$sold  station=$dock  action='remove'
 * -----------------------------------------------------------------------------------
 end
 end
@@ -119,7 +123,7 @@ end
 end
 
 * wait
-= wait randomly from 500 to 1000 ms
+ = wait randomly from 500 to 1000 ms
 * -----------------------------------------------------------------------------------
 end
 return null
@@ -127,11 +131,12 @@ return null
 
 * Debug Massage handling
 Debug.Sub:
-$d.time = playing time
-$d.time = format time: $d.time
+$d.time = = playing time
+$d.time = = format time: $d.time
 $txt = $d.time + ';' + $script + ';' + $dock + ';' + $txt.debug
-write to log file $DebugID append=[TRUE] value=$txt
+write to log file $DebugID  append=[TRUE]  value=$txt
 endsub
 * -----------------------------------------------------------------------------------
 return null
+
 

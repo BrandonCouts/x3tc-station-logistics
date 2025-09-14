@@ -1,0 +1,20 @@
+#name: lib.BW.isAP
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/lib.BW.isAP.xml
+* BW: ===============================
+* Test for AP.
+* BW: ===============================
+$scriptEngineVersion = = script engine version
+* TC 3.2 = 44
+* AP 2.0 = 52
+if $scriptEngineVersion >= 50
+$RetVal = [TRUE]
+else
+$RetVal = [FALSE]
+end
+
+return $RetVal
+
+
+

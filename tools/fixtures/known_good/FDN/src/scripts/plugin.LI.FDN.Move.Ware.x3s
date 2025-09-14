@@ -1,3 +1,7 @@
+#name: plugin.LI.FDN.Move.Ware
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Move.Ware.xml
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * this script handles the user inputs for moving wares
@@ -15,7 +19,7 @@
 * -----------------------------------------------------------------------------------
 
 * Fetch values saved in the AL Plugin global variable:
-$script = get script name
+$script = = get script name
 $al.Settings = get global variable: name='al.LI.FDN.event'
 if $al.Settings
 $PageID = $al.Settings[1]
@@ -26,14 +30,14 @@ end
 * -----------------------------------------------------------------------------------
 
 * fetch ware details from the source
-$pointer = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
-$ware.array = $source-> get local variable: name=$pointer
+$pointer = = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
+$ware.array = $source  ->  get local variable: name=$pointer
 * calculate the avialable physical, virtual and total
 $virtual.avialable = $ware.array[0]
 if not $virtual.avialable > 0
 $virtual.avialable = 0
 end
-$physical.avialable = $source-> get amount of ware $ware in cargo bay
+$physical.avialable = $source  ->  get amount of ware $ware in cargo bay
 $stock.avialable = $virtual.avialable + $physical.avialable
 * -----------------------------------------------------------------------------------
 
@@ -48,8 +52,8 @@ end
 * -----------------------------------------------------------------------------------
 
 * USER SELECT - player owned ship or station
-$txt = read text: page=$PageID id=184
-$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt
+$txt = = read text: page=$PageID id=184
+$destination = null  ->  get user input: type=Var/Ship/Station owned by Player, title=$txt
 * Debug
 if $al.Settings[7]
 $txt.debug = 'Selected: ' + $destination
@@ -58,9 +62,9 @@ end
 * -----------------------------------------------------------------------------------
 
 * check that destination can accept ware
-if not $destination-> is of class [Dock]
-if not $destination-> get free amount of ware $ware in cargo bay
-$txt = sprintf: pageid=$PageID textid=194, $destination, $ware, null, null, null
+if not $destination  ->  is of class Dock 2007
+if not $destination  ->  get free amount of ware $ware in cargo bay
+$txt = = sprintf: pageid=$PageID textid=194, $destination, $ware, null, null, null
 display subtitle text: text=$txt duration=2000 ms
 return null
 end
@@ -74,16 +78,16 @@ if $al.Settings[7]
 $txt.debug = 'Selected: ' + $destination + ' is same as source - exit move ware'
 gosub Debug.Sub:
 end
-$txt = sprintf: pageid=$PageID textid=192, $destination, null, null, null, null
+$txt = = sprintf: pageid=$PageID textid=192, $destination, null, null, null, null
 display subtitle text: text=$txt duration=2000 ms
 return null
 end
 * -----------------------------------------------------------------------------------
 
 * USER INPUT - amount of ware to move
-$txt = read text: page=$PageID id=178
-$amount = null-> get user input: type=[Var/Number], title=$txt
-if not is datatype[$amount] == [DATATYPE_NULL]
+$txt = = read text: page=$PageID id=178
+$amount = null  ->  get user input: type=Var/Number, title=$txt
+if not is datatyp[ $amount ] == DATATYPE_NULL
 if not $amount > 0
 * if not a valid amount exit
 return null
@@ -93,7 +97,7 @@ if $amount > $stock.avialable
 $amount = $stock.avialable
 end
 else
-$txt = sprintf: pageid=$PageID textid=193, $amount, $ware, null, null, null
+$txt = = sprintf: pageid=$PageID textid=193, $amount, $ware, null, null, null
 display subtitle text: text=$txt duration=2000 ms
 return null
 end
@@ -105,11 +109,11 @@ end
 * -----------------------------------------------------------------------------------
 
 * checks if the destination can hold the ware
-if not $destination-> is of class [Dock]
-if $destination-> get free amount of ware $ware in cargo bay
+if not $destination  ->  is of class Dock 2007
+if $destination  ->  get free amount of ware $ware in cargo bay
 
 * add to destination
-$amount.added = null-> call script 'plugin.LI.FDN.Update.Ware' : argument1=$ware argument2=$amount argument3=$destination argument4='add'
+$amount.added = null -> call script plugin.LI.FDN.Update.Ware : ware=$ware  amount=$amount  station=$destination  action='add'
 * -----------------------------------------------------------------------------------
 
 if $amount.added > 0
@@ -118,14 +122,14 @@ $amount = $amount.added
 end
 
 * remove from source
-= null-> call script 'plugin.LI.FDN.Update.Ware' : argument1=$ware argument2=$amount argument3=$source argument4='remove'
+ = null -> call script plugin.LI.FDN.Update.Ware : ware=$ware  amount=$amount  station=$source  action='remove'
 * -----------------------------------------------------------------------------------
 end
 end
 else
 
 * add to destination
-$amount.added = null-> call script 'plugin.LI.FDN.Update.Ware' : argument1=$ware argument2=$amount argument3=$destination argument4='add'
+$amount.added = null -> call script plugin.LI.FDN.Update.Ware : ware=$ware  amount=$amount  station=$destination  action='add'
 * -----------------------------------------------------------------------------------
 
 if $amount.added > 0
@@ -134,7 +138,7 @@ $amount = $amount.added
 end
 
 * remove from source
-= null-> call script 'plugin.LI.FDN.Update.Ware' : argument1=$ware argument2=$amount argument3=$source argument4='remove'
+ = null -> call script plugin.LI.FDN.Update.Ware : ware=$ware  amount=$amount  station=$source  action='remove'
 * -----------------------------------------------------------------------------------
 end
 end
@@ -143,11 +147,12 @@ return null
 
 * Debug Massage handling
 Debug.Sub:
-$d.time = playing time
-$d.time = format time: $d.time
+$d.time = = playing time
+$d.time = = format time: $d.time
 $txt = $d.time + ';' + $script + ';' + $txt.debug
-write to log file $DebugID append=[TRUE] value=$txt
+write to log file $DebugID  append=[TRUE]  value=$txt
 endsub
 * -----------------------------------------------------------------------------------
 return null
+
 

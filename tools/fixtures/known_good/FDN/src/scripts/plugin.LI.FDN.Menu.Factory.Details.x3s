@@ -1,0 +1,125 @@
+#name: plugin.LI.FDN.Menu.Factory.Details
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Menu.Factory.Details.xml
+$al.Settings = get global variable: name='al.LI.FDN.event'
+if $al.Settings
+$PageID = $al.Settings[1]
+end
+
+* 4xxx are pointer to locals variables
+* 4001 is the pointer for settings
+$pointer = = sprintf: pageid=$PageID textid=4001, $value, null, null, null, null
+* If there is no variable create one
+if not $value  ->  get local variable: name=$pointer
+$settings.array = = array alloc: size=6
+$value  ->  set local variable: name=$pointer value=$settings.array
+end
+$settings.array = $value  ->  get local variable: name=$pointer
+
+$txt = null -> call script plugin.LI.FDN.Format.Name : object=$value
+$temp.array = = array alloc: size=4
+$temp.array[0] = 1
+$temp.array[1] = $txt
+$temp.array[2] = -1
+$txt = $value  ->  get sector
+$temp.array[3] = $txt
+add custom menu info line to array $menu: text=$temp.array
+add custom menu info line to array $menu: text=' '
+
+$product.array = = array alloc: size=0
+$resource.array = = array alloc: size=0
+$ware.array = $value  ->  get tradeable ware array from station
+
+$s = size of array $ware.array
+while $s > 0
+dec $s =
+$ware = $ware.array[$s]
+if $value  ->  uses ware $ware as product
+append $ware to array $product.array
+else
+append $ware to array $resource.array
+end
+end
+
+$txt = = read text: page=$PageID id=137
+add custom menu info line to array $menu: text=$txt
+$s = size of array $product.array
+while $s > 0
+dec $s =
+$ware = $product.array[$s]
+$amount = = $value  ->  get number of products per cycle
+$txt = $ware + ' [' + $amount + ']'
+$temp.array = = array alloc: size=2
+$temp.array[0] = -1
+$temp.array[1] = $txt
+add custom menu info line to array $menu: text=$temp.array
+end
+add custom menu info line to array $menu: text=' '
+
+$txt = = read text: page=$PageID id=139
+add custom menu info line to array $menu: text=$txt
+$s = size of array $resource.array
+while $s > 0
+dec $s =
+$ware = $resource.array[$s]
+$amount = = $value  ->  get number of resources per cycle for ware $ware
+$txt = $ware + ' [' + $amount + ']'
+$temp.array = = array alloc: size=2
+$temp.array[0] = -1
+$temp.array[1] = $txt
+add custom menu info line to array $menu: text=$temp.array
+end
+
+
+* Products On/Off
+$txt = = read text: page=$PageID id=137
+add custom menu heading to array $menu: title=$txt
+
+$temp.array = = array alloc: size=4
+$temp.array[0] = 1
+$txt = = read text: page=$PageID id=138
+$temp.array[1] = $txt
+$temp.array[2] = -1
+if $settings.array[0]
+$txt = = read text: page=$PageID id=148
+else
+$txt = = read text: page=$PageID id=149
+end
+$temp.array[3] = $txt
+
+$ret.array = = array alloc: size=2
+$ret.array[0] = 'product'
+$ret.array[1] = $value
+
+$format = = create new array, arguments=$temp.array, $ret.array, null, null, null
+append $format to array $menu
+
+
+* Resource On/Off
+$txt = = read text: page=$PageID id=139
+add custom menu heading to array $menu: title=$txt
+
+$temp.array = = array alloc: size=4
+$temp.array[0] = 1
+$txt = = read text: page=$PageID id=138
+$temp.array[1] = $txt
+$temp.array[2] = -1
+if $settings.array[1]
+$txt = = read text: page=$PageID id=148
+else
+$txt = = read text: page=$PageID id=149
+end
+$temp.array[3] = $txt
+
+$ret.array = = array alloc: size=2
+$ret.array[0] = 'resource'
+$ret.array[1] = $value
+
+$format = = create new array, arguments=$temp.array, $ret.array, null, null, null
+append $format to array $menu
+
+return $menu
+
+
+

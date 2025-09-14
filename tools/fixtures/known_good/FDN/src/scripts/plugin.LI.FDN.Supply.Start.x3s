@@ -1,0 +1,108 @@
+#name: plugin.LI.FDN.Supply.Start
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Supply.Start.xml
+* Author: Logain Abler
+* -----------------------------------------------------------------------------------
+* This script ic called by the AL Plugin timer event and starts the supply cycle
+
+* Expected values:
+* - N/A the Factory and dock arrays are stored in the AL Plugin variable
+
+* Returns values:
+* - N/A
+
+* To Do - N/A
+
+* Version: 1.0
+* Date: 22/05/2012
+* Tested: 22/05/2012
+* -----------------------------------------------------------------------------------
+
+* - DC
+* - factory arrray - holds all the know player factories
+* - dock arrray - holds all the know player docks
+* Note: The two arrays are updated each timethe main menu opens, but it is the
+* supply logic which removes any destroyed stations
+$script = = get script name
+$al.Settings = get global variable: name='al.LI.FDN.event'
+if $al.Settings
+$PageID = $al.Settings[1]
+$DebugID = 0 + $PageID
+$dc = $al.Settings[2]
+$factory.array = $al.Settings[3]
+$dock.array = $al.Settings[4]
+$call.count.dock = $al.Settings[11]
+$is.running = $al.Settings[12]
+else
+return null
+end
+* -----------------------------------------------------------------------------------
+START  = [THIS] -> call script plugin.LI.FDN.Sector.Array : search=4
+ = wait 1000 ms
+
+if $al.Settings[7]
+$txt.debug = ' Start Supply Called'
+gosub Debug.Sub:
+end
+
+* check there is a DC the script will only continue if one is set
+if $dc
+* if there is a factory array call 'plugin.LI.FDN.Supply.Factory.Check'
+* else if debug is on log failure
+if $factory.array
+* debug
+* -----------------------------------------------------------------------------------
+
+* v 2 change - add flag to show factory supply is running
+* the flag will be cleared when 'plugin.LI.FDN.Supply.Factory.Check' ends
+if not $is.running
+$is.running = [TRUE]
+set global variable: name='al.LI.FDN.event' value=$al.Settings
+* -----------------------------------------------------------------------------------
+
+if $al.Settings[7]
+$txt.debug = 'Factory Array found'
+gosub Debug.Sub:
+end
+
+* start the factory supply script
+START  = null -> call script plugin.LI.FDN.Supply.Factory.Check :
+* -----------------------------------------------------------------------------------
+end
+end
+
+* this check skips the dock supply until call 3 times
+if $call.count.dock < 6
+inc $call.count.dock =
+$al.Settings[11] = $call.count.dock
+return null
+else
+$al.Settings[11] = 0
+
+if $dock.array
+* debug
+if $al.Settings[7]
+$txt.debug = 'Dock Array found'
+gosub Debug.Sub:
+end
+* start the dock supply script
+START  = null -> call script plugin.LI.FDN.Supply.Dock.Check :
+* -----------------------------------------------------------------------------------
+end
+end
+end
+return null
+* -----------------------------------------------------------------------------------
+
+* Debug Massage handling
+Debug.Sub:
+$d.time = = playing time
+$d.time = = format time: $d.time
+$txt = $d.time + ';' + $script + ';' + $txt.debug
+write to log file $DebugID  append=[TRUE]  value=$txt
+endsub
+* -----------------------------------------------------------------------------------
+return null
+
+
