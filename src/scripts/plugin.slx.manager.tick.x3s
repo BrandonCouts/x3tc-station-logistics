@@ -4,31 +4,34 @@
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
 
-$stations = call script 'lib.slx.query' : function='ListEnrolledStations'
-$scount = size of array $stations
-while $scount
-  dec $scount
-  $st = $stations[$scount]
-  $wares = $st -> get tradeable ware array from station
-  $wcount = size of array $wares
-  while $wcount
-    dec $wcount
-    $ware = $wares[$wcount]
-    $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$st, ware=$ware
-    $role = $cfg['role']
-    if not $role
-      continue
-    end
-    $pct = call script 'lib.slx.query' : function='GetStationWarePct', station=$st, ware=$ware
-    if $role == 'producer'
-      gosub ProducerLoop
-    end
-    if $role == 'consumer'
-      gosub ConsumerLoop
+while [TRUE]
+  $stations = call script 'lib.slx.query' : function='ListEnrolledStations'
+  $scount = size of array $stations
+  while $scount
+    dec $scount
+    $st = $stations[$scount]
+    $wares = $st -> get tradeable ware array from station
+    $wcount = size of array $wares
+    while $wcount
+      dec $wcount
+      $ware = $wares[$wcount]
+      $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$st, ware=$ware
+      $role = $cfg['role']
+      if not $role
+        continue
+      end
+      $pct = call script 'lib.slx.query' : function='GetStationWarePct', station=$st, ware=$ware
+      if $role == 'producer'
+        gosub ProducerLoop
+      end
+      if $role == 'consumer'
+        gosub ConsumerLoop
+      end
+      = wait 1 ms
     end
     = wait 1 ms
   end
-  = wait 1 ms
+  = wait 10000 ms
 end
 
 return null

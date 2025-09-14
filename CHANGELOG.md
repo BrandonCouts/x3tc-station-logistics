@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.4-internal
+- Manager tick now runs continuously every ~10 seconds.
+
 ## 0.1.3-internal
 - Added station enrollment toggle with default ware settings.
 - Fixed menu row formatting for per-ware display.
