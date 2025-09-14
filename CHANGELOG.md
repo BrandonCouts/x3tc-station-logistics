@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5-internal
+- Added reason codes for store balancing and filled-to-max events with supporting text.
+- Transfer logic now sets these codes when moves exhaust headroom or balance stores.
+
 ## 0.1.4-internal
 - Manager tick now runs continuously every ~10 seconds.
 
