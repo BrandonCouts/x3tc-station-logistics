@@ -1,0 +1,52 @@
+#name: anarkis.lib.get.sector.plus
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.sector.plus.xml
+
+* ===========================================
+* Get a sector according to the params
+* ===========================================
+
+$retry = 25
+$flags = [Find.Random]
+$random.race = null
+$sector = null
+$sector.list = $ref.object -> find all sectors within $max.jump jumps: Only known sectors=[FALSE]
+$sector.cnt =  size of array $sector.list
+
+while $sector.cnt
+dec $sector.cnt =
+$sector = $sector.list[$sector.cnt]
+$sector.owner = $sector -> get owner race
+if $race != null AND $sector.owner != $race
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+if $no.unknown == [TRUE] AND $sector.owner == Unknown
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+if $ignore.alien == [TRUE] AND ( $sector.owner == Xenon OR $sector.owner == Kha'ak )
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+if $ignore.pirate == [TRUE] AND ( $sector.owner == Pirates OR $sector.owner == Yaki )
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+$is.core = $sector -> is core sector
+if $remove.border == [TRUE] AND $is.core == [FALSE]
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+if $remove.core == [TRUE] AND $is.core == [TRUE]
+remove element from array $sector.list at index $sector.cnt
+continue
+end
+end
+
+$sector.cnt =  size of array $sector.list
+$sector.cnt =  = random value from 0 to $sector.cnt - 1
+$sector = $sector.list[$sector.cnt]
+
+return $sector

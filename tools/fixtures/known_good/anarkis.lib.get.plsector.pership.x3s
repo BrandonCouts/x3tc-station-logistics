@@ -1,0 +1,44 @@
+#name: anarkis.lib.get.plsector.pership
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.get.plsector.pership.xml
+
+* ===========================================
+* Retrieve a sector with a bunch of ships owned by the player
+* ===========================================
+* This script may take a while to execute given the amount of player owned ships
+* TC Fix : Speed improvement
+* TODO : Speed hack through 2 row array
+
+$ship.array =  get ship array: of race Player class/type=Moveable Ship
+$ship.count =  size of array $ship.array
+$sector.array =  array alloc: size=0
+
+while $ship.count
+dec $ship.count =
+$ship = $ship.array[$ship.count]
+$ship.sector = $ship -> get sector
+$jump.distance = get jumps from sector [SECTOR] to sector $ship.sector
+$sector.already =  find $ship.sector in array: $sector.array
+skip if $jump.distance > $max.jump OR $sector.already == [TRUE]
+append $ship.sector to array $sector.array
+= wait 10 ms
+end
+
+$s.amount = 0
+$s.sector = null
+$sector.count =  size of array $sector.array
+while $sector.count
+dec $sector.count =
+$sector = $sector.array[$sector.count]
+$ship.array =  find ship: sector=$sector class or type=Moveable Ship race=Player flags=[Find.Multiple] refobj=null maxdist=null maxnum=100 refpos=null
+$ship.count =  size of array $ship.array
+$rnd =  = random value from 0 to 2 - 1
+if ( $s.amount < $ship.count ) OR ( $s.amount == $ship.count AND $rnd == 1 )
+$s.amount = $ship.count
+$s.sector = $sector
+end
+= wait 10 ms
+end
+
+return $s.sector

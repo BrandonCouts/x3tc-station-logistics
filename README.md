@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 180 known-good ADS scripts (20 newly added from ADS):
+The linter is validated against these 200 known-good ADS scripts (20 newly added from ADS):
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -184,3 +184,23 @@ The linter is validated against these 180 known-good ADS scripts (20 newly added
 - anarkis.lib.encyclopedia.chapter.x3s
 - anarkis.lib.encyclopedia.x3s
 - anarkis.lib.get.bycargovalue.fro.x3s
+- anarkis.lib.get.bycargovalue.x3s
+- anarkis.lib.get.dockedowned.x3s
+- anarkis.lib.get.fighter.array.x3s
+- anarkis.lib.get.military.array.x3s
+- anarkis.lib.get.militarybase.x3s
+- anarkis.lib.get.plsector.array.x3s
+- anarkis.lib.get.plsector.pership.x3s
+- anarkis.lib.get.plsector.x3s
+- anarkis.lib.get.race.array.short.x3s
+- anarkis.lib.get.race.array.x3s
+- anarkis.lib.get.racesectors.x3s
+- anarkis.lib.get.random.pos.from.x3s
+- anarkis.lib.get.random.pos.x3s
+- anarkis.lib.get.rnd.race.x3s
+- anarkis.lib.get.sector.plus.x3s
+- anarkis.lib.get.ship.cargovalue.x3s
+- anarkis.lib.get.shipcount.x3s
+- anarkis.lib.get.shiplist.from.sy.x3s
+- anarkis.lib.get.ships.fast.x3s
+- anarkis.lib.get.ships.from.x3s
