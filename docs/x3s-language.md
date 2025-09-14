@@ -129,3 +129,7 @@ via `python tools/convert_mods.py` and are used by the test suite.
 - **skip.if.is.class**: `skip if $target -> is of class $plugin.config.class`
 - **skip.if.not.eq.num**: `skip if not $mycount == 0`
 - **array.get.index**: `$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1`
+
+### New Statements Recognized
+- **get.ship.array.by.race**: `$arr =  get ship array: of race $r class/type=Moveable Ship`
+- **destruct.no.explosion**: `$s -> destruct: show no explosion=[TRUE]`

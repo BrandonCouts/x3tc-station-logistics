@@ -1,18 +1,19 @@
 from pathlib import Path
+from pathlib import Path
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def run(cmd: list[str]):
+def run(cmd: list[str]) -> None:
+  """Run a command expecting success."""
   print('>', ' '.join(cmd))
-  p = subprocess.run(cmd, cwd=ROOT)
-  if p.returncode:
-    sys.exit(p.returncode)
+  subprocess.run(cmd, cwd=ROOT, check=True)
 
 
-def run_fail(cmd: list[str]):
+def run_fail(cmd: list[str]) -> None:
+  """Run a command expecting non-zero exit status."""
   print('>', ' '.join(cmd))
   p = subprocess.run(cmd, cwd=ROOT)
   if p.returncode == 0:

@@ -1,0 +1,21 @@
+#name: anarkis.lib.restore.signals
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.restore.signals.xml
+
+$curr.time = playing time
+$end.time = $curr.time + $delay
+while $curr.time < $end.time
+$curr.time = playing time
+= wait 1000 ms
+end
+
+[THIS] -> set ship command/signal $sig.a to global default behaviour
+skip if not $sig.b
+[THIS] -> set ship command/signal $sig.b to global default behaviour
+skip if not $sig.c
+[THIS] -> set ship command/signal $sig.c to global default behaviour
+skip if not $sig.d
+[THIS] -> set ship command/signal $sig.d to global default behaviour
+
+return null

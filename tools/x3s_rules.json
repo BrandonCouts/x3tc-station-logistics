@@ -734,6 +734,20 @@
             "examples": [
                 "$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1"
             ]
+        },
+        {
+            "name": "get.ship.array.by.race",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*get ship array: of race \\$[A-Za-z0-9_.]+ class/type=Moveable Ship$",
+            "examples": [
+                "$arr =  get ship array: of race $r class/type=Moveable Ship"
+            ]
+        },
+        {
+            "name": "destruct.no.explosion",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*->\\s*destruct: show no explosion=\\[(TRUE|FALSE)\\]$",
+            "examples": [
+                "$s -> destruct: show no explosion=[TRUE]"
+            ]
         }
     ]
 }

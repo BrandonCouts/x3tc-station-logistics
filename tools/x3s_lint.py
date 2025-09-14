@@ -18,16 +18,22 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC  = ROOT / "src" / "scripts"
 RULES = ROOT / "tools" / "x3s_rules.json"
 
-def load_patterns() -> list[re.Pattern[str]]:
+@dataclass
+class Rule:
+  name: str
+  regex: re.Pattern[str]
+
+def load_patterns() -> list[Rule]:
   try:
     data = json.loads(RULES.read_text(encoding="utf-8"))
   except FileNotFoundError:
     return []
-  pats = []
+  pats: list[Rule] = []
   for entry in data.get("patterns", []):
     rx = entry.get("regex")
+    name = entry.get("name", "")
     if rx:
-      pats.append(re.compile(rx, re.I))
+      pats.append(Rule(name, re.compile(rx, re.I)))
   return pats
 
 HEADER_RX = re.compile(r'^\s*#(\w+)\s*:\s*(.+)$')
@@ -41,7 +47,7 @@ class Block:
   has_wait: bool = False
   has_progress: bool = False
 
-def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list[str]:
+def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
   patterns = patterns or load_patterns()
   errors: list[str] = []
   warnings: list[str] = []
@@ -154,7 +160,7 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
           break
 
     # line-shape validation (warn on unknown shapes)
-    recognizable = any(pat.match(line.strip()) for pat in patterns)
+    recognizable = any(pat.regex.match(line.strip()) for pat in patterns)
     if not recognizable and not (re.match(r'^if\b', low) or re.match(r'^else\s+if\b', low) or low == "else" or low == "end" or re.match(r'^while\b', low)):
       # Allow variable assignments and general calls as free-form to reduce false positives
       if not re.match(r"^\s*=?\s*(?:\$[A-Za-z0-9_.]+|\[[A-Za-z]+\])(\[[^\]]+\])*\s*(=|->)", line) and "call script" not in low:

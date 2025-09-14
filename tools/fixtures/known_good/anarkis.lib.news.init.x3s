@@ -1,0 +1,14 @@
+#name: anarkis.lib.news.init
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.news.init.xml
+
+$news.list =  array alloc: size=0
+
+$setup =  array alloc: size=4
+$setup[0] = $plugin.id
+$setup[1] = $page.id
+$setup[2] = $max.news
+$setup[3] = $news.list
+
+return null
