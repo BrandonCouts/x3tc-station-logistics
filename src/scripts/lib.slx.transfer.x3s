@@ -3,5 +3,38 @@
 * DESCRIPTION: Ware transfer helpers for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
+$fn = argument 1
+
+if $fn == 'CanMove'
+  $src = argument 2
+  $dst = argument 3
+  $ware = argument 4
+  $amt = argument 5
+  $srcAmt = $src -> get amount of ware $ware in cargo bay
+  $srcCap = $src -> get max amount of ware $ware that can be stored in cargo bay
+  $dstAmt = $dst -> get amount of ware $ware in cargo bay
+  $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
+  $srcCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
+  $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
+  $srcNew = ($srcAmt - $amt) * 100 / $srcCap
+  $dstNew = ($dstAmt + $amt) * 100 / $dstCap
+  if $srcNew < $srcCfg['min_pct']
+    return [FALSE]
+  end
+  if $dstNew > $dstCfg['max_pct']
+    return [FALSE]
+  end
+  return [TRUE]
+end
+
+if $fn == 'ApplyMove'
+  $src = argument 2
+  $dst = argument 3
+  $ware = argument 4
+  $amt = argument 5
+  = $src -> add -$amt units of $ware
+  = $dst -> add $amt units of $ware
+  return null
+end
 
 return null
