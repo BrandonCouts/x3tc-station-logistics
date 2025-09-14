@@ -3,5 +3,18 @@
 * DESCRIPTION: Initialize SLX and start core tasks
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
+$PageId = 89055
+load text: id=$PageId
+
+$section = read text: page=$PageId id=101
+$txt = read text: page=$PageId id=102
+
+add custom menu item to plugin config: heading=$section text=$txt script='plugin.slx.station.menu'
+
+$running = get global variable: name='g.slx.manager.running'
+if not $running
+  START [THIS] -> call script plugin.slx.manager.tick :
+  set global variable: name='g.slx.manager.running' value=[TRUE]
+end
 
 return null

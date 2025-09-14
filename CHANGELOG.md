@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2-internal
+- Added init script to register plugin config and launch manager.
+- Implemented station configuration menu for per-ware settings.
+
 ## 0.1.1-internal
 - Added manager tick script to balance wares between stations.
 - Introduced basic status reason strings and formatter.
