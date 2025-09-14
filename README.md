@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 100 known-good ADS scripts:
+The linter is validated against these 120 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -104,3 +104,23 @@ The linter is validated against these 100 known-good ADS scripts:
 - anarkis.acc.task.hullcheck.x3s
 - anarkis.acc.upgrade.disable.x3s
 - anarkis.acc.upgrade.enable.x3s
+- anarkis.acc.task.repairs.x3s
+- anarkis.acc.wing.attack.pl.x3s
+- anarkis.acc.wing.attack.x3s
+- anarkis.acc.wing.clearsector.pl.x3s
+- anarkis.acc.wing.clearsector.x3s
+- anarkis.acc.wing.defence.pl.x3s
+- anarkis.acc.wing.defence.x3s
+- anarkis.ads.al.init.x3s
+- anarkis.ads.al.register.x3s
+- anarkis.ads.al.stop.x3s
+- anarkis.ads.cmd.protectgrid.x3s
+- anarkis.ads.comm.barracks.x3s
+- anarkis.ads.comm.hangars.x3s
+- anarkis.ads.comm.manage.call.x3s
+- anarkis.ads.comm.manage.menu.x3s
+- anarkis.ads.comm.wingmenu.x3s
+- anarkis.ads.crew.getcost.x3s
+- anarkis.ads.crew.sleep.x3s
+- anarkis.ads.crew.train.x3s
+- anarkis.ads.lib.enemy.strongest.x3s

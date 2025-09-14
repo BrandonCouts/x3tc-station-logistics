@@ -105,7 +105,8 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
         if blk.kind == "while" and not (blk.has_wait or blk.has_progress):
           errors.append(f"{path.name}:{blk.line_no}: while-block has no 'wait' before 'end'")
     # mark waits inside while
-    if re.search(r'\bwait(\s+\d+\s*ms| randomly from (\d+|\$[A-Za-z0-9_.]+) to (\d+|\$[A-Za-z0-9_.]+) ms)\b', low):
+    if re.search(r'\bwait(\s+\d+\s*ms| randomly from (\d+|\$[A-Za-z0-9_.]+) to (\d+|\$[A-Za-z0-9_.]+) ms)\b', low) or (
+      "call script" in low and ("wait" in low or "timeout" in low)):
       for b in reversed(stack):
         if b.kind == "while":
           b.has_wait = True
