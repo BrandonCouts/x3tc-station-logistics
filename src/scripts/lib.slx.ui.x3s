@@ -3,5 +3,11 @@
 * DESCRIPTION: UI helpers for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
+$fn = argument 1
+
+if $fn == 'FormatReason'
+  $reason = argument 2
+  return $reason
+end
 
 return null
