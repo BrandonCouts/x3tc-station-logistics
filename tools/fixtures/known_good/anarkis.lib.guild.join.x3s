@@ -1,0 +1,11 @@
+#name: anarkis.lib.guild.join
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.guild.join.xml
+
+$global.name = sprintf: fmt='anarkis.guild.%s', $plugin.name, null, null, null, null
+$array = get global variable: name=$global.name
+$array[3] = $join
+set global variable: name=$global.name value=$array
+
+return $array

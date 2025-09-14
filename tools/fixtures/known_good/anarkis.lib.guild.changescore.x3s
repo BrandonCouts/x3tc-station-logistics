@@ -1,0 +1,13 @@
+#name: anarkis.lib.guild.changescore
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.guild.changescore.xml
+
+$global.name = sprintf: fmt='anarkis.guild.%s', $plugin.name, null, null, null, null
+$array = get global variable: name=$global.name
+$xp = $array[1]
+$xp = $xp + $value
+$array[1] = $xp
+set global variable: name=$global.name value=$array
+
+return $array

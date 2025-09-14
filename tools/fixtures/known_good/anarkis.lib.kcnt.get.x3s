@@ -1,0 +1,11 @@
+#name: anarkis.lib.kcnt.get
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.kcnt.get.xml
+
+$global.name = sprintf: fmt='anarkis.kcnt.%s', $plugin.name, null, null, null, null
+$array = get global variable: name=$global.name
+$id = [THIS] -> call script anarkis.lib.race.to.id :  race=$race
+$result = $array[$id]
+
+return $result
