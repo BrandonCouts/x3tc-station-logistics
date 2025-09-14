@@ -1,0 +1,20 @@
+#name: anarkis.lib.custowned.getdocked
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.custowned.getdocked.xml
+
+$docked =  array alloc: size=0
+
+= [THIS] -> call script anarkis.lib.custowned.cleanarray :
+$array = [THIS] -> get local variable: name='anarkis.owned'
+$cnt =  size of array $array
+
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$env = $select -> get environment
+skip if not $env == [THIS]
+append $select to array $docked
+end
+
+return $docked

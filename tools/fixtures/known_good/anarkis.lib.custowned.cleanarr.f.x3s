@@ -1,0 +1,15 @@
+#name: anarkis.lib.custowned.cleanarr.f
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.custowned.cleanarr.f.xml
+
+$var = $from -> get local variable: name='anarkis.owned'
+$cnt =  size of array $var
+while $cnt
+dec $cnt =
+$ship = $var[$cnt]
+skip if $ship -> exists
+remove element from array $var at index $cnt
+end
+$from -> set local variable: name='anarkis.owned' value=$var
+return $var

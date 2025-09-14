@@ -1,0 +1,42 @@
+#name: anarkis.lib.encyclopedia
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.encyclopedia.xml
+
+$race.arr = [THIS] -> call script anarkis.lib.get.race.array :
+$race.cnt =  size of array $race.arr
+while $race.cnt
+dec $race.cnt =
+$race = $race.arr[$race.cnt]
+set discovered status: type=$race status=$show
+
+$ship.arr =  get ship type array: maker race=$race class=Ship
+$ship.cnt =  size of array $ship.arr
+while $ship.cnt
+dec $ship.cnt =
+$ship = $ship.arr[$ship.cnt]
+set discovered status: type=$ship status=$show
+end
+
+$st.arr =  get station array: of race $race class/type=Station
+$st.cnt =  size of array $st.arr
+while $st.cnt
+dec $st.cnt =
+$st = $st.arr[$st.cnt]
+$st = $st -> get ware type code of object
+set discovered status: type=$st status=$show
+end
+end
+
+$m.cnt = 20
+while $m.cnt
+dec $m.cnt =
+$cnt =  get number of subtypes of maintype $m.cnt
+while $cnt
+dec $cnt =
+$ware =  get ware from maintype $m.cnt and subtype $cnt
+set discovered status: type=$ware status=$show
+end
+end
+
+return null

@@ -106,3 +106,10 @@ via `python tools/convert_mods.py` and are used by the test suite.
 - **append.station**: `append Military Outpost to array $military.types`
 - **set.discovered.status**: `set discovered status: type=$race status=$show`
 - **set.notoriety**: `set notoriety of $base.race -> $target.race to $new.noto points`
+
+### New Statements Recognized
+- **find.station**: `$refobject = find station: sector=$sector class or type=Station race=$race flags=[Find.Random] refobj=null maxdist=null maxnum=1 refpos=null`
+- **find.ship**: `$ship.list = find ship: sector=$sector class or type=Moveable Ship race=null flags=$flags refobj=$refobject maxdist=null maxnum=50 refpos=null`
+- **size.of.array**: `$ship.count = size of array $ship.list`
+- **create.station**: `$select = create station: type=$station.type owner=$race addto=$sector x=$x y=$y z=$z`
+- **random.value**: `$p.face = = random value from 0 to 4 - 1`

@@ -1,0 +1,129 @@
+#name: anarkis.lib.dockall.full
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.dockall.full.xml
+
+* ===========================================
+* Securely Dock All Ships to a Carrier / Station
+* ===========================================
+
+
+if $ads.only
+$owned.list = $carrier -> call script anarkis.acc.lib.get.adsonly :
+else
+$owned.list = $carrier -> get owned ships: class/type=Moveable Ship
+end
+$owned.cnt =  size of array $owned.list
+while $owned.cnt
+dec $owned.cnt =
+$ship = $owned.list[$owned.cnt]
+end
+
+$myowner = $carrier -> get owner race
+
+
+* 1st Pass
+while $global
+$ship.count =  size of array $ship.list
+
+while $ship.count
+
+= wait 10 ms
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+$env = $ship -> get environment
+if not $carrier -> is docking possible of $ship
+remove element from array $ship.list at index $ship.count
+continue
+end
+if $env == $carrier
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+if not $ship -> exists
+remove element from array $ship.list at index $ship.count
+continue
+end
+$ship.owner = $ship -> get owner race
+if not $ship.owner == $myowner
+remove element from array $ship.list at index $ship.count
+continue
+end
+if not $ship -> is task 0 in use
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=$carrier arg2=null arg3=null arg4=null arg5=null
+continue
+end
+
+$runthis = [FALSE]
+skip if not $ship -> is script !move.movetostation on stack of task=0
+$runthis = [TRUE]
+skip if not $ship -> is script !ship.cmd.retreat.std on stack of task=0
+$runthis = [TRUE]
+$isjump = $ship -> is script !move.jumptosector on stack of task=0
+
+if $runthis == [TRUE]
+
+$ship.sec = $ship -> get sector
+* - - Don't touch ships in different sector or they'll go sluggish
+skip if [SECTOR] == $ship.sec
+continue
+
+$transport.device = $ship -> get true amount of ware Transporter Device in cargo bay
+$distance = get distance between $ship and $carrier
+
+* - - Teleport ships with transporter device (or when OOS)
+if $distance <= 5000 AND $transport.device >= 1
+$ship -> put into environment $carrier ->
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+* - - Same for OOS at smaller distance to avoid rare bug
+if $distance <= 2000 AND $OOS == [TRUE]
+$ship -> put into environment $carrier ->
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+
+* - Check for buggy ships
+$speed = $ship -> get current speed
+if $speed == 0 AND $isjump != [TRUE]
+* - - Transporter Device Teleportation possible ?
+if $distance <= 6000 AND $transport.device >= 1
+$ship -> put into environment $carrier ->
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+* - - - Go Idle and hope it'll work next try
+else
+START $ship -> call script !ship.cmd.idle.std :
+= wait 5000 ms
+end
+end
+else
+$env = $ship -> get environment
+if $env != [THIS]
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=$carrier arg2=null arg3=null arg4=null arg5=null
+else if $env == [THIS]
+gosub dodock
+remove element from array $ship.list at index $ship.count
+continue
+end
+end
+end
+$global =  size of array $ship.list
+= wait 5000 ms
+end
+
+return null
+
+dodock:
+$ship -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$ship -> set destination to null
+$ship -> set command: COMMAND_NONE  target=null target2=null par1=null par2=null
+$v1 = $ship -> get maximum shield strength
+$ship -> set current shield strength to $v1
+endsub
+return null

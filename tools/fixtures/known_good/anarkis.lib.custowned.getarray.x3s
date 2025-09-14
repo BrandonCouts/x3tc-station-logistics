@@ -1,0 +1,8 @@
+#name: anarkis.lib.custowned.getarray
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.custowned.getarray.xml
+
+= [THIS] -> call script anarkis.lib.custowned.cleanarray :
+$var = [THIS] -> get local variable: name='anarkis.owned'
+return $var

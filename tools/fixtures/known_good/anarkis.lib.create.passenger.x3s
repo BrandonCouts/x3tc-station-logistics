@@ -1,0 +1,16 @@
+#name: anarkis.lib.create.passenger
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.create.passenger.xml
+
+skip if $ship -> exists
+return null
+skip if $race
+$race = $ship -> get true owner
+
+$p.name = get random name: race=$race
+$p.face =  = random value from 0 to 4 - 1
+$p.voice =  = random value from 0 to 4 - 1
+$pass = $ship -> create passenger in ship: name=$p.name race=$race voice=$p.voice face=$p.face
+
+return $pass

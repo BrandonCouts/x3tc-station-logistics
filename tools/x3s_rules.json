@@ -615,6 +615,41 @@
             "examples": [
                 "set notoriety of $base.race -> $target.race to $new.noto points"
             ]
+        },
+        {
+            "name": "find.station",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*find station:\\s*sector=\\$[A-Za-z0-9_.]+\\s+class or type=[A-Za-z0-9 ]+\\s+race=\\$[A-Za-z0-9_.]+\\s+flags=\\[[A-Za-z0-9_.|]+\\]\\s+refobj=(\\$[A-Za-z0-9_.]+|null)\\s+maxdist=(\\$[A-Za-z0-9_.]+|null)\\s+maxnum=\\d+\\s+refpos=(\\$[A-Za-z0-9_.]+|null)$",
+            "examples": [
+                "$refobject = find station: sector=$sector class or type=Station race=$race flags=[Find.Random] refobj=null maxdist=null maxnum=1 refpos=null"
+            ]
+        },
+        {
+            "name": "find.ship",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*find ship:\\s*sector=\\$[A-Za-z0-9_.]+\\s+class or type=[A-Za-z0-9 ]+\\s+race=(\\$[A-Za-z0-9_.]+|null)\\s+flags=(\\$[A-Za-z0-9_.]+|\\[[A-Za-z0-9_.|]+\\])\\s+refobj=(\\$[A-Za-z0-9_.]+|null)\\s+maxdist=(\\$[A-Za-z0-9_.]+|null)\\s+maxnum=\\d+\\s+refpos=(\\$[A-Za-z0-9_.]+|null)$",
+            "examples": [
+                "$ship.list = find ship: sector=$sector class or type=Moveable Ship race=null flags=$flags refobj=$refobject maxdist=null maxnum=50 refpos=null"
+            ]
+        },
+        {
+            "name": "size.of.array",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*size of array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "$ship.count = size of array $ship.list"
+            ]
+        },
+        {
+            "name": "create.station",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*create station:\\s*type=\\$[A-Za-z0-9_.]+\\s+owner=\\$[A-Za-z0-9_.]+\\s+addto=\\$[A-Za-z0-9_.]+\\s+x=\\$[A-Za-z0-9_.]+\\s+y=\\$[A-Za-z0-9_.]+\\s+z=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "$select = create station: type=$station.type owner=$race addto=$sector x=$x y=$y z=$z"
+            ]
+        },
+        {
+            "name": "random.value",
+            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*=\\s*random value from \\d+ to \\d+ - \\d+$",
+            "examples": [
+                "$p.face = = random value from 0 to 4 - 1"
+            ]
         }
     ]
 }

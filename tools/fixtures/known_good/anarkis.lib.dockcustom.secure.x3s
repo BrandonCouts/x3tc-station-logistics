@@ -1,0 +1,68 @@
+#name: anarkis.lib.dockcustom.secure
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.lib.dockcustom.secure.xml
+
+* ===========================================
+* Securely Dock All Ships to a Carrier / Station
+* ===========================================
+
+$test.arr = [THIS] -> call script anarkis.lib.custowned.getarray :
+$glb.cnt =  size of array $test.arr
+dec $glb.cnt =
+
+* Arrays are POINTER type so we must make a real copy before doing something on it
+$ship.list =  clone array $test.arr : index 0 ... $glb.cnt
+$glb.cnt =  size of array $ship.list
+
+* 1st Pass
+while $glb.cnt
+$ship.count =  size of array $ship.list
+
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+$env = $ship -> get environment
+if $env == [THIS]
+remove element from array $ship.list at index $ship.count
+continue
+end
+if not $ship -> exists
+remove element from array $ship.list at index $ship.count
+continue
+end
+* - Check for buggy ships
+if $ship -> is script !move.movetostation on stack of task=0
+$speed = $ship -> get current speed
+if $speed == 0
+* - - Transporter Device Teleportation possible ?
+$transport.device = $ship -> get amount of ware Transporter Device in cargo bay
+$distance = get distance between $ship and [THIS]
+if $distance <= 5000 AND $transport.device == 1
+
+$ship -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$ship -> put into environment [THIS] ->
+$ship -> set command: COMMAND_NONE  target=null target2=null par1=null par2=null
+$ship -> set destination to null
+remove element from array $ship.list at index $ship.count
+continue
+* - - Go Idle and hope it'll work next try
+else
+START $ship -> call script !ship.cmd.idle.std :
+= wait 5000 ms
+end
+end
+else
+$ship -> start task 0 with script !ship.cmd.retreat.std and prio 0: arg1=[THIS] arg2=null arg3=null arg4=null arg5=null
+end
+end
+$glb.cnt =  size of array $ship.list
+* - Cancel if no dock bay free
+$test.dockbaysize = [THIS] -> get dock bay size
+$test.landedcount = [THIS] -> get number of landed ships
+skip if not $test.dockbaysize <= $test.landedcount
+break
+= wait 5000 ms
+end
+
+return null
