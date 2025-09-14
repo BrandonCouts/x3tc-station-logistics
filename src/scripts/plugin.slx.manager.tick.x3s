@@ -91,12 +91,32 @@ ProducerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
-          $txt = 'P2S'
-          if $auto
-            $txt = 'A_P2S'
+
+          * merged: nuanced codes + auto prefix
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'P2S'
           end
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
-          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2S_RECV'
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'P2S_RECV'
+          end
+          if $auto
+            if $srcCode == 'S_BAL'
+              $srcCode = 'A_S_BAL'
+            else if $srcCode == 'P2S'
+              $srcCode = 'A_P2S'
+            end
+            if $dstCode == 'FILLED_MAX'
+              $dstCode = 'A_FILLED_MAX'
+            else if $dstCode == 'P2S_RECV'
+              $dstCode = 'A_P2S_RECV'
+            end
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$srcCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text=$dstCode
         else
           $txt = 'NO_STORE'
           if $auto
@@ -158,12 +178,32 @@ ProducerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
-          $txt = 'P2C'
-          if $auto
-            $txt = 'A_P2C'
+
+          * merged: nuanced codes + auto prefix
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'P2C'
           end
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
-          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2C'
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'P2C'
+          end
+          if $auto
+            if $srcCode == 'S_BAL'
+              $srcCode = 'A_S_BAL'
+            else if $srcCode == 'P2C'
+              $srcCode = 'A_P2C'
+            end
+            if $dstCode == 'FILLED_MAX'
+              $dstCode = 'A_FILLED_MAX'
+            else if $dstCode == 'P2C'
+              $dstCode = 'A_P2C'
+            end
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$srcCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text=$dstCode
         else
           $txt = 'AT_MIN'
           if $auto
@@ -235,12 +275,32 @@ ConsumerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$src, dst=$st, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$st, ware=$ware, amount=$amt
-          $txt = 'S2C'
-          if $auto
-            $txt = 'A_S2C'
+
+          * merged: nuanced codes + auto prefix
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'S2C'
           end
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
-          call script 'lib.slx.query' : function='SetLastReason', station=$src, ware=$ware, text='S2C'
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'S2C'
+          end
+          if $auto
+            if $dstCode == 'FILLED_MAX'
+              $dstCode = 'A_FILLED_MAX'
+            else if $dstCode == 'S2C'
+              $dstCode = 'A_S2C'
+            end
+            if $srcCode == 'S_BAL'
+              $srcCode = 'A_S_BAL'
+            else if $srcCode == 'S2C'
+              $srcCode = 'A_S2C'
+            end
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$dstCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$src, ware=$ware, text=$srcCode
         else
           $txt = 'NO_STORE'
           if $auto
@@ -394,4 +454,3 @@ StoreLoop:
     call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
   end
   return null
-

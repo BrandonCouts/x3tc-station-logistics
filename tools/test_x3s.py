@@ -2,6 +2,7 @@ from pathlib import Path
 from pathlib import Path
 import subprocess
 import sys
+import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -35,4 +36,9 @@ if __name__ == '__main__':
   fail_dir = ROOT / 'tools/fixtures/should_fail'
   if list(fail_dir.rglob('*.x3s')):
     run_fail([sys.executable, 'tools/x3s_lint.py', str(fail_dir.relative_to(ROOT))])
+
+  suite = unittest.defaultTestLoader.discover(str(ROOT / 'tools/tests'))
+  result = unittest.TextTestRunner().run(suite)
+  if not result.wasSuccessful():
+    sys.exit(1)
 
