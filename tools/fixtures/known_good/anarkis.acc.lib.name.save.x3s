@@ -1,0 +1,15 @@
+#name: anarkis.acc.lib.name.save
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.name.save.xml
+
+$arr = [THIS] -> call script anarkis.acc.lib.get.adsonly :
+$cnt =  size of array $arr
+while $cnt
+dec $cnt =
+$select = $arr[$cnt]
+$name = $select -> get name
+$select -> set local variable: name='anarkis.acc.oldname' value=$name
+end
+
+return $arr

@@ -510,6 +510,20 @@
             "examples": [
                 "START $new.leader -> command $cmd.name : arg1=$arg1, arg2=$arg2, arg3=$arg3, arg4=null"
             ]
+        },
+        {
+            "name": "append.class",
+            "regex": "^append (M1|M2|M3|M4|M5|M6|M7|M8|TM|TP|TS|TL) to array \\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "append M2 to array $class.list"
+            ]
+        },
+        {
+            "name": "menu.value.selection",
+            "regex": "^add value selection to menu: \\$[A-Za-z0-9_.]+, text=\\$[A-Za-z0-9_.]+, value array=\\$[A-Za-z0-9_.]+, default=\\$[A-Za-z0-9_.]+, return id=\\$[A-Za-z0-9_.]+$",
+            "examples": [
+                "add value selection to menu: $menu, text=$st, value array=$sel.threat, default=$sel.threat.selection, return id=$sel.threat.id"
+            ]
         }
     ]
 }

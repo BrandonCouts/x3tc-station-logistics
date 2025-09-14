@@ -2,7 +2,7 @@
 SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
 ## ADS Sample Files
-The linter is validated against these 60 known-good ADS scripts:
+The linter is validated against these 80 known-good ADS scripts:
 
 - !init.anarkis.modified.x3s
 - al.plugin.sk.ecs.x3s
@@ -64,3 +64,23 @@ The linter is validated against these 60 known-good ADS scripts:
 - anarkis.lib.custowned.init.x3s
 - anarkis.lib.vis.task.blink.x3s
 - anarkis.acc.task.autoname.x3s
+- anarkis.acc.is.compatible.x3s
+- anarkis.acc.lib.applyallowned.x3s
+- anarkis.acc.lib.arr.remove.ads.x3s
+- anarkis.acc.lib.dockads.x3s
+- anarkis.acc.lib.get.adsonly.from.x3s
+- anarkis.acc.lib.get.adsonly.x3s
+- anarkis.acc.lib.get.enemies.x3s
+- anarkis.acc.lib.get.flyads.x3s
+- anarkis.acc.lib.get.leader.big.x3s
+- anarkis.acc.lib.get.lonely.x3s
+- anarkis.acc.lib.givetarget.x3s
+- anarkis.acc.lib.isadsactive.x3s
+- anarkis.acc.lib.name.load.x3s
+- anarkis.acc.lib.name.save.x3s
+- anarkis.acc.repairshields.single.x3s
+- anarkis.acc.repairshields.x3s
+- anarkis.acc.setup.attackmode.x3s
+- anarkis.acc.setup.autocarrier.x3s
+- anarkis.acc.setup.buywares.x3s
+- anarkis.acc.setup.copy.x3s
