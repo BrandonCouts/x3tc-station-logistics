@@ -1,0 +1,19 @@
+#name: anarkis.acc.ecs.register
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.ecs.register.xml
+
+* Added to prevent ADS to start before ECS
+= [THIS] -> call script anarkis.lib.wait :  wait time (in sec)=30  global to check=null
+
+$setup =  array alloc: size=7
+$setup[0] = 'anarkis.acc.plugin'
+$setup[1] = 'anarkis.acc.hotkey.ecs'
+$setup[2] = null
+$setup[3] = Player
+$setup[4] = null
+$setup[5] = 15
+$setup[6] = 'Latest ADS Reports'
+skip if [THIS] -> call script plugin.sk.ecs.register :  Setup Array=$setup
+send incoming message 'ECS Not Detected - Comms with ships and stations will be disabled !' to player: display it=[TRUE]
+return null

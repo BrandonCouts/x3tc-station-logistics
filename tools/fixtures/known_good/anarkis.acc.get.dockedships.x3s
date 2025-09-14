@@ -1,0 +1,66 @@
+#name: anarkis.acc.get.dockedships
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.get.dockedships.xml
+
+$ship.array = [THIS] -> get ship array from sector/ship/station
+$ship.cnt =  size of array $ship.array
+while $ship.cnt
+dec $ship.cnt =
+$test.ship = $ship.array[$ship.cnt]
+* - Check All-in-One no go variable
+if $test.ship -> get local variable: name='anarkis.skipme'
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check specific ADS ignore variable
+if $test.ship -> get local variable: name='anarkis.acc.skipme'
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check Ownership
+$owner = $test.ship -> get true owner
+if $owner != [OWNER]
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check ACC ownership
+if not $test.ship -> get local variable: name='anarkis.acc.ship'
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check Class
+if not $test.ship -> is of class $ship.class
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check Homebase
+$homebase = $test.ship -> get homebase
+if [OWNER] == Player
+if not $homebase -> exists
+$test.ship -> set homebase to [THIS]
+else if $homebase != [THIS]
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+end
+
+* - Let's stop ships with returnhome
+if $test.ship -> is script !move.movetostation on stack of task=0
+$test.ship -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$test.ship -> set command: null
+$test.ship -> set destination to null
+* - Else, check if they are not waiting to go
+else if $test.ship -> is task 0 in use
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+* - Check the hull
+$hull = $test.ship -> get hull percent
+if $hull < 95 AND $no.hull.dmg == [TRUE]
+remove element from array $ship.array at index $ship.cnt
+continue
+end
+end
+
+return $ship.array

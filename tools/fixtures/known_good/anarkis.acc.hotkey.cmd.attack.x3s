@@ -1,0 +1,17 @@
+#name: anarkis.acc.hotkey.cmd.attack
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.hotkey.cmd.attack.xml
+
+$aim =  get player tracking aim
+skip if $aim -> exists
+return null
+
+if [THIS] -> call script anarkis.acc.is.compatible :  target=[PLAYERSHIP]
+$v1 = $aim -> get object class
+$count = [THIS] -> call script anarkis.lib.get.shipcount :  class=$v1
+START [PLAYERSHIP] -> call script anarkis.acc.wing.attack.pl :  target=$aim  wing size=$count
+= speak text: page=13 id=131 priority=0
+end
+
+return null

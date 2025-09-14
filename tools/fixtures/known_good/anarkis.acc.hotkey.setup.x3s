@@ -1,0 +1,89 @@
+#name: anarkis.acc.hotkey.setup
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.hotkey.setup.xml
+
+$page.id = 8510
+load text: id=$page.id
+
+* Retrieve setup, apply default if not found
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+$cnt =  size of array $setup.array
+if not $cnt == 19
+$setup.array = [THIS] -> call script anarkis.acc.setup.default :
+= [THIS] -> call script anarkis.acc.apply.active :
+end
+skip if [THIS] -> is script anarkis.acc.task.repairs on stack of task=900
+[THIS] -> start task 900 with script anarkis.acc.task.repairs and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=240
+add custom menu heading to array $menu: title=$st
+
+$st = sprintf: pageid=$page.id textid=211, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='setup.home'
+$st = sprintf: pageid=$page.id textid=242, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='repairbay'
+$st = sprintf: pageid=$page.id textid=241, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='autocarrier'
+$st = sprintf: pageid=$page.id textid=243, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='supplies'
+
+$st = sprintf: pageid=$page.id textid=210, null, null, null, null, null
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=212, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='report'
+
+$st =  read text: page=$page.id id=230
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=232, null, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='reset'
+
+$v1 = [THIS] -> get object class
+$st = sprintf: pageid=$page.id textid=250, [THIS], $v1, null, null, null
+add custom menu info line to array $menu: text=$st
+$st = sprintf: pageid=$page.id textid=251, [SECTOR], null, null, null, null
+add custom menu info line to array $menu: text=$st
+$v1 = [THIS] -> get number of landed ships
+$v2 = [THIS] -> get dock bay size
+$v3 = [THIS] -> get owned ships: class/type=Ship
+$v3 =  size of array $v3
+$st = sprintf: pageid=$page.id textid=252, $v1, $v2, $v3, null, null
+add custom menu info line to array $menu: text=$st
+
+$v1 =  read text: page=$page.id id=200
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result == 'autocarrier'
+= [THIS] -> call script anarkis.acc.setup.autocarrier :
+
+else if $menu.result == 'setup.home'
+= [THIS] -> call script anarkis.acc.setup.hangars :
+
+else if $menu.result == 'repairbay'
+= [THIS] -> call script anarkis.acc.setup.repair :
+
+else if $menu.result == 'supplies'
+= [THIS] -> call script anarkis.acc.setup.supplies :
+
+* dont loop here
+else if $menu.result == 'report'
+START $null -> call script anarkis.acc.setup.reports :  selected ship=[THIS]
+return null
+
+else if $menu.result == 'reset'
+$setup.array = [THIS] -> call script anarkis.acc.setup.default :
+
+
+end
+
+end
+
+return null
