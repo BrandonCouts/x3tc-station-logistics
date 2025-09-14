@@ -36,6 +36,10 @@ if $fn == 'FormatReason'
     $txt = read text: page=$page id=207
     return $txt
   end
+  if $code == 'S_BAL'
+    $txt = read text: page=$page id=217
+    return $txt
+  end
   $txt = ''
   return $txt
 end

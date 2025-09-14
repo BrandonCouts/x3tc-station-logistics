@@ -77,8 +77,18 @@ ProducerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='P2S'
-          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2S_RECV'
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'P2S'
+          end
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'P2S_RECV'
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$srcCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text=$dstCode
         else
           call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
         end
@@ -128,8 +138,18 @@ ProducerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$st, dst=$dst, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$st, dst=$dst, ware=$ware, amount=$amt
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='P2C'
-          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text='P2C'
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'P2C'
+          end
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'P2C'
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$srcCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$dst, ware=$ware, text=$dstCode
         else
           call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='AT_MIN'
         end
@@ -185,8 +205,18 @@ ConsumerLoop:
         $ok = call script 'lib.slx.transfer' : function='CanMove', src=$src, dst=$st, ware=$ware, amount=$amt
         if $ok
           call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$st, ware=$ware, amount=$amt
-          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='S2C'
-          call script 'lib.slx.query' : function='SetLastReason', station=$src, ware=$ware, text='S2C'
+          if $amt == $room
+            $dstCode = 'FILLED_MAX'
+          else
+            $dstCode = 'S2C'
+          end
+          if $amt == $available
+            $srcCode = 'S_BAL'
+          else
+            $srcCode = 'S2C'
+          end
+          call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$dstCode
+          call script 'lib.slx.query' : function='SetLastReason', station=$src, ware=$ware, text=$srcCode
         else
           call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text='NO_STORE'
         end
