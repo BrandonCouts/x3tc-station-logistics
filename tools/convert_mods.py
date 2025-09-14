@@ -96,6 +96,7 @@ def copy_tree(src: Path, dst: Path, summary: ModSummary) -> None:
         return
     # Copy files preserving times; keep directory structure
     for p in src.rglob("*"):
+
         rel = p.relative_to(src)
         target = dst / rel
         if p.is_dir():

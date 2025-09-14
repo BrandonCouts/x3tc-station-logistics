@@ -1,3 +1,7 @@
+#name: plugin.LI.FDN.Reset
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Reset.xml
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * this script resets all FDN locally stored values
@@ -33,7 +37,7 @@ gosub Clear.Local.Sub:
 * loop the factory array and clear
 $sf = size of array $factory.array
 while $sf > 0
-dec $sf
+dec $sf =
 $station = $factory.array[$sf]
 gosub Clear.Local.Sub:
 end
@@ -42,7 +46,7 @@ end
 * loop the dock array and clear
 $sd = size of array $dock.array
 while $sd > 0
-dec $sd
+dec $sd =
 $station = $dock.array[$sd]
 gosub Clear.Local.Sub:
 end
@@ -50,9 +54,9 @@ end
 
 * set AL Plugin global variable values
 $al.Settings[2] = null
-$factory.array = array alloc: size=0
+$factory.array = = array alloc: size=0
 $al.Settings[3] = $factory.array
-$dock.array = array alloc: size=0
+$dock.array = = array alloc: size=0
 $al.Settings[4] = $dock.array
 set global variable: name='al.LI.FDN.event' value=$al.Settings
 * -----------------------------------------------------------------------------------
@@ -61,14 +65,15 @@ return null
 
 * this sub clears the locall stored values
 Clear.Local.Sub:
-$array = $station-> get local variables: regular expression='FDN*'
+$array = $station  ->  get local variables: regular expression='FDN*'
 $s = size of array $array
 while $s > 0
-dec $s
+dec $s =
 $var = $array[$s]
-$station-> set local variable: name=$var value=null
+$station  ->  set local variable: name=$var value=null
 end
 endsub
 * -----------------------------------------------------------------------------------
 return null
+
 

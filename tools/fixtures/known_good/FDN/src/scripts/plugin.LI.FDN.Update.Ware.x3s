@@ -1,3 +1,7 @@
+#name: plugin.LI.FDN.Update.Ware
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Update.Ware.xml
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 
@@ -16,7 +20,7 @@
 * -----------------------------------------------------------------------------------
 
 * Fetch values saved in the AL Plugin global variable:
-$script = get script name
+$script = = get script name
 $al.Settings = get global variable: name='al.LI.FDN.event'
 if $al.Settings
 $PageID = $al.Settings[1]
@@ -40,11 +44,11 @@ end
 if $amount > 0
 
 * check if dock - only dock class station have virtual storage
-if $station-> is of class [Dock]
+if $station  ->  is of class Dock 2007
 * -----------------------------------------------------------------------------------
 
-$pointer = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
-$ware.array = $station-> get local variable: name=$pointer
+$pointer = = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
+$ware.array = $station  ->  get local variable: name=$pointer
 * -----------------------------------------------------------------------------------
 
 * if no ware array is found for virtula add one
@@ -58,26 +62,26 @@ $virtual.stock = $ware.array[0]
 * -----------------------------------------------------------------------------------
 end
 
-$physical.stock = $station-> get amount of ware $ware in cargo bay
-$physical.free = $station-> get free amount of ware $ware in cargo bay
+$physical.stock = $station  ->  get amount of ware $ware in cargo bay
+$physical.free = $station  ->  get free amount of ware $ware in cargo bay
 
 * add and remove
 if $action == 'add'
 * -----------------------------------------------------------------------------------
 * add ware - priority it to add to physical first the use virtual
-if $station-> is of class [Dock]
+if $station  ->  is of class Dock 2007
 if not $physical.free > $amount
 
 $to.virtual = $amount - $physical.free
 $virtual.stock = $virtual.stock + $to.virtual
 $ware.array[0] = $virtual.stock
-$station-> set local variable: name=$pointer value=$ware.array
+$station  ->  set local variable: name=$pointer value=$ware.array
 
-= $station-> add $physical.free units of $ware
+ = $station  ->  add $physical.free units of $ware
 return $amount
 
 else
-= $station-> add $amount units of $ware
+ = $station  ->  add $amount units of $ware
 return $amount
 end
 
@@ -85,7 +89,7 @@ else
 if not $physical.free > $amount
 $amount = $physical.free
 end
-= $station-> add $amount units of $ware
+ = $station  ->  add $amount units of $ware
 return $amount
 end
 * -----------------------------------------------------------------------------------
@@ -108,14 +112,14 @@ end
 $return.remove = $return.remove + $from.physical
 
 $ware.array[0] = 0
-$remove = -$from.physical
-= $station-> add $remove units of $ware
+$remove = - $from.physical
+ = $station  ->  add $remove units of $ware
 end
 end
 * -----------------------------------------------------------------------------------
 
 * update the virtual ware ref
-$station-> set local variable: name=$pointer value=$ware.array
+$station  ->  set local variable: name=$pointer value=$ware.array
 end
 
 * return.remove is passed back but only used by the suppy factory script
@@ -124,8 +128,8 @@ return $return.remove
 
 Add.Ware.Sub:
 * add the virtula ref as none was found
-$price = $station-> get price of ware $ware
-$array = array alloc: size=12
+$price = $station  ->  get price of ware $ware
+$array = = array alloc: size=12
 $array[0] = 0
 $array[1] = null
 $array[2] = null
@@ -137,24 +141,25 @@ $array[7] = -1
 $array[8] = null
 $array[9] = null
 $array[11] = null
-$station-> set local variable: name=$pointer value=$array
+$station  ->  set local variable: name=$pointer value=$array
 
 * if no physical wares found create and delete ware so it show no the dock
-$physical.check = $station-> get amount of ware $ware in cargo bay
+$physical.check = $station  ->  get amount of ware $ware in cargo bay
 if not $physical.check > 0
-= $station-> add 1 units of $ware
-= $station-> add -1 units of $ware
+ = $station  ->  add 1 units of $ware
+ = $station  ->  add -1 units of $ware
 end
 endsub
 * -----------------------------------------------------------------------------------
 
 * Debug Massage handling
 Debug.Sub:
-$d.time = playing time
-$d.time = format time: $d.time
+$d.time = = playing time
+$d.time = = format time: $d.time
 $txt = $d.time + ';' + $script + ';' + $txt.debug
-write to log file $DebugID append=[TRUE] value=$txt
+write to log file $DebugID  append=[TRUE]  value=$txt
 endsub
 * -----------------------------------------------------------------------------------
 return null
+
 

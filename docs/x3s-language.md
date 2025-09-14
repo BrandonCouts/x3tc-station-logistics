@@ -15,3 +15,9 @@
 - **endsub**: `endsub`
 - **obj.add.units**: `= $station-> add $amount units of $ware`
 - **wait.random**: `= wait randomly from 500 to 1000 ms`
+
+## Fixtures
+
+Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
+provides `src/scripts/*.x3s` as the canonical source along with any `t/` text pages
+or optional `director/` XML. These fixtures are used by the test suite.

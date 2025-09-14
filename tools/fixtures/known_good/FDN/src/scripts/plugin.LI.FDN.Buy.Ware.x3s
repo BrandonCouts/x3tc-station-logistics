@@ -1,0 +1,139 @@
+#name: plugin.LI.FDN.Buy.Ware
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Buy.Ware.xml
+* Author: Logain Abler
+* -----------------------------------------------------------------------------------
+* This script is called by LI.FDN.Supply.Factory
+* It is used to buy a ware needed for production
+
+* Expected values:
+* - Factory
+* - Ware
+* - Amount
+
+* Returns values:
+* - N/A
+
+* To Do - N/A
+
+* Version: 1.0
+* Date: 22/05/2012
+* Tested: 22/05/2012
+* -----------------------------------------------------------------------------------
+
+* Fetch values saved in the AL Plugin global variable:
+* - DC
+* - exclude arrya holds all player owned stations so they are excluded from the search
+$script = = get script name
+$al.Settings = get global variable: name='al.LI.FDN.event'
+if $al.Settings
+$PageID = $al.Settings[1]
+$DebugID = 0 + $PageID
+$dc = $al.Settings[2]
+$debug = $al.Settings[7]
+$exclude.array = $al.Settings[8]
+else
+return null
+end
+* -----------------------------------------------------------------------------------
+
+$pointer = = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null
+$ware.settings = $dc  ->  get local variable: name=$pointer
+* if can buy
+if $ware.settings[3]
+
+* This calls the script that returns a list of sectors that have a player owned stations
+* or Adv Sat deployed
+$sector.array = null -> call script plugin.LI.FDN.Sector.Array : search=3
+* Get buy at price
+$buy.at = $ware.settings[4]
+
+$s = size of array $sector.array
+while $s > 0
+dec $s =
+$sector = $sector.array[$s]
+* Find stations sellin the required ware
+$buy.Station = find station: product $ware with best price:  max.price=$buy.at, amount=$amount, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array
+* check if station found
+if $buy.Station
+* Check relation to DC
+$relation = $dc  ->  get relation to object $buy.Station
+if not $relation == Foe
+* If not a foe try to buy ware
+* DEBUG Message Start----------------------------------------------------------------
+if $debug
+$txt.debug = $buy.Station + ' found in sector ' + $sector + ' selling ' + $ware
+gosub Debug.Sub:
+end
+* DEBUG Message End------------------------------------------------------------------
+$price = $buy.Station  ->  get price of ware $ware
+* DEBUG Message Start----------------------------------------------------------------
+if $debug
+$txt.debug = 'FDN buying ' + $ware + ' at ' + $price
+gosub Debug.Sub:
+end
+* DEBUG Message End------------------------------------------------------------------
+* Create drone at the station
+$drone = = create ship: type=Argon Mercury Super Freighter XL owner=Player addto=$buy.Station x=null y=null z=null
+* Set drone Homebase to DC
+$drone  ->  set homebase to $dc
+* Buy wares from station
+$bought = $drone  ->  buy $amount units of $ware
+* Remove drone
+$drone  ->  destruct: show no explosion=[TRUE]
+* DEBUG Message Start----------------------------------------------------------------
+if $debug
+$txt.debug = 'FDN has bought ' + $bought + ' of ' + $ware + ' at ' + $price
+gosub Debug.Sub:
+end
+* DEBUG Message End------------------------------------------------------------------
+* Check if wares were bought
+if $bought > 0
+ = $factory  ->  add $bought units of $ware
+* DEBUG Message Start----------------------------------------------------------------
+if $debug
+$txt.debug = 'Add ' + $bought + ' of ' + $ware + ' to ' + $factory
+gosub Debug.Sub:
+end
+* DEBUG Message End------------------------------------------------------------------
+if $bought == $amount
+return null
+else
+$amount = $amount - $bought
+* DEBUG Message Start----------------------------------------------------------------
+if $debug
+$txt.debug = $factory + ' still requires ' + $amount + ' of wares'
+gosub Debug.Sub:
+end
+* DEBUG Message End------------------------------------------------------------------
+end
+end
+end
+end
+ = wait randomly from 300 to 600 ms
+end
+
+else
+* debug
+if $debug
+$txt.debug = 'DC is not set to buy ' + $ware
+gosub Debug.Sub:
+end
+end
+
+return null
+* -----------------------------------------------------------------------------------
+* -----------------------------------------------------------------------------------
+* Debug Massage handling
+Debug.Sub:
+$d.time = = playing time
+$d.time = = format time: $d.time
+$txt = $d.time + ';' + $script + ';' + $txt.debug
+write to log file $DebugID  append=[TRUE]  value=$txt
+endsub
+* -----------------------------------------------------------------------------------
+* -----------------------------------------------------------------------------------
+return null
+
+

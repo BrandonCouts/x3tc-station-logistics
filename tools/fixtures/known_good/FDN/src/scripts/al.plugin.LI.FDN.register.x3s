@@ -1,0 +1,13 @@
+#name: al.plugin.LI.FDN.register
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/al.plugin.LI.FDN.register.xml
+$PageID = 9910
+load text: id=$PageID
+
+al engine: register script=al.LI.FDN.event
+
+return null
+
+
+

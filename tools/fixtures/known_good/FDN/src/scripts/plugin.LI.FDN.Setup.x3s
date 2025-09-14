@@ -1,3 +1,7 @@
+#name: plugin.LI.FDN.Setup
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Setup.xml
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * setup handles the srart and stop actions for FDN
@@ -28,14 +32,14 @@ end
 
 * Create debug log
 $txt = 'FDN Debug Log:'
-write to log file $DebugID append=[FALSE] value=$txt
+write to log file $DebugID  append=[FALSE]  value=$txt
 
 * Setup
 if $status == [TRUE]
 * add fdn menu to config
-$section = read text: page=$PageID id=101
-$txt = read text: page=$PageID id=102
-= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null
+$section = = read text: page=$PageID id=101
+$txt = = read text: page=$PageID id=102
+ = [THIS] -> call script plugin.config.addscript : Plugin Name=$txt  Author=null  Script Name='plugin.LI.FDN.Main.Menu'  Display author=[FALSE]  Add to section=$section  Menu=null
 * -----------------------------------------------------------------------------------
 else
 * remove fdn from config
@@ -43,10 +47,10 @@ $config.Array = get global variable: name='config.scripts'
 if $config.Array
 $s = size of array $config.Array
 while $s > 0
-dec $s
+dec $s =
 $script.Array = $config.Array[$s]
 $script = $script.Array[0]
-$menu = read text: page=$PageID id=102
+$menu = = read text: page=$PageID id=102
 if $script == $menu
 remove element from array $config.Array at index $s
 end
@@ -55,4 +59,6 @@ end
 end
 
 return null
+
+
 

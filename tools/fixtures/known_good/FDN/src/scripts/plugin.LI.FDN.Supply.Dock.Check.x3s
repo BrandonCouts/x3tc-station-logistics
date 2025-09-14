@@ -1,0 +1,81 @@
+#name: plugin.LI.FDN.Supply.Dock.Check
+#lang: 44
+#origin_mod: FDN
+#source: mods/FDN/scripts/plugin.LI.FDN.Supply.Dock.Check.xml
+* Author: Logain Abler
+* -----------------------------------------------------------------------------------
+* This script is called by LI.FDN.Menu.Supply.Start script if there is a valid
+* dock array stored in the AL Plugin variable
+* The script contains the checks made on the docks before calling LI.FDN.Menu.Dock.Factory
+* The script will also remove any non-existing Docks from the stored array
+
+* Expected values:
+* - N/A the Factory array is stored in the AL Plugin variable
+
+* Returns values:
+* - N/A
+
+* To Do - Debug
+
+* Version: 1.0
+* Date: 22/05/2012
+* Tested: 22/05/2012
+* -----------------------------------------------------------------------------------
+
+* Fetch values saved in the AL Plugin global variable:
+* - dock array - holds all the know player factories
+$script = = get script name
+$al.Settings = get global variable: name='al.LI.FDN.event'
+if $al.Settings
+$PageID = $al.Settings[1]
+$DebugID = 0 + $PageID
+$dc = $al.Settings[2]
+$dock.array = $al.Settings[4]
+$debug = $al.Settings[7]
+else
+return null
+end
+* -----------------------------------------------------------------------------------
+
+$s = size of array $dock.array
+
+* if DC
+if $dc  ->  exists
+* this call the supply script for the dc which kicks off the sell part for the dc
+START  = null -> call script plugin.LI.FDN.Supply.Dock : dock=$dc  flag=1
+end
+
+while $s > 0
+dec $s =
+$dock = $dock.array[$s]
+if $dock  ->  exists
+* -----------------------------------------------------------------------------------
+
+* Call plugin.LI.FDN.Supply.Dock:
+START  = null -> call script plugin.LI.FDN.Supply.Dock : dock=$dock  flag=null
+* ----------------------------------------------------------------------------------
+
+else
+* if factory does not exist remove from array
+remove element from array $dock.array at index $s
+* -----------------------------------------------------------------------------------
+end
+* -----------------------------------------------------------------------------------
+
+ = wait randomly from 1000 to 2000 ms
+* -----------------------------------------------------------------------------------
+end
+return null
+* -----------------------------------------------------------------------------------
+
+* Debug Massage handling
+Debug.Sub:
+$d.time = = playing time
+$d.time = = format time: $d.time
+$txt = $d.time + ';' + $script + ';' + $txt.debug
+write to log file $DebugID  append=[TRUE]  value=$txt
+endsub
+* -----------------------------------------------------------------------------------
+return null
+
+
