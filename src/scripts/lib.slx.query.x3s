@@ -4,6 +4,11 @@
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
 
+$ROLE = 0
+$MIN_PCT = 1
+$MAX_PCT = 2
+$CHUNK_PCT = 3
+
 if $function == 'ListEnrolledStations'
   $result = array alloc: size=0
   $all = get station array: of race=Player
@@ -39,12 +44,12 @@ if $function == 'GetStationWareConfig'
   $minArr = $station -> get local variable: name='slx.ware.min_pct'
   $maxArr = $station -> get local variable: name='slx.ware.max_pct'
   $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
-  $map = array alloc: size=0
-  $map['role'] = $roleArr[$ware]
-  $map['min_pct'] = $minArr[$ware]
-  $map['max_pct'] = $maxArr[$ware]
-  $map['chunk_pct'] = $chunkArr[$ware]
-  return $map
+  $cfg = array alloc: size=4
+  $cfg[$ROLE] = $roleArr[$ware]
+  $cfg[$MIN_PCT] = $minArr[$ware]
+  $cfg[$MAX_PCT] = $maxArr[$ware]
+  $cfg[$CHUNK_PCT] = $chunkArr[$ware]
+  return $cfg
 end
 
 if $function == 'SetStationWareConfig'
@@ -52,28 +57,28 @@ if $function == 'SetStationWareConfig'
   if not $roleArr
     $roleArr = array alloc: size=0
   end
-  $roleArr[$ware] = $map['role']
+  $roleArr[$ware] = $cfg[$ROLE]
   $station -> set local variable: name='slx.ware.role' value=$roleArr
 
   $minArr = $station -> get local variable: name='slx.ware.min_pct'
   if not $minArr
     $minArr = array alloc: size=0
   end
-  $minArr[$ware] = $map['min_pct']
+  $minArr[$ware] = $cfg[$MIN_PCT]
   $station -> set local variable: name='slx.ware.min_pct' value=$minArr
 
   $maxArr = $station -> get local variable: name='slx.ware.max_pct'
   if not $maxArr
     $maxArr = array alloc: size=0
   end
-  $maxArr[$ware] = $map['max_pct']
+  $maxArr[$ware] = $cfg[$MAX_PCT]
   $station -> set local variable: name='slx.ware.max_pct' value=$maxArr
 
   $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
   if not $chunkArr
     $chunkArr = array alloc: size=0
   end
-  $chunkArr[$ware] = $map['chunk_pct']
+  $chunkArr[$ware] = $cfg[$CHUNK_PCT]
   $station -> set local variable: name='slx.ware.chunk_pct' value=$chunkArr
   return null
 end

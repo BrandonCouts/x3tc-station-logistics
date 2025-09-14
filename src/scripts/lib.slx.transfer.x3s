@@ -3,6 +3,10 @@
 * DESCRIPTION: Ware transfer helpers for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
+$ROLE = 0
+$MIN_PCT = 1
+$MAX_PCT = 2
+$CHUNK_PCT = 3
 
 if $function == 'CanMove'
   $srcAmt = $src -> get amount of ware $ware in cargo bay
@@ -13,10 +17,10 @@ if $function == 'CanMove'
   $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
   $srcNew = ($srcAmt - $amount) * 100 / $srcCap
   $dstNew = ($dstAmt + $amount) * 100 / $dstCap
-  if $srcNew < $srcCfg['min_pct']
+  if $srcNew < $srcCfg[$MIN_PCT]
     return [FALSE]
   end
-  if $dstNew > $dstCfg['max_pct']
+  if $dstNew > $dstCfg[$MAX_PCT]
     return [FALSE]
   end
   return [TRUE]
