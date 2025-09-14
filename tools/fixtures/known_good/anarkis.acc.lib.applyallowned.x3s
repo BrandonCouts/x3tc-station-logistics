@@ -1,0 +1,15 @@
+#name: anarkis.acc.lib.applyallowned
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.applyallowned.xml
+
+$dock.list = [THIS] -> get owned ships: class/type=Moveable Ship
+$cnt =  size of array $dock.list
+while $cnt
+dec $cnt =
+$curr.ship = $dock.list[$cnt]
+skip if not $curr.ship -> get local variable: name='anarkis.skipme'
+continue
+$curr.ship -> set local variable: name='anarkis.acc.ship' value=[TRUE]
+end
+return null

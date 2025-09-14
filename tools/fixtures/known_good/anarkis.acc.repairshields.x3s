@@ -1,0 +1,21 @@
+#name: anarkis.acc.repairshields
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.repairshields.xml
+
+$array = [THIS] -> get ship array from sector/ship/station
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$select = $array[$cnt]
+$max = $select -> get maximum shield strength
+$select -> set current shield strength to $max
+$select -> start task 0 with script anarkis.lib.cmd.donothing and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+$select -> set command: COMMAND_NONE
+$select -> set destination to null
+$select -> set attack target to null
+$select -> set command target: null
+$select -> set command target2: null
+$select -> set ship command/signal SIGNAL_ATTACKED to global default behaviour
+end
+return null

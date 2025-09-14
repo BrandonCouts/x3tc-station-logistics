@@ -73,6 +73,10 @@
 - **copy.array.literal**: `copy array $setup index 0 ... 6 into array $config.to.update at index 0`
 - **start.command.args**: `START $new.leader -> command $cmd.name : arg1=$arg1, arg2=$arg2, arg3=$arg3, arg4=null`
 
+### New Statements Recognized
+- **append.class**: `append M2 to array $class.list`
+- **menu.value.selection**: `add value selection to menu: $menu, text=$st, value array=$sel.threat, default=$sel.threat.selection, return id=$sel.threat.id`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod

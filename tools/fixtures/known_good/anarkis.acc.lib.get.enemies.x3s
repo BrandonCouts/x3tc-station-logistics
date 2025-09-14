@@ -1,0 +1,58 @@
+#name: anarkis.acc.lib.get.enemies
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.lib.get.enemies.xml
+
+$class.list =  array alloc: size=0
+
+append M2 to array $class.list
+append M1 to array $class.list
+append M7 to array $class.list
+append TL to array $class.list
+append M6 to array $class.list
+append M8 to array $class.list
+append M3 to array $class.list
+append M4 to array $class.list
+append M5 to array $class.list
+append TM to array $class.list
+append TP to array $class.list
+append TS to array $class.list
+
+$class.count =  size of array $class.list
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+$setup.array = $refobject -> get local variable: name='anarkis.acc.setup'
+$owner = $refobject -> get owner race
+if $owner == Player
+$ignore.list = $gl.setup[7]
+else
+$ignore.list = $setup.array[16]
+end
+$radar.range = $setup.array[1]
+$flags = [Find.Enemy] | [Find.Multiple]
+
+$final.list =  array alloc: size=0
+
+
+while $class.count
+dec $class.count =
+$select.class = $class.list[$class.count]
+$ship.list =  find ship: sector=$sector class or type=$select.class race=null flags=$flags refobj=$refobject maxdist=$radar.range maxnum=50 refpos=null
+$ship.count =  size of array $ship.list
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+$owner = $ship -> get owner race
+$class = $ship -> get object class
+skip if not  find $owner in array: $ignore.list
+continue
+skip if $ship -> is $refobject a enemy
+continue
+skip if not $ship -> is civilian ship
+continue
+append $ship to array $final.list
+end
+end
+
+
+return $final.list

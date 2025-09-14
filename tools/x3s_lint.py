@@ -124,6 +124,12 @@ def lint_file(path: Path, patterns: list[re.Pattern[str]] | None = None) -> list
         if b.kind == "while" and b.var == var:
           b.has_progress = True
           break
+    if m := re.match(r"\$([A-Za-z0-9_.]+)\s*=", low):
+      var = m.group(1)
+      for b in reversed(stack):
+        if b.kind == "while" and b.var == var:
+          b.has_progress = True
+          break
 
     # treat certain blocking calls as progress (e.g., menu interaction)
     if "open custom menu:" in low or "open custom info menu:" in low:
