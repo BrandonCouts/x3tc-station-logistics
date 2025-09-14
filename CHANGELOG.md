@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.7-internal
+- Added overview section to SLX README for clarity.
+
 ## 0.1.6-internal
 - Added peer store status reason codes and auto-role mapping in UI helper.
 

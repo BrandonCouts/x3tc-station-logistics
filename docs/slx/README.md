@@ -1,5 +1,6 @@
 # Station Logistics X3 (SLX)
 
+## Overview
 SLX moves wares instantly between player-owned stations using simple per-ware rules.
 It ignores NPC trading and focuses purely on balancing your own production network.
 
