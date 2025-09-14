@@ -6,8 +6,38 @@
 $fn = argument 1
 
 if $fn == 'FormatReason'
-  $reason = argument 2
-  return $reason
+  $code = argument 2
+  $page = 89055
+  if $code == 'AT_MIN'
+    $txt = read text: page=$page id=201
+    return $txt
+  end
+  if $code == 'NO_STORE'
+    $txt = read text: page=$page id=202
+    return $txt
+  end
+  if $code == 'FILLED_MAX'
+    $txt = read text: page=$page id=203
+    return $txt
+  end
+  if $code == 'P2S'
+    $txt = read text: page=$page id=204
+    return $txt
+  end
+  if $code == 'P2C'
+    $txt = read text: page=$page id=205
+    return $txt
+  end
+  if $code == 'S2C'
+    $txt = read text: page=$page id=206
+    return $txt
+  end
+  if $code == 'P2S_RECV'
+    $txt = read text: page=$page id=207
+    return $txt
+  end
+  $txt = ''
+  return $txt
 end
 
 return null
