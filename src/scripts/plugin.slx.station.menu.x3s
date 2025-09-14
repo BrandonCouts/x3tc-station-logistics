@@ -3,8 +3,12 @@
 * DESCRIPTION: Station configuration menu for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
-$station = argument 1
 $PageId = 89055
+
+$ROLE = 0
+$MIN_PCT = 1
+$MAX_PCT = 2
+$CHUNK_PCT = 3
 
 if not $station
   $prompt = read text: page=$PageId id=209
@@ -34,7 +38,7 @@ while [TRUE]
     $last = $station -> get local variable: name='slx.ware.last_reason'
     $code = $last[$ware]
     $reason = call script 'lib.slx.ui' : function='FormatReason', code=$code
-    $row = sprintf: pageid=$PageId textid=214, $ware, $cfg['role'], $cfg['min_pct'], $cfg['max_pct'], $cfg['chunk_pct'], $reason
+    $row = sprintf: pageid=$PageId textid=214, $ware, $cfg[$ROLE], $cfg[$MIN_PCT], $cfg[$MAX_PCT], $cfg[$CHUNK_PCT], $reason
     add custom menu item to array $menu: text=$row returnvalue=$ware
     = wait 1 ms
   end
@@ -50,17 +54,17 @@ while [TRUE]
       $station -> set local variable: name='slx.enrolled' value=null
     else
       $station -> set local variable: name='slx.enrolled' value=[TRUE]
-      $def = array alloc: size=0
-      $def['role'] = 'auto'
-      $def['min_pct'] = 10
-      $def['max_pct'] = 90
-      $def['chunk_pct'] = 20
+      $def = array alloc: size=4
+      $def[$ROLE] = 'auto'
+      $def[$MIN_PCT] = 10
+      $def[$MAX_PCT] = 90
+      $def[$CHUNK_PCT] = 20
       $all = $station -> get tradeable ware array from station
       $idx = size of array $all
       while $idx
         dec $idx
         $w = $all[$idx]
-        call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, map=$def
+        call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, cfg=$def
         = wait 1 ms
       end
     end
@@ -70,29 +74,29 @@ while [TRUE]
   $txtRole = read text: page=$PageId id=210
   $role = null  ->  get user input: type=Var/String, title=$txtRole
   if not $role
-    $role = $cfg['role']
+    $role = $cfg[$ROLE]
   end
   $txtMin = read text: page=$PageId id=211
   $min = null  ->  get user input: type=Var/Number, title=$txtMin
   if not $min
-    $min = $cfg['min_pct']
+    $min = $cfg[$MIN_PCT]
   end
   $txtMax = read text: page=$PageId id=212
   $max = null  ->  get user input: type=Var/Number, title=$txtMax
   if not $max
-    $max = $cfg['max_pct']
+    $max = $cfg[$MAX_PCT]
   end
   $txtChunk = read text: page=$PageId id=213
   $chunk = null  ->  get user input: type=Var/Number, title=$txtChunk
   if not $chunk
-    $chunk = $cfg['chunk_pct']
+    $chunk = $cfg[$CHUNK_PCT]
   end
-  $new = array alloc: size=0
-  $new['role'] = $role
-  $new['min_pct'] = $min
-  $new['max_pct'] = $max
-  $new['chunk_pct'] = $chunk
-  call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, map=$new
+  $new = array alloc: size=4
+  $new[$ROLE] = $role
+  $new[$MIN_PCT] = $min
+  $new[$MAX_PCT] = $max
+  $new[$CHUNK_PCT] = $chunk
+  call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, cfg=$new
   = wait 1 ms
 end
 

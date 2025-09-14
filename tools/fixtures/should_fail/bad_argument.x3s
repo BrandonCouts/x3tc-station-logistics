@@ -1,0 +1,3 @@
+* Demonstrates invalid positional argument syntax
+$fn = argument 1
+return null

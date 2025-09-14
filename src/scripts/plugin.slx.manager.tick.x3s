@@ -4,6 +4,11 @@
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
 
+$ROLE = 0
+$MIN_PCT = 1
+$MAX_PCT = 2
+$CHUNK_PCT = 3
+
 while [TRUE]
   $stations = call script 'lib.slx.query' : function='ListEnrolledStations'
   $scount = size of array $stations
@@ -16,7 +21,7 @@ while [TRUE]
       dec $wcount
       $ware = $wares[$wcount]
       $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$st, ware=$ware
-      $role = $cfg['role']
+      $role = $cfg[$ROLE]
       if not $role
         continue
       end
@@ -24,9 +29,9 @@ while [TRUE]
       $auto = [FALSE]
       if $role == 'auto'
         $auto = [TRUE]
-        if $pct > $cfg['max_pct']
+        if $pct > $cfg[$MAX_PCT]
           $role = 'producer'
-        else if $pct < $cfg['min_pct']
+        else if $pct < $cfg[$MIN_PCT]
           $role = 'consumer'
         else
           $role = 'store'
@@ -51,7 +56,7 @@ end
 return null
 
 ProducerLoop:
-  if $pct > $cfg['max_pct']
+  if $pct > $cfg[$MAX_PCT]
     $dst = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -60,9 +65,9 @@ ProducerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2['role'] != 'store'
+      skip if $cfg2[$ROLE] != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2['max_pct']
+      if $pct2 < $cfg2[$MAX_PCT]
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $dst = $other
@@ -80,10 +85,10 @@ ProducerLoop:
       $dstAmt = $dst -> get amount of ware $ware in cargo bay
       $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
       $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
-      $srcChunk = $srcCap * $cfg['chunk_pct'] / 100
-      $dstChunk = $dstCap * $dstCfg['chunk_pct'] / 100
-      $available = $srcAmt - ($cfg['max_pct'] * $srcCap / 100)
-      $room = ($dstCfg['max_pct'] * $dstCap / 100) - $dstAmt
+      $srcChunk = $srcCap * $cfg[$CHUNK_PCT] / 100
+      $dstChunk = $dstCap * $dstCfg[$CHUNK_PCT] / 100
+      $available = $srcAmt - ($cfg[$MAX_PCT] * $srcCap / 100)
+      $room = ($dstCfg[$MAX_PCT] * $dstCap / 100) - $dstAmt
       $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
@@ -138,7 +143,7 @@ ProducerLoop:
       end
       call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
     end
-  else if $pct > $cfg['min_pct']
+  else if $pct > $cfg[$MIN_PCT]
     $dst = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -147,9 +152,9 @@ ProducerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2['role'] != 'consumer'
+      skip if $cfg2[$ROLE] != 'consumer'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2['max_pct']
+      if $pct2 < $cfg2[$MAX_PCT]
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $dst = $other
@@ -167,10 +172,10 @@ ProducerLoop:
       $dstAmt = $dst -> get amount of ware $ware in cargo bay
       $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
       $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
-      $srcChunk = $srcCap * $cfg['chunk_pct'] / 100
-      $dstChunk = $dstCap * $dstCfg['chunk_pct'] / 100
-      $available = $srcAmt - ($cfg['min_pct'] * $srcCap / 100)
-      $room = ($dstCfg['max_pct'] * $dstCap / 100) - $dstAmt
+      $srcChunk = $srcCap * $cfg[$CHUNK_PCT] / 100
+      $dstChunk = $dstCap * $dstCfg[$CHUNK_PCT] / 100
+      $available = $srcAmt - ($cfg[$MIN_PCT] * $srcCap / 100)
+      $room = ($dstCfg[$MAX_PCT] * $dstCap / 100) - $dstAmt
       $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
@@ -235,7 +240,7 @@ ProducerLoop:
   return null
 
 ConsumerLoop:
-  if $pct < $cfg['min_pct']
+  if $pct < $cfg[$MIN_PCT]
     $src = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -244,9 +249,9 @@ ConsumerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2['role'] != 'store'
+      skip if $cfg2[$ROLE] != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 > $cfg2['min_pct']
+      if $pct2 > $cfg2[$MIN_PCT]
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $src = $other
@@ -264,10 +269,10 @@ ConsumerLoop:
       $dstAmt = $st -> get amount of ware $ware in cargo bay
       $dstCap = $st -> get max amount of ware $ware that can be stored in cargo bay
       $srcCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
-      $srcChunk = $srcCap * $srcCfg['chunk_pct'] / 100
-      $dstChunk = $dstCap * $cfg['chunk_pct'] / 100
-      $available = $srcAmt - ($srcCfg['min_pct'] * $srcCap / 100)
-      $room = ($cfg['min_pct'] * $dstCap / 100) - $dstAmt
+      $srcChunk = $srcCap * $srcCfg[$CHUNK_PCT] / 100
+      $dstChunk = $dstCap * $cfg[$CHUNK_PCT] / 100
+      $available = $srcAmt - ($srcCfg[$MIN_PCT] * $srcCap / 100)
+      $room = ($cfg[$MIN_PCT] * $dstCap / 100) - $dstAmt
       $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
@@ -326,7 +331,7 @@ ConsumerLoop:
   return null
 
 StoreLoop:
-  if $pct > $cfg['max_pct']
+  if $pct > $cfg[$MAX_PCT]
     $dst = null
     $idx2 = size of array $stations
     while $idx2
@@ -334,9 +339,9 @@ StoreLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2['role'] != 'store'
+      skip if $cfg2[$ROLE] != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2['min_pct']
+      if $pct2 < $cfg2[$MIN_PCT]
         $dst = $other
         break
       end
@@ -348,10 +353,10 @@ StoreLoop:
       $dstAmt = $dst -> get amount of ware $ware in cargo bay
       $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
       $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
-      $srcChunk = $srcCap * $cfg['chunk_pct'] / 100
-      $dstChunk = $dstCap * $dstCfg['chunk_pct'] / 100
-      $available = $srcAmt - ($cfg['max_pct'] * $srcCap / 100)
-      $room = ($dstCfg['min_pct'] * $dstCap / 100) - $dstAmt
+      $srcChunk = $srcCap * $cfg[$CHUNK_PCT] / 100
+      $dstChunk = $dstCap * $dstCfg[$CHUNK_PCT] / 100
+      $available = $srcAmt - ($cfg[$MAX_PCT] * $srcCap / 100)
+      $room = ($dstCfg[$MIN_PCT] * $dstCap / 100) - $dstAmt
       $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room
@@ -386,7 +391,7 @@ StoreLoop:
       end
       call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
     end
-  else if $pct < $cfg['min_pct']
+  else if $pct < $cfg[$MIN_PCT]
     $src = null
     $idx2 = size of array $stations
     while $idx2
@@ -394,9 +399,9 @@ StoreLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2['role'] != 'store'
+      skip if $cfg2[$ROLE] != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 > $cfg2['max_pct']
+      if $pct2 > $cfg2[$MAX_PCT]
         $src = $other
         break
       end
@@ -408,10 +413,10 @@ StoreLoop:
       $dstAmt = $st -> get amount of ware $ware in cargo bay
       $dstCap = $st -> get max amount of ware $ware that can be stored in cargo bay
       $srcCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
-      $srcChunk = $srcCap * $srcCfg['chunk_pct'] / 100
-      $dstChunk = $dstCap * $cfg['chunk_pct'] / 100
-      $available = $srcAmt - ($srcCfg['max_pct'] * $srcCap / 100)
-      $room = ($cfg['min_pct'] * $dstCap / 100) - $dstAmt
+      $srcChunk = $srcCap * $srcCfg[$CHUNK_PCT] / 100
+      $dstChunk = $dstCap * $cfg[$CHUNK_PCT] / 100
+      $available = $srcAmt - ($srcCfg[$MAX_PCT] * $srcCap / 100)
+      $room = ($cfg[$MIN_PCT] * $dstCap / 100) - $dstAmt
       $amt = call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$available
       $amt = call script 'lib.slx.util' : function='Min', a=$amt, b=$room

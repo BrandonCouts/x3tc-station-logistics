@@ -3,11 +3,8 @@
 * DESCRIPTION: Utility helpers for SLX
 * AUTHOR:      Brandon              DATE: 8 September 2025
 * ******************************************************************************
-$fn = argument 1
 
-if $fn == 'Min'
-  $a = argument 2
-  $b = argument 3
+if $function == 'Min'
   if $a < $b
     return $a
   else
@@ -15,9 +12,7 @@ if $fn == 'Min'
   end
 end
 
-if $fn == 'Max'
-  $a = argument 2
-  $b = argument 3
+if $function == 'Max'
   if $a > $b
     return $a
   else
@@ -25,9 +20,7 @@ if $fn == 'Max'
   end
 end
 
-if $fn == 'SafeDiv'
-  $num = argument 2
-  $den = argument 3
+if $function == 'SafeDiv'
   if $den <= 0
     return 0
   else
@@ -36,9 +29,7 @@ if $fn == 'SafeDiv'
   end
 end
 
-if $fn == 'Percent'
-  $part = argument 2
-  $whole = argument 3
+if $function == 'Percent'
   if $whole <= 0
     return 0
   end

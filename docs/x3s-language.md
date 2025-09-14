@@ -1,5 +1,8 @@
 # X3S Language
 
+## Rules
+- Arrays can only be indexed by numbers or numeric variables. String keys like $arr['foo'] are invalid.
+
 ## New Statements Recognized
 - **write.log**: `write to log file $DebugID append=[FALSE] value=$txt`
 - **dec**: `dec $s`

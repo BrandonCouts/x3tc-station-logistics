@@ -159,6 +159,14 @@ def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
           b.has_progress = True
           break
 
+    # disallow positional argument references like "argument 1"
+    if re.search(r"\bargument\s+\d+\b", low):
+      errors.append(f"{path.name}:{ln}: use named arguments instead of 'argument n'")
+
+    # disallow string array indices like $arr['key']
+    if re.search(r"\[\s*'[A-Za-z0-9_.]+'\s*\]", line):
+      errors.append(f"{path.name}:{ln}: array indices must be numeric")
+
     # line-shape validation (warn on unknown shapes)
     recognizable = any(pat.regex.match(line.strip()) for pat in patterns)
     if not recognizable and not (re.match(r'^if\b', low) or re.match(r'^else\s+if\b', low) or low == "else" or low == "end" or re.match(r'^while\b', low)):
