@@ -24,12 +24,12 @@ if __name__ == '__main__':
   # lint project scripts
   run([sys.executable, 'tools/x3s_lint.py', 'src/scripts'])
 
-  # lint known-good fixtures
-  good = sorted((ROOT / 'tools/fixtures/known_good').glob('**/src/scripts/*.x3s'))
-  if good:
-    run([sys.executable, 'tools/x3s_lint.py', *[str(p.relative_to(ROOT)) for p in good]])
+  # lint known-good fixtures recursively
+  good_paths = sorted(ROOT.glob('tools/fixtures/known_good/**/src/scripts/*.x3s'))
+  if good_paths:
+    run([sys.executable, 'tools/x3s_lint.py', *[str(p.relative_to(ROOT)) for p in good_paths]])
 
-  # ensure safety checks still trigger
+  # ensure safety checks still trigger (negative tests)
   fail_paths = sorted((ROOT / 'tools/fixtures/should_fail').glob('**/*.x3s'))
   if fail_paths:
     run_fail([sys.executable, 'tools/x3s_lint.py', *[str(p.relative_to(ROOT)) for p in fail_paths]])

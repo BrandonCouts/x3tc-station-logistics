@@ -2,6 +2,7 @@
 #lang: 44
 #origin_mod: FDN
 #source: mods/FDN/scripts/plugin.LI.FDN.Reset.xml
+
 * Author: Logain Abler
 * -----------------------------------------------------------------------------------
 * this script resets all FDN locally stored values

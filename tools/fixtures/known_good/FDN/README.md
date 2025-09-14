@@ -1,8 +1,9 @@
-Generated from mods/FDN on 2025-09-14
+# FDN (fixtures)
 
-Scripts converted: 28
-Text pages copied: 1
-Skipped files:
-- plugin.LI.FDN.Main.Menu.xml (lint failed)
-- plugin.LI.FDN.Menu.DC.Details_D.xml (lint failed)
-- plugin.LI.FDN.Menu.Dock.Details_D.xml (lint failed)
+Generated from `mods/FDN` on 2025-09-14 00:41:13Z.
+
+## Summary
+- Scripts converted: 31
+- Scripts skipped:  0
+- Text pages copied: 1
+- Director copied:   no

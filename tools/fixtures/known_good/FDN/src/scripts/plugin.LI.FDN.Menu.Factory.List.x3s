@@ -2,6 +2,7 @@
 #lang: 44
 #origin_mod: FDN
 #source: mods/FDN/scripts/plugin.LI.FDN.Menu.Factory.List.xml
+
 $al.Settings = get global variable: name='al.LI.FDN.event'
 if $al.Settings
 $PageID = $al.Settings[1]

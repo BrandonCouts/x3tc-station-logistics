@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Convert fixtures from tools/fixtures/known_good/mods/<mod_name>/
+Convert fixtures from tools/fixtures/mods/<mod_name>/
 to tools/fixtures/known_good/<mod_name>/.
 
 - scripts/*.xml with <codearray><line>…</line></codearray> → src/scripts/*.x3s
@@ -50,22 +50,37 @@ def ensure_dirs(out_root: Path, mod_name: str) -> dict[str, Path]:
 
 def is_x3_script_xml(xml_path: Path) -> bool:
     try:
-        tree = ET.parse(xml_path)
-        root = tree.getroot()
-        # Expect exactly <codearray> root with <line> children
-        return root.tag.lower() == "codearray" and any(ch.tag.lower() == "line" for ch in root)
+        root = ET.parse(xml_path).getroot()
     except ET.ParseError:
         return False
 
+    tag = root.tag.lower()
+    if tag == "codearray":
+        return any(ch.tag.lower() == "line" for ch in root)
+    if tag == "script":
+        st = root.find("sourcetext")
+        if st is not None:
+            return any(ch.tag.lower() == "line" for ch in st)
+    return False
+
 def extract_lines(xml_path: Path) -> list[str]:
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
+    root = ET.parse(xml_path).getroot()
     lines: list[str] = []
-    for node in root:
-        if node.tag.lower() != "line":
-            continue
-        # ElementTree decodes XML entities; coerce None to empty string
-        s = (node.text or "").rstrip()
+
+    tag = root.tag.lower()
+    if tag == "codearray":
+        line_nodes = [n for n in root if n.tag.lower() == "line"]
+    elif tag == "script":
+        st = root.find("sourcetext")
+        if st is None:
+            return []
+        line_nodes = [n for n in st if n.tag.lower() == "line"]
+    else:
+        return []
+
+    for node in line_nodes:
+        # Gather text from line and child tags
+        s = "".join(node.itertext()).rstrip()
         lines.append(s)
     return lines
 
@@ -122,25 +137,31 @@ def convert_mod(mod_dir: Path, out_root: Path) -> ModSummary:
     # Convert each scripts/*.xml that is an X3 script
     scripts_src = mod_dir / "scripts"
     if scripts_src.exists():
-        for xml_path in sorted(scripts_src.glob("*.xml")):
-            if not is_x3_script_xml(xml_path):
+        for p in sorted(scripts_src.iterdir()):
+            if not p.is_file():
+                continue
+            if p.suffix.lower() != ".xml":
                 summary.scripts_skipped += 1
-                summary.notes.append(f"Skipped non-X3Script XML: {xml_path.name}")
+                summary.notes.append(f"Skipped non-XML file: {p.name}")
+                continue
+            if not is_x3_script_xml(p):
+                summary.scripts_skipped += 1
+                summary.notes.append(f"Skipped non-X3Script XML: {p.name}")
                 continue
 
-            lines = extract_lines(xml_path)
+            lines = extract_lines(p)
             page = detect_page_id(lines)
             header = {
-                "name": xml_path.stem,                # plugin.slx.foo
+                "name": p.stem,                # plugin.slx.foo
                 "origin_mod": mod_name,
-                "source": str(xml_path.relative_to(mod_dir)),
+                "source": f"mods/{mod_name}/{p.relative_to(mod_dir)}",
             }
             if page:
                 header["page"] = page
             if has_44:
                 header["lang"] = "44"
 
-            out_path = paths["scripts"] / f"{xml_path.stem}.x3s"
+            out_path = paths["scripts"] / f"{p.stem}.x3s"
             write_x3s(out_path, header, lines)
             summary.scripts_converted += 1
     else:
@@ -172,8 +193,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Convert known_good mods to per-mod .x3s fixtures.")
     parser.add_argument(
         "--mods-dir",
-        default=str(Path("tools/fixtures/known_good/mods")),
-        help="Input mods/ root (default: tools/fixtures/known_good/mods)",
+        default=str(Path("tools/fixtures/mods")),
+        help="Input mods/ root (default: tools/fixtures/mods)",
     )
     parser.add_argument(
         "--out-dir",
@@ -197,11 +218,16 @@ def main() -> int:
         return 2
 
     total = ModSummary()
+    failed_mods: list[str] = []
     print(f"Converting from {mods_root} -> {out_root}")
     for mod in mods:
         print(f"- [{mod.name}] …", end="", flush=True)
         s = convert_mod(mod, out_root)
-        print(f" converted={s.scripts_converted} skipped={s.scripts_skipped} t={s.t_copied} director={'y' if s.director_copied else 'n'}")
+        print(
+            f" converted={s.scripts_converted} skipped={s.scripts_skipped} t={s.t_copied} director={'y' if s.director_copied else 'n'}"
+        )
+        if (mod / "scripts").exists() and s.scripts_converted == 0:
+            failed_mods.append(mod.name)
         total.scripts_converted += s.scripts_converted
         total.scripts_skipped += s.scripts_skipped
         total.t_copied += s.t_copied
@@ -211,6 +237,13 @@ def main() -> int:
     print(f"Total scripts converted: {total.scripts_converted}")
     print(f"Total scripts skipped:  {total.scripts_skipped}")
     print(f"Total t files copied:   {total.t_copied}")
+    if failed_mods:
+        print(
+            "ERROR: no scripts converted for mods with scripts/: "
+            + ", ".join(failed_mods),
+            file=sys.stderr,
+        )
+        return 1
     return 0 if total.scripts_converted > 0 else 1
 
 if __name__ == "__main__":
