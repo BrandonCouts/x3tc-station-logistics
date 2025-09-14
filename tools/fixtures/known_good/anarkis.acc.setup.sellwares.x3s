@@ -1,0 +1,189 @@
+#name: anarkis.acc.setup.sellwares
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.sellwares.xml
+
+skip if $selected -> exists
+return null
+
+$page.id = 8510
+$null = null
+$setup.array = $selected -> get local variable: name='anarkis.acc.setup'
+$ware.list =  array alloc: size=0
+$jump.range = 2
+$sector = $selected -> get sector
+
+while $menu.result != -1
+$menu =  create custom menu array
+$st =  read text: page=$page.id id=641
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=646
+add custom menu item to array $menu: text=$st returnvalue='add.ware'
+$cnt =  size of array $ware.list
+while $cnt
+dec $cnt =
+$v1 = $ware.list[$cnt]
+$v2 = $selected -> get amount of ware $v1 in cargo bay
+$st = sprintf: pageid=$page.id textid=650, $v1, $v2, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=$v1
+end
+$st =  read text: page=$page.id id=642
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=643
+add custom menu item to array $menu: text=$st returnvalue='rem.all'
+$st =  read text: page=$page.id id=644
+add custom menu item to array $menu: text=$st returnvalue='add.all'
+$st =  read text: page=$page.id id=663
+add custom menu item to array $menu: text=$st returnvalue='add.missile'
+$st =  read text: page=$page.id id=647
+add custom menu heading to array $menu: title=$st
+$st = sprintf: pageid=$page.id textid=648, $jump.range, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue='jump.range'
+$st =  read text: page=$page.id id=645
+add custom menu item to array $menu: text=$st returnvalue='proceed'
+
+$st = sprintf: pageid=$page.id textid=649, null, null, null, null, null
+add custom menu info line to array $menu: text=$st
+
+$v1 =  read text: page=$page.id id=640
+$st = sprintf: pageid=$page.id textid=488, $selected, null, null, null, null
+$menu.result =  open custom menu: title=$v1 description=$st option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result == 'rem.all'
+$ware.list =  array alloc: size=0
+
+else if $menu.result == 'jump.range'
+$st =  read text: page=$page.id id=651
+$jump.range = $selected -> get user input: type=Var/Number, title=$st
+
+else if $menu.result == 'add.ware'
+$st =  read text: page=$page.id id=652
+$v1 = $selected -> get user input: type=Var/Ware of Ship, title=$st
+$v1 = $v1[0]
+if $v1
+skip if  find $v1 in array: $ware.list
+append $v1 to array $ware.list
+end
+
+else if $menu.result == 'add.missile'
+$wares = $selected -> get tradeable ware array from ship
+$cnt =  size of array $wares
+while $cnt
+dec $cnt =
+$v1 = $wares[$cnt]
+$v2 =  get maintype of ware $v1
+if $v2 == 10
+skip if  find $v1 in array: $ware.list
+append $v1 to array $ware.list
+end
+end
+
+else if $menu.result == 'add.all'
+$wares = $selected -> get tradeable ware array from ship
+$cnt =  size of array $wares
+while $cnt
+dec $cnt =
+$v1 = $wares[$cnt]
+$v2 =  get maintype of ware $v1
+if $v2 != 10 AND $v2 != 8 AND $v2 != 9
+skip if  find $v1 in array: $ware.list
+append $v1 to array $ware.list
+end
+end
+
+else if  is datatyp[ $menu.result ] == DATATYP_WARE
+$v1 =  get index of $menu.result in array $ware.list offset=-1 + 1
+remove element from array $ware.list at index $v1
+
+else if $menu.result == 'proceed'
+$ok = [TRUE]
+
+while $ok == [TRUE]
+$ok = [FALSE]
+gosub cleanlist
+$proc.count =  size of array $ware.list
+while $proc.count
+dec $proc.count =
+$select.ware = $ware.list[$proc.count]
+gosub getbestship
+if $select.ship -> exists
+$ok = [TRUE]
+$dest.station = $select.ship -> call script !lib.get.bestsell :  Ware=$select.ware  Min Price=null  Max Jumps=$jump.range  Check for Property=[FALSE]  Find around sector=$selected
+$proc.warecount = $select.ship -> get max amount of ware $select.ware that can be stored in cargo bay
+START $select.ship -> call script anarkis.acc.cmd.sell.return :  ware=$select.ware  station=$dest.station  quantity=$proc.warecount  min price=null
+$st = sprintf: pageid=$page.id textid=653, $select.ship, $select.ware, $dest.station, null, null
+display subtitle text: text=$st duration=2000 ms
+= wait 2000 ms
+end
+end
+end
+$menu.result = -1
+end
+end
+
+return null
+
+
+cleanlist:
+$cnt =  size of array $ware.list
+while $cnt
+dec $cnt =
+$select.ware = $ware.list[$cnt]
+if not $selected -> get amount of ware $select.ware in cargo bay
+remove element from array $ware.list at index $cnt
+continue
+end
+gosub getbestship
+if not $select.ship -> exists
+remove element from array $ware.list at index $cnt
+$st = sprintf: pageid=$page.id textid=655, $select.ware, null, null, null, null
+display subtitle text: text=$st duration=2000 ms
+= wait 2000 ms
+continue
+end
+if not $select.ship -> call script !lib.get.bestsell :  Ware=$select.ware  Min Price=null  Max Jumps=$jump.range  Check for Property=[FALSE]  Find around sector=$selected
+remove element from array $ware.list at index $cnt
+$st = sprintf: pageid=$page.id textid=654, $select.ware, null, null, null, null
+display subtitle text: text=$st duration=2000 ms
+= wait 2000 ms
+continue
+end
+end
+
+endsub
+
+getstation:
+$dest.station = $selected -> find station: resource $select.ware with best price: min.price=null, amount=$ware.amount, max.jumps=$jump.range, startsector=$sector, trader=$select.ship, exclude array=null
+endsub
+
+
+getbestship:
+$select.ship = null
+$v2 = 0
+$id = null
+$ware.amount = $selected -> get amount of ware $select.ware in cargo bay
+$ship.list = [THIS] -> call script anarkis.acc.get.dockedships :  ship class=Moveable Ship  no hull damaged ships=[TRUE]
+$ship.count =  size of array $ship.list
+while $ship.count
+dec $ship.count =
+$v1 = $ship.list[$ship.count]
+skip if not $v1 -> is task 0 in use
+continue
+$amt = $v1 -> get max amount of ware $select.ware that can be stored in cargo bay
+if $amt > $v2
+$v2 = $amt
+$id = $ship.count
+skip if not $amt >= $ware.amount
+break
+end
+end
+if $id != null
+$select.ship = $ship.list[$id]
+end
+endsub
+
+return null

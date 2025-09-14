@@ -1,0 +1,86 @@
+#name: anarkis.acc.setup.reports
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.reports.xml
+
+$page.id = 8510
+$null = null
+$setup.array = $selected -> get local variable: name='anarkis.acc.setup'
+
+while $menu.result != -1
+$menu =  create custom menu array
+
+if $selected -> exists
+$st =  read text: page=$page.id id=806
+add custom menu heading to array $menu: title=$st
+$st =  read text: page=$page.id id=807
+add custom menu item to array $menu: text=$st returnvalue='setup'
+$st =  read text: page=$page.id id=808
+add custom menu item to array $menu: text=$st returnvalue='all'
+end
+
+$st =  read text: page=$page.id id=803
+add custom menu heading to array $menu: title=$st
+$array = $null -> call script anarkis.acc.get.acc.carriers :  active only?=[FALSE]
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$v1 = $array[$cnt]
+$v2 = $v1 -> get object class
+$v3 = $v1 -> get sector
+$st = sprintf: pageid=$page.id textid=804, $v1, $v2, $v3, null, null
+add custom menu item to array $menu: text=$st returnvalue=$v1
+end
+
+
+if $selected -> exists
+$v1 = $selected -> get object class
+$st = sprintf: pageid=$page.id textid=801, $selected, $v1, null, null, null
+add custom menu info line to array $menu: text=$st
+
+$v3 = $selected -> get sector
+$v2 = $v3 -> get owner race
+$st = sprintf: pageid=$page.id textid=805, $v3, $v2, null, null, null
+add custom menu info line to array $menu: text=$st
+
+$v1 = $selected -> get command
+$v2 =  read text: page=$page.id id=820
+if not $selected -> is script anarkis.acc.task.autocarrier on stack of task=10
+if not $selected -> is script anarkis.acc.task.autocarrier on stack of task=11
+$v2 =  read text: page=$page.id id=821
+end
+end
+$st = sprintf: pageid=$page.id textid=802, $v1, $v2, null, null, null
+add custom menu info line to array $menu: text=$st
+end
+$v1 =  read text: page=$page.id id=800
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result -> is of class Moveable Ship
+$selected = $menu.result
+
+else if $menu.result == 'all'
+$array = $null -> call script anarkis.acc.get.acc.carriers :  active only?=[FALSE]
+$cnt =  size of array $array
+while $cnt
+dec $cnt =
+$v1 = $array[$cnt]
+if $v1 != $selected
+= $null -> call script anarkis.acc.setup.copy :  base=$selected  dest=$v1
+end
+end
+
+else if $menu.result == 'setup'
+$selected -> start task 892 with script anarkis.acc.setup and prio 0: arg1=null arg2=null arg3=null arg4=null arg5=null
+return null
+end
+
+
+end
+
+return null

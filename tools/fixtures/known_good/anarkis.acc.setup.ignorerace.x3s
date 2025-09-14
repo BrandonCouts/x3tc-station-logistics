@@ -1,0 +1,67 @@
+#name: anarkis.acc.setup.ignorerace
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.setup.ignorerace.xml
+
+$page.id = 8510
+
+* Retrieve setup, apply default if not found
+$setup.array = [THIS] -> get local variable: name='anarkis.acc.setup'
+
+
+while $menu.result != -1
+
+$race.array = $setup.array[16]
+$race.count =  size of array $race.array
+
+$menu =  create custom menu array
+
+$st =  read text: page=$page.id id=461
+add custom menu heading to array $menu: title=$st
+
+$st =  read text: page=$page.id id=463
+add custom menu item to array $menu: text=$st returnvalue='add'
+if $race.count
+$st =  read text: page=$page.id id=462
+add custom menu item to array $menu: text=$st returnvalue='clear'
+end
+
+if $race.count
+$st =  read text: page=$page.id id=460
+add custom menu heading to array $menu: title=$st
+$cnt = $race.count
+while $cnt
+dec $cnt =
+$v1 = $race.array[$cnt]
+$st = sprintf: pageid=$page.id textid=464, $v1, null, null, null, null
+add custom menu item to array $menu: text=$st returnvalue=$v1
+end
+end
+
+$v1 =  read text: page=$page.id id=460
+$v2 =  read text: page=$page.id id=260
+$menu.result =  open custom menu: title=$v1 description=$v2 option array=$menu
+
+* ===================
+* Handle answer
+* ===================
+
+if $menu.result == 'clear'
+resize array $race.array to 0
+
+else if $menu.result == 'add'
+$st =  read text: page=$page.id id=465
+$v1 = [THIS] -> get user input: type=Var/Race, title=$st
+skip if  is datatyp[ $v1 ] == DATATYP_RACE
+continue
+skip if  find $v1 in array: $race.array
+append $v1 to array $race.array
+
+else if $menu.result != -1
+$index =  get index of $menu.result in array $race.array offset=-1 + 1
+remove element from array $race.array at index $index
+end
+
+end
+
+return null
