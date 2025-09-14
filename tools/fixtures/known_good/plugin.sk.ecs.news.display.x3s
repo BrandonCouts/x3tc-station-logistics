@@ -1,0 +1,86 @@
+#name: plugin.sk.ecs.news.display
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.news.display.xml
+
+* ===========================================
+* Extended Communication System 2.5
+* ===========================================
+* Use this script to show the News List GUI. It will show a menu allowing the
+* player to browse the latest messages posted to news list.
+* ===========================================
+* Parameter :
+* - plugin.id : The global variable you used to register (string)
+* ===========================================
+
+$ecs.setup = get global variable: name='plugin.ecs.setup'
+load text: id=8511
+$ecs.installed = $ecs.setup[1]
+$ecs.configs = $ecs.setup[2]
+$ecs.news = $ecs.setup[5]
+
+skip if  find $plugin.id in array: $ecs.installed
+return null
+$index =  get index of $plugin.id in array $ecs.installed offset=-1 + 1
+
+$my.config = $ecs.configs[$index]
+$max.news.count = $my.config[5]
+$bbs.title = $my.config[6]
+
+$news.list = $ecs.news[$index]
+$news.count =  size of array $news.list
+$menu.result = 0
+$selected = -1
+while $menu.result != -1
+$menu =  create custom menu array
+$string = sprintf: pageid=8511 textid=221, null, null, null, null, null
+add custom menu heading to array $menu: title=$string
+if $news.count
+$x = 0
+while $x < $news.count
+$c.news = $news.list[$x]
+$c.news.title = $c.news[0]
+$ago = $c.news[3]
+$pl.time = playing time
+$ago = $pl.time - $ago
+$ago =  format time: $ago
+$string = sprintf: pageid=8511 textid=216, $ago, $c.news.title, null, null, null
+$res = $x + 10
+add custom menu item to array $menu: text=$string returnvalue=$res
+inc $x =
+end
+else
+$string = sprintf: pageid=8511 textid=222, null, null, null, null, null
+add custom menu item to array $menu: text=$string returnvalue=-1
+end
+
+if $selected >= 0
+$c.news = $news.list[$selected]
+$c.title = $c.news[0]
+$c.content = $c.news[1]
+$c.from = $c.news[2]
+$ago = $c.news[3]
+$pl.time = playing time
+$ago = $pl.time - $ago
+$ago =  format time: $ago
+$string = sprintf: pageid=8511 textid=220, $c.title, null, null, null, null
+add custom menu info line to array $menu: text=$string
+$string = sprintf: pageid=8511 textid=218, $c.content, $ago, null, null, null
+add custom menu info line to array $menu: text=$string
+if $c.from -> exists
+$string = sprintf: pageid=8511 textid=217, $c.from, null, null, null, null
+else
+$string = null
+end
+else
+$string = sprintf: pageid=8511 textid=223, null, null, null, null, null
+add custom menu info line to array $menu: text=$string
+end
+$menu.result =  open custom menu: title=$bbs.title description=$string option array=$menu
+if $menu.result != -1
+$menu.result = $menu.result - 10
+$selected = $menu.result
+end
+end
+
+return [TRUE]

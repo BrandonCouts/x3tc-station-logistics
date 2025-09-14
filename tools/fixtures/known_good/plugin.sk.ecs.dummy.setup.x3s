@@ -1,0 +1,26 @@
+#name: plugin.sk.ecs.dummy.setup
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/plugin.sk.ecs.dummy.setup.xml
+
+* ===========================================
+* ECS 2.5 Demo Script - Spy Ship
+* ===========================================
+* This example script allows the player to keep track of the 10 last
+* ships he has spotted, with current location info
+* ===========================================
+* This script should be renamed/copied as setup.ecs.dummy to be
+* run when game starts.
+* ===========================================
+
+* We set a global to easily check if the script is installed
+set global variable: name='plugin.ecs.dummy' value=[TRUE]
+
+* Then we call the script used to register to ECS
+= [THIS] -> call script plugin.sk.ecs.dummy.register :
+
+* ... here comes whatever you need to add in your setup script ...
+
+* ...
+
+return null
