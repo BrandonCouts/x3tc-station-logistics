@@ -16,7 +16,15 @@ end
 
 while [TRUE]
   $title = read text: page=$PageId id=101
-  $menu = = create custom menu array: heading=$title
+  $menu = create custom menu array: heading=$title
+  $enrolled = $station -> get local variable: name='slx.enrolled'
+  if $enrolled
+    $toggle = read text: page=$PageId id=216
+  else
+    $toggle = read text: page=$PageId id=215
+  end
+  add custom menu item to array $menu: text=$toggle returnvalue='toggle'
+  add section to custom menu: $menu
   $wares = $station -> get tradeable ware array from station
   $wcount = size of array $wares
   while $wcount
@@ -26,7 +34,7 @@ while [TRUE]
     $last = $station -> get local variable: name='slx.ware.last_reason'
     $code = $last[$ware]
     $reason = call script 'lib.slx.ui' : function='FormatReason', code=$code
-    $row = = sprintf: pageid=$PageId textid=214, $ware, $cfg['role'], $cfg['min_pct'], $cfg['max_pct'], $cfg['chunk_pct'], $reason
+    $row = sprintf: pageid=$PageId textid=214, $ware, $cfg['role'], $cfg['min_pct'], $cfg['max_pct'], $cfg['chunk_pct'], $reason
     add custom menu item to array $menu: text=$row returnvalue=$ware
     = wait 1 ms
   end
@@ -36,6 +44,27 @@ while [TRUE]
   $sel = open custom menu: title=$title description=null option array=$menu
   if not $sel
     break
+  end
+  if $sel == 'toggle'
+    if $enrolled
+      $station -> set local variable: name='slx.enrolled' value=null
+    else
+      $station -> set local variable: name='slx.enrolled' value=[TRUE]
+      $def = array alloc: size=0
+      $def['role'] = 'auto'
+      $def['min_pct'] = 10
+      $def['max_pct'] = 90
+      $def['chunk_pct'] = 20
+      $all = $station -> get tradeable ware array from station
+      $idx = size of array $all
+      while $idx
+        dec $idx
+        $w = $all[$idx]
+        call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, map=$def
+        = wait 1 ms
+      end
+    end
+    continue
   end
   $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$sel
   $txtRole = read text: page=$PageId id=210

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3-internal
+- Added station enrollment toggle with default ware settings.
+- Fixed menu row formatting for per-ware display.
+
 ## 0.1.2-internal
 - Added init script to register plugin config and launch manager.
 - Implemented station configuration menu for per-ware settings.
