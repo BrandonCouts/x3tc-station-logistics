@@ -1,0 +1,11 @@
+#name: !init.glen.trade.ok
+#lang: 44
+#origin_mod: OKTraders1_7_1
+#source: mods/OKTraders1_7_1/scripts/!init.glen.trade.ok.xml
+
+			* ******************************************************************************
+			* OK Trade
+			*  Existence of this script sets the game to modified allowing OK Trade to work
+			* ******************************************************************************
+
+			return null

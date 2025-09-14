@@ -1,0 +1,1160 @@
+#name: glen.trade.ok.menu
+#lang: 44
+#origin_mod: OKTraders1_7_1
+#source: mods/OKTraders1_7_1/scripts/glen.trade.ok.menu.xml
+
+			* ******************************************************************************
+			* OK Trade
+			*  Trade menu
+			* ******************************************************************************
+
+			$Comp = 'Menu'
+
+			$Config = get global variable: name='glen.trade.ok'
+			skip if $Config
+			return null
+			skip if $Trader-> exists
+			return null
+
+			$Game.Version = script engine version
+			$Is.AP = ($Game.Version > 49)
+
+			* Config array members
+			$Config.Ver.Major = 0
+			$Config.Ver.Minor = 1
+			$Config.Ver.Patch = 2
+			$Config.Ver.Internal = 3
+			$Config.PageId = 4
+			$Config.Debug.Enabled = 5
+			$Config.Debug.Verbosity = 6
+			$Config.Debug.Target = 7
+			$Config.Required.Ware = 8
+			$Config.Auto.Rename = 9
+			$Config.Blacklist = 10
+			$Config.Monitor.Task = 11
+			$Config.Trade.Threshold = 12
+			$Config.Trade.Illegal.Wares = 14
+			$Config.Refuel.Percent = 17
+			$Config.Global.Balance = 18
+			$Config.Equip = 20
+			$Config.Alert.Sound = 21
+
+			$Lib.Config.Get.Station.Config = 0
+			$Lib.Config.Get.Stock.Limit.Min = 1
+			$Lib.Config.Get.Stock.Limit.Max = 2
+			$Lib.Config.Get.Stock.Limit.Free = 3
+			$Lib.Config.Get.Stock.Limit.Tradeable = 4
+			$Lib.Config.Get.Dockware.Limit = 5
+
+			* Config settings referenced in this script
+			$Ver.Major = $Config[$Config.Ver.Major]
+			$Ver.Minor = $Config[$Config.Ver.Minor]
+			$Ver.Patch = $Config[$Config.Ver.Patch]
+			$Ver.Internal = $Config[$Config.Ver.Internal]
+			$PageId = $Config[$Config.PageId]
+			$Debug = $Config[$Config.Debug.Enabled]
+			$Required.Ware = $Config[$Config.Required.Ware]
+			$Blacklist = $Config[$Config.Blacklist]
+
+			* Selected mode for trading a given ware
+			$Mission.Type.None = 0
+			$Mission.Type.Buy = 1
+			$Mission.Type.Sell = 2
+
+			* Whether the command script should start anew or
+			* continue an existing mission
+			$Directive.Type.Start = 0
+			$Directive.Type.Resume = 1
+
+			* Trader local state
+			$State.Ware.Entries = 5
+
+			* Ware entry members
+			$Ware.Entry.Ware = 0
+			$Ware.Entry.Mode = 1
+
+			* State contents
+			$State.Version = 0
+			$State.Mission = 1
+			$State.Dest = 2
+			$State.Ware = 3
+			$State.Price = 4
+			$State.Ware.Entries = 5
+			$State.Fleeing = 6
+			$State.Balance = 7
+			$State.Trade.Mode = 8
+			$State.Tether.Sector = 9
+			$State.Tether.Range = 10
+			$State.Ver.Cmd = 11
+			$State.Ver.Monitor = 12
+
+			* Equipping config
+			$Config.Equip.Ver = 0
+			$Config.Equip.Lasers = 1
+			$Config.Equip.Shields = 2
+			$Config.Equip.Missiles = 3
+			$Config.Equip.Drones = 4
+			$Config.Equip.DockingComputer = 5
+			$Config.Equip.Jumpdrive = 6
+			$Config.Equip.Triplex = 7
+			$Config.Equip.Rudder = 8
+			$Config.Equip.CargoLifeSupport = 9
+			$Config.Equip.Duplex = 10
+
+			* Text IDs
+			$Id.Menu.Root.Title = 0
+			$Id.Menu.Root.Title.Homebased = 1
+			$Id.Menu.Root.Title.Free = 2
+			$Id.Menu.Root.Economy.Boost = 5
+			$Id.Menu.Root.Tether.Sector = 6
+			$Id.Menu.Root.Tether.Range = 7
+			$Id.Menu.Root.Begin = 10
+			$Id.Menu.Root.Balance.Red = 15
+			$Id.Menu.Root.Balance.Green = 16
+			$Id.Menu.Root.Balance.Collective.Red = 17
+			$Id.Menu.Root.Balance.Collective.Green = 18
+			$Id.Menu.Root.Settings = 20
+			$Id.Menu.Root.Section.Broadcast = 21
+			$Id.Menu.Root.Broadcast.Ship.Type = 22
+			$Id.Menu.Root.Broadcast.Docked.Title = 25
+			$Id.Menu.Root.Broadcast.Homebased = 28
+			$Id.Menu.Root.Broadcast.Docked = 29
+			$Id.Menu.Root.Uninstall = 30
+			$Id.Menu.Root.Broadcast.Fleet = 31
+			$Id.Menu.Root.Info.Enable.Free = 49
+			$Id.Menu.Root.Info.Enable.Homebased = 50
+			$Id.Menu.Root.Info.Update = 51
+			$Id.Menu.Root.Info.Already = 52
+			$Id.Menu.Root.Info.Homebased = 53
+			$Id.Menu.Root.Info.Free = 54
+			$Id.Menu.Root.Info.Broadcast = 55
+			$Id.Menu.Root.Info.NoFit = 56
+			$Id.Menu.Root.Mode = 70
+			$Id.Menu.Root.Mode.Normal = 71
+			$Id.Menu.Root.Mode.Economy = 72
+			$Id.Menu.Root.Mode.Player = 73
+			$Id.Menu.Root.Limits = 80
+			$Id.Menu.Limits.Title = 81
+			$Id.Menu.Limits.Desc1 = 82
+			$Id.Menu.Limits.Desc2 = 83
+			$Id.Menu.Limits.Desc3 = 84
+			$Id.Menu.Limits.Min.Perc = 85
+			$Id.Menu.Limits.Max.Perc = 86
+			$Id.Menu.Limits.Dockware.Limit = 87
+			$Id.Menu.Limits.Ware = 88
+			$Id.Menu.Root.Buy = 120
+			$Id.Menu.Root.Sell = 121
+			$Id.Menu.Root.NoTrade = 122
+			$Id.Menu.Settings.Title = 200
+			$Id.Menu.Settings.Auto.Rename = 210
+			$Id.Menu.Settings.Blacklist = 211
+			$Id.Menu.Settings.Trade.Threshold = 212
+			$Id.Menu.Settings.Illegal.Wares = 213
+			$Id.Menu.Settings.Alert.Sound = 214
+			$Id.Menu.Settings.Section.Homebased = 238
+			$Id.Menu.Settings.Section.Free = 239
+			$Id.Menu.Settings.Section.Debugging = 240
+			$Id.Menu.Settings.Logging.Enabled = 241
+			$Id.Menu.Settings.Logging.Target = 242
+			$Id.Menu.Settings.Logging.Verbosity = 243
+			$Id.Menu.Settings.Logging.Target.All = 250
+			$Id.Menu.Settings.Select.Logging.Target = 260
+			$Id.Menu.Settings.Section.Equipment = 270
+			$Id.Menu.Settings.Equipment.Lasers = 271
+			$Id.Menu.Settings.Equipment.Shields = 272
+			$Id.Menu.Settings.Equipment.Missiles = 273
+			$Id.Menu.Settings.Equipment.Drones = 274
+			$Id.Menu.Settings.Equipment.DockingComputer = 275
+			$Id.Menu.Settings.Equipment.Jumpdrive = 276
+			$Id.Menu.Settings.Equipment.Triplex = 277
+			$Id.Menu.Settings.Equipment.Rudder = 278
+			$Id.Menu.Settings.Equipment.CargoLifeSupport = 279
+			$Id.Menu.Settings.Equipment.Duplex = 280
+			$Id.Menu.Uninstall.Title = 300
+			$Id.Menu.Uninstall.Abort = 310
+			$Id.Menu.Uninstall.Uninstall = 311
+			$Id.Menu.Uninstall.Info = 320
+			$Id.Menu.Blacklist.Title = 400
+			$Id.Menu.Blacklist.Add.Sector = 410
+			$Id.Menu.Blacklist.Add.Pirate = 411
+			$Id.Menu.Blacklist.Add.Non.Jumpable = 412
+			$Id.Menu.Blacklist.Add.War = 413
+			$Id.Menu.Blacklist.Clear = 414
+			$Id.Menu.Blacklist.Add.Station = 415
+			$Id.Menu.Blacklist.Add.Race = 416
+			$Id.Menu.Blacklist.Sector = 420
+			$Id.Menu.Blacklist.Race = 421
+			$Id.Menu.Blacklist.Add.Message = 430
+			$Id.Reset.Trader.Balance = 500
+			$Id.Reset.Global.Balance = 501
+			$Id.Off = 1050
+			$Id.On = 1051
+			$Id.Yes = 1052
+			$Id.No = 1053
+			$Id.None = 1054
+			$Id.Any = 1056
+			$Id.BluePrefix = 1059
+			$Id.Freighters = 1060
+			$Id.Version = 2000
+
+			* Text
+			$Text.Menu.Root.Title = read text: page=$PageId id=$Id.Menu.Root.Title
+			$Text.Menu.Root.Title.Homebased = read text: page=$PageId id=$Id.Menu.Root.Title.Homebased
+			$Text.Menu.Root.Title.Free = read text: page=$PageId id=$Id.Menu.Root.Title.Free
+			* $Text.Menu.Root.Tether.Sector = read text: page=$PageId id=$Id.Menu.Root.Tether.Sector
+			* $Text.Menu.Root.Tether.Range = read text: page=$PageId id=$Id.Menu.Root.Tether.Range
+			$Text.Menu.Root.Begin = read text: page=$PageId id=$Id.Menu.Root.Begin
+			$Text.Menu.Root.Settings = read text: page=$PageId id=$Id.Menu.Root.Settings
+			$Text.Menu.Root.Section.Broadcast = read text: page=$PageId id=$Id.Menu.Root.Section.Broadcast
+			$Text.Menu.Root.Broadcast.Ship.Type = read text: page=$PageId id=$Id.Menu.Root.Broadcast.Ship.Type
+			$Text.Menu.Root.Broadcast.Docked.Title = read text: page=$PageId id=$Id.Menu.Root.Broadcast.Docked.Title
+			$Text.Menu.Root.Broadcast.Docked = read text: page=$PageId id=$Id.Menu.Root.Broadcast.Docked
+			$Text.Menu.Root.Uninstall = read text: page=$PageId id=$Id.Menu.Root.Uninstall
+			$Text.Menu.Root.Broadcast.Fleet = read text: page=$PageId id=$Id.Menu.Root.Broadcast.Fleet
+			$Text.Menu.Root.Info.Enable.Free = sprintf: pageid=$PageId textid=$Id.Menu.Root.Info.Enable.Free, $Required.Ware, null, null, null, null
+			$Text.Menu.Root.Info.Enable.Homebased = sprintf: pageid=$PageId textid=$Id.Menu.Root.Info.Enable.Homebased, $Required.Ware, null, null, null, null
+			$Text.Menu.Root.Info.Update = read text: page=$PageId id=$Id.Menu.Root.Info.Update
+			$Text.Menu.Root.Info.Already = read text: page=$PageId id=$Id.Menu.Root.Info.Already
+			$Text.Menu.Root.Info.Homebased = read text: page=$PageId id=$Id.Menu.Root.Info.Homebased
+			$Text.Menu.Root.Info.Free = read text: page=$PageId id=$Id.Menu.Root.Info.Free
+			$Text.Menu.Root.Info.Broadcast = read text: page=$PageId id=$Id.Menu.Root.Info.Broadcast
+			$Text.Menu.Root.Info.NoFit = read text: page=$PageId id=$Id.Menu.Root.Info.NoFit
+			$Text.Menu.Root.Mode = read text: page=$PageId id=$Id.Menu.Root.Mode
+			$Text.Menu.Root.Mode.Normal = read text: page=$PageId id=$Id.Menu.Root.Mode.Normal
+			$Text.Menu.Root.Mode.Economy = read text: page=$PageId id=$Id.Menu.Root.Mode.Economy
+			$Text.Menu.Root.Mode.Player = read text: page=$PageId id=$Id.Menu.Root.Mode.Player
+			$Text.Menu.Root.Limits = read text: page=$PageId id=$Id.Menu.Root.Limits
+			$Text.Menu.Limits.Title = read text: page=$PageId id=$Id.Menu.Limits.Title
+			$Text.Menu.Limits.Desc1 = read text: page=$PageId id=$Id.Menu.Limits.Desc1
+			$Text.Menu.Limits.Desc2 = read text: page=$PageId id=$Id.Menu.Limits.Desc2
+			$Text.Menu.Limits.Desc3 = read text: page=$PageId id=$Id.Menu.Limits.Desc3
+			$Text.Menu.Limits.Min.Perc = read text: page=$PageId id=$Id.Menu.Limits.Min.Perc
+			$Text.Menu.Limits.Max.Perc = read text: page=$PageId id=$Id.Menu.Limits.Max.Perc
+			$Text.Menu.Limits.Dockware.Limit = read text: page=$PageId id=$Id.Menu.Limits.Dockware.Limit
+			$Text.Menu.Limits.Ware = read text: page=$PageId id=$Id.Menu.Limits.Ware
+			$Text.Menu.Root.Buy = read text: page=$PageId id=$Id.Menu.Root.Buy
+			$Text.Menu.Root.Sell = read text: page=$PageId id=$Id.Menu.Root.Sell
+			$Text.Menu.Root.NoTrade = read text: page=$PageId id=$Id.Menu.Root.NoTrade
+			$Text.Menu.Settings.Title = read text: page=$PageId id=$Id.Menu.Settings.Title
+			$Text.Menu.Settings.Auto.Rename = read text: page=$PageId id=$Id.Menu.Settings.Auto.Rename
+			$Text.Menu.Settings.Blacklist = read text: page=$PageId id=$Id.Menu.Settings.Blacklist
+			$Text.Menu.Settings.Trade.Threshold = read text: page=$PageId id=$Id.Menu.Settings.Trade.Threshold
+			$Text.Menu.Settings.Illegal.Wares = read text: page=$PageId id=$Id.Menu.Settings.Illegal.Wares
+			$Text.Menu.Settings.Alert.Sound = read text: page=$PageId id=$Id.Menu.Settings.Alert.Sound
+			$Text.Menu.Settings.Section.Homebased = read text: page=$PageId id=$Id.Menu.Settings.Section.Homebased
+			$Text.Menu.Settings.Section.Free = read text: page=$PageId id=$Id.Menu.Settings.Section.Free
+			$Text.Menu.Settings.Section.Debugging = read text: page=$PageId id=$Id.Menu.Settings.Section.Debugging
+			$Text.Menu.Settings.Logging.Enabled = read text: page=$PageId id=$Id.Menu.Settings.Logging.Enabled
+			$Text.Menu.Settings.Logging.Verbosity = read text: page=$PageId id=$Id.Menu.Settings.Logging.Verbosity
+			$Text.Menu.Settings.Logging.Target.All = read text: page=$PageId id=$Id.Menu.Settings.Logging.Target.All
+			$Text.Menu.Settings.Select.Logging.Target = read text: page=$PageId id=$Id.Menu.Settings.Select.Logging.Target
+			$Text.Menu.Settings.Section.Equipment = read text: page=$PageId id=$Id.Menu.Settings.Section.Equipment
+			$Text.Menu.Settings.Equipment.Lasers = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Lasers
+			$Text.Menu.Settings.Equipment.Shields = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Shields
+			$Text.Menu.Settings.Equipment.Missiles = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Missiles
+			$Text.Menu.Settings.Equipment.Drones = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Drones
+			$Text.Menu.Settings.Equipment.DockingComputer = read text: page=$PageId id=$Id.Menu.Settings.Equipment.DockingComputer
+			$Text.Menu.Settings.Equipment.Jumpdrive = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Jumpdrive
+			$Text.Menu.Settings.Equipment.Triplex = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Triplex
+			$Text.Menu.Settings.Equipment.Rudder = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Rudder
+			$Text.Menu.Settings.Equipment.CargoLifeSupport = read text: page=$PageId id=$Id.Menu.Settings.Equipment.CargoLifeSupport
+			$Text.Menu.Settings.Equipment.Duplex = read text: page=$PageId id=$Id.Menu.Settings.Equipment.Duplex
+			$Text.Menu.Uninstall.Title = read text: page=$PageId id=$Id.Menu.Uninstall.Title
+			$Text.Menu.Uninstall.Abort = read text: page=$PageId id=$Id.Menu.Uninstall.Abort
+			$Text.Menu.Uninstall.Uninstall = read text: page=$PageId id=$Id.Menu.Uninstall.Uninstall
+			$Text.Menu.Uninstall.Info = read text: page=$PageId id=$Id.Menu.Uninstall.Info
+			$Text.Menu.Blacklist.Title = read text: page=$PageId id=$Id.Menu.Blacklist.Title
+			$Text.Menu.Blacklist.Add.Sector = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Sector
+			$Text.Menu.Blacklist.Add.Pirate = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Pirate
+			$Text.Menu.Blacklist.Add.War = read text: page=$PageId id=$Id.Menu.Blacklist.Add.War
+			$Text.Menu.Blacklist.Add.Non.Jumpable = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Non.Jumpable
+			$Text.Menu.Blacklist.Clear = read text: page=$PageId id=$Id.Menu.Blacklist.Clear
+			$Text.Menu.Blacklist.Add.Station = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Station
+			$Text.Menu.Blacklist.Add.Race = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Race
+			$Text.Menu.Blacklist.Sector = read text: page=$PageId id=$Id.Menu.Blacklist.Sector
+			$Text.Menu.Blacklist.Race = read text: page=$PageId id=$Id.Menu.Blacklist.Race
+			$Text.Menu.Blacklist.Add.Message = read text: page=$PageId id=$Id.Menu.Blacklist.Add.Message
+			$Text.Reset.Trader.Balance = read text: page=$PageId id=$Id.Reset.Trader.Balance
+			$Text.Reset.Global.Balance = read text: page=$PageId id=$Id.Reset.Global.Balance
+			$Text.Off = read text: page=$PageId id=$Id.Off
+			$Text.On = read text: page=$PageId id=$Id.On
+			$Text.Yes = read text: page=$PageId id=$Id.Yes
+			$Text.No = read text: page=$PageId id=$Id.No
+			$Text.None = read text: page=$PageId id=$Id.None
+			$Text.Any = read text: page=$PageId id=$Id.Any
+			$Text.Freighters = read text: page=$PageId id=$Id.Freighters
+			$Text.Version = sprintf: pageid=$PageId textid=$Id.Version, $Ver.Major, $Ver.Minor, $Ver.Patch, null, null
+
+			* Value selections
+			$Values.Menu.Root.Mode = create new array, arguments=$Text.Menu.Root.NoTrade, $Text.Menu.Root.Buy, $Text.Menu.Root.Sell, null, null
+			$Values.Trade.Mode = create new array, arguments=$Text.Menu.Root.Mode.Normal, $Text.Menu.Root.Mode.Economy, null, null, null
+			$Values.Off.On = create new array, arguments=$Text.Off, $Text.On, null, null, null
+			$Values.No.Yes = create new array, arguments=$Text.No, $Text.Yes, null, null, null
+			$Values.Logging.Verbosity = array alloc: size=0
+			$Values.Trade.Thresholds = array alloc: size=0
+
+			$Values.Trade.Min = array alloc: size=0
+			$idx = 0
+			while $idx < 17
+			$tmp = $idx * 5
+			append $tmp to array $Values.Trade.Min
+			inc $idx
+			end
+
+			$Values.Trade.Max = array alloc: size=0
+			$idx = 4
+			while $idx < 21
+			$tmp = $idx * 5
+			append $tmp to array $Values.Trade.Max
+			inc $idx
+			end
+
+			* Library functions
+			$Lib.Uninstall = 5
+			$Lib.Check.Cmd.Enabled = 6
+			$Lib.Get.Non.Transportable.Wares = 9
+			$Lib.BigInt.Format = 34
+
+			* Generic library functions
+			$Lib.Generic.List.Fleets = 6
+
+			* State functions
+			$Lib.State.Fetch = 0
+			$Lib.State.Publish = 1
+			$Lib.State.Reset.Config = 2
+			$Lib.State.Update.Config = 3
+
+			$Ware.Entries = array alloc: size=0
+
+			$idx = 0
+			while $idx < 11
+			append $idx to array $Values.Logging.Verbosity
+			inc $idx
+			end
+
+			$idx = 0
+			while $idx < 100
+			append $idx to array $Values.Trade.Thresholds
+			$idx = $idx + 5
+			end
+
+			$Null = null
+			$Cmd.Enabled = $Null-> call script glen.trade.ok.lib : Func=$Lib.Check.Cmd.Enabled Arg1=$Trader Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+
+			* ****************************************
+			* Ship does not qualify to run OK Traders
+			* ****************************************
+			if not $Cmd.Enabled
+			gosub Menu.Root.Basic:
+			return null
+			end
+
+			$Cmd.Already.Running = $Trader-> is script glen.trade.ok.cmd on stack of task=0
+			$State = $Trader-> call script glen.trade.ok.state : Func=$Lib.State.Fetch Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+			if $Cmd.Already.Running
+			= $Trader-> call script glen.trade.ok.state : Func=$Lib.State.Update.Config Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+			else
+			= $Trader-> call script glen.trade.ok.state : Func=$Lib.State.Reset.Config Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+			end
+
+			$Homebase = $Trader-> get homebase
+
+			* ************
+			* Free trader
+			* ************
+			if not $Homebase-> exists
+			gosub Menu.Root.Free:
+			return null
+			end
+
+			* *****************
+			* Homebased trader
+			* *****************
+			$Non.Transportable.Wares = $Null-> call script glen.trade.ok.lib : Func=$Lib.Get.Non.Transportable.Wares Arg1=$Trader Arg2=$Homebase Arg3=null Arg4=null Arg5=null Arg6=null
+			$Ware.Entries = $State[$State.Ware.Entries]
+			gosub Menu.Root.Homebased:
+			return null
+
+			* ******************************************************************************
+			* Menu.Root
+			*  Root level menu for homebase trading
+			* ******************************************************************************
+			Menu.Root.Homebased:
+			$Text.Menu.Root.Broadcast.Homebased = sprintf: pageid=$PageId textid=$Id.Menu.Root.Broadcast.Homebased, $Homebase, null, null, null, null
+
+			while 1
+			$Menu.Root = create custom menu array
+
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Homebased
+
+			if $Cmd.Already.Running
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Update
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Broadcast
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.NoFit
+			add section to custom menu: $Menu.Root
+			else
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Broadcast
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.NoFit
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Begin returnvalue=$Id.Menu.Root.Begin
+			add section to custom menu: $Menu.Root
+			end
+
+			$idx = size of array $Ware.Entries
+			$Options = array alloc: size=$idx
+			while $idx
+			dec $idx
+
+			$Ware.Entry = $Ware.Entries[$idx]
+			$Ware = $Ware.Entry[$Ware.Entry.Ware]
+			$Mode = $Ware.Entry[$Ware.Entry.Mode]
+			$ReturnValue = $idx + 10000
+
+			$Text.Ware = $Ware
+			skip if not find $Ware in array: $Non.Transportable.Wares
+			$Text.Ware = sprintf: pageid=$PageId textid=$Id.BluePrefix, $Ware, null, null, null, null
+
+			$Opt = create new array, arguments=-4, $Text.Ware, $Values.Menu.Root.Mode, $Mode, $ReturnValue
+			append $Opt to array $Menu.Root
+			$Options[$idx] = $Opt
+			end
+
+			add section to custom menu: $Menu.Root
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Settings returnvalue=$Id.Menu.Root.Settings
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Limits returnvalue=$Id.Menu.Root.Limits
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Uninstall returnvalue=$Id.Menu.Root.Uninstall
+
+			add custom menu heading to array $Menu.Root: title=$Text.Menu.Root.Section.Broadcast
+			$Options.Broadcast.Ship.Type = create new array, arguments=$Text.Any, $Text.Freighters, null, null, null
+			$Values.Broadcast.Ship.Type = create new array, arguments=-4, $Text.Menu.Root.Broadcast.Ship.Type, $Options.Broadcast.Ship.Type, 0, $Id.Menu.Root.Broadcast.Ship.Type
+			append $Values.Broadcast.Ship.Type to array $Menu.Root
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Broadcast.Homebased returnvalue=$Id.Menu.Root.Broadcast.Homebased
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Broadcast.Docked returnvalue=$Id.Menu.Root.Broadcast.Docked
+			skip if not $Is.AP
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Broadcast.Fleet returnvalue=$Id.Menu.Root.Broadcast.Fleet
+
+			$Menu.Result = open custom menu: title=$Text.Menu.Root.Title.Homebased description=$Text.Version option array=$Menu.Root
+
+			* Save value selections
+			$idx = size of array $Options
+			while $idx
+			dec $idx
+			$Opt = $Options[$idx]
+			if $Opt
+			$Ware.Entry = $Ware.Entries[$idx]
+			$Ware.Entry[$Ware.Entry.Mode] = $Opt[3]
+			end
+			end
+
+			skip if is datatype[$Menu.Result] == [DATATYPE_ARRAY]
+			break
+			$Menu.Selection = $Menu.Result[0]
+			skip if $Menu.Selection > 0
+			break
+
+			if $Menu.Selection == $Id.Menu.Root.Begin
+			* The preload script return array must match args of the cmd script.
+			$Output = array alloc: size=2
+			$Output[0] = null
+			$Output[1] = $Directive.Type.Start
+			return $Output
+			else if $Menu.Selection == $Id.Menu.Root.Broadcast.Homebased
+			$Broadcast.Fleet = null
+			$Broadcast.Station = null
+			$Broadcast.Ship.Type = $Values.Broadcast.Ship.Type[3]
+			gosub Broadcast:
+			else if $Menu.Selection == $Id.Menu.Root.Broadcast.Docked
+			$Broadcast.Fleet = null
+			$Broadcast.Station = $Trader-> get user input: type=[Var/Station], title=$Text.Menu.Root.Broadcast.Docked.Title
+			$Broadcast.Ship.Type = $Values.Broadcast.Ship.Type[3]
+			skip if not $Broadcast.Station
+			gosub Broadcast:
+			else if $Menu.Selection == $Id.Menu.Root.Broadcast.Fleet
+			$Broadcast.Fleet = $Trader-> get user input: type=[Var/Fleet Commander], title=$Text.Menu.Root.Title
+			$Broadcast.Station = null
+			$Broadcast.Ship.Type = $Values.Broadcast.Ship.Type[3]
+			skip if not $Broadcast.Fleet
+			gosub Broadcast:
+			else if $Menu.Selection == $Id.Menu.Root.Settings
+			gosub Menu.Settings:
+			else if $Menu.Selection == $Id.Menu.Root.Limits
+			gosub Menu.Limits:
+			else if $Menu.Selection == $Id.Menu.Root.Uninstall
+			gosub Menu.Uninstall:
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Menu.Root.Free
+			*  Root level menu for free trading
+			* ******************************************************************************
+			$Text.Balance = null
+			Menu.Root.Free:
+
+			while 1
+			$Tether.Sector = $State[$State.Tether.Sector]
+			$Tether.Range = $State[$State.Tether.Range]
+
+			$Menu.Root = create custom menu array
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Free
+			if $Cmd.Already.Running
+			add custom menu info line to array $Menu.Root: text=' '
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Already
+			gosub Format.Trader.Balance:
+			add custom menu item to array $Menu.Root: text=$Text.Balance returnvalue=$Id.Menu.Root.Balance.Green
+			gosub Format.Global.Balance:
+			add custom menu item to array $Menu.Root: text=$Text.Balance returnvalue=$Id.Menu.Root.Balance.Collective.Green
+
+			add section to custom menu: $Menu.Root
+			else
+			* Begin Trading
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Begin returnvalue=$Id.Menu.Root.Begin
+			add section to custom menu: $Menu.Root
+			end
+
+			* Trade Mode
+			$Trade.Mode = $State[$State.Trade.Mode]
+			$Select.Trade.Mode = create new array, arguments=-4, $Text.Menu.Root.Mode, $Values.Trade.Mode, $Trade.Mode, $Id.Menu.Root.Mode
+			append $Select.Trade.Mode to array $Menu.Root
+
+			* Tether Sector
+			$Text.Tether.Sector = $Tether.Sector
+			skip if $Text.Tether.Sector
+			$Text.Tether.Sector = $Text.None
+			$Text.Tether.Sector = sprintf: pageid=$PageId textid=$Id.Menu.Root.Tether.Sector, $Text.Tether.Sector, null, null, null, null
+			add custom menu item to array $Menu.Root: text=$Text.Tether.Sector returnvalue=$Id.Menu.Root.Tether.Sector
+
+			* Tether Range
+			$Text.Tether.Range = sprintf: pageid=$PageId textid=$Id.Menu.Root.Tether.Range, $Tether.Range, null, null, null, null
+			add custom menu item to array $Menu.Root: text=$Text.Tether.Range returnvalue=$Id.Menu.Root.Tether.Range
+
+			add section to custom menu: $Menu.Root
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Settings returnvalue=$Id.Menu.Root.Settings
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Uninstall returnvalue=$Id.Menu.Root.Uninstall
+
+			add custom menu heading to array $Menu.Root: title=$Text.Menu.Root.Section.Broadcast
+			$Options.Broadcast.Ship.Type = create new array, arguments=$Text.Any, $Text.Freighters, null, null, null
+			$Values.Broadcast.Ship.Type = create new array, arguments=-4, $Text.Menu.Root.Broadcast.Ship.Type, $Options.Broadcast.Ship.Type, 0, $Id.Menu.Root.Broadcast.Ship.Type
+			append $Values.Broadcast.Ship.Type to array $Menu.Root
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Broadcast.Docked returnvalue=$Id.Menu.Root.Broadcast.Docked
+			skip if not $Is.AP
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Broadcast.Fleet returnvalue=$Id.Menu.Root.Broadcast.Fleet
+
+			$Menu.Result = open custom menu: title=$Text.Menu.Root.Title.Free description=$Text.Version option array=$Menu.Root
+
+			* Save off selection values
+			$State[$State.Trade.Mode] = $Select.Trade.Mode[3]
+
+			skip if is datatype[$Menu.Result] == [DATATYPE_ARRAY]
+			break
+			$Menu.Result = $Menu.Result[0]
+			skip if $Menu.Result > 0
+			break
+
+			* if not is datatype[$Menu.Result] == [DATATYPE_ARRAY]
+			* $State[$State.Tether.Sector] = $Tether.Sector
+			* $State[$State.Tether.Range] = $Tether.Range
+			* break
+			* end
+
+			* if not $Menu.Result > 0
+			* $State[$State.Tether.Sector] = $Tether.Sector
+			* $State[$State.Tether.Range] = $Tether.Range
+			* break
+			* end
+
+			if $Menu.Result == $Id.Menu.Root.Begin
+			$State[$State.Tether.Sector] = $Tether.Sector
+			$State[$State.Tether.Range] = $Tether.Range
+			* The preload script return array must match args of the cmd script.
+			$Output = array alloc: size=2
+			$Output[0] = null
+			$Output[1] = $Directive.Type.Start
+			return $Output
+			else if $Menu.Result == $Id.Menu.Root.Tether.Sector
+			$Sector = $Trader-> get sector
+			$Tether.Sector = $Null-> get user input type=[Var/Sector], title=null, sector=$Sector
+			$State[$State.Tether.Sector] = $Tether.Sector
+			else if $Menu.Result == $Id.Menu.Root.Tether.Range
+			$Tether.Range = $Null-> get user input: type=[Number], title=null
+			skip if $Tether.Range
+			$Tether.Range = 0
+			$State[$State.Tether.Range] = $Tether.Range
+			else if $Menu.Result == $Id.Menu.Root.Settings
+			gosub Menu.Settings:
+			else if $Menu.Result == $Id.Menu.Root.Uninstall
+			gosub Menu.Uninstall:
+			else if $Menu.Result == $Id.Menu.Root.Balance.Green
+			$Menu.Confirm = create custom menu array
+			add custom menu item to array $Menu.Confirm: text=$Text.No returnvalue=$Id.No
+			add custom menu item to array $Menu.Confirm: text=$Text.Yes returnvalue=$Id.Yes
+			$Menu.Confirm.Result = open custom menu: title=$Text.Reset.Trader.Balance description=$Text.Version option array=$Menu.Confirm
+			if $Menu.Confirm.Result == $Id.Yes
+			$tmp = create new array, arguments=0, 0, null, null, null
+			$State[$State.Balance] = $tmp
+			end
+			else if $Menu.Result == $Id.Menu.Root.Balance.Collective.Green
+			$Menu.Confirm = create custom menu array
+			add custom menu item to array $Menu.Confirm: text=$Text.No returnvalue=$Id.No
+			add custom menu item to array $Menu.Confirm: text=$Text.Yes returnvalue=$Id.Yes
+			$Menu.Confirm.Result = open custom menu: title=$Text.Reset.Global.Balance description=$Text.Version option array=$Menu.Confirm
+			if $Menu.Confirm.Result == $Id.Yes
+			$tmp = create new array, arguments=0, 0, null, null, null
+			$Config[$Config.Global.Balance] = $tmp
+			end
+			else if $Menu.Result == $Id.Menu.Root.Broadcast.Docked
+			$Broadcast.Fleet = null
+			$Broadcast.Station = $Trader-> get user input: type=[Var/Station], title=$Text.Menu.Root.Broadcast.Docked.Title
+			$Broadcast.Ship.Type = $Values.Broadcast.Ship.Type[3]
+			skip if not $Broadcast.Station
+			gosub Broadcast:
+			else if $Menu.Result == $Id.Menu.Root.Broadcast.Fleet
+			$Broadcast.Fleet = $Trader-> get user input: type=[Var/Fleet Commander], title=$Text.Menu.Root.Title
+			$Broadcast.Station = null
+			$Broadcast.Ship.Type = $Values.Broadcast.Ship.Type[3]
+			skip if not $Broadcast.Fleet
+			gosub Broadcast:
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Menu.Root.Basic
+			*  Menu when cmd is not enabled. Shows only settings, uninstall and info
+			* ******************************************************************************
+			Menu.Root.Basic:
+			while 1
+			* = wait 1 ms
+
+			$Menu.Root = create custom menu array
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Enable.Homebased
+			add custom menu info line to array $Menu.Root: text=$Text.Menu.Root.Info.Enable.Free
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Settings returnvalue=$Id.Menu.Root.Settings
+			add custom menu item to array $Menu.Root: text=$Text.Menu.Root.Uninstall returnvalue=$Id.Menu.Root.Uninstall
+
+			$Menu.Result = open custom menu: title=$Text.Menu.Root.Title description=$Text.Version option array=$Menu.Root
+			if $Menu.Result == null OR $Menu.Result == -1
+			break
+			end
+
+			if $Menu.Result == $Id.Menu.Root.Settings
+			gosub Menu.Settings:
+			else if $Menu.Result == $Id.Menu.Root.Uninstall
+			gosub Menu.Uninstall:
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Menu.Uninstall
+			* ******************************************************************************
+			Menu.Uninstall:
+			$Menu.Uninstall = create custom menu array
+
+			add custom menu info line to array $Menu.Uninstall: text=$Text.Menu.Uninstall.Info
+			add custom menu item to array $Menu.Uninstall: text=$Text.Menu.Uninstall.Abort returnvalue=$Id.Menu.Uninstall.Abort
+			add custom menu item to array $Menu.Uninstall: text=$Text.Menu.Uninstall.Uninstall returnvalue=$Id.Menu.Uninstall.Uninstall
+
+			* = wait 1 ms
+			$Menu.Result = open custom menu: title=$Text.Menu.Uninstall.Title description=$Text.Version option array=$Menu.Uninstall
+
+			if $Menu.Result == $Id.Menu.Uninstall.Uninstall
+			= $Null-> call script glen.trade.ok.lib : Func=$Lib.Uninstall Arg1=$Null Arg2=$Null Arg3=null Arg4=null Arg5=null Arg6=null
+			return null
+			end
+			endsub
+
+			* ******************************************************************************
+			* Menu.Settings
+			* ******************************************************************************
+			Menu.Settings:
+			while [TRUE]
+			$Equip.Config = $Config[$Config.Equip]
+			$Menu.Settings = create custom menu array
+
+			$default = $Config[$Config.Auto.Rename]
+			$values.auto.rename = create new array, arguments=-4, $Text.Menu.Settings.Auto.Rename, $Values.Off.On, $default, $Id.Menu.Settings.Auto.Rename
+			append $values.auto.rename to array $Menu.Settings
+			$default = $Config[$Config.Alert.Sound]
+			$values.alert.sound = create new array, arguments=-4, $Text.Menu.Settings.Alert.Sound, $Values.Off.On, $default, $Id.Menu.Settings.Alert.Sound
+			append $values.alert.sound to array $Menu.Settings
+			add custom menu item to array $Menu.Settings: text=$Text.Menu.Settings.Blacklist returnvalue=$Id.Menu.Settings.Blacklist
+
+			add custom menu heading to array $Menu.Settings: title=$Text.Menu.Settings.Section.Homebased
+			$default = $Config[$Config.Trade.Threshold]
+			$default = $default / 5
+			$Values.Trade.Threshold = create new array, arguments=-4, $Text.Menu.Settings.Trade.Threshold, $Values.Trade.Thresholds, $default, $Id.Menu.Settings.Trade.Threshold
+			append $Values.Trade.Threshold to array $Menu.Settings
+
+			add custom menu heading to array $Menu.Settings: title=$Text.Menu.Settings.Section.Free
+			$default = $Config[$Config.Trade.Illegal.Wares]
+			$values.trade.illegal.wares = create new array, arguments=-4, $Text.Menu.Settings.Illegal.Wares, $Values.Off.On, $default, $Id.Menu.Settings.Illegal.Wares
+			append $values.trade.illegal.wares to array $Menu.Settings
+
+			add custom menu heading to array $Menu.Settings: title=$Text.Menu.Settings.Section.Equipment
+			$default = $Equip.Config[$Config.Equip.CargoLifeSupport]
+			$values.equip.cargolifesupport = create new array, arguments=-4, $Text.Menu.Settings.Equipment.CargoLifeSupport, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.CargoLifeSupport
+			append $values.equip.cargolifesupport to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.DockingComputer]
+			$values.equip.docking = create new array, arguments=-4, $Text.Menu.Settings.Equipment.DockingComputer, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.DockingComputer
+			append $values.equip.docking to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Drones]
+			$values.equip.drones = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Drones, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Drones
+			append $values.equip.drones to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Duplex]
+			$values.equip.duplex = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Duplex, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Duplex
+			append $values.equip.duplex to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Jumpdrive]
+			$values.equip.jumpdrive = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Jumpdrive, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Jumpdrive
+			append $values.equip.jumpdrive to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Lasers]
+			$values.equip.lasers = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Lasers, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Lasers
+			append $values.equip.lasers to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Missiles]
+			$values.equip.missiles = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Missiles, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Missiles
+			append $values.equip.missiles to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Rudder]
+			$values.equip.rudder = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Rudder, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Rudder
+			append $values.equip.rudder to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Shields]
+			$values.equip.shields = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Shields, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Shields
+			append $values.equip.shields to array $Menu.Settings
+			$default = $Equip.Config[$Config.Equip.Triplex]
+			$values.equip.triplex = create new array, arguments=-4, $Text.Menu.Settings.Equipment.Triplex, $Values.Off.On, $default, $Id.Menu.Settings.Equipment.Triplex
+			append $values.equip.triplex to array $Menu.Settings
+
+			add custom menu heading to array $Menu.Settings: title=$Text.Menu.Settings.Section.Debugging
+			$default = $Config[$Config.Debug.Enabled]
+			$values.debug.enabled = create new array, arguments=-4, $Text.Menu.Settings.Logging.Enabled, $Values.Off.On, $default, $Id.Menu.Settings.Logging.Enabled
+			append $values.debug.enabled to array $Menu.Settings
+
+			$default = $Config[$Config.Debug.Verbosity]
+			$values.debug.verbosity = create new array, arguments=-4, $Text.Menu.Settings.Logging.Verbosity, $Values.Logging.Verbosity, $default, $Id.Menu.Settings.Logging.Verbosity
+			append $values.debug.verbosity to array $Menu.Settings
+
+			$target = $Config[$Config.Debug.Target]
+			if not $target-> exists
+			$target = null
+			$Config[$Config.Debug.Target] = null
+			end
+			skip if $target
+			$target = $Text.Menu.Settings.Logging.Target.All
+			$text = sprintf: pageid=$PageId textid=$Id.Menu.Settings.Logging.Target, $target, null, null, null, null
+			add custom menu item to array $Menu.Settings: text=$text returnvalue=$Id.Menu.Settings.Logging.Target
+
+			* = wait 1 ms
+			$Menu.Result = open custom menu: title=$Text.Menu.Settings.Title description=$Text.Version option array=$Menu.Settings
+
+			* Save off selection values
+			$Config[$Config.Auto.Rename] = $values.auto.rename[3]
+			$Config[$Config.Alert.Sound] = $values.alert.sound[3]
+			$Config[$Config.Trade.Illegal.Wares] = $values.trade.illegal.wares[3]
+			$Equip.Config[$Config.Equip.Lasers] = $values.equip.lasers[3]
+			$Equip.Config[$Config.Equip.Shields] = $values.equip.shields[3]
+			$Equip.Config[$Config.Equip.Missiles] = $values.equip.missiles[3]
+			$Equip.Config[$Config.Equip.Drones] = $values.equip.drones[3]
+			$Equip.Config[$Config.Equip.DockingComputer] = $values.equip.docking[3]
+			$Equip.Config[$Config.Equip.Jumpdrive] = $values.equip.jumpdrive[3]
+			$Equip.Config[$Config.Equip.Triplex] = $values.equip.triplex[3]
+			$Equip.Config[$Config.Equip.Rudder] = $values.equip.rudder[3]
+			$Equip.Config[$Config.Equip.CargoLifeSupport] = $values.equip.cargolifesupport[3]
+			$Equip.Config[$Config.Equip.Duplex] = $values.equip.duplex[3]
+			$Config[$Config.Debug.Enabled] = $values.debug.enabled[3]
+			$Config[$Config.Debug.Verbosity] = $values.debug.verbosity[3]
+			$tmp = $Values.Trade.Threshold[3]
+			$tmp = $tmp * 5
+			$Config[$Config.Trade.Threshold] = $tmp
+
+			skip if is datatype[$Menu.Result] == [DATATYPE_ARRAY]
+			break
+
+			$Menu.Result = $Menu.Result[0]
+			skip if $Menu.Result > 0
+			break
+
+			if $Menu.Result == $Id.Menu.Settings.Logging.Target
+			$target = $Trader-> get user input: type=[Var/Ship], title=$Text.Menu.Settings.Select.Logging.Target
+			$Config[$Config.Debug.Target] = $target
+			else if $Menu.Result == $Id.Menu.Settings.Blacklist
+			gosub Menu.Blacklist:
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Menu.Blacklist
+			* ******************************************************************************
+			Menu.Blacklist:
+			$Width = 200
+
+			* Trim out the dead wood
+			$idx = size of array $Blacklist
+			while $idx
+			dec $idx
+			$Entry = $Blacklist[$idx]
+			skip if $Entry-> exists
+			remove element from array $Blacklist at index $idx
+			end
+
+			while 1
+			* = wait 1 ms
+
+			$Menu.Blacklist = create custom menu array
+			$Row = create new array, arguments=0, $Text.Menu.Blacklist.Sector, $Width, $Text.Menu.Blacklist.Race, null
+			add custom menu item to array $Menu.Blacklist: text=$Row returnvalue=null
+			add section to custom menu: $Menu.Blacklist
+
+			$idx = size of array $Blacklist
+			while $idx
+			dec $idx
+			$Entry = $Blacklist[$idx]
+			skip if $Entry-> exists
+			continue
+
+			$Owner = $Entry-> get owner race
+			$ReturnValue = $idx + 10000
+			$Row = create new array, arguments=0, $Entry, $Width, $Owner, null
+			add custom menu item to array $Menu.Blacklist: text=$Row returnvalue=$ReturnValue
+			end
+
+			add section to custom menu: $Menu.Blacklist
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.Sector returnvalue=$Id.Menu.Blacklist.Add.Sector
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.Station returnvalue=$Id.Menu.Blacklist.Add.Station
+			add section to custom menu: $Menu.Blacklist
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.Pirate returnvalue=$Id.Menu.Blacklist.Add.Pirate
+			skip if not $Is.AP
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.War returnvalue=$Id.Menu.Blacklist.Add.War
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.Non.Jumpable returnvalue=$Id.Menu.Blacklist.Add.Non.Jumpable
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Add.Race returnvalue=$Id.Menu.Blacklist.Add.Race
+			add section to custom menu: $Menu.Blacklist
+			add custom menu item to array $Menu.Blacklist: text=$Text.Menu.Blacklist.Clear returnvalue=$Id.Menu.Blacklist.Clear
+
+			$Menu.Result = open custom info menu: title=$Text.Menu.Blacklist.Title description=$Text.Version option array=$Menu.Blacklist maxoptions=0
+
+			if $Menu.Result == null OR $Menu.Result <= 0
+			break
+			else if $Menu.Result == $Id.Menu.Blacklist.Add.Sector
+			$Entry = $Trader-> get user input: type=[Var/Sector], title=$Text.Menu.Blacklist.Add.Message
+			gosub Add.Blacklist.Entry:
+			else if $Menu.Result == $Id.Menu.Blacklist.Add.Station
+			$Entry = $Trader-> get user input: type=[Var/Station], title=$Text.Menu.Blacklist.Add.Message
+			gosub Add.Blacklist.Entry:
+			else if $Menu.Result == $Id.Menu.Blacklist.Add.War OR $Menu.Result == $Id.Menu.Blacklist.Add.Pirate OR $Menu.Result == $Id.Menu.Blacklist.Add.Non.Jumpable OR $Menu.Result == $Id.Menu.Blacklist.Add.Race
+			$Race = [Pirates]
+			if $Menu.Result == $Id.Menu.Blacklist.Add.Race
+			$Race = $Trader-> get user input: type=[Var/Race], title=null
+			skip if $Race
+			continue
+			end
+
+			$x = get max sectors in x direction
+			while $x
+			dec $x
+
+			$y = get max sectors in y direction
+			while $y
+			dec $y
+			$Sector = get sector from universe index: x=$x, y=$y
+			skip if $Sector
+			continue
+			skip if not find $Sector in array: $Blacklist
+			continue
+
+			if $Menu.Result == $Id.Menu.Blacklist.Add.War
+			skip if not $Sector-> get WarObject ID
+			append $Sector to array $Blacklist
+			else if $Menu.Result == $Id.Menu.Blacklist.Add.Pirate OR $Menu.Result == $Id.Menu.Blacklist.Add.Race
+			$Owner = $Sector-> get owner race
+			skip if $Owner != $Race
+			append $Sector to array $Blacklist
+			else if $Menu.Result == $Id.Menu.Blacklist.Add.Non.Jumpable
+			skip if not find gate: flags=[Find.JumpableGate], refobj=$Sector, max dist=null, refpos=null
+			continue
+			if $Is.AP
+			skip if not find ship: sector=$Sector class or type={Neutral Race Jump Beacon} race=null flags=null refobj=null maxdist=null maxnum=null refpos=null
+			continue
+			end
+			append $Sector to array $Blacklist
+			end
+			end
+			end
+
+			$Blacklist = sort array $Blacklist
+			$Blacklist = reverse array $Blacklist
+			$Config[$Config.Blacklist] = $Blacklist
+			else if $Menu.Result == $Id.Menu.Blacklist.Clear
+			$Blacklist = array alloc: size=0
+			$Config[$Config.Blacklist] = $Blacklist
+			else
+			$idx = $Menu.Result - 10000
+			gosub Remove.Blacklist.Entry:
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Add.Blacklist.Entry
+			* ******************************************************************************
+			Add.Blacklist.Entry:
+			if $Entry-> exists
+			if not find $Entry in array: $Blacklist
+			append $Entry to array $Blacklist
+			$Blacklist = sort array $Blacklist
+			$Blacklist = reverse array $Blacklist
+			$Config[$Config.Blacklist] = $Blacklist
+			end
+			end
+			endsub
+
+			* ******************************************************************************
+			* Remove.Blacklist.Entry
+			* ******************************************************************************
+			Remove.Blacklist.Entry:
+			$size = size of array $Blacklist
+			dec $size
+			skip if $idx == $size
+			$Blacklist[$idx] = $Blacklist[$size]
+			resize array $Blacklist to $size
+			$Blacklist = sort array $Blacklist
+			$Blacklist = reverse array $Blacklist
+			$Config[$Config.Blacklist] = $Blacklist
+			endsub
+
+			* ******************************************************************************
+			* Format.Trader.Balance:
+			*  Format free trader balance text
+			* ******************************************************************************
+			Format.Trader.Balance:
+			$Balance = $State[$State.Balance]
+			$TextId.Red = $Id.Menu.Root.Balance.Red
+			$TextId.Green = $Id.Menu.Root.Balance.Green
+			gosub Format.Balance:
+			endsub
+
+			* ******************************************************************************
+			* Format.Trader.Balance:
+			*  Format global free trader balance text
+			* ******************************************************************************
+			Format.Global.Balance:
+			$Balance = $Config[$Config.Global.Balance]
+			$TextId.Red = $Id.Menu.Root.Balance.Collective.Red
+			$TextId.Green = $Id.Menu.Root.Balance.Collective.Green
+			gosub Format.Balance:
+			endsub
+
+			* ******************************************************************************
+			* Format.Balance:
+			*  Common formatting routinefor trader balance
+			* ******************************************************************************
+			Format.Balance:
+			if is datatype[$Balance] == [DATATYPE_ARRAY]
+			$HI = $Balance[0]
+			$LO = $Balance[1]
+			$Negative = ($HI < 0 OR $LO < 0)
+			else
+			$Negative = ($Balance < 0)
+			end
+
+			$Text.Balance = [THIS]-> call script glen.trade.ok.lib : Func=$Lib.BigInt.Format Arg1=$Balance Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			if $Negative
+			$Text.Balance = sprintf: pageid=$PageId textid=$TextId.Red, $Text.Balance, null, null, null, null
+			else
+			$Text.Balance = sprintf: pageid=$PageId textid=$TextId.Green, $Text.Balance, null, null, null, null
+			end
+			endsub
+
+			* ******************************************************************************
+			* Broadcast
+			* ******************************************************************************
+			Broadcast:
+			* $Monitor.Task = $Config[$Config.Monitor.Task]
+			$Homebase = $Trader-> get homebase
+
+			if $Broadcast.Station
+			$Ships = $Broadcast.Station-> get ship array from sector/ship/station
+			else if $Broadcast.Fleet
+			skip if $Broadcast.Fleet-> is in fleet
+			endsub
+			$Ships = $Broadcast.Fleet-> get fleet ships: only currently with fleet: [FALSE]
+			else if $Homebase
+			$Ships = $Homebase-> get owned ships: class/type=[Moveable Ship]
+			else
+			endsub
+			end
+
+			$idx = size of array $Ships
+			while $idx
+			dec $idx
+			$Ship = $Ships[$idx]
+
+			skip if $Ship-> exists
+			continue
+
+			skip if $Ship != [PLAYERSHIP]
+			continue
+
+			$Owner = $Ship-> get owner race
+			skip if $Owner == [Player]
+			continue
+
+			skip if $Null-> call script glen.trade.ok.lib : Func=$Lib.Check.Cmd.Enabled Arg1=$Ship Arg2=null Arg3=null Arg4=null Arg5=null Arg6=null
+			continue
+
+			if $Broadcast.Ship.Type
+			skip if $Ship-> is of class [Freighter]
+			continue
+			end
+
+			gosub Broadcast.Ship:
+			end
+			endsub
+
+			* ******************************************************************************
+			* Broadcast.Ship
+			* ******************************************************************************
+			Broadcast.Ship:
+			$Ship.Homebase = $Ship-> get homebase
+
+			if $Homebase == null
+			$Ship-> set homebase to null
+			else if $Homebase-> is of class [Station]
+			$Ship-> set homebase to $Homebase
+			else
+			endsub
+			end
+
+			$Ship.State = $Ship-> call script glen.trade.ok.state : Func=$Lib.State.Fetch Arg1=null Arg2=null Arg3=null Arg4=null Arg5=null
+
+			if $Homebase
+			$Ware.Idx = size of array $Ware.Entries
+			$Dupe.Ware.Entries = array alloc: size=$Ware.Idx
+			$Ship.State[$State.Ware.Entries] = $Dupe.Ware.Entries
+			while $Ware.Idx
+			dec $Ware.Idx
+			$Ware.Entry = $Ware.Entries[$Ware.Idx]
+			$Dupe.Ware.Entry = array alloc: size=2
+			$Dupe.Ware.Entries[$Ware.Idx] = $Dupe.Ware.Entry
+			$Dupe.Ware.Entry[0] = $Ware.Entry[0]
+			$Dupe.Ware.Entry[1] = $Ware.Entry[1]
+			end
+			else
+			$Ship.State[$State.Trade.Mode] = $State[$State.Trade.Mode]
+			$Ship.State[$State.Tether.Sector] = $State[$State.Tether.Sector]
+			$Ship.State[$State.Tether.Range] = $State[$State.Tether.Range]
+			end
+
+			if $Ship-> is script glen.trade.ok.cmd on stack of task=0
+			if $Ship.Homebase == $Homebase
+			skip if $Ship.Homebase == $Homebase
+			= $Ship-> call script glen.trade.ok.state : Func=$Lib.State.Publish Arg1=$Mission.Type.None Arg2=null Arg3=null Arg4=null Arg5=null
+
+			$Ship-> begin task 0 with script glen.trade.ok.cmd and priority 0: arg1=null arg2=$Directive.Type.Resume arg3=null arg4=null arg5=null
+			else
+			$Ship-> begin task 0 with script glen.trade.ok.cmd and priority 0: arg1=null arg2=$Directive.Type.Start arg3=null arg4=null arg5=null
+			end
+			else
+			$Ship-> begin task 0 with script glen.trade.ok.cmd and priority 0: arg1=null arg2=$Directive.Type.Start arg3=null arg4=null arg5=null
+			end
+
+			skip if $Trader != $Ship
+			$Cmd.Already.Running = 1
+			endsub
+
+			* ******************************************************************************
+			* Menu.Limits
+			* ******************************************************************************
+			Menu.Limits:
+
+			$C1 = 0
+			$C2 = 150
+			$C3 = 225
+			$C4 = 300
+
+			while 1
+			$Menu.Limits = create custom menu array
+
+			add custom menu info line to array $Menu.Limits: text=$Text.Menu.Limits.Desc1
+			add custom menu info line to array $Menu.Limits: text=' '
+			add custom menu info line to array $Menu.Limits: text=$Text.Menu.Limits.Desc2
+			add custom menu info line to array $Menu.Limits: text=' '
+			add custom menu info line to array $Menu.Limits: text=$Text.Menu.Limits.Desc3
+
+			* Header row
+			$Row = create new array, arguments=$C1, $Text.Menu.Limits.Ware, $C2, $Text.Menu.Limits.Min.Perc, $C3
+			append $Text.Menu.Limits.Max.Perc to array $Row
+			append $C4 to array $Row
+			append $Text.Menu.Limits.Dockware.Limit to array $Row
+			add custom menu item to array $Menu.Limits: text=$Row returnvalue=null
+
+			$Station.Config = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Station.Config Arg1=[HOMEBASE] Arg2=null Arg3=null Arg4=null Arg5=null
+			$Wares = $Station.Config[1]
+			$Mins = $Station.Config[2]
+			$Maxes = $Station.Config[3]
+
+			$idx = size of array $Wares
+			$Options = array alloc: size=$idx
+			while $idx
+			dec $idx
+
+			$Ware = $Wares[$idx]
+			$Min = $Mins[$idx]
+			$Max = $Maxes[$idx]
+			$ReturnValue = $idx + 10000
+
+			$Text = sprintf: pageid=$PageId textid=$Id.BluePrefix, $Ware, null, null, null, null
+			$Row = create new array, arguments=$C1, $Text, $C2, null, null
+			$text = sprintf: fmt='%s', $Min, null, null, null, null
+			append $text to array $Row
+			append $C3 to array $Row
+			$text = sprintf: fmt='%s', $Max, null, null, null, null
+			append $text to array $Row
+			append $C4 to array $Row
+			$Dockware.Limit = [THIS]-> call script glen.trade.ok.config : Func=$Lib.Config.Get.Dockware.Limit Arg1=[HOMEBASE] Arg2=$Ware Arg3=null Arg4=null Arg5=null
+			skip if $Dockware.Limit != null
+			$Dockware.Limit = '-'
+
+			$text = sprintf: fmt='%s', $Dockware.Limit, null, null, null, null
+			append $text to array $Row
+
+			add custom menu item to array $Menu.Limits: text=$Row returnvalue=$ReturnValue
+			end
+
+			$rc = open custom info menu: title=$Text.Menu.Limits.Title description=$Text.Version option array=$Menu.Limits maxoptions=0
+
+			if $rc == -1 OR $rc == null
+			endsub
+			end
+
+			$rc = $rc - 10000
+
+			$Menu.Limits.Ware = create custom menu array
+
+			$default = $Mins[$rc]
+			$default = $default / 5
+			$Values.Min = create new array, arguments=-4, $Text.Menu.Limits.Min.Perc, $Values.Trade.Min, $default, $Id.Menu.Limits.Min.Perc
+			append $Values.Min to array $Menu.Limits.Ware
+
+			$default = $Maxes[$rc]
+			$default = ($default / 5) - 4
+			$Values.Max = create new array, arguments=-4, $Text.Menu.Limits.Max.Perc, $Values.Trade.Max, $default, $Id.Menu.Limits.Max.Perc
+			append $Values.Max to array $Menu.Limits.Ware
+
+			$Ware = $Wares[$rc]
+			= open custom menu: title=$Ware description=$Text.Version option array=$Menu.Limits.Ware
+
+			$tmp = $Values.Min[3]
+			$tmp = $tmp * 5
+			$Mins[$rc] = $tmp
+
+			$tmp = $Values.Max[3]
+			$tmp = ($tmp + 4) * 5
+			$Maxes[$rc] = $tmp
+
+			end
+			endsub
+

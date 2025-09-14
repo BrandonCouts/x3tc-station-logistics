@@ -19,6 +19,25 @@ from datetime import datetime, timezone
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+
+def _norm_path(p: str) -> Path:
+    """Return a Path with Windows separators normalized.
+
+    If the resulting absolute path does not exist, attempt to treat the input as
+    relative to the current working directory.  This allows callers to pass in
+    Windows-style paths like ``\\tools\\fixtures\\mods\\Foo`` even on POSIX
+    systems.
+    """
+
+    candidate = Path(p.replace("\\", "/"))
+    if candidate.exists():
+        return candidate.resolve()
+    if str(candidate).startswith("/"):
+        candidate = Path.cwd() / str(candidate).lstrip("/")
+        if candidate.exists():
+            return candidate.resolve()
+    return (Path.cwd() / candidate).resolve()
+
 RE_LOAD_TEXT = re.compile(r"load text:\s*id\s*=\s*(\d+)", re.IGNORECASE)
 
 @dataclass
@@ -65,7 +84,6 @@ def is_x3_script_xml(xml_path: Path) -> bool:
 
 def extract_lines(xml_path: Path) -> list[str]:
     root = ET.parse(xml_path).getroot()
-    lines: list[str] = []
 
     tag = root.tag.lower()
     if tag == "codearray":
@@ -78,10 +96,13 @@ def extract_lines(xml_path: Path) -> list[str]:
     else:
         return []
 
+    lines: list[str] = []
     for node in line_nodes:
-        # Gather text from line and child tags
-        s = "".join(node.itertext()).rstrip()
-        lines.append(s)
+        # node.text may include a leading newline; strip it but preserve indentation
+        text = (node.text or "").replace("\n", "")
+        for child in node:
+            text += "".join(child.itertext())
+        lines.append(text.rstrip())
     return lines
 
 def detect_page_id(lines: list[str]) -> str | None:
@@ -103,8 +124,9 @@ def write_x3s(out_path: Path, header: dict[str, str], lines: list[str]) -> None:
             if key in header and header[key]:
                 f.write(f"#{key}: {header[key]}\n")
         f.write("\n")
-        for ln in lines:
-            f.write(f"{ln.rstrip()}\n")
+        # Write exactly one line for each XML <line> node
+        for line in lines:
+            f.write(line.rstrip() + "\n")
 
 def copy_tree(src: Path, dst: Path, summary: ModSummary) -> None:
     if not src.exists():
@@ -190,7 +212,13 @@ def write_readme(base_dir: Path, mod_name: str, s: ModSummary) -> None:
     readme.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Convert known_good mods to per-mod .x3s fixtures.")
+    parser = argparse.ArgumentParser(
+        description="Convert known_good mods to per-mod .x3s fixtures."
+    )
+    parser.add_argument(
+        "--single-mod",
+        help="Convert only this mod directory",
+    )
     parser.add_argument(
         "--mods-dir",
         default=str(Path("tools/fixtures/mods")),
@@ -205,21 +233,28 @@ def parse_args():
 
 def main() -> int:
     args = parse_args()
-    mods_root = Path(args.mods_dir).resolve()
-    out_root = Path(args.out_dir).resolve()
+    out_root = _norm_path(args.out_dir)
 
-    if not mods_root.exists():
-        print(f"ERROR: mods root not found: {mods_root}", file=sys.stderr)
-        return 2
-
-    mods = discover_mods(mods_root)
-    if not mods:
-        print(f"ERROR: no mod folders in {mods_root}", file=sys.stderr)
-        return 2
+    if args.single_mod:
+        mod_dir = _norm_path(args.single_mod)
+        if not mod_dir.exists():
+            print(f"ERROR: mod path not found: {mod_dir}", file=sys.stderr)
+            return 2
+        mods = [mod_dir]
+        print(f"Converting from {mod_dir} -> {out_root}")
+    else:
+        mods_root = _norm_path(args.mods_dir)
+        if not mods_root.exists():
+            print(f"ERROR: mods root not found: {mods_root}", file=sys.stderr)
+            return 2
+        mods = discover_mods(mods_root)
+        if not mods:
+            print(f"ERROR: no mod folders in {mods_root}", file=sys.stderr)
+            return 2
+        print(f"Converting from {mods_root} -> {out_root}")
 
     total = ModSummary()
     failed_mods: list[str] = []
-    print(f"Converting from {mods_root} -> {out_root}")
     for mod in mods:
         print(f"- [{mod.name}] …", end="", flush=True)
         s = convert_mod(mod, out_root)
