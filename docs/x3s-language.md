@@ -54,6 +54,12 @@
 - **speak.text**: `= speak text: page=13 id=1276 priority=0`
 - **speak.array**: `= speak array: $d prio=0`
 
+### New Statements Recognized
+- **send.message.literal**: `send incoming message 'ECS Not Detected - Comms with ships and stations will be disabled !' to player: display it=[TRUE]`
+- **return.bool**: `return [TRUE]`
+- **start.speak.text**: `START speak text: page=13 id=131 priority=0`
+- **unregister.hotkey**: `unregister hotkey $hotkey.id`
+
 ## Fixtures
 
 Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod

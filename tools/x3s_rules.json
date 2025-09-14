@@ -405,6 +405,34 @@
       "examples": [
         "play sample 972"
       ]
+    },
+    {
+      "name": "send.message.literal",
+      "regex": "^send incoming message '[^']+' to player: display it=\\[(TRUE|FALSE)\\]$",
+      "examples": [
+        "send incoming message 'ECS Not Detected - Comms with ships and stations will be disabled !' to player: display it=[TRUE]"
+      ]
+    },
+    {
+      "name": "return.bool",
+      "regex": "^return \\[(TRUE|FALSE)\\]$",
+      "examples": [
+        "return [TRUE]"
+      ]
+    },
+    {
+      "name": "start.speak.text",
+      "regex": "^START speak text: page=\\d+ id=\\d+ priority=\\d+$",
+      "examples": [
+        "START speak text: page=13 id=131 priority=0"
+      ]
+    },
+    {
+      "name": "unregister.hotkey",
+      "regex": "^unregister hotkey \\$[A-Za-z0-9_.]+$",
+      "examples": [
+        "unregister hotkey $hotkey.id"
+      ]
     }
   ]
 }

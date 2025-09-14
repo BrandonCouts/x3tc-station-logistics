@@ -1,0 +1,10 @@
+#name: anarkis.acc.cmd.sellwares.pl
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.cmd.sellwares.pl.xml
+
+[THIS] -> set command: ANARKIS_SELLWARES  target=null target2=null par1=null par2=null
+= [THIS] -> call script anarkis.acc.setup.sellwares :  selected ship=[THIS]
+[THIS] -> set command: null  target=null target2=null par1=null par2=null
+
+return null

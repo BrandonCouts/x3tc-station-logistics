@@ -1,0 +1,43 @@
+#name: anarkis.acc.evalute.danger
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.evalute.danger.xml
+
+
+$gl.setup = get global variable: name='anarkis.ads.setup'
+
+$setup.array = $refobject -> get local variable: name='anarkis.acc.setup'
+$radar.range = $setup.array[1]
+$owner = $refobject -> get owner race
+if $owner == Player
+$ignore.list = $gl.setup[7]
+else
+$ignore.list = $setup.array[16]
+end
+$flags = [Find.Enemy] | [Find.Multiple] | [Find.Nearest]
+$ship.list =  find ship: sector=$sector class or type=Moveable Ship race=null flags=$flags refobj=$refobject maxdist=$radar.range maxnum=50 refpos=null
+$ship.count =  size of array $ship.list
+
+$threat.level = 0
+
+while $ship.count
+dec $ship.count =
+$ship = $ship.list[$ship.count]
+$class = $ship -> get object class
+$owner = $ship -> get owner race
+if  find $owner in array: $ignore.list
+remove element from array $ship.list at index $ship.count
+continue
+end
+if not $ship -> is $refobject a enemy
+remove element from array $ship.list at index $ship.count
+continue
+end
+if $ship -> is civilian ship
+remove element from array $ship.list at index $ship.count
+continue
+end
+$ship.threat = [THIS] -> call script anarkis.ads.lib.get.shipthreat :  ship/class=$ship
+$threat.level = $threat.level + $ship.threat
+end
+return $threat.level

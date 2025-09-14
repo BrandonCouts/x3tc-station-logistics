@@ -1,0 +1,7 @@
+#name: anarkis.acc.hotkey.cmd.manage
+#lang: 44
+#origin_mod: ADS
+#source: mods/ADS/scripts/anarkis.acc.hotkey.cmd.manage.xml
+
+= [THIS] -> call script anarkis.ads.comm.manage.call :
+return null
