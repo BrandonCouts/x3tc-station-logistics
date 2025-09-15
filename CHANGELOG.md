@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.9-internal
+- Clarified required station array syntax and fixed query helper to include class and wrapped race.
+- Added lint rule for station array queries and consolidated language guide.
+- Documented script object races in a dedicated reference file.
+- Enforced `dec <var>` syntax, added option-based lint rules, and removed redundant ship array rule.
+- Restricted station array rule to known races and station classes and added station class reference.
+
 ## 0.1.8-internal
 - Linter now rejects positional argument syntax and scripts use named parameters.
 - Fixed remaining positional-style references in ware config query.
