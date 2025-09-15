@@ -2,9 +2,14 @@
 
 ## 0.1.9-internal
 - Added weapon property command reference.
+- Added universe data command reference.
+- Added universe property command reference.
 - Added passenger command reference.
+- Added user interface command reference.
 - Added pilot command reference.
 - Added script property command reference.
+- Added script action command reference.
+- Added system property command reference.
 - Added player command reference documentation.
 - Added object property commands documentation.
 - Added object action command reference.
@@ -12,11 +17,15 @@
 - Document merchant commands.
 - Added math commands reference.
 - Added marine commands documentation.
+- Added ship property commands reference.
+- Added string commands reference.
 - Clarified required station array syntax and fixed query helper to include class and wrapped race.
 - Added lint rule for station array queries and consolidated language guide.
 - Documented script object races in a dedicated reference file.
 - Enforced `dec <var>` syntax, added option-based lint rules, and removed redundant ship array rule.
 - Restricted station array rule to known races and station classes and added station class reference.
+- Added ship trading command reference.
+- Added station property command reference.
 
 ## 0.1.8-internal
 - Added macro commands documentation.

@@ -1,0 +1,38 @@
+# Station Trading Commands
+
+This reference covers station trading-related commands available in X3TC scripting. Each entry shows the basic syntax.
+
+- `<RetVar/IF> <RefObj> add big ship <Var/Ship>`
+- `<RefObj> add default wares to station/dock`
+- `<RefObj> add money: <Var/Number>`
+- `<RefObj> add primary resource to factory: <Var/Ware>`
+- `<RefObj> add product to factory or dock: <Var/Ware>`
+- `<RefObj> add second resource to factory: <Var/Ware>`
+- `<RefObj> factory production task: on=<Var/Number>`
+- `<RetVar/IF> <RefObj> find different dock: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> find different dock: sells <Var/Ware> with min. jumps: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> find different factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> find different factory: buys <Var/Ware> with min. jumps: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> find different factory: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> find different factory: sells <Var/Ware> with min. jumps: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find dock: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find dock: sells <Var/Ware> with best chance: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find dock: sells <Var/Ware> with min. jumps: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: buys <Var/Ware> with best chance: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: buys <Var/Ware> with min jumps: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: sells <Var/Ware> with best chance: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find factory: sells <Var/Ware> with min. jumps: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find random dock: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find random factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> find random factory: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- `<RetVar/IF> <RefObj> lock ware: <Var/Ware> on station: <Var/Station> for this`
+- `<RetVar/IF> order ship in next shipyard: owner=<Var/Race> sector=<Var/Sector> class=<Var/Class> optional: default shiptype for race:<Var/Race>`
+- `<RefObj> remove primary resource from factory: <Var/Ware>`
+- `<RefObj> remove product from factory or dock: <Var/Ware>`
+- `<RefObj> remove second resource from factory: <Var/Ware>`
+- `station <Var/Station>: lock ware <Var/Ware> for race <Var/Race>`
+- `station <Var/Station>: unlock ware <Var/Ware> for race <Var/Race>`
+- `<RefObj> station send defend squad against ship <Var/Ship/Station>`
+- `<RefObj> station trade and production tasks: on=<Var/Number>`
