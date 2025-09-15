@@ -188,6 +188,13 @@ def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
     if re.search(r"\[\s*'[A-Za-z0-9_.]+'\s*\]", line):
       errors.append(f"{path.name}:{ln}: array indices must be numeric")
 
+    # disallow array indexing directly in conditional expressions
+    if re.match(r'^(?:else\s+)?if\b', low) or re.match(r'^while\b', low):
+      if re.search(r"\$[A-Za-z0-9_.]+\s*\[", line):
+        errors.append(
+          f"{path.name}:{ln}: array indices not allowed in conditionals; assign to variable first"
+        )
+
     # disallow negative amounts directly in add commands
     if re.search(r"->\s*add\s*-", line):
       errors.append(f"{path.name}:{ln}: negative amounts in 'add' require temp variable")

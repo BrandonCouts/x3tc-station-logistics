@@ -17,10 +17,12 @@ if $function == 'CanMove'
   $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
   $srcNew = ($srcAmt - $amount) * 100 / $srcCap
   $dstNew = ($dstAmt + $amount) * 100 / $dstCap
-  if $srcNew < $srcCfg[$MIN_PCT]
+  $srcMinPct = $srcCfg[$MIN_PCT]
+  if $srcNew < $srcMinPct
     return [FALSE]
   end
-  if $dstNew > $dstCfg[$MAX_PCT]
+  $dstMaxPct = $dstCfg[$MAX_PCT]
+  if $dstNew > $dstMaxPct
     return [FALSE]
   end
   return [TRUE]

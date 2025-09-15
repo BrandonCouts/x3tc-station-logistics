@@ -29,9 +29,11 @@ while [TRUE]
       $auto = [FALSE]
       if $role == 'auto'
         $auto = [TRUE]
-        if $pct > $cfg[$MAX_PCT]
+        $cfgMaxPct = $cfg[$MAX_PCT]
+        $cfgMinPct = $cfg[$MIN_PCT]
+        if $pct > $cfgMaxPct
           $role = 'producer'
-        else if $pct < $cfg[$MIN_PCT]
+        else if $pct < $cfgMinPct
           $role = 'consumer'
         else
           $role = 'store'
@@ -56,7 +58,9 @@ end
 return null
 
 ProducerLoop:
-  if $pct > $cfg[$MAX_PCT]
+  $cfgMaxPct = $cfg[$MAX_PCT]
+  $cfgMinPct = $cfg[$MIN_PCT]
+  if $pct > $cfgMaxPct
     $dst = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -65,9 +69,11 @@ ProducerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2[$ROLE] != 'store'
+      $cfg2Role = $cfg2[$ROLE]
+      skip if $cfg2Role != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2[$MAX_PCT]
+      $cfg2MaxPct = $cfg2[$MAX_PCT]
+      if $pct2 < $cfg2MaxPct
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $dst = $other
@@ -143,7 +149,7 @@ ProducerLoop:
       end
       call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
     end
-  else if $pct > $cfg[$MIN_PCT]
+  else if $pct > $cfgMinPct
     $dst = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -152,9 +158,11 @@ ProducerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2[$ROLE] != 'consumer'
+      $cfg2Role = $cfg2[$ROLE]
+      skip if $cfg2Role != 'consumer'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2[$MAX_PCT]
+      $cfg2MaxPct = $cfg2[$MAX_PCT]
+      if $pct2 < $cfg2MaxPct
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $dst = $other
@@ -240,7 +248,8 @@ ProducerLoop:
   return null
 
 ConsumerLoop:
-  if $pct < $cfg[$MIN_PCT]
+  $cfgMinPct = $cfg[$MIN_PCT]
+  if $pct < $cfgMinPct
     $src = null
     $sec = call script 'lib.slx.query' : function='GetSector', station=$st
     $idx2 = size of array $stations
@@ -249,9 +258,11 @@ ConsumerLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2[$ROLE] != 'store'
+      $cfg2Role = $cfg2[$ROLE]
+      skip if $cfg2Role != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 > $cfg2[$MIN_PCT]
+      $cfg2MinPct = $cfg2[$MIN_PCT]
+      if $pct2 > $cfg2MinPct
         $sec2 = call script 'lib.slx.query' : function='GetSector', station=$other
         if $sec == $sec2
           $src = $other
@@ -331,7 +342,9 @@ ConsumerLoop:
   return null
 
 StoreLoop:
-  if $pct > $cfg[$MAX_PCT]
+  $cfgMaxPct = $cfg[$MAX_PCT]
+  $cfgMinPct = $cfg[$MIN_PCT]
+  if $pct > $cfgMaxPct
     $dst = null
     $idx2 = size of array $stations
     while $idx2
@@ -339,9 +352,11 @@ StoreLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2[$ROLE] != 'store'
+      $cfg2Role = $cfg2[$ROLE]
+      skip if $cfg2Role != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 < $cfg2[$MIN_PCT]
+      $cfg2MinPct = $cfg2[$MIN_PCT]
+      if $pct2 < $cfg2MinPct
         $dst = $other
         break
       end
@@ -391,7 +406,7 @@ StoreLoop:
       end
       call script 'lib.slx.query' : function='SetLastReason', station=$st, ware=$ware, text=$txt
     end
-  else if $pct < $cfg[$MIN_PCT]
+  else if $pct < $cfgMinPct
     $src = null
     $idx2 = size of array $stations
     while $idx2
@@ -399,9 +414,11 @@ StoreLoop:
       $other = $stations[$idx2]
       skip if $other == $st
       $cfg2 = call script 'lib.slx.query' : function='GetStationWareConfig', station=$other, ware=$ware
-      skip if $cfg2[$ROLE] != 'store'
+      $cfg2Role = $cfg2[$ROLE]
+      skip if $cfg2Role != 'store'
       $pct2 = call script 'lib.slx.query' : function='GetStationWarePct', station=$other, ware=$ware
-      if $pct2 > $cfg2[$MAX_PCT]
+      $cfg2MaxPct = $cfg2[$MAX_PCT]
+      if $pct2 > $cfg2MaxPct
         $src = $other
         break
       end

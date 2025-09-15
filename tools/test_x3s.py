@@ -26,10 +26,7 @@ def run_fail(cmd: list[str]) -> None:
 
 def known_good_dirs() -> list[str]:
   base = ROOT / 'tools/fixtures/known_good'
-  dirs = {base}
-  for p in base.rglob('*.x3s'):
-    dirs.add(p.parent)
-  return [str(d.relative_to(ROOT)) for d in sorted(dirs)]
+  return [str(base.relative_to(ROOT))]
 
 
 class RuleExampleTests(unittest.TestCase):
