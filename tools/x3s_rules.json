@@ -122,12 +122,14 @@
     },
     {
       "name": "call script",
-      "pattern": "call script <string> : function=<string>(, <namedArg>)*",
-      "options": {},
+      "pattern": "<obj> -> call script <string> : function=<string>(, <namedArg>)*",
+      "options": {
+        "<obj>": "(?:<var>|\\[THIS\\]|null)"
+      },
       "examples": [
-        "call script 'lib.slx.query' : function='GetSector', station=$st",
-        "call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk",
-        "call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10"
+        "null -> call script 'lib.slx.query' : function='GetSector', station=$st",
+        "[THIS] -> call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk",
+        "$ship -> call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10"
       ]
     },
     {

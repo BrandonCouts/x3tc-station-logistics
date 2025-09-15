@@ -29,9 +29,9 @@ dec $s
 
 = wait 5 s
 
-call script 'lib.slx.query' : function='GetSector', station=$st
-call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
-call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10
+null -> call script 'lib.slx.query' : function='GetSector', station=$st
+null -> call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk
+null -> call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10
 
 gosub init
 gosub do_cleanup

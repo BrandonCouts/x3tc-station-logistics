@@ -200,6 +200,8 @@ def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
       errors.append(f"{path.name}:{ln}: negative amounts in 'add' require temp variable")
 
     # line-shape validation (warn on unknown shapes)
+    if re.match(r'^\s*(?:\$[A-Za-z0-9_.]+\s*=\s*)?call script\b', low) and "-> call script" not in low:
+      errors.append(f"{path.name}:{ln}: call script missing object reference")
     recognizable = any(pat.regex.match(line.strip()) for pat in patterns)
     if not recognizable and not (re.match(r'^if\b', low) or re.match(r'^else\s+if\b', low) or low == "else" or low == "end" or re.match(r'^while\b', low)):
       # Allow variable assignments and general calls as free-form to reduce false positives

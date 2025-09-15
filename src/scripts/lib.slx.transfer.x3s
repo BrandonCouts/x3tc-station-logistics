@@ -13,8 +13,8 @@ if $function == 'CanMove'
   $srcCap = $src -> get max amount of ware $ware that can be stored in cargo bay
   $dstAmt = $dst -> get amount of ware $ware in cargo bay
   $dstCap = $dst -> get max amount of ware $ware that can be stored in cargo bay
-  $srcCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
-  $dstCfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
+  $srcCfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$src, ware=$ware
+  $dstCfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$dst, ware=$ware
   $srcNew = ($srcAmt - $amount) * 100 / $srcCap
   $dstNew = ($dstAmt + $amount) * 100 / $dstCap
   $srcMinPct = $srcCfg[$MIN_PCT]

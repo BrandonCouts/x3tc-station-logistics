@@ -34,10 +34,10 @@ while [TRUE]
   while $wcount
     dec $wcount
     $ware = $wares[$wcount]
-    $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
+    $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
     $last = $station -> get local variable: name='slx.ware.last_reason'
     $code = $last[$ware]
-    $reason = call script 'lib.slx.ui' : function='FormatReason', code=$code
+    $reason = null -> call script 'lib.slx.ui' : function='FormatReason', code=$code
     $row = sprintf: pageid=$PageId textid=214, $ware, $cfg[$ROLE], $cfg[$MIN_PCT], $cfg[$MAX_PCT], $cfg[$CHUNK_PCT], $reason
     add custom menu item to array $menu: text=$row returnvalue=$ware
     wait 1 ms
@@ -64,13 +64,13 @@ while [TRUE]
       while $idx
         dec $idx
         $w = $all[$idx]
-        call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, cfg=$def
+        null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, cfg=$def
         wait 1 ms
       end
     end
     continue
   end
-  $cfg = call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$sel
+  $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$sel
   $txtRole = read text: page=$PageId id=210
   $role = null  ->  get user input: type=Var/String, title=$txtRole
   if not $role
@@ -96,7 +96,7 @@ while [TRUE]
   $new[$MIN_PCT] = $min
   $new[$MAX_PCT] = $max
   $new[$CHUNK_PCT] = $chunk
-  call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, cfg=$new
+  null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, cfg=$new
   wait 1 ms
 end
 
