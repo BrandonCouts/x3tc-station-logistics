@@ -85,39 +85,39 @@
     },
     {
       "name": "inc|dec var",
-      "pattern": "<op> <var>(\\s*=)?",
+      "pattern": "<op> <var>",
       "options": {
         "<op>": "(?:inc|dec)"
       },
       "examples": [
         "inc $counter",
         "dec $s",
-        "  dec $idx ="
+        "  dec $idx"
       ]
     },
     {
       "name": "wait",
-      "pattern": "= wait <num>( <time_unit>)?",
+      "pattern": "(?:=\\s+)?wait <num>( <time_unit>)?",
       "options": {
         "<num>": "(?:<number>|<var>)"
       },
       "examples": [
-        "= wait 1 ms",
-        "= wait 10000 ms",
-        "= wait $Wait ms"
+        "wait 1 ms",
+        "wait 10000 ms",
+        "wait $Wait ms"
       ]
     },
     {
       "name": "wait random",
-      "pattern": "= wait randomly from <min> to <max> <time_unit>",
+      "pattern": "(?:=\\s+)?wait randomly from <min> to <max> <time_unit>",
       "options": {
         "<min>": "(?:<number>|<var>)",
         "<max>": "(?:<number>|<var>)"
       },
       "examples": [
-        "= wait randomly from 500 to 1000 ms",
-        "= wait randomly from $min to $max ms",
-        "  = wait randomly from 3000 to 5000 ms"
+        "wait randomly from 500 to 1000 ms",
+        "wait randomly from $min to $max ms",
+        "  wait randomly from 3000 to 5000 ms"
       ]
     },
     {
@@ -144,12 +144,12 @@
     },
     {
       "name": "open custom menu",
-      "pattern": "= open custom menu: title=<value> description=<value> option array=<var>",
+      "pattern": "(?:=\\s+)?open custom menu: title=<value> description=<value> option array=<var>",
       "options": {},
       "examples": [
-        "= open custom menu: title=$Ware description=$Text.Version option array=$Menu.Limits.Ware",
-        "  = open custom menu: title='Foo' description=$Desc option array=$Opts",
-        "= open custom menu: title=$Title description='Bar' option array=$Arr"
+        "open custom menu: title=$Ware description=$Text.Version option array=$Menu.Limits.Ware",
+        "  open custom menu: title='Foo' description=$Desc option array=$Opts",
+        "open custom menu: title=$Title description='Bar' option array=$Arr"
       ]
     },
     {
