@@ -97,7 +97,7 @@
     },
     {
       "name": "wait",
-      "pattern": "(?:=\\s+)?wait <num>( <time_unit>)?",
+      "pattern": "wait <num>( <time_unit>)?",
       "options": {
         "<num>": "(?:<number>|<var>)"
       },
@@ -109,7 +109,7 @@
     },
     {
       "name": "wait random",
-      "pattern": "(?:=\\s+)?wait randomly from <min> to <max> <time_unit>",
+      "pattern": "wait randomly from <min> to <max> <time_unit>",
       "options": {
         "<min>": "(?:<number>|<var>)",
         "<max>": "(?:<number>|<var>)"
