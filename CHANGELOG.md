@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added math commands reference.
 - Added marine commands documentation.
 - Clarified required station array syntax and fixed query helper to include class and wrapped race.
 - Added lint rule for station array queries and consolidated language guide.
