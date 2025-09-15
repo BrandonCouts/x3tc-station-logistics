@@ -4,6 +4,7 @@
 - Added universe data command reference.
 - Added universe property command reference.
 - Added passenger command reference.
+- Added user interface command reference.
 - Added pilot command reference.
 - Added script property command reference.
 - Added script action command reference.
