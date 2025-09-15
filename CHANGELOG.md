@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added script property command reference.
 - Added player command reference documentation.
 - Added object property commands documentation.
 - Added object action command reference.
