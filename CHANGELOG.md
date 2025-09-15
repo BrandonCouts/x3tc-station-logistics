@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Enforced explicit object reference for all `call script` invocations and updated linter to flag omissions.
 - Cached array indices before conditional checks to avoid invalid direct indexing in transfer and manager scripts.
 - Linter now flags array indexing inside conditional statements, enforcing variable caching before comparisons.
 - Linter now rejects negative amounts in `add` commands; assign the value to a variable first.
