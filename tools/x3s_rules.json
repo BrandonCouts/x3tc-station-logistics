@@ -79,9 +79,12 @@
         },
         {
             "name": "dec",
-            "regex": "^dec \\$[A-Za-z0-9_.]+(?:\\s*=\\s*)?$",
+            "pattern": "dec <var>",
+            "options": {
+                "<var>": "\\$[A-Za-z0-9_.]+"
+            },
             "examples": [
-                "dec $s ="
+                "dec $s"
             ]
         },
         {
@@ -736,10 +739,24 @@
             ]
         },
         {
-            "name": "get.ship.array.by.race",
-            "regex": "^\\$[A-Za-z0-9_.]+\\s*=\\s*get ship array: of race \\$[A-Za-z0-9_.]+ class/type=Moveable Ship$",
+            "name": "get.station.array.by.race",
+            "pattern": "<ret> = get station array: of race <race> class/type=<type>",
+            "options": {
+                "<ret>": "\\$[A-Za-z0-9_.]+",
+                "<race>": [
+                    "\\$[A-Za-z0-9_.]+",
+                    "\\[(?:Argon|ATF|Boron|Enemy\\sRace|Goner|Kha'ak|Neutral\\sRace|Paranid|Pirates|Player|Race\\s1|Race\\s2|Split|Teladi|Terran|Unknown|Xenon|Yaki)\\]"
+                ],
+                "<type>": [
+                    "\\[Station\\]",
+                    "\\[Dock\\]",
+                    "\\[Complex\\sHub\\]",
+                    "\\[Shipyard\\]",
+                    "null"
+                ]
+            },
             "examples": [
-                "$arr =  get ship array: of race $r class/type=Moveable Ship"
+                "$arr = get station array: of race [Player] class/type=[Station]"
             ]
         },
         {
