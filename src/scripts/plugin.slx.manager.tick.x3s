@@ -46,11 +46,11 @@ while [TRUE]
       if $role == 'store'
         gosub StoreLoop
       end
-      = wait 1 ms
+      wait 1 ms
     end
-    = wait 1 ms
+    wait 1 ms
   end
-  = wait 10000 ms
+  wait 10000 ms
 end
 
 return null
@@ -77,7 +77,7 @@ ProducerLoop:
           $dst = $other
         end
       end
-      = wait 1 ms
+      wait 1 ms
     end
     if $dst
       $srcAmt = $st -> get amount of ware $ware in cargo bay
@@ -164,7 +164,7 @@ ProducerLoop:
           $dst = $other
         end
       end
-      = wait 1 ms
+      wait 1 ms
     end
     if $dst
       $srcAmt = $st -> get amount of ware $ware in cargo bay
@@ -261,7 +261,7 @@ ConsumerLoop:
           $src = $other
         end
       end
-      = wait 1 ms
+      wait 1 ms
     end
     if $src
       $srcAmt = $src -> get amount of ware $ware in cargo bay
@@ -345,7 +345,7 @@ StoreLoop:
         $dst = $other
         break
       end
-      = wait 1 ms
+      wait 1 ms
     end
     if $dst
       $srcAmt = $st -> get amount of ware $ware in cargo bay
@@ -405,7 +405,7 @@ StoreLoop:
         $src = $other
         break
       end
-      = wait 1 ms
+      wait 1 ms
     end
     if $src
       $srcAmt = $src -> get amount of ware $ware in cargo bay

@@ -40,7 +40,7 @@ while [TRUE]
     $reason = call script 'lib.slx.ui' : function='FormatReason', code=$code
     $row = sprintf: pageid=$PageId textid=214, $ware, $cfg[$ROLE], $cfg[$MIN_PCT], $cfg[$MAX_PCT], $cfg[$CHUNK_PCT], $reason
     add custom menu item to array $menu: text=$row returnvalue=$ware
-    = wait 1 ms
+    wait 1 ms
   end
   add section to custom menu: $menu
   $exit = read text: page=$PageId id=208
@@ -65,7 +65,7 @@ while [TRUE]
         dec $idx
         $w = $all[$idx]
         call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, cfg=$def
-        = wait 1 ms
+        wait 1 ms
       end
     end
     continue
@@ -97,7 +97,7 @@ while [TRUE]
   $new[$MAX_PCT] = $max
   $new[$CHUNK_PCT] = $chunk
   call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, cfg=$new
-  = wait 1 ms
+  wait 1 ms
 end
 
 return null
