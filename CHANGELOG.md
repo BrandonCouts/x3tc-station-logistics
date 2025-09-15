@@ -1,6 +1,8 @@
 # Changelog
 
 ## 0.1.9-internal
+- Cached array indices before conditional checks to avoid invalid direct indexing in transfer and manager scripts.
+- Linter now flags array indexing inside conditional statements, enforcing variable caching before comparisons.
 - Linter now rejects negative amounts in `add` commands; assign the value to a variable first.
 - Expanded linter rules and constant handling to reduce warnings on known-good scripts.
 - Fixed inc/dec rule patterns to avoid stray '=' tokens.
