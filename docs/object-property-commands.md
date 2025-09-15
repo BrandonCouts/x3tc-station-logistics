@@ -1,0 +1,108 @@
+# Object Property Commands
+
+This reference covers object property commands available in X3TC scripting. Each entry shows the basic syntax.
+
+- `<RetVar/IF> <RefObj> can be controlled by race logic`
+- `<RetVar/IF> <RefObj> can execute StartAction`
+- `<RetVar/IF> <RefObj> exists`
+- `<RetVar/IF> <RefObj> find nearest enemy ship: max.dist=<Var/Number>`
+- `<RetVar/IF> <RefObj> find nearest enemy ship in range: class=<Var/Class>`
+- `<RetVar/IF> <RefObj> find nearest enemy station: max.dist=<Var/Number>`
+- `<RetVar/IF> <RefObj> find nearest missile aiming to me`
+- `<RetVar/IF> <RefObj> get all local variable keys, starting with=<Var/String>`
+- `<RetVar/IF> <RefObj> get array of missiles aiming to me`
+- `<RetVar/IF> <RefObj> get asteroid yield`
+- `<RetVar/IF> <RefObj> get attacker`
+- `<RetVar/IF> <RefObj> get command`
+- `<RetVar/IF> <RefObj> get command target`
+- `<RetVar/IF> <RefObj> get command target2`
+- `<RetVar/IF> <RefObj> get current action`
+- `<RetVar/IF> <RefObj> get current laser strength`
+- `<RetVar/IF> <RefObj> get current shield strength`
+- `<RetVar/IF> <RefObj> get debris count`
+- `<RetVar/IF> <RefObj> get dock bay size`
+- `<RetVar/IF> <RefObj> get environment`
+- `<RetVar/IF> <RefObj> get flying ware count`
+- `<RetVar/IF> <RefObj> get hull`
+- `<RetVar/IF> <RefObj> get hull percent`
+- `<RetVar/IF> <RefObj> get ID code`
+- `<RetVar/IF> <RefObj> get laser type in bay <Var/Number>`
+- `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
+- `<RetVar/IF> <RefObj> get maintype`
+- `<RetVar/IF> <RefObj> get maker race`
+- `<RetVar/IF> <RefObj> get max. laser type that can be installed`
+- `<RetVar/IF> <RefObj> get max. shield type that can be installed`
+- `<RetVar/IF> <RefObj> get maximum laser strength`
+- `<RetVar/IF> <RefObj> get maximum shield strength`
+- `<RetVar/IF> <RefObj> get name`
+- `<RetVar/IF> <RefObj> get notoriety percentage to race <Var/Race>`
+- `<RetVar/IF> <RefObj> get notoriety title to race <Var/Race>: text=<Var/Boolean>`
+- `<RetVar/IF> <RefObj> get notoriety to race <Var/Race>`
+- `<RetVar/IF> <RefObj> get number of landed ships`
+- `<RetVar/IF> <RefObj> get number of laser bays`
+- `<RetVar/IF> <RefObj> get number of shield bays`
+- `<RetVar/IF> <RefObj> get number of subtypes of maintype <Var/Number>`
+- `<RetVar/IF> <RefObj> get object class`
+- `<RetVar/IF> <RefObj> get owner race`
+- `<RetVar/IF> <RefObj> get position as array`
+- `<RetVar/IF> <RefObj> get power generator`
+- `<RetVar/IF> <RefObj> get relation to object <Var/Ship/Station>`
+- `<RetVar/IF> <RefObj> get relation to race <Var/Race>`
+- `<RetVar/IF> <RefObj> get resource waretype of asteroid`
+- `<RetVar/IF> <RefObj> get rot alpha`
+- `<RetVar/IF> <RefObj> get rot beta`
+- `<RetVar/IF> <RefObj> get rot gamma`
+- `<RetVar/IF> <RefObj> get sector`
+- `<RetVar/IF> <RefObj> get shield and hull percent`
+- `<RetVar/IF> <RefObj> get shield percent`
+- `<RetVar/IF> <RefObj> get shield type in bay <Var/Number>`
+- `<RetVar/IF> <RefObj> get size of object`
+- `<RetVar/IF> <RefObj> get subtype`
+- `<RetVar/IF> <RefObj> get true owner`
+- `<RetVar/IF> <RefObj> get ware type code of object`
+- `<RetVar/IF> <RefObj> get x position`
+- `<RetVar/IF> <RefObj> get y position`
+- `<RetVar/IF> <RefObj> get z position`
+- `<RetVar/IF> <RefObj> has a free ship dock port: ship subtype = <Value>`
+- `<RetVar/IF> has <Value> been discovered`
+- `<RetVar/IF> <RefObj> has collectible rocks`
+- `<RetVar/IF> <RefObj> has same environment as <Var/Ship/Station>`
+- `<RefObj> ignore collisions: <Var/Number>`
+- `<RetVar/IF> <RefObj> is <Var/Ship/Station> a enemy`
+- `<RetVar/IF> <RefObj> is <Var/Ship/Station> a friend`
+- `<RetVar/IF> <RefObj> is asteroid scanned`
+- `<RetVar/IF> <RefObj> is detectable`
+- `<RetVar/IF> <RefObj> is disabled`
+- `<RetVar/IF> <RefObj> is docking allowed at <Var/Ship/Station>`
+- `<RetVar/IF> <RefObj> is hidden`
+- `<RetVar/IF> <RefObj> is in active sector`
+- `<RetVar/IF> <RefObj> is in freight scanning range: ship=<Var/Ship>`
+- `<RetVar/IF> <RefObj> is in mineral scanner range: asteroid=<Var/Asteroid>`
+- `<RetVar/IF> <RefObj> is in same sector as <Var/Ship/Station>`
+- `<RetVar/IF> <RefObj> is in transporter range: ship=<Var/Ship>`
+- `<RetVar/IF> <RefObj> is invincible`
+- `<RetVar/IF> <RefObj> is known`
+- `<RetVar/IF> <RefObj> is landing`
+- `<RetVar/IF> <RefObj> is <Var/Ship/Station> neutral to me`
+- `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
+- `<RetVar/IF> <RefObj> is starting`
+- `<RetVar/IF> <RefObj> is target visible <Var/Ship/Station>`
+- `<RefObj> set asteroid scanned to <Var/Number>`
+- `<RefObj> set attacker to <Var/Ship/Station>`
+- `<RefObj> set command: <Object Command>`
+- `<RefObj> set command target: <Value>`
+- `<RefObj> set command target2: <Value>`
+- `<RefObj> set current shield strength to <Var/Number>`
+- `set discovered status: type=<Value> status=<Var/Boolean>`
+- `<RefObj> set hull to <Var/Number>`
+- `<RefObj> set known status to <Var/Number>`
+- `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- `<RefObj> set name to <Var/String>`
+- `<RefObj> set owner race to <Var/Race>`
+- `<RefObj> set position: x=<Var/Number> y=<Var/Number> z=<Var/Number>`
+- `<RefObj> set race logic control enabled to <Var/Number>`
+- `<RefObj> set relation against <Value> to <Relation>`
+- `<RefObj> set rotation: alpha=<Var/Number> beta=<Var/Number> gamma=<Var/Number>`
+- `<RefObj> set StartAction enabled to <Var/Number>`

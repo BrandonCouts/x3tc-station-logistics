@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added object property commands documentation.
 - Added object action command reference.
 - Document NPC commands for reference.
 - Document merchant commands.
