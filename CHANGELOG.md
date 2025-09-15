@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Expanded linter rules and constant handling to reduce warnings on known-good scripts.
 - Added ware property command reference.
 - Added weapon property command reference.
 - Added universe data command reference.
