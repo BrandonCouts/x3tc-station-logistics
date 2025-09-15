@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added universe property command reference.
 - Added passenger command reference.
 - Added pilot command reference.
 - Added script property command reference.
