@@ -5,6 +5,7 @@
 - Added passenger command reference.
 - Added pilot command reference.
 - Added script property command reference.
+- Added script action command reference.
 - Added system property command reference.
 - Added player command reference documentation.
 - Added object property commands documentation.
