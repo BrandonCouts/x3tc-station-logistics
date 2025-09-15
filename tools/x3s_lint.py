@@ -31,9 +31,17 @@ def load_patterns() -> list[Rule]:
   pats: list[Rule] = []
   for entry in data.get("patterns", []):
     rx = entry.get("regex")
+    if not rx and (pattern := entry.get("pattern")):
+      rx = re.escape(pattern)
+      for token, sub in entry.get("options", {}).items():
+        if isinstance(sub, list):
+          sub_rx = "(?:" + "|".join(sub) + ")"
+        else:
+          sub_rx = f"(?:{sub})"
+        rx = rx.replace(re.escape(token), sub_rx)
     name = entry.get("name", "")
     if rx:
-      pats.append(Rule(name, re.compile(rx, re.I)))
+      pats.append(Rule(name, re.compile(rf"^{rx}$", re.I)))
   return pats
 
 HEADER_RX = re.compile(r'^\s*#(\w+)\s*:\s*(.+)$')
