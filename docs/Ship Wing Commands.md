@@ -1,0 +1,44 @@
+# Ship Wing Commands
+
+This reference covers ship wing commands available in X3TC scripting. Each entry shows the basic syntax.
+
+- `add ship to flight wing: wing=<Var/Wing> ship=<Var/Ship>`
+- `<RefObj> add to flight wing: wing=<Var/Wing>`
+- `<RefObj> add to patrol group for sector: <Var/Sector>`
+- `<RefObj> add wing additional ship command: id=<Var/String> script=<Script Name> pageid=<Var/Number> textid=<Var/Number>`
+- `<RefObj> add wing additional ship command: id=<Var/String> script=<Script Name> pageid=<Var/Number> textid=<Var/Number> checkscript=<Script Name>`
+- `add wing custom command: id=<Var/Number>`
+- `<RefObj> auto sync patrol sector with environment: <Var/Number>`
+- `<RefObj> connect wing command/signal <Object Command/Signal> to script <Script Name> with prio <Var/Number>`
+- `<RetVar/IF> create a new flight wing: name=<Var/String> race=<Var/Race>`
+- `disband flight wing: wing=<Var/Wing>`
+- `<RetVar/IF> does wing additional ship command exists: id=<Var/String>`
+- `<RetVar/IF> find flight wing: name=<Var/String> race=<Var/Race>`
+- `<RetVar/IF> <RefObj> get all formation followers`
+- `<RetVar/IF> <RefObj> get flight wing`
+- `<RetVar/IF> get flight wing array`
+- `<RetVar/IF> get flight wing ship array: wing=<Var/Wing>`
+- `<RetVar/IF> get highest formation leader`
+- `<RetVar/IF> get max number of ships per wing formation`
+- `<RetVar/IF> get number of wing formation leaders`
+- `<RetVar/IF> get predefined wing: <Var/Wing>`
+- `<RetVar/IF> get ship array for wing command upgrade: command=<Var/Wing Command>`
+- `<RetVar/IF> <RefObj> get temporarily removed ship array from wing`
+- `<RetVar/IF> get wing command upgrade: command=<Var/Wing Command>`
+- `<RetVar/IF> get wing formation leaders`
+- `<RetVar/IF> get wing natural formation`
+- `<RetVar/IF> <RefObj> is in same wing as <Var/Ship>`
+- `<RetVar/IF> <RefObj> is temporarily removed from wing`
+- `<RefObj> remove all patrol group references`
+- `<RefObj> remove from flight wing`
+- `<RefObj> remove from patrol group for sector: <Var/Sector>`
+- `remove ship from flight wing: wing=<Var/Wing> ship=<Var/Ship>`
+- `<RefObj> remove wing additional ship command: id=<Var/String>`
+- `remove wing custom command: id=<Var/Number>`
+- `<RefObj> return to wing`
+- `<RefObj> set wing command: <Var/Wing Command>`
+- `<RefObj> set wing command: <Var/Wing Command> target=<value> target2=<value>`
+- `<RefObj> set wing natural formation: formation=<Var/Number>`
+- `<RetVar/IF> <RefObj> ship has wing command upgrade: command=<Var/Wing Command>`
+- `<RefObj> temporarily remove from wing`
+- `<RetVar/IF> wing custom command exists: id=<Var/Number>`

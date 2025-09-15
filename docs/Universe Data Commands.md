@@ -1,0 +1,68 @@
+# Universe Data Commands
+
+This reference lists universe data commands available in X3TC scripting.
+
+- `<RefObj> change destination gate to <Var/Warpgate>`
+- `<RetVar> create asteroid: type=<Var/Number1> addto=<Var/Sector> resource=<Var/Number2> yield=<Var/Number> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create debris: type=<Var/Number1> addto=<Var/Sector> resource=<Var/Number2> yield=<Var/Number> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create flying ware: maintype=<Var/Number1> subtype=<Var/Number2> count=<Var/Number3> sector=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create gate: type=<Var/Number> addto=<Var/Sector> gateid=<Var/Number10> dstsecx=<Var/Number3> dstsecy=<Var/Number3> dstgateid=<Var/Number20> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3> selfdestruct=<Var/Number0>`
+- `<RetVar> create nebula: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create planet: subtype=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create ship: type=<Var/Ship Type> owner=<Var/Race> addto=<value> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create special: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create station: type=<Var/Station Type> owner=<Var/Race> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar> create sun: subtype=<Var/Number> r=<Var/Number1> g=<Var/Number2> b=<Var/Number3> addto=<Var/Sector>`
+- `<RetVar/IF> <RefObj> find all sectors within <Var/Number1> jumps: Only known sectors=<Var/Number2>`
+- `<RetVar> find a random sector: startsector=<Var/Sector>, jumps=<Var/Number>, owner=<Var/Race>`
+- `<RetVar> find a random sector: startsector=<Var/Sector>, jumps=<Var/Number>, owner=<Var/Race>, security level=<Var/Number>`
+- `<RetVar/IF> find asteroid: sector=<Var/Sector> resourcetype=<Var/Number1> min.yield=<Var/Number2> flags=<Var/Number> refobj=<value> maxdist=<Var/Number1> maxnum=<Var/Number2> refpos=<Var/Array>`
+- `<RetVar/IF> find debris: sector=<Var/Sector> resource=<Var/Ware> min yield=<Var/Number> flags=<Var/Number> refobj=<value> maxdist=<Var/Number> maxnum=<Var/Number> refpos=<Var/Array>`
+- `<RetVar/IF> find flying ware: sector=<Var/Sector> maintype=<Var/Number1> subtype=<Var/Number2> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number3> refpos=<Var/Array>`
+- `<RetVar/IF> find gate: flags=<Var/Number>, refobj=<value>, max dist=<Var/Number>, refpos=<Var/Array>`
+- `<RetVar/IF> <RefObj> find nearest military outpost`
+- `<RetVar> find nebula: sector=<Var/Sector> type=<Var/Number> effect=<Var/Number> flags=<Var/Number> refobj=<value> maxdist=<Var/Number> maxnum=<Var/Number> refpos=<Var/Array>`
+- `<RetVar/IF> <RefObj> find ship: class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxnum=<Var/Number> with homebase=<value>`
+- `<RetVar/IF> find ship: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2>`
+- `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2> num=<Var/Number>`
+- `<RetVar/IF> <RefObj> get all stationary objects: include asteroids=<Var/Boolean>`
+- `<RetVar/IF> <RefObj> get asteroid array from sector`
+- `<RetVar/IF> <RefObj> get buyable wares in sector. Include player factories: <Var/Number> Include shipyards: <Var/Number> Include docks: <Var/Number>`
+- `<RetVar> get distance: position array1=<Var/Array> array2=<Var/Array>`
+- `<RetVar> get distance between <Var/Ship/Station> and <Var/Ship/Station>`
+- `<RetVar> get distance to: position array=<Var/Array>`
+- `<RetVar> get distance to: x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- `<RetVar/IF> <RefObj> get dock array from sector`
+- `<RetVar/IF> <RefObj> get east warp gate`
+- `<RetVar/IF> <RefObj> get factory array from sector`
+- `<RetVar/IF> <RefObj> get gate destination: return sector=<Var/Number>`
+- `<RetVar/IF> <RefObj> get gate id`
+- `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- `<RetVar/IF> get max sectors in x direction`
+- `<RetVar/IF> get max sectors in y direction`
+- `<RetVar/IF> get next gate on route from <Var/Sector1> to <Var/Sector2>`
+- `<RetVar/IF> get next sector on route from sector <Var/Sector1> to sector <Var/Sector2>`
+- `<RetVar/IF> <RefObj> get north warp gate`
+- `<RetVar/IF> <RefObj> get owned ships: class/type=<value>`
+- `<RetVar/IF> <RefObj> get planet array`
+- `<RetVar/IF> <RefObj> get player owned ship array from sector`
+- `<RetVar/IF> <RefObj> get player owned station array from sector`
+- `<RetVar/IF> get sector from universe index: x=<Var/Number1>, y=<Var/Number2>`
+- `<RetVar/IF> get ship array: of race <Var/Race> class/type=<value>`
+- `<RetVar/IF> <RefObj> get ship array from sector/ship/station`
+- `<RetVar/IF> get ship type array: maker race=<Var/Race> class=<value>`
+- `<RetVar/IF> <RefObj> get south warp gate`
+- `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- `<RetVar/IF> get station array: product=<Var/Ware> include empty=<Var/Boolean>`
+- `<RetVar/IF> get station array: resource=<Var/Ware> include empty=<Var/Boolean>`
+- `<RetVar/IF> <RefObj> get station array from sector`
+- `<RetVar/IF> get universe x index`
+- `<RetVar/IF> get universe y index`
+- `<RetVar/IF> <RefObj> get warp gate: gate id=<Var/Number>`
+- `<RetVar/IF> <RefObj> get west warp gate`
+- `<RetVar/IF> <RefObj> is core sector`
+- `<RetVar/IF> <RefObj> is sector known by the player`
+- `<RetVar/IF> <RefObj> realign gate: gatenum=<value> gate to link=<Var/Warpgate> force=<Var/Boolean>`
+- `<RefObj> set sector to core security <Var/Boolean>`
