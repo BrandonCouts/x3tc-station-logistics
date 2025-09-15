@@ -23,25 +23,38 @@ class Rule:
   name: str
   regex: re.Pattern[str]
 
+TOKEN_RX = re.compile(r"<[^>]+>")
+
+def _expand(text: str, options: dict[str, str], cache: dict[str, str]) -> str:
+  """Recursively expand <tokens> inside *text* using *options*."""
+  def repl(m: re.Match[str]) -> str:
+    tok = m.group(0)
+    if tok in cache:
+      return cache[tok]
+    sub = options.get(tok, tok)
+    sub = sub.replace(" ", r"\s+")
+    sub = TOKEN_RX.sub(repl, sub)
+    cache[tok] = sub
+    return sub
+  text = text.replace(" ", r"\s+")
+  return TOKEN_RX.sub(lambda m: f"(?:{repl(m)})", text)
+
 def load_patterns() -> list[Rule]:
   try:
     data = json.loads(RULES.read_text(encoding="utf-8"))
   except FileNotFoundError:
     return []
   pats: list[Rule] = []
-  for entry in data.get("patterns", []):
+  shared = data.get("shared_options", {})
+  entries = data.get("rules") or data.get("patterns", [])
+  for entry in entries:
     rx = entry.get("regex")
     if not rx and (pattern := entry.get("pattern")):
-      rx = re.escape(pattern)
-      for token, sub in entry.get("options", {}).items():
-        if isinstance(sub, list):
-          sub_rx = "(?:" + "|".join(sub) + ")"
-        else:
-          sub_rx = f"(?:{sub})"
-        rx = rx.replace(re.escape(token), sub_rx)
+      opts = {**shared, **entry.get("options", {})}
+      rx = _expand(pattern, opts, {})
     name = entry.get("name", "")
     if rx:
-      pats.append(Rule(name, re.compile(rf"^{rx}$", re.I)))
+      pats.append(Rule(name, re.compile(rf"^\s*{rx}\s*$", re.I)))
   return pats
 
 HEADER_RX = re.compile(r'^\s*#(\w+)\s*:\s*(.+)$')
