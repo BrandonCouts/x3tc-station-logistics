@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added weapon property command reference.
 - Added universe data command reference.
 - Added universe property command reference.
 - Added passenger command reference.
