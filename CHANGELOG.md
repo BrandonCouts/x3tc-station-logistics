@@ -4,6 +4,7 @@
 - Expanded linter rules and constant handling to reduce warnings on known-good scripts.
 - Fixed inc/dec rule patterns to avoid stray '=' tokens.
 - Disallowed leading '=' before wait commands.
+- Removed stray '=' before wait commands in manager tick and station menu scripts.
 - Added ware property command reference.
 - Added weapon property command reference.
 - Added universe data command reference.
