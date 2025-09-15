@@ -1,0 +1,105 @@
+# Ship Property Commands
+
+This reference covers ship property commands available in X3TC scripting. Each entry shows the basic syntax.
+
+- `<RefObj> add to formation with leader <Var/Ship>`
+- `<RefObj> autojump emergency jump shield threshold=<Var/Number>`
+- `<RefObj> autojump minimum jumps=<Var/Number>`
+- `<RetVar> best missile type for target <value>`
+- `<RetVar/IF> <RefObj> can launch marines`
+- `<RetVar/IF> <RefObj> can missile <Var/Ware> be installed`
+- `<RetVar/IF> <RefObj> can transport passenger: <Var/Passenger>`
+- `<RetVar/IF> <RefObj> can turret <Var/Number> fire missiles`
+- `<RetVar/IF> <RefObj> find best missile for target <value>`
+- `<RetVar/IF> <RefObj> find enemy in firing range of turret <Var/Number>`
+- `<RetVar/IF> <RefObj> fits laser <Var/Ware> into turret <Var/Number>`
+- `<RetVar/IF> <RefObj> get ammo resupply: ammo=<Var/Ware>`
+- `<RetVar/IF> <RefObj> get attack target`
+- `<RetVar/IF> <RefObj> get autojump minimum jumps`
+- `<RetVar/IF> <RefObj> get boarding shield threshold`
+- `<RetVar/IF> <RefObj> get compatible missile array`
+- `<RetVar/IF> <RefObj> get compatible missile array from cargobay`
+- `<RetVar/IF> <RefObj> get current max speed`
+- `<RetVar/IF> <RefObj> get current missile`
+- `<RetVar/IF> <RefObj> get current speed`
+- `<RetVar/IF> <RefObj> get desired speed`
+- `<RetVar/IF> <RefObj> get destination`
+- `<RetVar/IF> <RefObj> get emergency jump minimum shield threshold`
+- `<RetVar/IF> <RefObj> get fire missile probability`
+- `<RetVar/IF> <RefObj> get fire missile time difference in seconds`
+- `<RetVar/IF> <RefObj> get flight time`
+- `<RetVar/IF> <RefObj> get follow mode`
+- `<RetVar/IF> <RefObj> get formation follower ships`
+- `<RetVar/IF> <RefObj> get formation leader`
+- `<RetVar/IF> <RefObj> get freight scanner range`
+- `<RetVar/IF> <RefObj> get homebase`
+- `<RetVar/IF> <RefObj> get homesector`
+- `<RetVar/IF> <RefObj> get job id`
+- `<RetVar/IF> <RefObj> get job idle rate`
+- `<RetVar/IF> <RefObj> get job jump range`
+- `<RetVar/IF> <RefObj> get job leader`
+- `<RetVar/IF> <RefObj> get jumpdrive fuel resupply`
+- `<RetVar/IF> <RefObj> get laser type in turret <Var/Number1> at slot <Var/Number2>`
+- `<RetVar> get maker race: shiptype=<Value>`
+- `<RetVar/IF> <RefObj> get max. number of lasers in turret <Var/Number>`
+- `<RetVar/IF> <RefObj> get maximum laser range: turret=<Var/Number>`
+- `<RetVar/IF> <RefObj> get max laser strength in turret <Var/Number>`
+- `<RetVar/IF> <RefObj> get max speed`
+- `<RetVar/IF> <RefObj> get max trade jumps`
+- `<RetVar/IF> <RefObj> get max upgraded speed`
+- `<RetVar/IF> <RefObj> get max upgrades for upgrade <Var/Ware>`
+- `<RetVar> get mineral scanner range`
+- `<RetVar/IF> <RefObj> get minimum laser range: turret=<Var/Number>`
+- `<RetVar/IF> <RefObj> get missile resupply: missile=<Var/Ware>`
+- `<RetVar/IF> <RefObj> get most destructive missile type that can be installed`
+- `<RetVar/IF> <RefObj> get number of turrets`
+- `<RetVar/IF> <RefObj> get repair cost of ship <Var/Ship>`
+- `<RetVar/IF> <RefObj> get resupply fuel required`
+- `<RetVar> <RefObj> get scanner range`
+- `<RetVar/IF> <RefObj> get ship variation`
+- `<RetVar/IF> get ship variation: subtype=<Var/Number>`
+- `<RetVar> get transporter range`
+- `<RefObj> give formation leadership to <Var/Ship>`
+- `<RetVar/IF> <RefObj> has formation ships`
+- `<RetVar/IF> <RefObj> has illegal ware onboard: race=<Var/Race>`
+- `<RetVar/IF> <RefObj> is autojump activated`
+- `<RetVar/IF> <RefObj> is civilian ship`
+- `<RetVar/IF> <RefObj> is decoupled ships leader`
+- `<RetVar/IF> <RefObj> is docked`
+- `<RetVar/IF> <RefObj> is emergency jump activated`
+- `<RetVar/IF> <RefObj> is hired`
+- `<RetVar/IF> <RefObj> is in a sector`
+- `<RetVar/IF> <RefObj> is <Var/Ship/Station> in firing range of turret <Var/Number>`
+- `<RetVar/IF> <RefObj> is landed`
+- `<RetVar/IF> <RefObj> is missile boat`
+- `<RetVar/IF> <RefObj> is missile <Var/Ware> ready to fire`
+- `<RetVar/IF> <RefObj> is player warping`
+- `<RetVar/IF> <RefObj> is player wingman`
+- `<RetVar/IF> <RefObj> is ship boardable`
+- `<RetVar/IF> <RefObj> needed jump drive energy for jump to sector <Var/Sector>`
+- `<RefObj> remove from any formation`
+- `<RefObj> reset flight time`
+- `<RetVar/IF> <RefObj> select new formation leader by: ship class=<Var/Number1> strength=<Var/Number2> min.speed=<Var/Number3>`
+- `<RefObj> set ammo resupply: ammo=<Var/Ware> amount=<Var/Number>`
+- `<RefObj> set as player wingman: <Var/Number>`
+- `<RefObj> set attack target to <value>`
+- `<RefObj> set autojump active: <Var/Number>`
+- `<RefObj> set desired speed: <Var/Number>`
+- `<RefObj> set destination to <value>`
+- `<RefObj> set emergency jump active: <Var/Number>`
+- `<RefObj> set fire missile probability to <Var/Number>`
+- `<RefObj> set fire missile time difference to <Var/Number> ms`
+- `<RefObj> set follow mode <Var/Number>`
+- `<RefObj> set formation <Var/Number>`
+- `<RefObj> set homebase to <Var/Ship/Station>`
+- `<RefObj> set homesector to <Var/Sector>`
+- `<RefObj> set jumpdrive fuel resupply: amount=<Var/Number>`
+- `<RefObj> set laser energy to <Var/Number>`
+- `<RefObj> set max trade jumps: <Var/Number>`
+- `<RefObj> set missile resupply: missile=<Var/Ware> amount=<Var/Number>`
+- `<RefObj> set pilot speaker: voice=<Value>, face=<Value>, Pirate subrace=<Value>, Argon female=<Value>`
+- `<RefObj> set pirate cover state to <Var/Number>`
+- `<RefObj> set ship disabled to <Var/Number>`
+- `<RefObj> set ship speed to <Var/Number>`
+- `<RetVar/IF> <RefObj> should a missile be fired`
+- `<RetVar/IF> <RefObj> turret <Var/Number> can use laser <Var/Ware>`
