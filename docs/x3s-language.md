@@ -112,3 +112,21 @@ provides `src/scripts/*.x3s` as the canonical source along with any `t/` text pa
 or optional `director/` XML. These fixtures are generated from `tools/fixtures/mods/<mod_name>`
 via `python tools/convert_mods.py` and are used by the test suite.
 
+## Appendix: Lint Tokens
+
+The linter's pattern rules share these reusable tokens:
+
+- `<ws>` – `\s+`
+- `<var>` – `$` followed by letters, numbers, underscores or dots
+- `<ident>` – `[A-Za-z_][A-Za-z0-9_]*`
+- `<number>` – signed integer value
+- `<bool>` – `[TRUE]` or `[FALSE]`
+- `<string>` – single-quoted MSCI string
+- `<time_unit>` – `ms|s|sec|secs|seconds|m|min|mins|minutes`
+- `<value>` – `<var>` / `<number>` / `<string>` / `<bool>`
+- `<namedArg>` – `<ident> = <value>`
+- `<expr>` – any expression (loose catch‑all)
+- `<label>` – label name using letters, numbers, underscores or dots
+
+Examples in `tools/x3s_rules.json` mirror the constructs described here to keep documentation and lint checks in sync.
+
