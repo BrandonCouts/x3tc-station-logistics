@@ -21,9 +21,9 @@ Placeholders like `<var>` denote a variable.
 - **label**: `Debug.Sub:`
 - **endsub**: `endsub`
 - **obj.add.units**: `= $station-> add $amount units of $ware`
-- **wait.random**: `= wait randomly from 500 to 1000 ms`
+- **wait.random**: `wait randomly from 500 to 1000 ms`
 - **al.register.noquote**: `al engine: register script=al.LI.FDN.event`
-- **inc**: `inc $sector.count =`
+- **inc**: `inc $sector.count`
 - **set.global.var.null**: `set global variable: name=$var value=null`
 - **menu.info**: `add custom menu info line to array $menu: text=$txt`
 - **menu.heading**: `add custom menu heading to array $menu: title=$txt`
