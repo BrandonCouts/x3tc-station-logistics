@@ -148,7 +148,8 @@ $station  ->  set local variable: name=$pointer value=$array
 $physical.check = $station  ->  get amount of ware $ware in cargo bay
 if not $physical.check > 0
  = $station  ->  add 1 units of $ware
- = $station  ->  add -1 units of $ware
+ $reduce = -1
+ = $station  ->  add $reduce units of $ware
 end
 endsub
 * -----------------------------------------------------------------------------------

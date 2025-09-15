@@ -27,7 +27,8 @@ if $function == 'CanMove'
 end
 
 if $function == 'ApplyMove'
-  = $src -> add -$amount units of $ware
+  $reduce = -$amount
+  = $src -> add $reduce units of $ware
   = $dst -> add $amount units of $ware
   return null
 end
