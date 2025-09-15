@@ -7,7 +7,8 @@
     "<bool>": "\\[(?:TRUE|FALSE)\\]",
     "<string>": "'(?:[^'\\\\]|\\\\.)*'",
     "<time_unit>": "(?:ms|s|sec|secs|seconds|m|min|mins|minutes)",
-    "<value>": "(?:<var>|<number>|<string>|<bool>)",
+    "<const>": "(?:\\[[^\\]]+\\]|\\{[^\\}]+\\})",
+    "<value>": "(?:<var>|<number>|<string>|<bool>|<const>)",
     "<namedArg>": "<ident>\\s*=\\s*<value>",
     "<expr>": ".+",
     "<label>": "[A-Za-z0-9_.]+"
@@ -96,12 +97,27 @@
     },
     {
       "name": "wait",
-      "pattern": "= wait <number>( <time_unit>)?",
-      "options": {},
+      "pattern": "wait <num>( <time_unit>)?",
+      "options": {
+        "<num>": "(?:<number>|<var>)"
+      },
       "examples": [
-        "= wait 1 ms",
-        "= wait 10000 ms",
-        "= wait 5 s"
+        "wait 1 ms",
+        "wait 10000 ms",
+        "wait $Wait ms"
+      ]
+    },
+    {
+      "name": "wait random",
+      "pattern": "wait randomly from <min> to <max> <time_unit>",
+      "options": {
+        "<min>": "(?:<number>|<var>)",
+        "<max>": "(?:<number>|<var>)"
+      },
+      "examples": [
+        "wait randomly from 500 to 1000 ms",
+        "wait randomly from $min to $max ms",
+        "  wait randomly from 3000 to 5000 ms"
       ]
     },
     {
@@ -112,6 +128,28 @@
         "call script 'lib.slx.query' : function='GetSector', station=$st",
         "call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk",
         "call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10"
+      ]
+    },
+    {
+      "name": "do if",
+      "pattern": "do if <expr>",
+      "options": {
+        "<expr>": ".+"
+      },
+      "examples": [
+        "do if $Config[$Config.Debug.Enabled]",
+        "do if $Significant",
+        "  do if [THIS]-> is of class [Dock]"
+      ]
+    },
+    {
+      "name": "open custom menu",
+      "pattern": "(?:=\\s+)?open custom menu: title=<value> description=<value> option array=<var>",
+      "options": {},
+      "examples": [
+        "open custom menu: title=$Ware description=$Text.Version option array=$Menu.Limits.Ware",
+        "  open custom menu: title='Foo' description=$Desc option array=$Opts",
+        "open custom menu: title=$Title description='Bar' option array=$Arr"
       ]
     },
     {
@@ -173,7 +211,9 @@
       "examples": [
         "append $ware to array $All.Wares",
         "append 5 to array $numbers",
-        "  append 'foo' to array $arr"
+        "  append 'foo' to array $arr",
+        "  append [Goner] to array $Races",
+        "  append {Docking Computer} to array $Wares"
       ]
     },
     {
@@ -184,6 +224,34 @@
         "remove element from array $list at index 0",
         "remove element from array $Blacklist at index $idx",
         "  remove element from array $arr at index 3"
+      ]
+    },
+    {
+      "name": "resize array",
+      "pattern": "resize array <var> to <num>",
+      "options": {
+        "<num>": "(?:<number>|<var>)"
+      },
+      "examples": [
+        "resize array $Ware.Entries to 0",
+        "resize array $State to 30",
+        "  resize array $List to $size"
+      ]
+    },
+    {
+      "name": "copy array",
+      "pattern": "copy array <src> index <start> ... <end> into array <dst> at index <dst_idx>",
+      "options": {
+        "<src>": "<var>",
+        "<dst>": "<var>",
+        "<start>": "(?:<number>|<var>)",
+        "<end>": "(?:<number>|<var>)",
+        "<dst_idx>": "(?:<number>|<var>)"
+      },
+      "examples": [
+        "copy array $Arg2 index 0 ... $Arg2.Length into array $rc at index $Arg1.Length",
+        "copy array $Arg1 index 0 ... $Arg1.Length into array $rc at index 0",
+        "  copy array $Src index $s ... $e into array $Dst at index $i"
       ]
     },
     {
@@ -251,6 +319,16 @@
       ]
     },
     {
+      "name": "write to log file",
+      "pattern": "write to log file <value> append=<bool> value=<value>",
+      "options": {},
+      "examples": [
+        "write to log file $PageId append=[TRUE] value=$msg",
+        "  write to log file 9055 append=[FALSE] value='done'",
+        "write to log file $LogId append=[TRUE] value=$text"
+      ]
+    },
+    {
       "name": "send incoming message",
       "pattern": "send incoming message <value> to player: display it=<bool>",
       "options": {},
@@ -258,6 +336,15 @@
         "send incoming message $msg to player: display it=[TRUE]",
         "send incoming message 'Hello' to player: display it=[FALSE]",
         "  send incoming message $log to player: display it=[TRUE]"
+      ]
+    },
+    {
+      "name": "play sample",
+      "pattern": "play sample <number>",
+      "options": {},
+      "examples": [
+        "play sample 972",
+        "  play sample 123"
       ]
     },
     {

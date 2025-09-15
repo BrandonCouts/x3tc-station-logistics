@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.1.9-internal
+- Expanded linter rules and constant handling to reduce warnings on known-good scripts.
+- Fixed inc/dec rule patterns to avoid stray '=' tokens.
+- Disallowed leading '=' before wait commands.
 - Added ware property command reference.
 - Added weapon property command reference.
 - Added universe data command reference.
