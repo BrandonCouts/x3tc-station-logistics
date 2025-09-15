@@ -2,11 +2,22 @@
 
 ## 0.1.9-internal
 - Added object action command reference.
+- Document NPC commands for reference.
+- Document merchant commands.
+- Added math commands reference.
+- Added marine commands documentation.
+- Clarified required station array syntax and fixed query helper to include class and wrapped race.
+- Added lint rule for station array queries and consolidated language guide.
+- Documented script object races in a dedicated reference file.
+- Enforced `dec <var>` syntax, added option-based lint rules, and removed redundant ship array rule.
+- Restricted station array rule to known races and station classes and added station class reference.
 
 ## 0.1.8-internal
+- Added macro commands documentation.
 - Linter now rejects positional argument syntax and scripts use named parameters.
 - Fixed remaining positional-style references in ware config query.
 - Enforced numeric array indexing for ware configs and linter rejects string keys.
+- Documented array commands.
 
 ## 0.1.7-internal
 - Added overview section to SLX README for clarity.
