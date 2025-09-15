@@ -11,10 +11,10 @@ $CHUNK_PCT = 3
 
 if $function == 'ListEnrolledStations'
   $result = array alloc: size=0
-  $all = get station array: of race=Player
+  $all = get station array: of race [Player] class/type=[Station]
   $count = size of array $all
   while $count
-    dec $count =
+    dec $count
     $st = $all[$count]
     $enrolled = $st -> get local variable: name='slx.enrolled'
     if $enrolled
