@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Added pilot command reference.
 - Added script property command reference.
 - Added player command reference documentation.
 - Added object property commands documentation.
