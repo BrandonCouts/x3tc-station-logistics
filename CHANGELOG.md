@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Document NPC commands for reference.
 - Document merchant commands.
 - Added math commands reference.
 - Added marine commands documentation.
