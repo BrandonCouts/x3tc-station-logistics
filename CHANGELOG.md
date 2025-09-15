@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Linter now rejects negative amounts in `add` commands; assign the value to a variable first.
 - Expanded linter rules and constant handling to reduce warnings on known-good scripts.
 - Fixed inc/dec rule patterns to avoid stray '=' tokens.
 - Disallowed leading '=' before wait commands.

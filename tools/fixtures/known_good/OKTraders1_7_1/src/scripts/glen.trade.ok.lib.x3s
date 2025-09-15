@@ -865,11 +865,12 @@
 			$rc = 1
 			append $Ware to array $Infinite.Wares
 			else
-			= $Station-> add -1 units of $Ware
-			append $Ware to array $Finite.Wares
-			end
-			end
-			end
+                        $reduce = -1
+                        = $Station-> add $reduce units of $Ware
+                        append $Ware to array $Finite.Wares
+                        end
+                        end
+                        end
 			$Ship.Proxy-> destruct: show no explosion=[TRUE]
 
 			break
