@@ -9,7 +9,16 @@ $MIN_PCT = 1
 $MAX_PCT = 2
 $CHUNK_PCT = 3
 
+* mark task as running (self-report so flag stays accurate)
+set global variable: name='g.slx.manager.running' value=[TRUE]
+
 while [TRUE]
+  * optional kill switch if you ever want AL disable support
+  $enabled = get global variable: name='g.slx.enabled'
+  if $enabled == [FALSE]
+    set global variable: name='g.slx.manager.running' value=[FALSE]
+    return null
+  end
   $stations = null -> call script 'lib.slx.query' : function='ListEnrolledStations'
   $scount = size of array $stations
   while $scount

@@ -61,4 +61,6 @@ al engine: register script='al.plugin.slx'
 al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'
 al engine: set plugin 'al.plugin.slx' timer interval to 30 s
 
+= [THIS] -> call script 'plugin.slx.init' :
+
 return null

@@ -1,0 +1,15 @@
+* ******************************************************************************
+* SCRIPT NAME: al.plugin.slx
+* DESCRIPTION: AL plugin entrypoint for SLX (start/stop manager task)
+* AUTHOR:      Brandon              DATE: 16 September 2025
+* ******************************************************************************
+$PageId = 89055
+load text: id=$PageId
+
+* Start manager task if not already running
+$running = get global variable: name='g.slx.manager.running'
+if not $running
+  START [THIS] -> call script 'plugin.slx.manager.tick' :
+end
+
+return null
