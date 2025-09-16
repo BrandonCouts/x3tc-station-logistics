@@ -91,6 +91,20 @@ while [TRUE]
   if not $chunk
     $chunk = $cfg[$CHUNK_PCT]
   end
+
+    * sanity clamp
+    if $min > $max
+    $tmp = $min
+    $min = $max
+    $max = $tmp
+    end
+    if $chunk < 1
+    $chunk = 1
+    end
+    if $chunk > 100
+    $chunk = 100
+    end
+
   $new = array alloc: size=4
   $new[$ROLE] = $role
   $new[$MIN_PCT] = $min
