@@ -7,7 +7,7 @@ Automate safe, mechanical X3TC work using **.x3s** source files only. Write scri
 - **Architect** – repo layout, `docs/ids.md`, PR templates.
 - **Scriptor (X3S)** – writes `src/scripts/*.x3s` (setup/lib/commands/AL).
 - **Textkeeper** – maintains `t/89xxx-L044.xml` strings & ranges.
-- **Linter** – runs `tools/x3s_lint.py` (syntax/structure checks).
+- **Linter** – runs `tools/x3s_lint.py src/scripts` (syntax/structure checks).
 - **Packager** – version bump, changelog, `build/*.zip` (optional).
 
 ## Repository Layout
@@ -27,13 +27,13 @@ Automate safe, mechanical X3TC work using **.x3s** source files only. Write scri
 ## Workflow (every task)
 1. Read `docs/ids.md` + `docs/x3s-language.md`.
 2. Create/modify `src/scripts/*.x3s` (+ `t/` strings if needed).
-3. Run: `python tools/test_x3s.py` (lints all sources).
+3. Run: `python tools/test_x3s.py` (lints `src/scripts` + unit tests).
 4. Fix issues until green.
 5. Update `CHANGELOG.md` and `docs/ids.md`.
 6. Open PR: include plan, checklist, and any test notes/screens.
 
 ## Acceptance Checklist
-- `python tools/x3s_lint.py` passes (no errors).
+- `python tools/x3s_lint.py src/scripts` passes (no errors).
 - Setup scripts contain `load text: id=<page>`.
 - No busy loops: each `while` block contains a `wait`.
 - IDs/tasks/command slots match `docs/ids.md`.
@@ -62,3 +62,4 @@ return null
 ### Additional Notes
 - When required tools or directories are missing, coordinate with the **Architect** to bootstrap the repo structure.
 - Keep commits focused; run tests after each change.
+- Fixtures under `tools/fixtures/` are reference-only pseudo code; never treat them as canonical sources.
