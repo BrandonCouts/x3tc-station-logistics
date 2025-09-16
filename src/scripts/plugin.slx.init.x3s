@@ -19,7 +19,7 @@ $txt = 'Open SLX'
 
 $running = get global variable: name='g.slx.manager.running'
 if not $running
-  START [THIS] -> call script plugin.slx.manager.tick :
+  START [THIS] -> call script 'plugin.slx.manager.tick' :
   set global variable: name='g.slx.manager.running' value=[TRUE]
 end
 
