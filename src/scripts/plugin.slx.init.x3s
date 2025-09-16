@@ -13,7 +13,7 @@ add custom menu item to plugin config: heading=$section text=$txt script='plugin
 
 $running = get global variable: name='g.slx.manager.running'
 if not $running
-  START [THIS] -> call script plugin.slx.manager.tick :
+  START [THIS] -> call script 'plugin.slx.manager.tick' :
   set global variable: name='g.slx.manager.running' value=[TRUE]
 end
 

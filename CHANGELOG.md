@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.9-internal
+- Linter now rejects unquoted script names in `call script` commands and quotes the init manager launch.
 - Enforced explicit object reference for all `call script` invocations and updated linter to flag omissions.
 - Cached array indices before conditional checks to avoid invalid direct indexing in transfer and manager scripts.
 - Linter now flags array indexing inside conditional statements, enforcing variable caching before comparisons.

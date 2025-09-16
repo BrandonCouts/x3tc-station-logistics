@@ -72,6 +72,10 @@ def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
   patterns = patterns or load_patterns()
   errors: list[str] = []
   warnings: list[str] = []
+  try:
+    in_src = path.resolve().is_relative_to(SRC)
+  except FileNotFoundError:
+    in_src = False
 
   text = path.read_text(encoding="utf-8").splitlines()
   headers, body = {}, []
@@ -202,6 +206,21 @@ def lint_file(path: Path, patterns: list[Rule] | None = None) -> list[str]:
     # line-shape validation (warn on unknown shapes)
     if re.match(r'^\s*(?:\$[A-Za-z0-9_.]+\s*=\s*)?call script\b', low) and "-> call script" not in low:
       errors.append(f"{path.name}:{ln}: call script missing object reference")
+    if "-> call script" in low:
+      if m := re.search(r"->\s*call\s+script\s+(?P<name>[^:]+)\s*:", line, re.I):
+        script_name = m.group("name").strip()
+        stripped = line.lstrip().lower()
+        if stripped.startswith("start ") and in_src:
+          if not script_name:
+            errors.append(
+              f"{path.name}:{ln}: script name in 'call script' must be quoted"
+            )
+          else:
+            quote = script_name[0]
+            if quote not in {'"', "'"} or script_name[-1] != quote:
+              errors.append(
+                f"{path.name}:{ln}: script name in 'call script' must be quoted"
+              )
     recognizable = any(pat.regex.match(line.strip()) for pat in patterns)
     if not recognizable and not (re.match(r'^if\b', low) or re.match(r'^else\s+if\b', low) or low == "else" or low == "end" or re.match(r'^while\b', low)):
       # Allow variable assignments and general calls as free-form to reduce false positives
