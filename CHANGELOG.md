@@ -1,6 +1,8 @@
 # Changelog
 
 ## 0.1.9-internal
+- Registered the plugin config entry through `plugin.config.addscript` and provided default menu text fallbacks.
+- Expanded linter coverage for custom menu item commands and flexible `call script` argument formats.
 - Linter now rejects unquoted script names in `call script` commands and quotes the init manager launch.
 - Enforced explicit object reference for all `call script` invocations and updated linter to flag omissions.
 - Cached array indices before conditional checks to avoid invalid direct indexing in transfer and manager scripts.
