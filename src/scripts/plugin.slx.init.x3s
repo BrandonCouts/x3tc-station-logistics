@@ -9,7 +9,13 @@ load text: id=$PageId
 $section = read text: page=$PageId id=101
 $txt = read text: page=$PageId id=102
 
-add custom menu item to plugin config: heading=$section text=$txt script='plugin.slx.station.menu'
+skip if $section
+$section = 'SLX'
+
+skip if $txt
+$txt = 'Open SLX'
+
+= [THIS] -> call script plugin.config.addscript : Plugin Name=$txt, Author=null, Script Name='plugin.slx.station.menu', Display author=[FALSE], Add to section=$section, Menu=null
 
 $running = get global variable: name='g.slx.manager.running'
 if not $running

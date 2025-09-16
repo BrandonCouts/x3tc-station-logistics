@@ -6,10 +6,14 @@
     "<number>": "-?\\d+",
     "<bool>": "\\[(?:TRUE|FALSE)\\]",
     "<string>": "'(?:[^'\\\\]|\\\\.)*'",
+    "<script>": "(?:<string>|[A-Za-z0-9_.]+)",
     "<time_unit>": "(?:ms|s|sec|secs|seconds|m|min|mins|minutes)",
     "<const>": "(?:\\[[^\\]]+\\]|\\{[^\\}]+\\})",
     "<value>": "(?:<var>|<number>|<string>|<bool>|<const>)",
+    "<valueOrNull>": "(?:<value>|null)",
     "<namedArg>": "<ident>\\s*=\\s*<value>",
+    "<argName>": "<ident>(?:\\s+<ident>)*",
+    "<namedArgOrNull>": "<argName>\\s*=\\s*<valueOrNull>",
     "<expr>": ".+",
     "<label>": "[A-Za-z0-9_.]+"
   },
@@ -122,14 +126,19 @@
     },
     {
       "name": "call script",
-      "pattern": "<obj> -> call script <string> : function=<string>(, <namedArg>)*",
+      "pattern": "(?:<assign>\\s*)?(?:START\\s*(?:=\\s*)?)?<obj> -> call script <script>(\\s*:\\s*<arg_list>)?",
       "options": {
-        "<obj>": "(?:<var>|\\[THIS\\]|null)"
+        "<obj>": "(?:<var>|\\[THIS\\]|null)",
+        "<assign>": "(?:<var>\\s*=|=)",
+        "<arg_list>": "(?:<arg>(?:, <arg>| <arg>)*)?",
+        "<arg>": "<namedArgOrNull>"
       },
       "examples": [
-        "null -> call script 'lib.slx.query' : function='GetSector', station=$st",
+        "$cfg = null -> call script 'lib.slx.query' : function='GetSector', station=$st",
         "[THIS] -> call script 'lib.slx.util' : function='Min', a=$srcChunk, b=$dstChunk",
-        "$ship -> call script 'lib.slx.transfer' : function='ApplyMove', src=$src, dst=$dst, ware=$ware, amount=10"
+        "= [THIS] -> call script plugin.config.addscript : Plugin Name=$txt  Author=null  Script Name='plugin.slx.station.menu'  Display author=[FALSE]  Add to section=$section  Menu=null",
+        "START [THIS] -> call script plugin.slx.manager.tick :",
+        "START  = null -> call script plugin.LI.FDN.Supply.Factory.Check :"
       ]
     },
     {
@@ -152,6 +161,31 @@
         "open custom menu: title=$Ware description=$Text.Version option array=$Menu.Limits.Ware",
         "  open custom menu: title='Foo' description=$Desc option array=$Opts",
         "open custom menu: title=$Title description='Bar' option array=$Arr"
+      ]
+    },
+    {
+      "name": "add custom menu item text",
+      "pattern": "add custom menu item to array <var>: text=<menu_text> returnvalue=<retval>",
+      "options": {
+        "<menu_text>": "<value>",
+        "<retval>": "<valueOrNull>"
+      },
+      "examples": [
+        "add custom menu item to array $menu: text=$toggle returnvalue='toggle'",
+        "add custom menu item to array $menu: text=$row returnvalue=$ware",
+        "add custom menu item to array $menu: text=$exit returnvalue=null"
+      ]
+    },
+    {
+      "name": "add custom menu item page",
+      "pattern": "add custom menu item to array <var>: page=<idref> id=<idref> returnvalue=<retval>",
+      "options": {
+        "<idref>": "(?:<number>|<var>)",
+        "<retval>": "<valueOrNull>"
+      },
+      "examples": [
+        "add custom menu item to array $menu: page=89055 id=102 returnvalue='toggle'",
+        "add custom menu item to array $menu: page=$PageId id=$TextId returnvalue=$value"
       ]
     },
     {
