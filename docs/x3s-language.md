@@ -107,10 +107,11 @@ Placeholders like `<var>` denote a variable.
 - **destruct.no.explosion**: `$s -> destruct: show no explosion=[TRUE]`
 
 ## Fixtures
-Known-good mod fixtures live under `tools/fixtures/known_good/<mod_name>`. Each mod
-provides `src/scripts/*.x3s` as the canonical source along with any `t/` text pages
-or optional `director/` XML. These fixtures are generated from `tools/fixtures/mods/<mod_name>`
-via `python tools/convert_mods.py` and are used by the test suite.
+Historical mod conversions live under `tools/fixtures/known_good/<mod_name>`. Each
+mod folder mirrors the structure of a typical package (`src/scripts/*.x3s`, `t/`,
+and optional `director/`). Treat these files as illustrative pseudo code only:
+they are no longer linted by the automated test suite and may drift from the
+current rule set. Use them as architectural references, not as definitive sources.
 
 ## Appendix: Lint Tokens
 

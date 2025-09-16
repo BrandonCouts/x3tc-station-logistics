@@ -1,246 +1,31 @@
 # x3tc-station-logistics
-SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. Moves wares between enrolled player stations (same- or cross-sector) — no NPC trade or scanning — via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
-## ADS Sample Files
-The linter is validated against these 240 known-good ADS scripts (now including 20 plugin.sk.ecs.* files):
+SLX is a lightweight station-to-station logistics mod for X3TC: Terran Conflict. It moves wares between enrolled player stations (same- or cross-sector) via per-ware roles (Producer, Consumer, Store) with Min/Max/Chunk thresholds and a priority-based transfer loop.
 
-- !init.anarkis.modified.x3s
-- al.plugin.sk.ecs.x3s
-- anarkis.acc.al.init.x3s
-- anarkis.acc.al.register.x3s
-- anarkis.acc.al.stop.x3s
-- anarkis.acc.apply.active.x3s
-- anarkis.acc.apply.relations.x3s
-- anarkis.acc.apply.settings.x3s
-- anarkis.acc.audio.alert.x3s
-- anarkis.acc.cmd.alert.dock.x3s
-- anarkis.acc.cmd.alert.launch.x3s
-- anarkis.acc.cmd.attack.return.x3s
-- anarkis.acc.cmd.buy.return.x3s
-- anarkis.acc.cmd.buywares.pl.x3s
-- anarkis.acc.cmd.call.autocarrier.x3s
-- anarkis.acc.cmd.call.autostation.x3s
-- anarkis.acc.cmd.dock.all.pl.x3s
-- anarkis.acc.cmd.dock.all.x3s
-- anarkis.acc.cmd.protect.x3s
-- anarkis.acc.cmd.sell.return.x3s
-- anarkis.acc.cmd.sellwares.pl.x3s
-- anarkis.acc.ecs.register.x3s
-- anarkis.acc.ecs.remove.x3s
-- anarkis.acc.evaluate.enemy.npc.x3s
-- anarkis.acc.evaluate.enemy.x3s
-- anarkis.acc.evaluate.findstrong.x3s
-- anarkis.acc.evalute.danger.npc.x3s
-- anarkis.acc.evalute.danger.off.x3s
-- anarkis.acc.evalute.danger.x3s
-- anarkis.acc.get.acc.carriers.x3s
-- anarkis.acc.get.all.x3s
-- anarkis.acc.get.dockedships.x3s
-- anarkis.acc.hotkey.cmd.attack.x3s
-- anarkis.acc.hotkey.cmd.clear.x3s
-- anarkis.acc.hotkey.cmd.dockall.x3s
-- anarkis.acc.hotkey.cmd.manage.x3s
-- anarkis.acc.hotkey.ecs.x3s
-- anarkis.acc.hotkey.install.x3s
-- anarkis.acc.hotkey.setup.x3s
-- anarkis.acc.hotkey.uninstall.x3s
-- anarkis.lib.get.sector.x3s
-- anarkis.lib.task.autodocking.x3s
-- anarkis.lib.wing.join.x3s
-- setup.anarkis.acc.x3s
-- anarkis.lib.cmd.attack.x3s
-- anarkis.lib.unknown.x3s
-- anarkis.acc.uninstall.x3s
-- anarkis.lib.wait.x3s
-- anarkis.lib.get.bycargovalue.adv.x3s
-- anarkis.ads.crew.getrepair.x3s
-- anarkis.lib.get.ships.var.x3s
-- anarkis.lib.ask.shiparray.x3s
-- anarkis.acc.setup.default.to.x3s
-- anarkis.lib.guild.register.x3s
-- anarkis.acc.setup.repair.x3s
-- anarkis.lib.shipstate.restore.x3s
-- anarkis.acc.lib.get.leaderlist.x3s
-- anarkis.lib.custowned.init.x3s
-- anarkis.lib.vis.task.blink.x3s
-- anarkis.acc.task.autoname.x3s
-- anarkis.acc.is.compatible.x3s
-- anarkis.acc.lib.applyallowned.x3s
-- anarkis.acc.lib.arr.remove.ads.x3s
-- anarkis.acc.lib.dockads.x3s
-- anarkis.acc.lib.get.adsonly.from.x3s
-- anarkis.acc.lib.get.adsonly.x3s
-- anarkis.acc.lib.get.enemies.x3s
-- anarkis.acc.lib.get.flyads.x3s
-- anarkis.acc.lib.get.leader.big.x3s
-- anarkis.acc.lib.get.lonely.x3s
-- anarkis.acc.lib.givetarget.x3s
-- anarkis.acc.lib.isadsactive.x3s
-- anarkis.acc.lib.name.load.x3s
-- anarkis.acc.lib.name.save.x3s
-- anarkis.acc.repairshields.single.x3s
-- anarkis.acc.repairshields.x3s
-- anarkis.acc.setup.attackmode.x3s
-- anarkis.acc.setup.autocarrier.x3s
-- anarkis.acc.setup.buywares.x3s
-- anarkis.acc.setup.copy.x3s
-- anarkis.acc.setup.default.st.x3s
-- anarkis.acc.setup.default.x3s
-- anarkis.acc.setup.hangars.x3s
-- anarkis.acc.setup.ignorerace.x3s
-- anarkis.acc.setup.rename.x3s
-- anarkis.acc.setup.reports.x3s
-- anarkis.acc.setup.sellwares.x3s
-- anarkis.acc.setup.ships.x3s
-- anarkis.acc.setup.supplies.c2s.x3s
-- anarkis.acc.setup.supplies.s2c.x3s
-- anarkis.acc.setup.supplies.x3s
-- anarkis.acc.setup.threatsetup.x3s
-- anarkis.acc.setup.x3s
-- anarkis.acc.signal.killed.npc.x3s
-- anarkis.acc.task.autocarrier.npc.x3s
-- anarkis.acc.task.autocarrier.x3s
-- anarkis.acc.task.autoname.plus.x3s
-- anarkis.acc.task.hullcheck.x3s
-- anarkis.acc.upgrade.disable.x3s
-- anarkis.acc.upgrade.enable.x3s
-- anarkis.acc.task.repairs.x3s
-- anarkis.acc.wing.attack.pl.x3s
-- anarkis.acc.wing.attack.x3s
-- anarkis.acc.wing.clearsector.pl.x3s
-- anarkis.acc.wing.clearsector.x3s
-- anarkis.acc.wing.defence.pl.x3s
-- anarkis.acc.wing.defence.x3s
-- anarkis.ads.al.init.x3s
-- anarkis.ads.al.register.x3s
-- anarkis.ads.al.stop.x3s
-- anarkis.ads.cmd.protectgrid.x3s
-- anarkis.ads.comm.barracks.x3s
-- anarkis.ads.comm.hangars.x3s
-- anarkis.ads.comm.manage.call.x3s
-- anarkis.ads.comm.manage.menu.x3s
-- anarkis.ads.comm.wingmenu.x3s
-- anarkis.ads.crew.getcost.x3s
-- anarkis.ads.crew.sleep.x3s
-- anarkis.ads.crew.train.x3s
-- anarkis.ads.lib.enemy.strongest.x3s
-- anarkis.ads.lib.get.gridships.x3s
-- anarkis.ads.lib.get.plsectors.x3s
-- anarkis.ads.lib.get.racesectors.x3s
-- anarkis.ads.lib.get.sectorthreat.x3s
-- anarkis.ads.lib.get.shipthreat.x3s
-- anarkis.ads.lib.shiptostring.x3s
-- anarkis.ads.settings.default.app.x3s
-- anarkis.ads.settings.default.get.x3s
-- anarkis.ads.settings.default.ini.x3s
-- anarkis.ads.settings.default.shi.x3s
-- anarkis.ads.settings.default.sta.x3s
-- anarkis.ads.setup.createdefault.x3s
-- anarkis.ads.setup.editdefault.x3s
-- anarkis.ads.setup.global.x3s
-- anarkis.ads.setup.init.x3s
-- anarkis.ads.task.maingrid.x3s
-- anarkis.ads.task.sectorgrid.x3s
-- anarkis.ads.toggle.task.x3s
-- anarkis.ads.wing.attack.pl.x3s
-- anarkis.ads.wing.defense.pl.x3s
-- anarkis.debug.off.x3s
-- anarkis.debug.on.x3s
-- anarkis.debug.output.x3s
-- anarkis.ecs.al.init.x3s
-- anarkis.lib.add.software.x3s
-- anarkis.lib.armship.x3s
-- anarkis.lib.armturret.x3s
-- anarkis.lib.array.append.x3s
-- anarkis.lib.build.ships.x3s
-- anarkis.lib.change.race.x3s
-- anarkis.lib.clear.shiparray.x3s
-- anarkis.lib.cmd.attackland.x3s
-- anarkis.lib.cmd.attacksame.x3s
-- anarkis.lib.cmd.dock.all.x3s
-- anarkis.lib.cmd.dock.custom.x3s
-- anarkis.lib.cmd.donothing.x3s
-- anarkis.lib.cmd.jumpnearobject.x3s
-- anarkis.lib.cmd.jumptobeacon.x3s
-- anarkis.lib.cmd.killandland.timeout.x3s
-- anarkis.lib.create.marine.x3s
-- anarkis.lib.create.passenger.x3s
-- anarkis.lib.createfactory.x3s
-- anarkis.lib.createship.x3s
-- anarkis.lib.custowned.addship.x3s
-- anarkis.lib.custowned.cleanarr.f.x3s
-- anarkis.lib.custowned.cleanarray.x3s
-- anarkis.lib.custowned.getarray.f.x3s
-- anarkis.lib.custowned.getarray.x3s
-- anarkis.lib.custowned.getdocked.x3s
-- anarkis.lib.custowned.kill.x3s
-- anarkis.lib.disable.ai.x3s
-- anarkis.lib.display.message.x3s
-- anarkis.lib.dockall.adsonly.x3s
-- anarkis.lib.dockall.full.x3s
-- anarkis.lib.dockall.insector.x3s
-- anarkis.lib.dockall.secure.x3s
-- anarkis.lib.dockcustom.secure.x3s
-- anarkis.lib.encyclopedia.chapter.x3s
-- anarkis.lib.encyclopedia.x3s
-- anarkis.lib.get.bycargovalue.fro.x3s
-- anarkis.lib.get.bycargovalue.x3s
-- anarkis.lib.get.dockedowned.x3s
-- anarkis.lib.get.fighter.array.x3s
-- anarkis.lib.get.military.array.x3s
-- anarkis.lib.get.militarybase.x3s
-- anarkis.lib.get.plsector.array.x3s
-- anarkis.lib.get.plsector.pership.x3s
-- anarkis.lib.get.plsector.x3s
-- anarkis.lib.get.race.array.short.x3s
-- anarkis.lib.get.race.array.x3s
-- anarkis.lib.get.racesectors.x3s
-- anarkis.lib.get.random.pos.from.x3s
-- anarkis.lib.get.random.pos.x3s
-- anarkis.lib.get.rnd.race.x3s
-- anarkis.lib.get.sector.plus.x3s
-- anarkis.lib.get.ship.cargovalue.x3s
-- anarkis.lib.get.shipcount.x3s
-- anarkis.lib.get.shiplist.from.sy.x3s
-- anarkis.lib.get.ships.fast.x3s
-- anarkis.lib.get.ships.from.x3s
-- plugin.sk.ecs.al.init.x3s
-- plugin.sk.ecs.al.register.x3s
-- plugin.sk.ecs.al.stop.x3s
-- plugin.sk.ecs.call.script.x3s
-- plugin.sk.ecs.dialog.menu.x3s
-- plugin.sk.ecs.dialog.ok.x3s
-- plugin.sk.ecs.dialog.yesno.x3s
-- plugin.sk.ecs.dummy.commscript.x3s
-- plugin.sk.ecs.dummy.register.x3s
-- plugin.sk.ecs.dummy.remove.x3s
-- plugin.sk.ecs.dummy.setup.x3s
-- plugin.sk.ecs.dummy.uninstall.x3s
-- plugin.sk.ecs.hotkey.install.x3s
-- plugin.sk.ecs.hotkey.remove.x3s
-- plugin.sk.ecs.manager.x3s
-- plugin.sk.ecs.news.add.x3s
-- plugin.sk.ecs.news.display.x3s
-- plugin.sk.ecs.news.getrandom.x3s
-- plugin.sk.ecs.register.x3s
-- plugin.sk.ecs.unregister.x3s
-- anarkis.lib.get.ships.x3s
-- anarkis.lib.get.shipyard.x3s
-- anarkis.lib.guild.changescore.x3s
-- anarkis.lib.guild.getscore.x3s
-- anarkis.lib.guild.isguild.x3s
-- anarkis.lib.guild.join.x3s
-- anarkis.lib.guild.remove.x3s
-- anarkis.lib.id.to.race.x3s
-- anarkis.lib.kcnt.add.x3s
-- anarkis.lib.kcnt.findtop.x3s
-- anarkis.lib.kcnt.get.x3s
-- anarkis.lib.kcnt.init.x3s
-- anarkis.lib.kcnt.kill.x3s
-- anarkis.lib.kcnt.set.x3s
-- anarkis.lib.kill.civies.sector.x3s
-- anarkis.lib.kill.civilians.x3s
-- anarkis.lib.kill.task.x3s
-- anarkis.lib.news.init.x3s
-- anarkis.lib.race.to.id.x3s
-- anarkis.lib.restore.signals.x3s
+## Reference Fixtures
+
+Historical `.x3s` conversions from other mods live under `tools/fixtures/`. They demonstrate how different MSCI constructs map into our text format and provide architectural reference points. Treat them as pseudo code only: the commands and behaviors captured there are not linted and should not be considered authoritative.
+
+Our canonical sources are the scripts in `src/scripts/`. When in doubt, align new work with the patterns that already ship in that directory.
+
+## Testing
+
+Run the consolidated test harness to lint the project and execute supporting unit tests:
+
+```sh
+python tools/test_x3s.py
+```
+
+The harness lints only the sources in `src/scripts/` before running the tests under `tools/tests/`. If you need to lint manually, call the linter directly:
+
+```sh
+python tools/x3s_lint.py src/scripts
+```
+
+## Repository Layout
+
+- `src/scripts/` – primary `.x3s` sources for the mod.
+- `t/` – in-game text resources (`89xxx-L044.xml`).
+- `docs/` – language reference, ID allocations, and design notes.
+- `tools/` – linter, tests, and historical fixture references.
+- `prompts/` – internal development briefs.
