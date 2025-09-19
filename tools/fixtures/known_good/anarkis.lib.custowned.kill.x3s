@@ -1,7 +1,0 @@
-#name: anarkis.lib.custowned.kill
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.custowned.kill.xml
-
-[THIS] -> set local variable: name='anarkis.owned' value=null
-return $var

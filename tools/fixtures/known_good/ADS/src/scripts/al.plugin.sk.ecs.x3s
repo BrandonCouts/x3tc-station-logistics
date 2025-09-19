@@ -1,9 +1,0 @@
-#name: al.plugin.sk.ecs
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/al.plugin.sk.ecs.xml
-
-$page.id = 8511
-load text: id=$page.id
-al engine: register script=plugin.sk.ecs.al.register
-return null

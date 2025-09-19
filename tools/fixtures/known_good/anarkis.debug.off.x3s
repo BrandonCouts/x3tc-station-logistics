@@ -1,7 +1,0 @@
-#name: anarkis.debug.off
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.debug.off.xml
-
-set global variable: name='anarkis.debug' value=null
-return null

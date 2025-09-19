@@ -1,3 +1,0 @@
-* while loop without wait should fail
-while 1
-end

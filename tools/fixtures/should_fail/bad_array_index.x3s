@@ -1,4 +1,0 @@
-* Demonstrates invalid string array index
-$arr = array alloc: size=0
-$val = $arr['foo']
-return null

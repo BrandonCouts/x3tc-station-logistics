@@ -1,0 +1,1003 @@
+<?xml version="1.0" standalone="yes"?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl"?>
+<!-- Generated using X-Studio -->
+<script>
+	<name>setup.plugin.slx</name>
+	<version>1</version>
+	<engineversion>44</engineversion>
+	<description></description>
+	<arguments />
+	<sourcetext>
+		<line linenr="001" indent="">
+			<comment>* ******************************************************************************</comment>
+		</line>
+		<line linenr="002" indent="">
+			<comment>* SCRIPT NAME: setup.plugin.slx</comment>
+		</line>
+		<line linenr="003" indent="">
+			<comment>* DESCRIPTION: SLX Station Logistics X3  (setup + AL plugin registration + loop guard)</comment>
+		</line>
+		<line linenr="004" indent="">
+			<comment>* AUTHOR:      Brandon              DATE: 8 September 2025</comment>
+		</line>
+		<line linenr="005" indent="">
+			<comment>* ******************************************************************************</comment>
+		</line>
+		<line linenr="006" indent="" />
+		<line linenr="007" indent="" />
+		<line linenr="008" indent="">
+			<var>$Ver.Major</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>1</var>
+		</line>
+		<line linenr="009" indent="">
+			<var>$Ver.Minor</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>0</var>
+		</line>
+		<line linenr="010" indent="">
+			<var>$Ver.Patch</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>0</var>
+		</line>
+		<line linenr="011" indent="" />
+		<line linenr="012" indent="">
+			<var>$PageId</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>89055</var>
+		</line>
+		<line linenr="013" indent="" />
+		<line linenr="014" indent="">
+			<comment>* A combined integer is handy for comparison, e.g. v1.2.3 =</comment>
+		</line>
+		<line linenr="015" indent="">
+			<comment>* |Maj|Min|Pch|</comment>
+		</line>
+		<line linenr="016" indent="">
+			<comment>* |001|002|003|</comment>
+		</line>
+		<line linenr="017" indent="">
+			<var>$Ver.Internal</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>(</text>
+			<var>$Ver.Major</var>
+			<text> </text>
+			<text>*</text>
+			<text> </text>
+			<var>1000000</var>
+			<text>)</text>
+			<text> </text>
+			<text>+</text>
+			<text> </text>
+			<text>(</text>
+			<var>$Ver.Minor</var>
+			<text> </text>
+			<text>*</text>
+			<text> </text>
+			<var>1000</var>
+			<text>)</text>
+			<text> </text>
+			<text>+</text>
+			<text> </text>
+			<var>$Ver.Patch</var>
+		</line>
+		<line linenr="018" indent="" />
+		<line linenr="019" indent="">
+			<var>$Config.Ver.Major</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>0</var>
+		</line>
+		<line linenr="020" indent="">
+			<var>$Config.Ver.Minor</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>1</var>
+		</line>
+		<line linenr="021" indent="">
+			<var>$Config.Ver.Patch</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>2</var>
+		</line>
+		<line linenr="022" indent="">
+			<var>$Config.Ver.Internal</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>3</var>
+		</line>
+		<line linenr="023" indent="">
+			<var>$Config.PageId</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>4</var>
+		</line>
+		<line linenr="024" indent="">
+			<var>$Config.Debug.Enabled</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>5</var>
+		</line>
+		<line linenr="025" indent="">
+			<var>$Config.Debug.Verbosity</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>6</var>
+		</line>
+		<line linenr="026" indent="">
+			<var>$Config.Debug.Target</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>7</var>
+		</line>
+		<line linenr="027" indent="">
+			<var>$Config.Required.Ware</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>8</var>
+		</line>
+		<line linenr="028" indent="">
+			<var>$Config.Auto.Rename</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>9</var>
+		</line>
+		<line linenr="029" indent="">
+			<var>$Config.Blacklist</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>10</var>
+		</line>
+		<line linenr="030" indent="">
+			<var>$Config.Monitor.Task</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>11</var>
+		</line>
+		<line linenr="031" indent="">
+			<var>$Config.Trade.Threshold</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>12</var>
+		</line>
+		<line linenr="032" indent="">
+			<var>$Config.All.Wares</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>13</var>
+		</line>
+		<line linenr="033" indent="">
+			<var>$Config.Trade.Illegal.Wares</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>14</var>
+		</line>
+		<line linenr="034" indent="">
+			<var>$Config.Races</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>15</var>
+		</line>
+		<line linenr="035" indent="">
+			<var>$Config.Illegal.Wares</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>16</var>
+		</line>
+		<line linenr="036" indent="">
+			<var>$Config.Refuel.Percent</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>17</var>
+		</line>
+		<line linenr="037" indent="">
+			<var>$Config.Global.Balance</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>18</var>
+		</line>
+		<line linenr="038" indent="">
+			<var>$Config.Trade.Cache</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>19</var>
+		</line>
+		<line linenr="039" indent="">
+			<var>$Config.Equip</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>20</var>
+		</line>
+		<line linenr="040" indent="">
+			<var>$Config.Alert.Sound</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<var>21</var>
+		</line>
+		<line linenr="041" indent="" />
+		<line linenr="042" indent="">
+			<text>load</text>
+			<text> </text>
+			<text>text</text>
+			<text>:</text>
+			<text> </text>
+			<text>id</text>
+			<text>=</text>
+			<var>$PageId</var>
+		</line>
+		<line linenr="043" indent="" />
+		<line linenr="044" indent="">
+			<var>$section</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>read</text>
+			<text> </text>
+			<text>text</text>
+			<text>:</text>
+			<text> </text>
+			<text>page</text>
+			<text>=</text>
+			<var>$PageId</var>
+			<text> </text>
+			<text>id</text>
+			<text>=</text>
+			<var>101</var>
+		</line>
+		<line linenr="045" indent="">
+			<var>$txt</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>read</text>
+			<text> </text>
+			<text>text</text>
+			<text>:</text>
+			<text> </text>
+			<text>page</text>
+			<text>=</text>
+			<var>$PageId</var>
+			<text> </text>
+			<text>id</text>
+			<text>=</text>
+			<var>102</var>
+		</line>
+		<line linenr="046" indent="" />
+		<line linenr="047" indent="">
+			<text>skip</text>
+			<text> </text>
+			<text>if</text>
+			<text> </text>
+			<var>$section</var>
+		</line>
+		<line linenr="048" indent="&#160;">
+			<var>$section</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>'SLX'</text>
+		</line>
+		<line linenr="049" indent="" />
+		<line linenr="050" indent="">
+			<text>skip</text>
+			<text> </text>
+			<text>if</text>
+			<text> </text>
+			<var>$txt</var>
+		</line>
+		<line linenr="051" indent="&#160;">
+			<var>$txt</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>'Open SLX'</text>
+		</line>
+		<line linenr="052" indent="" />
+		<line linenr="053" indent="">
+			<var>$st</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>get</text>
+			<text> </text>
+			<text>global</text>
+			<text> </text>
+			<text>variable</text>
+			<text>:</text>
+			<text> </text>
+			<text>name</text>
+			<text>=</text>
+			<text>'slx.stations'</text>
+		</line>
+		<line linenr="054" indent="">
+			<text>if</text>
+			<text> </text>
+			<text>not</text>
+			<text> </text>
+			<var>$st</var>
+		</line>
+		<line linenr="055" indent="&#160;">
+			<var>$st</var>
+			<text> </text>
+			<text>=</text>
+			<text> </text>
+			<text>array</text>
+			<text> </text>
+			<text>alloc</text>
+			<text>:</text>
+			<text> </text>
+			<text>size</text>
+			<text>=</text>
+			<var>0</var>
+		</line>
+		<line linenr="056" indent="&#160;">
+			<text>set</text>
+			<text> </text>
+			<text>global</text>
+			<text> </text>
+			<text>variable</text>
+			<text>:</text>
+			<text> </text>
+			<text>name</text>
+			<text>=</text>
+			<text>'slx.stations'</text>
+			<text> </text>
+			<text>value</text>
+			<text>=</text>
+			<var>$st</var>
+		</line>
+		<line linenr="057" indent="">
+			<text>end</text>
+		</line>
+		<line linenr="058" indent="" />
+		<line linenr="059" indent="">
+			<comment>* Register AL plugin for SLX</comment>
+		</line>
+		<line linenr="060" indent="">
+			<text>al</text>
+			<text> </text>
+			<text>engine</text>
+			<text>:</text>
+			<text> </text>
+			<text>register</text>
+			<text> </text>
+			<text>script</text>
+			<text>=</text>
+			<call>al.plugin.slx</call>
+		</line>
+		<line linenr="061" indent="">
+			<text>al</text>
+			<text> </text>
+			<text>engine</text>
+			<text>:</text>
+			<text> </text>
+			<text>set</text>
+			<text> </text>
+			<text>plugin</text>
+			<text> </text>
+			<text>'al.plugin.slx'</text>
+			<text> </text>
+			<text>description</text>
+			<text> </text>
+			<text>to</text>
+			<text> </text>
+			<text>'SLX Station Logistics'</text>
+		</line>
+		<line linenr="062" indent="">
+			<text>al</text>
+			<text> </text>
+			<text>engine</text>
+			<text>:</text>
+			<text> </text>
+			<text>set</text>
+			<text> </text>
+			<text>plugin</text>
+			<text> </text>
+			<text>'al.plugin.slx'</text>
+			<text> </text>
+			<text>timer</text>
+			<text> </text>
+			<text>interval</text>
+			<text> </text>
+			<text>to</text>
+			<text> </text>
+			<var>30</var>
+			<text> </text>
+			<text>s</text>
+		</line>
+		<line linenr="063" indent="" />
+		<line linenr="064" indent="" interruptable="@">
+			<text>=</text>
+			<text> </text>
+			<var>[THIS]</var>
+			<text> </text>
+			<text>-&gt;</text>
+			<text> </text>
+			<text>call</text>
+			<text> </text>
+			<text>script</text>
+			<text> </text>
+			<call>plugin.slx.init</call>
+			<text> </text>
+			<text>:</text>
+		</line>
+		<line linenr="065" indent="" />
+		<line linenr="066" indent="">
+			<text>return</text>
+			<text> </text>
+			<var>null</var>
+		</line>
+		<line linenr="067" indent="" />
+	</sourcetext>
+	<codearray>
+		<sval type="array" size="10">
+			<sval type="string" val="setup.plugin.slx" />
+			<sval type="int" val="44" />
+			<sval type="string" val="" />
+			<sval type="int" val="1" />
+			<sval type="int" val="0" />
+			<sval type="array" size="30">
+				<sval type="string" val="Ver.Major" />
+				<sval type="string" val="Ver.Minor" />
+				<sval type="string" val="Ver.Patch" />
+				<sval type="string" val="PageId" />
+				<sval type="string" val="Ver.Internal" />
+				<sval type="string" val="Config.Ver.Major" />
+				<sval type="string" val="Config.Ver.Minor" />
+				<sval type="string" val="Config.Ver.Patch" />
+				<sval type="string" val="Config.Ver.Internal" />
+				<sval type="string" val="Config.PageId" />
+				<sval type="string" val="Config.Debug.Enabled" />
+				<sval type="string" val="Config.Debug.Verbosity" />
+				<sval type="string" val="Config.Debug.Target" />
+				<sval type="string" val="Config.Required.Ware" />
+				<sval type="string" val="Config.Auto.Rename" />
+				<sval type="string" val="Config.Blacklist" />
+				<sval type="string" val="Config.Monitor.Task" />
+				<sval type="string" val="Config.Trade.Threshold" />
+				<sval type="string" val="Config.All.Wares" />
+				<sval type="string" val="Config.Trade.Illegal.Wares" />
+				<sval type="string" val="Config.Races" />
+				<sval type="string" val="Config.Illegal.Wares" />
+				<sval type="string" val="Config.Refuel.Percent" />
+				<sval type="string" val="Config.Global.Balance" />
+				<sval type="string" val="Config.Trade.Cache" />
+				<sval type="string" val="Config.Equip" />
+				<sval type="string" val="Config.Alert.Sound" />
+				<sval type="string" val="section" />
+				<sval type="string" val="txt" />
+				<sval type="string" val="st" />
+			</sval>
+			<sval type="array" size="43">
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="1" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="2" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="3" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="89055" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="35">
+					<sval type="int" val="104" />
+					<sval type="int" val="4" />
+					<sval type="int" val="9" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="0" />
+					<sval type="int" val="4" />
+					<sval type="int" val="1000000" />
+					<sval type="int" val="15" />
+					<sval type="int" val="13" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="1000" />
+					<sval type="int" val="15" />
+					<sval type="int" val="13" />
+					<sval type="int" val="15" />
+					<sval type="int" val="11" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="2" />
+					<sval type="int" val="15" />
+					<sval type="int" val="11" />
+					<sval type="int" val="13" />
+					<sval type="int" val="16" />
+					<sval type="int" val="-1" />
+					<sval type="int" val="13" />
+					<sval type="int" val="-2" />
+					<sval type="int" val="17" />
+					<sval type="int" val="11" />
+					<sval type="int" val="16" />
+					<sval type="int" val="-4" />
+					<sval type="int" val="13" />
+					<sval type="int" val="-5" />
+					<sval type="int" val="17" />
+					<sval type="int" val="11" />
+					<sval type="int" val="-8" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="5" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="6" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="7" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="2" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="8" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="3" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="9" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="10" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="5" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="11" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="6" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="12" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="7" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="13" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="8" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="14" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="9" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="15" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="10" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="16" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="11" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="17" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="12" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="18" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="13" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="19" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="14" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="20" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="15" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="21" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="16" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="22" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="17" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="23" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="18" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="24" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="19" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="25" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="20" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="26" />
+					<sval type="int" val="1" />
+					<sval type="int" val="4" />
+					<sval type="int" val="21" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="151" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="3" />
+				</sval>
+				<sval type="array" size="6">
+					<sval type="int" val="126" />
+					<sval type="int" val="27" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="3" />
+					<sval type="int" val="4" />
+					<sval type="int" val="101" />
+				</sval>
+				<sval type="array" size="6">
+					<sval type="int" val="126" />
+					<sval type="int" val="28" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="3" />
+					<sval type="int" val="4" />
+					<sval type="int" val="102" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="-536862713" />
+					<sval type="int" val="1" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="27" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="27" />
+					<sval type="int" val="1" />
+					<sval type="int" val="5" />
+					<sval type="string" val="SLX" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="-536862201" />
+					<sval type="int" val="1" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="28" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="28" />
+					<sval type="int" val="1" />
+					<sval type="int" val="5" />
+					<sval type="string" val="Open SLX" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="4">
+					<sval type="int" val="158" />
+					<sval type="int" val="5" />
+					<sval type="string" val="slx.stations" />
+					<sval type="int" val="29" />
+				</sval>
+				<sval type="array" size="7">
+					<sval type="int" val="104" />
+					<sval type="int" val="-536861180" />
+					<sval type="int" val="1" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="29" />
+					<sval type="int" val="1" />
+					<sval type="int" val="-1" />
+				</sval>
+				<sval type="array" size="4">
+					<sval type="int" val="128" />
+					<sval type="int" val="29" />
+					<sval type="int" val="4" />
+					<sval type="int" val="0" />
+				</sval>
+				<sval type="array" size="5">
+					<sval type="int" val="157" />
+					<sval type="int" val="5" />
+					<sval type="string" val="slx.stations" />
+					<sval type="int" val="131074" />
+					<sval type="int" val="29" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="1000" />
+					<sval type="string" val="al.plugin.slx" />
+				</sval>
+				<sval type="array" size="5">
+					<sval type="int" val="1024" />
+					<sval type="int" val="5" />
+					<sval type="string" val="al.plugin.slx" />
+					<sval type="int" val="5" />
+					<sval type="string" val="SLX Station Logistics" />
+				</sval>
+				<sval type="array" size="5">
+					<sval type="int" val="1025" />
+					<sval type="int" val="5" />
+					<sval type="string" val="al.plugin.slx" />
+					<sval type="int" val="4" />
+					<sval type="int" val="30" />
+				</sval>
+				<sval type="array" size="6">
+					<sval type="int" val="102" />
+					<sval type="string" val="plugin.slx.init" />
+					<sval type="int" val="-2147483647" />
+					<sval type="int" val="131075" />
+					<sval type="int" val="1" />
+					<sval type="int" val="0" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="103" />
+					<sval type="int" val="0" />
+					<sval type="int" val="0" />
+				</sval>
+			</sval>
+			<sval type="int" val="0" />
+			<sval type="array" size="24">
+				<sval type="array" size="3">
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="string" val="******************************************************************************" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="string" val="SCRIPT NAME: setup.plugin.slx" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="string" val="DESCRIPTION: SLX Station Logistics X3  (setup + AL plugin registration + loop guard)" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="string" val="AUTHOR:      Brandon              DATE: 8 September 2025" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="0" />
+					<sval type="int" val="1" />
+					<sval type="string" val="******************************************************************************" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="0" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="0" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="3" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="4" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="string" val="A combined integer is handy for comparison, e.g. v1.2.3 =" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="string" val="|Maj|Min|Pch|" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="4" />
+					<sval type="int" val="1" />
+					<sval type="string" val="|001|002|003|" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="5" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="27" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="28" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="30" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="32" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="34" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="38" />
+					<sval type="int" val="4" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="38" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="3">
+					<sval type="int" val="38" />
+					<sval type="int" val="1" />
+					<sval type="string" val="Register AL plugin for SLX" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="41" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="42" />
+					<sval type="int" val="2" />
+				</sval>
+				<sval type="array" size="2">
+					<sval type="int" val="43" />
+					<sval type="int" val="2" />
+				</sval>
+			</sval>
+			<sval type="int" val="0" />
+		</sval>
+	</codearray>
+</script>

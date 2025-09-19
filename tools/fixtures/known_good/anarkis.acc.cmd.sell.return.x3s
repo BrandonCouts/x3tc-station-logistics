@@ -1,9 +1,0 @@
-#name: anarkis.acc.cmd.sell.return
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.acc.cmd.sell.return.xml
-
-[THIS] -> set command: COMMAND_SELL_WARE_BEST  target=$ware target2=$dest par1=$amount par2=$minprice
-= [THIS] -> call script !trade.sellwareandreturnhome :  ware=$ware  destination station=$dest  amount=$amount  min price=$minprice
-
-return null

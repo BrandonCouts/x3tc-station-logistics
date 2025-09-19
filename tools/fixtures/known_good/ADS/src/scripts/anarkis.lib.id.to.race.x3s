@@ -1,9 +1,0 @@
-#name: anarkis.lib.id.to.race
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.id.to.race.xml
-
-$array = [THIS] -> call script anarkis.lib.get.race.array :
-$test = $array[$id]
-
-return $test

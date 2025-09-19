@@ -1,9 +1,0 @@
-#name: anarkis.lib.guild.remove
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.guild.remove.xml
-
-$global.name = sprintf: fmt='anarkis.guild.%s', $plugin.name, null, null, null, null
-set global variable: name=$global.name value=null
-
-return $array

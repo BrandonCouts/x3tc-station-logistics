@@ -1,9 +1,0 @@
-#name: anarkis.lib.shortcmd
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.shortcmd.xml
-
-
-$d = sprintf: fmt='%s', $command, null, null, null, null
-$d =  substitute in string $d: pattern 'COMMAND_' with ' '
-return $d

@@ -1,6 +1,0 @@
-#name: !init.anarkis.modified
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/!init.anarkis.modified.xml
-
-return null

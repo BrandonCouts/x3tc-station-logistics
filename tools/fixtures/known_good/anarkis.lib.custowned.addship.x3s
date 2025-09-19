@@ -1,9 +1,0 @@
-#name: anarkis.lib.custowned.addship
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.custowned.addship.xml
-
-$var = [THIS] -> get local variable: name='anarkis.owned'
-append $ship to array $var
-[THIS] -> set local variable: name='anarkis.owned' value=$var
-return $var

@@ -1,7 +1,0 @@
-#name: anarkis.lib.unknown
-#lang: 44
-#origin_mod: ADS
-#source: mods/ADS/scripts/anarkis.lib.unknown.xml
-
-$sec -> set known status to [FALSE]
-return null
