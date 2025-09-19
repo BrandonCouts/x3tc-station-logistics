@@ -7,15 +7,12 @@ Automate safe, mechanical X3TC work using **.x3s** source files only. Write scri
 - **Architect** – repo layout, `docs/ids.md`, PR templates.
 - **Scriptor (X3S)** – writes `src/scripts/*.x3s` (setup/lib/commands/AL).
 - **Textkeeper** – maintains `t/89xxx-L044.xml` strings & ranges.
-- **Linter** – runs `tools/x3s_lint.py src/scripts` (syntax/structure checks).
-- **Packager** – version bump, changelog, `build/*.zip` (optional).
 
 ## Repository Layout
+- `docs/` – language implimentation documents
 - `src/scripts/` – author here in `.x3s` (single source of truth)
 - `t/` – text pages (e.g., `89001-L044.xml`)
 - `docs/` – `ids.md`, `x3s-language.md`, design notes
-- `tools/` – `x3s_lint.py`, `test_x3s.py`
-- `build/` – artifacts (zips, version.txt)
 
 ## Conventions
 - Names: `setup.plugin.slx.*`, `plugin.slx.<feature>.*`, `lib.slx.*`, `al.plugin.slx.*`
