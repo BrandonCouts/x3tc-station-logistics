@@ -58,6 +58,40 @@
 - `* FOR NOW EXCLUDE COMPLEX HUBS` – could not be matched to any documented rule.
 - `* find docks in sector` – could not be matched to any documented rule.
 - `* loop docks` – could not be matched to any documented rule.
+- `* Author: Logain Abler` – could not be matched to any documented rule.
+- `* This script sorts wares into their main type` – could not be matched to any documented rule.
+- `* Called by:` – could not be matched to any documented rule.
+- `* - plugin.LI.FDN.Main.DC.Details` – could not be matched to any documented rule.
+- `* - plugin.LI.FDN.Main.Dock.Details` – could not be matched to any documented rule.
+- `* - plugin.LI.FDN.Main.Dock.List` – could not be matched to any documented rule.
+- `* Expected values:` – could not be matched to any documented rule.
+- `* - station` – could not be matched to any documented rule.
+- `* Return values:` – could not be matched to any documented rule.
+- `* - return.array[Array[MainType][Array[sorted ware for main type]]]` – could not be matched to any documented rule.
+- `* ToDo:` – could not be matched to any documented rule.
+- `* - ?` – could not be matched to any documented rule.
+- `* Version: 1.0` – could not be matched to any documented rule.
+- `* Date: 22/05/2012` – could not be matched to any documented rule.
+- `* Tested: 22/05/2012` – could not be matched to any documented rule.
+- `* Get the ware array for the DC or dock` – could not be matched to any documented rule.
+- `* Create temp arrays to hold the wares` – could not be matched to any documented rule.
+- `* Create array to hold the results` – could not be matched to any documented rule.
+- `* Loop the wares and add to the appropriate temp array` – could not be matched to any documented rule.
+- `* sort the tenp arrays` – could not be matched to any documented rule.
+- `* create  an array[main type][ware array for the main type]` – could not be matched to any documented rule.
+- `* Add the created array to the main.ware.array` – could not be matched to any documented rule.
+- `* return the main.ware.array` – could not be matched to any documented rule.
+- `if is datatype[$ware] == [DATATYPE_WARE]` – could not be matched to any documented rule.
+- `if $main.t == [SSTYPE_LASER]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_SHIELD]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_MISSILE]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_ENERGY]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_NATURAL]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_BIO]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_FOOD]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_MINERALS]` – could not be matched to any documented rule.
+- `else if $main.t == [SSTYPE_W_TECH]` – could not be matched to any documented rule.
+- `return $main.ware.Array` – could not be matched to any documented rule.
 - `if $sector.count > 0` – could not be matched to any documented rule.
 - `if $factory.count > 0` – could not be matched to any documented rule.
 - `if $dock.count > 0` – could not be matched to any documented rule.

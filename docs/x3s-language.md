@@ -293,3 +293,21 @@
 - **One Example:**
   - `$d.time = playing time`
 - **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get tradeable ware array from station`
+- **Short Description:** `<RetVar/IF> <RefObj> get tradeable ware array from station`
+- **One Example:**
+  - `$ware.Array = $station-> get tradeable ware array from station`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> get maintype of ware <Var/Ware>`
+- **Short Description:** `<RetVar> get maintype of ware <Var/Ware>`
+- **One Example:**
+  - `$main.t = get maintype of ware $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> is equipment: ware=<Var/Ware>`
+- **Short Description:** `<RetVar/IF> is equipment: ware=<Var/Ware>`
+- **One Example:**
+  - `if not is equipment: ware=$ware`
+- **Edge Cases:** _None._

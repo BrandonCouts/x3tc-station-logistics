@@ -14,6 +14,7 @@ This reference lists array commands available in X3TC scripting.
   - `$factory = $factory.array[$sf]`
   - `$dock = $dock.array[$sd]`
   - `$check = $factory.show.array[$s]`
+  - `$ware = $ware.Array[$s]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`
@@ -47,6 +48,26 @@ This reference lists array commands available in X3TC scripting.
   - `append 0 to array $target.pos`
   - `append $target to array $target.pos`
   - `append $format to array $menu`
+  - `append $ware to array $tlaser.Array`
+  - `append $ware to array $tshield.Array`
+  - `append $ware to array $tmissile.Array`
+  - `append $ware to array $tenergy.Array`
+  - `append $ware to array $tnatural.Array`
+  - `append $ware to array $tbio.Array`
+  - `append $ware to array $tfood.Array`
+  - `append $ware to array $tmineral.Array`
+  - `append $ware to array $ttech.Array`
+  - `append $ware to array $tequip.Array`
+  - `append $equip.Array to array $main.ware.Array`
+  - `append $tech.Array to array $main.ware.Array`
+  - `append $mineral.Array to array $main.ware.Array`
+  - `append $food.Array to array $main.ware.Array`
+  - `append $bio.Array to array $main.ware.Array`
+  - `append $natural.Array to array $main.ware.Array`
+  - `append $energy.Array to array $main.ware.Array`
+  - `append $missile.Array to array $main.ware.Array`
+  - `append $shield.Array to array $main.ware.Array`
+  - `append $laser.Array to array $main.ware.Array`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar> array alloc: size=<Var/Number>`
 - **Full Description:** `<RetVar> array alloc: size=<Var/Number>`
@@ -55,6 +76,17 @@ This reference lists array commands available in X3TC scripting.
   - `$factory.show.array = array alloc: size=$s`
   - `$settings.array = array alloc: size=6`
   - `$temp.array = array alloc: size=8`
+  - `$tlaser.Array = array alloc: size=0`
+  - `$tshield.Array = array alloc: size=0`
+  - `$tmissile.Array = array alloc: size=0`
+  - `$tenergy.Array = array alloc: size=0`
+  - `$tnatural.Array = array alloc: size=0`
+  - `$tbio.Array = array alloc: size=0`
+  - `$tfood.Array = array alloc: size=0`
+  - `$tmineral.Array = array alloc: size=0`
+  - `$ttech.Array = array alloc: size=0`
+  - `$tequip.Array = array alloc: size=0`
+  - `$main.ware.Array = array alloc: size=0`
 - **Edge Cases:** _None._
 - `<RetVar/IF> arrays <Value1> and <Value2> are equal`
 - `<RetVar> clone array <Var/Array> : index <Var/Number1> ... <Var/Number2>`
@@ -65,6 +97,16 @@ This reference lists array commands available in X3TC scripting.
   - `$format = create new array, arguments=$temp.array, $return.array, null, null, null`
   - `$format = create new array, arguments=$temp.array, 'dynamic.dc', null, null, null`
   - `$format = create new array, arguments=$temp.array, 'dynamic.dock', null, null, null`
+  - `$laser.Array = create new array, arguments=8, $tlaser.Array, null, null, null`
+  - `$shield.Array = create new array, arguments=9, $tshield.Array, null, null, null`
+  - `$missile.Array = create new array, arguments=10, $tmissile.Array, null, null, null`
+  - `$energy.Array = create new array, arguments=11, $tenergy.Array, null, null, null`
+  - `$natural.Array = create new array, arguments=12, $tnatural.Array, null, null, null`
+  - `$bio.Array = create new array, arguments=13, $tbio.Array, null, null, null`
+  - `$food.Array = create new array, arguments=14, $tfood.Array, null, null, null`
+  - `$mineral.Array = create new array, arguments=15, $tmineral.Array, null, null, null`
+  - `$tech.Array = create new array, arguments=16, $ttech.Array, null, null, null`
+  - `$equip.Array = create new array, arguments=17, $tequip.Array, null, null, null`
 - **Edge Cases:** _None._
 - `<RetVar/IF> find <Value> in array: <Value>`
 - `<RetVar> get index of <Value> in array <Var/Array> offset=<Var/Number>`
@@ -81,6 +123,15 @@ This reference lists array commands available in X3TC scripting.
 - **Examples:**
   - `$factory.array = reverse array $factory.array`
   - `$dock.array = reverse array $dock.array`
+  - `$tequip.Array = reverse array $tequip.Array`
+  - `$ttech.Array = reverse array $ttech.Array`
+  - `$tmineral.Array = reverse array $tmineral.Array`
+  - `$tfood.Array = reverse array $tfood.Array`
+  - `$tbio.Array = reverse array $tbio.Array`
+  - `$tnatural.Array = reverse array $tnatural.Array`
+  - `$tmissile.Array = reverse array $tmissile.Array`
+  - `$tshield.Array = reverse array $tshield.Array`
+  - `$tlaser.Array = reverse array $tlaser.Array`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar/IF> size of array <Var/Array>`
 - **Full Description:** `<RetVar/IF> size of array <Var/Array>`
@@ -90,11 +141,21 @@ This reference lists array commands available in X3TC scripting.
   - `$s = size of array $sector.array`
   - `$sf = size of array $factory.array`
   - `$sd = size of array $dock.array`
+  - `$s = size of array $ware.Array`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar> sort array <Value>`
 - **Full Description:** `<RetVar> sort array <Value>`
 - **Examples:**
   - `$factory.array = sort array $factory.array`
   - `$dock.array = sort array $dock.array`
+  - `$tequip.Array = sort array $tequip.Array`
+  - `$ttech.Array = sort array $ttech.Array`
+  - `$tmineral.Array = sort array $tmineral.Array`
+  - `$tfood.Array = sort array $tfood.Array`
+  - `$tbio.Array = sort array $tbio.Array`
+  - `$tnatural.Array = sort array $tnatural.Array`
+  - `$tmissile.Array = sort array $tmissile.Array`
+  - `$tshield.Array = sort array $tshield.Array`
+  - `$tlaser.Array = sort array $tlaser.Array`
 - **Edge Cases:** _None._
 - `<RetVar> sort array: data=<Value> sort values=<Value>`

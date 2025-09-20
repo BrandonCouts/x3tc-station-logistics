@@ -21,7 +21,11 @@ This reference covers station property commands available in X3TC scripting. Eac
 - `<RetVar/IF> <RefObj> get product ware`
 - `<RetVar/IF> <RefObj> get remaining production cycle time`
 - `<RetVar/IF> <RefObj> get serial name of station`
-- `<RetVar/IF> <RefObj> get tradeable ware array from station`
+- #### Rule: `<RetVar/IF> <RefObj> get tradeable ware array from station`
+- **Full Description:** `<RetVar/IF> <RefObj> get tradeable ware array from station`
+- **Examples:**
+  - `$ware.Array = $station-> get tradeable ware array from station`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is docking possible of <Value>`
 - `<RetVar/IF> <RefObj> is military outpost`
 - `<RetVar/IF> <RefObj> only player own ships can trade with`
