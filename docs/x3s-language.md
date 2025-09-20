@@ -1,5 +1,11 @@
 # X3S Language Reference
 
+#### Rule: `<RetVar/IF> <RefObj> exists`
+- **Short Description:** `<RetVar/IF> <RefObj> exists`
+- **One Example:**
+  - `if $dock-> exists`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF> <RefObj> get command`
 - **Short Description:** `<RetVar/IF> <RefObj> get command`
 - **One Example:**
@@ -165,7 +171,7 @@
 #### Rule: `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
 - **Short Description:** Pauses script execution for a random duration within the specified range.
 - **One Example:**
-  - `= wait randomly from 500 to 1000 ms`
+  - `= wait randomly from 1000 to 2000 ms`
 - **Edge Cases:** _None._
 
 #### Rule: `<RefObj> destruct: show no explosion=<Var/Number>`
@@ -255,7 +261,7 @@
 #### Rule: `remove element from array <Var/Array> at index <Var/Number>`
 - **Short Description:** `remove element from array <Var/Array> at index <Var/Number>`
 - **One Example:**
-  - `remove element from array $config.Array at index $s`
+  - `remove element from array $dock.array at index $s`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> reverse array <Value>`
@@ -291,7 +297,7 @@
 #### Rule: `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **Short Description:** `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **One Example:**
-  - `= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dc flag=1`
 - **Edge Cases:** _None._
 
 #### Rule: `gosub <Label Name>:`

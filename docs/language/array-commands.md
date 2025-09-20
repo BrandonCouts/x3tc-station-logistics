@@ -10,6 +10,8 @@ This reference lists array commands available in X3TC scripting.
   - `$dc = $al.Settings[2]`
   - `$is.dynamic = $al.Settings[6]`
   - `$exclude.array = $al.Settings[8]`
+  - `$dock.array = $al.Settings[4]`
+  - `$debug = $al.Settings[7]`
   - `$dock = $dock.array[$s]`
   - `$var = $glb.Array[$s]`
   - `$sector = $sector.array[$s]`
@@ -123,6 +125,7 @@ This reference lists array commands available in X3TC scripting.
 - **Full Description:** `remove element from array <Var/Array> at index <Var/Number>`
 - **Examples:**
   - `remove element from array $config.Array at index $s`
+  - `remove element from array $dock.array at index $s`
 - **Edge Cases:** _None._
 - #### Rule: `resize array <Var/Array> to <Var/Number>`
 - **Full Description:** `resize array <Var/Array> to <Var/Number>`

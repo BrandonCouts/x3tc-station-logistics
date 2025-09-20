@@ -183,3 +183,9 @@
 - `if $status == [TRUE]` – could not be matched to any documented rule.
 - `if $config.Array` – could not be matched to any documented rule.
 - `if $script == $menu` – could not be matched to any documented rule.
+- `* This script is called by LI.FDN.Menu.Supply.Start script if there is a valid` – could not be matched to any documented rule.
+- `* dock array stored in the AL Plugin variable` – could not be matched to any documented rule.
+- `* The script contains the checks made on the docks before calling LI.FDN.Menu.Dock.Factory` – could not be matched to any documented rule.
+- `* The script will also remove any non-existing Docks from the stored array` – could not be matched to any documented rule.
+- `* - N/A the Factory array is stored in the AL Plugin variable` – could not be matched to any documented rule.
+- `* - dock array - holds all the know player factories` – could not be matched to any documented rule.

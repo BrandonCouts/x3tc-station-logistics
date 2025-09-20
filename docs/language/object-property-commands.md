@@ -4,7 +4,12 @@ This reference covers object property commands available in X3TC scripting. Each
 
 - `<RetVar/IF> <RefObj> can be controlled by race logic`
 - `<RetVar/IF> <RefObj> can execute StartAction`
-- `<RetVar/IF> <RefObj> exists`
+- #### Rule: `<RetVar/IF> <RefObj> exists`
+- **Full Description:** `<RetVar/IF> <RefObj> exists`
+- **Examples:**
+  - `if $dc-> exists`
+  - `if $dock-> exists`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> find nearest enemy ship: max.dist=<Var/Number>`
 - `<RetVar/IF> <RefObj> find nearest enemy ship in range: class=<Var/Class>`
 - `<RetVar/IF> <RefObj> find nearest enemy station: max.dist=<Var/Number>`
