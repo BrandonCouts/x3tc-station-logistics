@@ -20,6 +20,13 @@ This reference lists string commands available in X3TC scripting.
 - **Full Description:** `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Examples:**
   - `$txt = read text: page=$PageID id=103`
+  - `$txt = read text: page=$PageID id=180`
+  - `$txt = read text: page=$PageID id=181`
+  - `$pointer = read text: page=$PageID id=4001`
+  - `$txt = read text: page=$PageID id=162`
+  - `$txt = read text: page=$PageID id=160`
+  - `$txt = read text: page=$PageID id=163`
+  - `$txt = read text: page=$PageID id=161`
 - **Edge Cases:** _None._
 - `<RetVar/IF> read text: page id=<Var/Number1>, from <Var/Number2> to <Var/Number3> to array, include empty=<Var/Number4>`
 - `<RetVar/IF> read text: page id=<Var/Number>, id=<Var/Number> exists`
@@ -28,6 +35,12 @@ This reference lists string commands available in X3TC scripting.
 - **Full Description:** `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
 - **Examples:**
   - `$return = sprintf: pageid=$PageID textid=134, $name, $id, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=9000, $sector, null, null, null, null`
+  - `$name = sprintf: pageid=$PageID textid=9000, $name, null, null, null, null`
+  - `$pre = sprintf: pageid=$PageID textid=9000, '- ', null, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=2000, $sector.count, null, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=2002, $factory.count, $product.count, $resource.count, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=2001, $dock.count, null, null, null, null`
 - **Edge Cases:** _None._
 - `<RetVar> string <Var/String> to integer`
 - `<RetVar> substitute in string <Var/String1>: pattern <Var/String2> with <Var/String3>`

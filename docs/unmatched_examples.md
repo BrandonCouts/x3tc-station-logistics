@@ -46,3 +46,32 @@
 - `* append $format to array $menu` – could not be matched to any documented rule.
 - `return $menu` – could not be matched to any documented rule.
 - `if $check == 'FDND.'` – could not be matched to any documented rule.
+- `if $factory.show.array == null` – could not be matched to any documented rule.
+- `if not $factory.show.array[$s]` – could not be matched to any documented rule.
+- `if $check == 1` – could not be matched to any documented rule.
+- `$flags = [Find.Multiple]` – could not be matched to any documented rule.
+- `while $sf > 0` – could not be matched to any documented rule.
+- `while $sd > 0` – could not be matched to any documented rule.
+- `if $detectable == 0` – could not be matched to any documented rule.
+- `* find factories in sector` – could not be matched to any documented rule.
+- `* loop factories` – could not be matched to any documented rule.
+- `* FOR NOW EXCLUDE COMPLEX HUBS` – could not be matched to any documented rule.
+- `* find docks in sector` – could not be matched to any documented rule.
+- `* loop docks` – could not be matched to any documented rule.
+- `if $sector.count > 0` – could not be matched to any documented rule.
+- `if $factory.count > 0` – could not be matched to any documented rule.
+- `if $dock.count > 0` – could not be matched to any documented rule.
+- `return $return.array` – could not be matched to any documented rule.
+- `Dock.Summary.Sub:` – could not be matched to any documented rule.
+- `* dock summary` – could not be matched to any documented rule.
+- `$name = '- ' + $name` – could not be matched to any documented rule.
+- `* format display line` – could not be matched to any documented rule.
+- `* open factory` – could not be matched to any documented rule.
+- `Factory.Summary.Sub:` – could not be matched to any documented rule.
+- `* factory summary` – could not be matched to any documented rule.
+- `* get factory settings` – could not be matched to any documented rule.
+- `* auto manage check` – could not be matched to any documented rule.
+- `if not $settings.array[2]` – could not be matched to any documented rule.
+- `if $settings.array[0]` – could not be matched to any documented rule.
+- `if $settings.array[1]` – could not be matched to any documented rule.
+- `$name = $pre + $name` – could not be matched to any documented rule.

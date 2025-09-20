@@ -30,10 +30,16 @@
   - `if $target-> is of class [Moveable Ship]`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar/IF> <RefObj> is detectable`
+- **Short Description:** `<RetVar/IF> <RefObj> is detectable`
+- **One Example:**
+  - `$detectable = $factory-> is detectable`
+- **Edge Cases:** _None._
+
 #### Rule: `append <Value> to array <Var/Array>`
 - **Short Description:** `append <Value> to array <Var/Array>`
 - **One Example:**
-  - `append $target.sector to array $target.pos`
+  - `append $format to array $menu`
 - **Edge Cases:** _None._
 
 #### Rule: `resize array <Var/Array> to <Var/Number>`
@@ -90,16 +96,28 @@
   - `$id = $object-> get ID code`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **Short Description:** `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **One Example:**
+  - `$settings.array = $factory-> get local variable: name=$pointer`
+- **Edge Cases:** _None._
+
+#### Rule: `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **Short Description:** `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **One Example:**
+  - `$factory-> set local variable: name=$pointer value=$settings.array`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Short Description:** `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **One Example:**
-  - `$txt = read text: page=$PageID id=103`
+  - `$txt = read text: page=$PageID id=180`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
 - **Short Description:** `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
 - **One Example:**
-  - `$return = sprintf: pageid=$PageID textid=134, $name, $id, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=2002, $factory.count, $product.count, $resource.count, null, null`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> get substring of <Var/String> offset=<Var/Number1> length=<Var/Number2>`
@@ -117,13 +135,19 @@
 #### Rule: `add custom menu info line to array <value>: text=<Var/String>`
 - **Short Description:** `add custom menu info line to array <value>: text=<Var/String>`
 - **One Example:**
-  - `add custom menu info line to array $menu: text=$temp.array`
+  - `add custom menu info line to array $menu: text=$txt`
+- **Edge Cases:** _None._
+
+#### Rule: `add custom menu heading to array <Var/Array>: title=<Var/String>`
+- **Short Description:** `add custom menu heading to array <Var/Array>: title=<Var/String>`
+- **One Example:**
+  - `add custom menu heading to array $menu: title=$txt`
 - **Edge Cases:** _None._
 
 #### Rule: `add custom menu heading to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **Short Description:** `add custom menu heading to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **One Example:**
-  - `add custom menu heading to array $menu: page=$PageID id=123`
+  - `add custom menu heading to array $menu: page=$PageID id=157`
 - **Edge Cases:** _None._
 
 #### Rule: `add custom menu info line to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
@@ -135,31 +159,37 @@
 #### Rule: `add custom menu item to array <Var/Array>: page=<Var/Number1> id=<Var/Number2> returnvalue=<Value>`
 - **Short Description:** `add custom menu item to array <Var/Array>: page=<Var/Number1> id=<Var/Number2> returnvalue=<Value>`
 - **One Example:**
-  - `add custom menu item to array $menu: page=$PageID id=128 returnvalue='master.reset'`
+  - `add custom menu item to array $menu: page=$PageID id=158 returnvalue='product.all.on'`
+- **Edge Cases:** _None._
+
+#### Rule: `add section to custom menu: <Var/Array>`
+- **Short Description:** `add section to custom menu: <Var/Array>`
+- **One Example:**
+  - `add section to custom menu: $menu`
 - **Edge Cases:** _None._
 
 #### Rule: `dim <Var/Array> = <Value> [, <Value> ] [, <Value> ] ... [, <Value> ]`
 - **Short Description:** `dim <Var/Array> = <Value> [, <Value> ] [, <Value> ] ... [, <Value> ]`
 - **One Example:**
-  - `dim $return.array = 'add.dc', $dock`
+  - `dim $return.array = 'show.factory', $s`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **Short Description:** `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **One Example:**
-  - `$PageID = $al.Settings[1]`
+  - `$factory = $factory.array[$sf]`
 - **Edge Cases:** _None._
 
 #### Rule: `<Var/Array>[<Var/Number>] = <Value>`
 - **Short Description:** `<Var/Array>[<Var/Number>] = <Value>`
 - **One Example:**
-  - `$temp.array[0] = 1`
+  - `$settings.array[2] = 1`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> array alloc: size=<Var/Number>`
 - **Short Description:** `<RetVar> array alloc: size=<Var/Number>`
 - **One Example:**
-  - `$temp.array = array alloc: size=4`
+  - `$factory.show.array = array alloc: size=$s`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
@@ -168,10 +198,22 @@
   - `$format = create new array, arguments=$temp.array, $return.array, null, null, null`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar/IF> reverse array <Value>`
+- **Short Description:** `<RetVar/IF> reverse array <Value>`
+- **One Example:**
+  - `$factory.array = reverse array $factory.array`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> sort array <Value>`
+- **Short Description:** `<RetVar> sort array <Value>`
+- **One Example:**
+  - `$factory.array = sort array $factory.array`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF> size of array <Var/Array>`
 - **Short Description:** `<RetVar/IF> size of array <Var/Array>`
 - **One Example:**
-  - `$s = size of array $dock.array`
+  - `$s = size of array $sector.array`
 - **Edge Cases:** _None._
 
 #### Rule: `dec <Var>`
@@ -180,16 +222,22 @@
   - `dec $s`
 - **Edge Cases:** _None._
 
+#### Rule: `inc <Var>`
+- **Short Description:** `inc <Var>`
+- **One Example:**
+  - `inc $sector.count`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **Short Description:** `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **One Example:**
-  - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dc`
+  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
 - **Edge Cases:** _None._
 
 #### Rule: `gosub <Label Name>:`
 - **Short Description:** `gosub <Label Name>:`
 - **One Example:**
-  - `gosub Add.DC.Menu.Sub:`
+  - `gosub Factory.Summary.Sub:`
 - **Edge Cases:** _None._
 
 #### Rule: `endsub`
@@ -202,4 +250,10 @@
 - **Short Description:** `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
 - **One Example:**
   - `$dock.array = get station array: of race [Player] class/type=[Dock]`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **Short Description:** `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **One Example:**
+  - `$factory.array = find station: sector=$sector class or type=[Factory] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
 - **Edge Cases:** _None._

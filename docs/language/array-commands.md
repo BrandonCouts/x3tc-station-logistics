@@ -10,6 +10,10 @@ This reference lists array commands available in X3TC scripting.
   - `$is.dynamic = $al.Settings[6]`
   - `$dock = $dock.array[$s]`
   - `$var = $glb.Array[$s]`
+  - `$sector = $sector.array[$s]`
+  - `$factory = $factory.array[$sf]`
+  - `$dock = $dock.array[$sd]`
+  - `$check = $factory.show.array[$s]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`
@@ -20,6 +24,17 @@ This reference lists array commands available in X3TC scripting.
   - `$temp.array[1] = $txt`
   - `$temp.array[2] = -1`
   - `$temp.array[3] = $txt`
+  - `$factory.show.array[$s] = 1`
+  - `$temp.array[5] = $txt`
+  - `$temp.array[7] = $txt`
+  - `$settings.array[2] = 1`
+  - `$settings.array[0] = 1`
+  - `$settings.array[1] = 1`
+  - `$temp.array[2] = 5`
+  - `$temp.array[3] = $name`
+  - `$temp.array[4] = -200`
+  - `$temp.array[6] = -1`
+  - `$temp.array[1] = ''`
 - **Edge Cases:** _None._
 - `<Var/Array1>[<Var/Number1>] = <Var/Array2>[<Var/Number2>]`
 - #### Rule: `append <Value> to array <Var/Array>`
@@ -37,6 +52,9 @@ This reference lists array commands available in X3TC scripting.
 - **Full Description:** `<RetVar> array alloc: size=<Var/Number>`
 - **Examples:**
   - `$temp.array = array alloc: size=4`
+  - `$factory.show.array = array alloc: size=$s`
+  - `$settings.array = array alloc: size=6`
+  - `$temp.array = array alloc: size=8`
 - **Edge Cases:** _None._
 - `<RetVar/IF> arrays <Value1> and <Value2> are equal`
 - `<RetVar> clone array <Var/Array> : index <Var/Number1> ... <Var/Number2>`
@@ -58,12 +76,25 @@ This reference lists array commands available in X3TC scripting.
 - **Examples:**
   - `resize array $target.pos to 0`
 - **Edge Cases:** _None._
-- `<RetVar/IF> reverse array <Value>`
+- #### Rule: `<RetVar/IF> reverse array <Value>`
+- **Full Description:** `<RetVar/IF> reverse array <Value>`
+- **Examples:**
+  - `$factory.array = reverse array $factory.array`
+  - `$dock.array = reverse array $dock.array`
+- **Edge Cases:** _None._
 - #### Rule: `<RetVar/IF> size of array <Var/Array>`
 - **Full Description:** `<RetVar/IF> size of array <Var/Array>`
 - **Examples:**
   - `$s = size of array $dock.array`
   - `$s = size of array $glb.Array`
+  - `$s = size of array $sector.array`
+  - `$sf = size of array $factory.array`
+  - `$sd = size of array $dock.array`
 - **Edge Cases:** _None._
-- `<RetVar> sort array <Value>`
+- #### Rule: `<RetVar> sort array <Value>`
+- **Full Description:** `<RetVar> sort array <Value>`
+- **Examples:**
+  - `$factory.array = sort array $factory.array`
+  - `$dock.array = sort array $dock.array`
+- **Edge Cases:** _None._
 - `<RetVar> sort array: data=<Value> sort values=<Value>`

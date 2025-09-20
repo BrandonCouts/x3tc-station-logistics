@@ -9,6 +9,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
 - **Examples:**
   - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dc`
   - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
+  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
+  - `$name = null-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
 - **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
@@ -26,6 +28,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `gosub Dynamic.Menu.Sub:`
   - `gosub Debug.Menu.Sub:`
   - `gosub Reset.Menu.Sub:`
+  - `gosub Factory.Summary.Sub:`
+  - `gosub Dock.Summary.Sub:`
 - **Edge Cases:** _None._
 - `goto label <Label Name>:`
 - `<RefObj> interrupt task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3>`

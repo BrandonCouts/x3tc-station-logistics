@@ -40,7 +40,11 @@ This reference covers object property commands available in X3TC scripting. Each
   - `$id = $object-> get ID code`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get laser type in bay <Var/Number>`
-- `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- #### Rule: `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **Full Description:** `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **Examples:**
+  - `$settings.array = $factory-> get local variable: name=$pointer`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
 - `<RetVar/IF> <RefObj> get maker race`
@@ -101,7 +105,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> a enemy`
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> a friend`
 - `<RetVar/IF> <RefObj> is asteroid scanned`
-- `<RetVar/IF> <RefObj> is detectable`
+- #### Rule: `<RetVar/IF> <RefObj> is detectable`
+- **Full Description:** `<RetVar/IF> <RefObj> is detectable`
+- **Examples:**
+  - `$detectable = $factory-> is detectable`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is disabled`
 - `<RetVar/IF> <RefObj> is docking allowed at <Var/Ship/Station>`
 - `<RetVar/IF> <RefObj> is hidden`
@@ -118,6 +126,8 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Full Description:** `<RetVar/IF> <RefObj> is of class <Var/Class>`
 - **Examples:**
   - `if $target-> is of class [Moveable Ship]`
+  - `if $factory-> is of class [Factory]`
+  - `if not $factory-> is of class [Complex Hub]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
 - `<RetVar/IF> <RefObj> is starting`
@@ -131,7 +141,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `set discovered status: type=<Value> status=<Var/Boolean>`
 - `<RefObj> set hull to <Var/Number>`
 - `<RefObj> set known status to <Var/Number>`
-- `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- #### Rule: `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **Full Description:** `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **Examples:**
+  - `$factory-> set local variable: name=$pointer value=$settings.array`
+- **Edge Cases:** _None._
 - `<RefObj> set name to <Var/String>`
 - `<RefObj> set owner race to <Var/Race>`
 - `<RefObj> set position: x=<Var/Number> y=<Var/Number> z=<Var/Number>`

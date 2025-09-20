@@ -2,15 +2,24 @@
 
 This reference covers user interface-related commands available in X3TC scripting. Each entry shows the basic syntax.
 
-- `add custom menu heading to array <value>: title=<Var/String>`
+- #### Rule: `add custom menu heading to array <Var/Array>: title=<Var/String>`
+- **Full Description:** `add custom menu heading to array <Var/Array>: title=<Var/String>`
+- **Examples:**
+  - `add custom menu heading to array $menu: title=$txt`
+- **Edge Cases:** _None._
 - #### Rule: `add custom menu info line to array <value>: text=<Var/String>`
 - **Full Description:** `add custom menu info line to array <value>: text=<Var/String>`
 - **Examples:**
   - `add custom menu info line to array $menu: text=' '`
   - `add custom menu info line to array $menu: text=$temp.array`
+  - `add custom menu info line to array $menu: text=$txt`
 - **Edge Cases:** _None._
 - `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
-- `add section to custom menu: <Var/Array>`
+- #### Rule: `add section to custom menu: <Var/Array>`
+- **Full Description:** `add section to custom menu: <Var/Array>`
+- **Examples:**
+  - `add section to custom menu: $menu`
+- **Edge Cases:** _None._
 - `add value selection to menu: <Var/Array>, text=<Var/String>, value array=<Var/Array>, default=<Var/Number>, return id=<Var/String>`
 - `<RetVar> create custom menu array`
 - `<RetVar> create custom menu array, info lines=<Var/String>, <Var/String>, <Var/String>, <Var/String>`

@@ -24,7 +24,12 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar> find nebula: sector=<Var/Sector> type=<Var/Number> effect=<Var/Number> flags=<Var/Number> refobj=<value> maxdist=<Var/Number> maxnum=<Var/Number> refpos=<Var/Array>`
 - `<RetVar/IF> <RefObj> find ship: class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxnum=<Var/Number> with homebase=<value>`
 - `<RetVar/IF> find ship: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
-- `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- #### Rule: `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **Full Description:** `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **Examples:**
+  - `$factory.array = find station: sector=$sector class or type=[Factory] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
+  - `$dock.array = find station: sector=$sector class or type=[Dock] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
+- **Edge Cases:** _None._
 - `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2>`
 - `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2> num=<Var/Number>`
 - `<RetVar/IF> <RefObj> get all stationary objects: include asteroids=<Var/Boolean>`
