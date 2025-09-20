@@ -8,7 +8,12 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - `<RetVar/IF> <RefObj> can buy ware <Var/Ware> at station <Var/Station>`
 - `<RetVar/IF> <RefObj> can buy ware <Var/Ware> from race <Var/Race>`
 - `<RetVar/IF> <RefObj> can transport ware <Var/Ware>`
-- `<RetVar/IF> <RefObj> get amount of ware <Var/Ware> in cargo bay`
+- #### Rule: `<RetVar/IF> <RefObj> get amount of ware <Var/Ware> in cargo bay`
+- **Full Description:** `<RetVar/IF> <RefObj> get amount of ware <Var/Ware> in cargo bay`
+- **Examples:**
+  - `if [THIS]-> get amount of ware {Advanced Jumpdrive} in cargo bay`
+  - `if [THIS]-> get amount of ware {FTL Jumpdrive Extension} in cargo bay`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get cargo bay size`
 - `<RetVar/IF> <RefObj> get defined amount of ware <Var/Ware> as ship hardware`
 - `<RetVar/IF> <RefObj> get free amount of ware <Var/Ware> in cargo bay`

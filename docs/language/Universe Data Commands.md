@@ -39,7 +39,11 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar/IF> <RefObj> get factory array from sector`
 - `<RetVar/IF> <RefObj> get gate destination: return sector=<Var/Number>`
 - `<RetVar/IF> <RefObj> get gate id`
-- `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- #### Rule: `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- **Full Description:** `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- **Examples:**
+  - `$jumps.needed = get jumps from sector $this.sector to sector $target.sector`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get max sectors in x direction`
 - `<RetVar/IF> get max sectors in y direction`
 - `<RetVar/IF> get next gate on route from <Var/Sector1> to <Var/Sector2>`
