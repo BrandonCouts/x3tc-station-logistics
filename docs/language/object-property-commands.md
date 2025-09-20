@@ -45,6 +45,7 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Examples:**
   - `$settings.array = $factory-> get local variable: name=$pointer`
   - `$ware.array = $source-> get local variable: name=$pointer`
+  - `$ware.settings = $dock-> get local variable: name=$pointer`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
@@ -75,6 +76,9 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get power generator`
 - `<RetVar/IF> <RefObj> get relation to object <Var/Ship/Station>`
+- **Examples:**
+  - `$relation = $dock-> get relation to object $sell.Station`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get relation to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get resource waretype of asteroid`
 - `<RetVar/IF> <RefObj> get rot alpha`

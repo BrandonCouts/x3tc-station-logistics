@@ -8,6 +8,7 @@ This reference lists array commands available in X3TC scripting.
   - `$PageID = $al.Settings[1]`
   - `$dc = $al.Settings[2]`
   - `$is.dynamic = $al.Settings[6]`
+  - `$exclude.array = $al.Settings[8]`
   - `$dock = $dock.array[$s]`
   - `$var = $glb.Array[$s]`
   - `$sector = $sector.array[$s]`
@@ -15,6 +16,9 @@ This reference lists array commands available in X3TC scripting.
   - `$dock = $dock.array[$sd]`
   - `$check = $factory.show.array[$s]`
   - `$ware = $ware.Array[$s]`
+  - `$sell.at = $ware.settings[6]`
+  - `$virtual.stock = $ware.settings[0]`
+  - `$sell = $ware.settings[5]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`

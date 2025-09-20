@@ -3,6 +3,8 @@
 This reference covers ship trading commands available in X3TC scripting. Each entry shows the basic syntax.
 
 - `<RetVar/IF> <RefObj> add <Var/Number> units of <Var/Ware>`
+- **Examples:**
+  - `= $drone-> add $sell.amount units of $ware`
 - `<RetVar/IF> <RefObj> buy <Var/Number> units of <Var/Ware>`
 - `<RetVar/IF> <RefObj> buy <Var/Number1> units of <Var/Ware> to a max. price of <Var/Number2> cr`
 - `<RetVar/IF> <RefObj> can buy ware <Var/Ware> at station <Var/Station>`
@@ -14,6 +16,7 @@ This reference covers ship trading commands available in X3TC scripting. Each en
   - `if [THIS]-> get amount of ware {Advanced Jumpdrive} in cargo bay`
   - `if [THIS]-> get amount of ware {FTL Jumpdrive Extension} in cargo bay`
   - `$physical.avialable = $source-> get amount of ware $ware in cargo bay`
+  - `$physical.stock = $dock-> get amount of ware $ware in cargo bay`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get cargo bay size`
 - `<RetVar/IF> <RefObj> get defined amount of ware <Var/Ware> as ship hardware`
@@ -26,6 +29,9 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - `<RetVar/IF> <RefObj> get free volume of ware <Var/Ware> in cargo bay`
 - `<RetVar/IF> <RefObj> get max. ware transport class`
 - `<RetVar/IF> <RefObj> get max amount of ware <Var/Ware> that can be stored in cargo bay`
+- **Examples:**
+  - `$drone.max = $drone-> get max amount of ware $ware that can be stored in cargo bay`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get ship hardware as array`
 - `<RetVar/IF> <RefObj> get total volume in cargo bay`
 - `<RetVar/IF> <RefObj> get tradeable ware array from ship`
@@ -40,6 +46,9 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - `<RetVar/IF> <RefObj> install <Var/Number> units of <Var/Ware>`
 - `<RetVar/IF> <RefObj> load <Var/Number> units of <Var/Ware>`
 - `<RetVar/IF> <RefObj> sell ware <Var/Ware>`
+- **Examples:**
+  - `$sold = $drone-> sell $sell.amount units of $ware`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> set defined amount of ware <Var/Ware> as ship hardware`
 - `<RetVar/IF> <RefObj> set wanted ware count to <Var/Number>`
 - `<RetVar/IF> <RefObj> set wanted ware to <Var/Ware>`

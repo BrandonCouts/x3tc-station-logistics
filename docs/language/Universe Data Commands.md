@@ -10,6 +10,9 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar> create nebula: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create planet: subtype=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create ship: type=<Var/Ship Type> owner=<Var/Race> addto=<value> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- **Examples:**
+  - `$drone = create ship: type={Argon Mercury Super Freighter XL} owner=[Player] addto=$sell.Station x=null y=null z=null`
+- **Edge Cases:** _None._
 - `<RetVar> create special: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create station: type=<Var/Station Type> owner=<Var/Race> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create sun: subtype=<Var/Number> r=<Var/Number1> g=<Var/Number2> b=<Var/Number3> addto=<Var/Sector>`

@@ -150,3 +150,23 @@
 - `* Debug Massage handling` – could not be matched to any documented rule.
 - `Debug.Sub:` – could not be matched to any documented rule.
 - `$txt = $d.time + ';' + $script + ';' + $txt.debug` – could not be matched to any documented rule.
+- `* This script is called by LI.FDN.Supply.Factory` – could not be matched to any documented rule.
+- `* It is used to buy a ware needed for production` – could not be matched to any documented rule.
+- `* - Factory` – could not be matched to any documented rule.
+- `* - Ware` – could not be matched to any documented rule.
+- `* - Amount` – could not be matched to any documented rule.
+- `* To Do - Debug` – could not be matched to any documented rule.
+- `$stock = $virtual.stock + $physical.stock` – could not be matched to any documented rule.
+- `$amount = $stock - $sell` – could not be matched to any documented rule.
+- `$txt.debug = 'Dock Virtual Stock ' + $virtual.stock + ' for ' + $ware` – could not be matched to any documented rule.
+- `$txt.debug = 'Dock Physical Stock ' + $physical.stock + ' for ' + $ware` – could not be matched to any documented rule.
+- `$txt.debug = 'Has ' + $amount + ' of ' + $ware + ' free to sell'` – could not be matched to any documented rule.
+- `if $sell.Station` – could not be matched to any documented rule.
+- `if not $relation == [Foe]` – could not be matched to any documented rule.
+- `if $amount > $drone.max` – could not be matched to any documented rule.
+- `$txt.debug = 'Drone has ' + $drone.max + ' of ' + $ware + ' to sell'` – could not be matched to any documented rule.
+- `$txt.debug = 'Drone has ' + $sell.amount + ' of ' + $ware + ' to sell'` – could not be matched to any documented rule.
+- `$amount = $amount - $sold` – could not be matched to any documented rule.
+- `$txt.debug = 'Sold ' + $sold + ' for ' + $ware` – could not be matched to any documented rule.
+- `$txt.debug = 'To sell amount is now ' + $amount + ' for ' + $ware` – could not be matched to any documented rule.
+- `$txt = $d.time + ';' + $script + ';' + $dock + ';' + $txt.debug` – could not be matched to any documented rule.

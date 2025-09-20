@@ -92,6 +92,9 @@ This reference covers ship property commands available in X3TC scripting. Each e
 - `<RefObj> set follow mode <Var/Number>`
 - `<RefObj> set formation <Var/Number>`
 - `<RefObj> set homebase to <Var/Ship/Station>`
+- **Examples:**
+  - `$drone-> set homebase to $dock`
+- **Edge Cases:** _None._
 - `<RefObj> set homesector to <Var/Sector>`
 - `<RefObj> set jumpdrive fuel resupply: amount=<Var/Number>`
 - `<RefObj> set laser energy to <Var/Number>`

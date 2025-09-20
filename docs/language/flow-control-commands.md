@@ -10,9 +10,11 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dc`
   - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
   - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
+  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=3`
   - `$name = null-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
   - `$amount.added = null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$destination action='add'`
   - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$source action='remove'`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$sold station=$dock action='remove'`
 - **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
@@ -32,6 +34,7 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `gosub Reset.Menu.Sub:`
   - `gosub Factory.Summary.Sub:`
   - `gosub Dock.Summary.Sub:`
+  - `gosub Debug.Sub:`
 - **Edge Cases:** _None._
 - `goto label <Label Name>:`
 - `<RefObj> interrupt task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3>`
@@ -45,5 +48,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
 - `<RefObj> launch named script: task=<Var/Number> scriptname=<Var/String> prio=<Var/Number>, <Value>, <Value>, <Value>, <Value>, <Value>`
 - `<RetVar/IF> wait <Var/Number> ms`
 - `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
+- **Examples:**
+  - `= wait randomly from 500 to 1000 ms`
+- **Edge Cases:** _None._
 - `START <RefObj> wing command <Var/Wing Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 

@@ -120,6 +120,60 @@
   - `$txt = sprintf: pageid=$PageID textid=2002, $factory.count, $product.count, $resource.count, null, null`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar/IF> find factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- **Short Description:** Finds the best-price factory buying a ware from a given sector, honoring jump and exclusion limits.
+- **One Example:**
+  - `$sell.Station = find factory: buys $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> create ship: type=<Var/Ship Type> owner=<Var/Race> addto=<value> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- **Short Description:** Spawns a ship of the specified type, owner, and position.
+- **One Example:**
+  - `$drone = create ship: type={Argon Mercury Super Freighter XL} owner=[Player] addto=$sell.Station x=null y=null z=null`
+- **Edge Cases:** _None._
+
+#### Rule: `<RefObj> set homebase to <Var/Ship/Station>`
+- **Short Description:** Assigns a new homebase station for a ship.
+- **One Example:**
+  - `$drone-> set homebase to $dock`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get relation to object <Var/Ship/Station>`
+- **Short Description:** Returns the relation standing toward another object.
+- **One Example:**
+  - `$relation = $dock-> get relation to object $sell.Station`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get max amount of ware <Var/Ware> that can be stored in cargo bay`
+- **Short Description:** Retrieves the cargo capacity for a specific ware on a ship.
+- **One Example:**
+  - `$drone.max = $drone-> get max amount of ware $ware that can be stored in cargo bay`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> add <Var/Number> units of <Var/Ware>`
+- **Short Description:** Adds a quantity of ware to a ship's cargo bay.
+- **One Example:**
+  - `= $drone-> add $sell.amount units of $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> sell ware <Var/Ware>`
+- **Short Description:** Commands a ship to sell a ware from its cargo.
+- **One Example:**
+  - `$sold = $drone-> sell $sell.amount units of $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
+- **Short Description:** Pauses script execution for a random duration within the specified range.
+- **One Example:**
+  - `= wait randomly from 500 to 1000 ms`
+- **Edge Cases:** _None._
+
+#### Rule: `<RefObj> destruct: show no explosion=<Var/Number>`
+- **Short Description:** Destroys an object optionally hiding the explosion.
+- **One Example:**
+  - `$drone-> destruct: show no explosion=[TRUE]`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar> get substring of <Var/String> offset=<Var/Number1> length=<Var/Number2>`
 - **Short Description:** `<RetVar> get substring of <Var/String> offset=<Var/Number1> length=<Var/Number2>`
 - **One Example:**
