@@ -21,20 +21,69 @@ Automate safe, mechanical X3TC work using **.x3s** source files only. Write scri
 - Text page: reserve one `89xxx` and record in `docs/ids.md`
 - **Setup scripts must include** `load text: id=<89xxx>`
 
-## Workflow (every task)
+# LEARNING
+## Attach Examples from X3S Scripts to Documented Rules
+You are working with a constrained block language with a **fixed, finite set of rules** documented in pseudocode format. These documentation files already exist in the `docs/language` directory and are the **only source of truth** for the language. Your task is to treat these documented rules as the complete language set. Then, take the provided X3S script and attach examples from the script lines to the appropriate rules in the documentation.
+
+### Scope
+- Use only the documentation files in `docs/` as the authoritative rule set.
+- For each script line:
+  1. Match it to the closest documented rule in `docs/language`.
+  2. Add the script line as an **example** under that rule inside the existing `docs/language` file.
+  3. If multiple script lines match the same rule, add them all as examples.
+  4. If a script line does not match any documented rule, output it into a **new, separate file** called `docs/unmatched_examples.md`.
+- Do not modify or create files outside the `docs/` directory.
+- Do not update or generate new rules beyond what already exists in `docs/`.
+
+### Format
+Update the documentation entries like this:
+
+```
+#### Rule: `<documented rule pattern>`
+- **Full Description:** (existing documentation text)
+- **Examples:**
+  - `<script line 1>`
+  - `<script line 2>`
+- **Edge Cases:** (existing notes, or add if discovered during matching)
+```
+
+If any unmatched lines are found, create/update `docs/unmatched_examples.md` with:
+- `<script line>` – could not be matched to any documented rule.
+
+### Constraints
+- Only edit the existing files in `docs/language`.
+- Only add examples and edge cases; never alter the rule definitions themselves.
+- Only create one new file: `docs/unmatched_examples.md`.
+- Do not modify rules or linters outside of the `docs/` folder.
+
+### Deliverable
+- Updated documentation in `docs/language` with script examples attached to the correct rules.
+- A new `docs/unmatched_examples.md` file containing any lines that do not fit the documented rules.
+- Create docs/x3s-language.md from the language files in docs/language/
+
+### Input
+1. The current rule documentation files in `docs/`.
+2. An X3S script file to extract examples from.
+
+### Generating docs/x3s-language.md
+Update the documentation entries like this:
+
+```
+#### Rule: `<documented rule pattern>`
+- **Short Description:** (existing documentation text)
+- **One Example:**
+  - `<script line 1>`
+- **Edge Cases:** (existing notes, or add if discovered during matching)
+```
+
+# SCRIPTING
+## Workflow
 1. Read `docs/ids.md` + `docs/x3s-language.md`.
 2. Create/modify `src/scripts/*.x3s` (+ `t/` strings if needed).
 3. Run: `python tools/test_x3s.py` (lints `src/scripts` + unit tests).
 4. Fix issues until green.
 5. Update `CHANGELOG.md` and `docs/ids.md`.
 6. Open PR: include plan, checklist, and any test notes/screens.
-
-## Acceptance Checklist
-- `python tools/x3s_lint.py src/scripts` passes (no errors).
-- Setup scripts contain `load text: id=<page>`.
-- No busy loops: each `while` block contains a `wait`.
-- IDs/tasks/command slots match `docs/ids.md`.
-- No hardcoded UI text—strings live in `t/`.
 
 ## Example (.x3s)
 ```
@@ -55,8 +104,3 @@ al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'
 al engine: set plugin 'al.plugin.slx' timer interval to 30 s
 return null
 ```
-
-### Additional Notes
-- When required tools or directories are missing, coordinate with the **Architect** to bootstrap the repo structure.
-- Keep commits focused; run tests after each change.
-- Fixtures under `tools/fixtures/` are reference-only pseudo code; never treat them as canonical sources.
