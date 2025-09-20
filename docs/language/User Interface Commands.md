@@ -30,7 +30,14 @@ This reference covers user interface-related commands available in X3TC scriptin
 - **Edge Cases:** _None._
 - `<RetVar> create text for custom menu, left=<Var/String>, right=<Var/String>`
 - `display subtitle text: text=<Var/String> duration=<Var/Number> ms`
+- **Examples:**
+  - `display subtitle text: text=$txt duration=2000 ms`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
+- **Examples:**
+  - `$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt`
+  - `$amount = null-> get user input: type=[Var/Number], title=$txt`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get user input <Script Reference Type>, title=<Var/String>, sector=<Var/Sector>`
 - `<RetVar/IF> get user input without sector type=<Script Reference Type>, title=<Var/String>`
 - `<RetVar/IF> open custom info menu: title=<Var/String> description=<Var/String> option array=<Var/Array> maxoptions=<Var/Number>`

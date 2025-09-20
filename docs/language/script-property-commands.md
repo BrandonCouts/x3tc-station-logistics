@@ -21,6 +21,9 @@ This reference lists script property commands available in X3TC scripting.
 - `<RetVar/IF> player HQ has blueprints for: type=<Var/Ship Type>`
 - `player loses police licence for race <Var/Race>`
 - `<RetVar/IF> playing time`
+- **Examples:**
+  - `$d.time = playing time`
+- **Edge Cases:** _None._
 - `remove blueprints from player HQ: type=<Var/Ship Type>`
 - `set mission rank: name=<Var/String> rank=<Var/Number>`
 - `set player tracking aim to <RefObj>`

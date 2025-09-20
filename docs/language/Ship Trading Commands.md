@@ -13,10 +13,15 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - **Examples:**
   - `if [THIS]-> get amount of ware {Advanced Jumpdrive} in cargo bay`
   - `if [THIS]-> get amount of ware {FTL Jumpdrive Extension} in cargo bay`
+  - `$physical.avialable = $source-> get amount of ware $ware in cargo bay`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get cargo bay size`
 - `<RetVar/IF> <RefObj> get defined amount of ware <Var/Ware> as ship hardware`
 - `<RetVar/IF> <RefObj> get free amount of ware <Var/Ware> in cargo bay`
+- **Examples:**
+  - `if not $destination-> get free amount of ware $ware in cargo bay`
+  - `if $destination-> get free amount of ware $ware in cargo bay`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get free volume of cargo bay`
 - `<RetVar/IF> <RefObj> get free volume of ware <Var/Ware> in cargo bay`
 - `<RetVar/IF> <RefObj> get max. ware transport class`

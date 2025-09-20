@@ -6,6 +6,9 @@ This reference lists string commands available in X3TC scripting.
 - `<RetVar> find position of pattern <Var/String1> in <Var/String2>`
 - `<RetVar> format seconds=<Var/String> to Zura time string`
 - `<RetVar> format time: <Var/Number>`
+- **Examples:**
+  - `$d.time = format time: $d.time`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get length of string <Var/String>`
 - `<RetVar/IF> get string font length: <Var/String>`
 - #### Rule: `<RetVar> get substring of <Var/String> offset=<Var/Number1> length=<Var/Number2>`
@@ -27,6 +30,8 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = read text: page=$PageID id=160`
   - `$txt = read text: page=$PageID id=163`
   - `$txt = read text: page=$PageID id=161`
+  - `$txt = read text: page=$PageID id=184`
+  - `$txt = read text: page=$PageID id=178`
 - **Edge Cases:** _None._
 - `<RetVar/IF> read text: page id=<Var/Number1>, from <Var/Number2> to <Var/Number3> to array, include empty=<Var/Number4>`
 - `<RetVar/IF> read text: page id=<Var/Number>, id=<Var/Number> exists`
@@ -41,6 +46,10 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = sprintf: pageid=$PageID textid=2000, $sector.count, null, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=2002, $factory.count, $product.count, $resource.count, null, null`
   - `$txt = sprintf: pageid=$PageID textid=2001, $dock.count, null, null, null, null`
+  - `$pointer = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=194, $destination, $ware, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=192, $destination, null, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=193, $amount, $ware, null, null, null`
 - **Edge Cases:** _None._
 - `<RetVar> string <Var/String> to integer`
 - `<RetVar> substitute in string <Var/String1>: pattern <Var/String2> with <Var/String3>`

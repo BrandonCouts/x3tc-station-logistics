@@ -44,6 +44,7 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Full Description:** `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
 - **Examples:**
   - `$settings.array = $factory-> get local variable: name=$pointer`
+  - `$ware.array = $source-> get local variable: name=$pointer`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
@@ -128,6 +129,7 @@ This reference covers object property commands available in X3TC scripting. Each
   - `if $target-> is of class [Moveable Ship]`
   - `if $factory-> is of class [Factory]`
   - `if not $factory-> is of class [Complex Hub]`
+  - `if not $destination-> is of class [Dock]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
 - `<RetVar/IF> <RefObj> is starting`

@@ -257,3 +257,39 @@
 - **One Example:**
   - `$factory.array = find station: sector=$sector class or type=[Factory] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
 - **Edge Cases:** _None._
+
+#### Rule: `<RetVar> format time: <Var/Number>`
+- **Short Description:** `<RetVar> format time: <Var/Number>`
+- **One Example:**
+  - `$d.time = format time: $d.time`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
+- **Short Description:** `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
+- **One Example:**
+  - `$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt`
+- **Edge Cases:** _None._
+
+#### Rule: `display subtitle text: text=<Var/String> duration=<Var/Number> ms`
+- **Short Description:** `display subtitle text: text=<Var/String> duration=<Var/Number> ms`
+- **One Example:**
+  - `display subtitle text: text=$txt duration=2000 ms`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get free amount of ware <Var/Ware> in cargo bay`
+- **Short Description:** `<RetVar/IF> <RefObj> get free amount of ware <Var/Ware> in cargo bay`
+- **One Example:**
+  - `if not $destination-> get free amount of ware $ware in cargo bay`
+- **Edge Cases:** _None._
+
+#### Rule: `write to log file <Var/Number> append=<Var/Number> value=<Value>`
+- **Short Description:** `write to log file <Var/Number> append=<Var/Number> value=<Value>`
+- **One Example:**
+  - `write to log file $DebugID append=[TRUE] value=$txt`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> playing time`
+- **Short Description:** `<RetVar/IF> playing time`
+- **One Example:**
+  - `$d.time = playing time`
+- **Edge Cases:** _None._

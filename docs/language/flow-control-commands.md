@@ -11,6 +11,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
   - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
   - `$name = null-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
+  - `$amount.added = null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$destination action='add'`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$source action='remove'`
 - **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`

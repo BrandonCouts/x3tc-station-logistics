@@ -75,3 +75,44 @@
 - `if $settings.array[0]` – could not be matched to any documented rule.
 - `if $settings.array[1]` – could not be matched to any documented rule.
 - `$name = $pre + $name` – could not be matched to any documented rule.
+- `* Author: Logain Abler` – could not be matched to any documented rule.
+- `* this script handles the user inputs for moving wares` – could not be matched to any documented rule.
+- `* Expected values:` – could not be matched to any documented rule.
+- `* - ware` – could not be matched to any documented rule.
+- `* - source` – could not be matched to any documented rule.
+- `* Returns values:` – could not be matched to any documented rule.
+- `* - N/A` – could not be matched to any documented rule.
+- `* Version: 1.0` – could not be matched to any documented rule.
+- `* Date: 09/06/2012` – could not be matched to any documented rule.
+- `* Tested: 09/06/2012` – could not be matched to any documented rule.
+- `* Fetch values saved in the AL Plugin global variable:` – could not be matched to any documented rule.
+- `$script = get script name` – could not be matched to any documented rule.
+- `$DebugID = 0 + $PageID` – could not be matched to any documented rule.
+- `* fetch ware details from the source` – could not be matched to any documented rule.
+- `* calculate the avialable physical, virtual and total` – could not be matched to any documented rule.
+- `if not $virtual.avialable > 0` – could not be matched to any documented rule.
+- `$virtual.avialable = 0` – could not be matched to any documented rule.
+- `$stock.avialable = $virtual.avialable + $physical.avialable` – could not be matched to any documented rule.
+- `if not $stock.avialable > 0` – could not be matched to any documented rule.
+- `* Debug` – could not be matched to any documented rule.
+- `$txt.debug = $source + ' has no free ' + $ware + ' - exit move ware'` – could not be matched to any documented rule.
+- `* USER SELECT - player owned ship or station` – could not be matched to any documented rule.
+- `if $destination == $source` – could not be matched to any documented rule.
+- `$txt.debug = 'Selected: ' + $destination` – could not be matched to any documented rule.
+- `$txt.debug = 'Selected: ' + $destination + ' is same as source - exit move ware'` – could not be matched to any documented rule.
+- `* USER INPUT - amount of ware to move` – could not be matched to any documented rule.
+- `if not is datatype[$amount] == [DATATYPE_NULL]` – could not be matched to any documented rule.
+- `if not $amount > 0` – could not be matched to any documented rule.
+- `* if not a valid amount exit` – could not be matched to any documented rule.
+- `if $amount > $stock.avialable` – could not be matched to any documented rule.
+- `* if amount greater than current stock` – could not be matched to any documented rule.
+- `$txt.debug = 'Input : ' + $amount + ' of ' + $ware + ' to be moved'` – could not be matched to any documented rule.
+- `* checks if the destination can hold the ware` – could not be matched to any documented rule.
+- `* add to destination` – could not be matched to any documented rule.
+- `if $amount.added > 0` – could not be matched to any documented rule.
+- `if $amount.added < $amount` – could not be matched to any documented rule.
+- `$amount = $amount.added` – could not be matched to any documented rule.
+- `* remove from source` – could not be matched to any documented rule.
+- `* Debug Massage handling` – could not be matched to any documented rule.
+- `Debug.Sub:` – could not be matched to any documented rule.
+- `$txt = $d.time + ';' + $script + ';' + $txt.debug` – could not be matched to any documented rule.
