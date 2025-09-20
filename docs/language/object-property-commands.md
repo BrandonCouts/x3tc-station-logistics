@@ -9,6 +9,7 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Examples:**
   - `if $dc-> exists`
   - `if $dock-> exists`
+  - `if $factory-> exists`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> find nearest enemy ship: max.dist=<Var/Number>`
 - `<RetVar/IF> <RefObj> find nearest enemy ship in range: class=<Var/Class>`
@@ -56,6 +57,7 @@ This reference covers object property commands available in X3TC scripting. Each
   - `$settings.array = $value-> get local variable: name=$pointer`
   - `$ware.settings = $value-> get local variable: name=$pointer`
   - `$ware.array = $value-> get local variable: name=$pointer`
+  - `if not $factory-> get local variable: name=$pointer`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`

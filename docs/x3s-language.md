@@ -390,6 +390,18 @@
   - `$d.time = playing time`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar/IF> <RefObj> get production cycle time: account for secondary resources=<Var/Number>`
+- **Short Description:** `<RetVar/IF> <RefObj> get production cycle time: account for secondary resources=<Var/Number>`
+- **One Example:**
+  - `$full.time = $factory-> get production cycle time: account for secondary resources=[FALSE]`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> <RefObj> get remaining production cycle time`
+- **Short Description:** `<RetVar/IF> <RefObj> get remaining production cycle time`
+- **One Example:**
+  - `$check.time = $factory-> get remaining production cycle time`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF> <RefObj> get tradeable ware array from station`
 - **Short Description:** `<RetVar/IF> <RefObj> get tradeable ware array from station`
 - **One Example:**

@@ -16,10 +16,20 @@ This reference covers station property commands available in X3TC scripting. Eac
 - `<RetVar> <RefObj> get number of resources per cycle for ware <Var/Ware>`
 - `<RetVar/IF> <RefObj> get number of secondary resources`
 - `<RetVar/IF> <RefObj> get production cycle time: account for secondary resources=<Var/Number>`
+- #### Rule: `<RetVar/IF> <RefObj> get production cycle time: account for secondary resources=<Var/Number>`
+- **Full Description:** `<RetVar/IF> <RefObj> get production cycle time: account for secondary resources=<Var/Number>`
+- **Examples:**
+  - `$full.time = $factory-> get production cycle time: account for secondary resources=[FALSE]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get production status: as percentage=<Var/Number>`
 - `<RetVar/IF> <RefObj> get products`
 - `<RetVar/IF> <RefObj> get product ware`
 - `<RetVar/IF> <RefObj> get remaining production cycle time`
+- #### Rule: `<RetVar/IF> <RefObj> get remaining production cycle time`
+- **Full Description:** `<RetVar/IF> <RefObj> get remaining production cycle time`
+- **Examples:**
+  - `$check.time = $factory-> get remaining production cycle time`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get serial name of station`
 - #### Rule: `<RetVar/IF> <RefObj> get tradeable ware array from station`
 - **Full Description:** `<RetVar/IF> <RefObj> get tradeable ware array from station`

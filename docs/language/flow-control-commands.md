@@ -35,6 +35,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=null station=$value action='create'`
   - `= null-> call script 'plugin.LI.FDN.Reset' :`
   - `START null-> call script 'plugin.LI.FDN.Cleanup' :`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=1`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=null`
 - **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
@@ -84,6 +86,7 @@ This reference covers flow control commands available in X3TC scripting. Each en
 - **Examples:**
   - `= wait randomly from 500 to 1000 ms`
   - `= wait randomly from 1000 to 2000 ms`
+  - `= wait randomly from $wait.1 to $wait.2 ms`
 - **Edge Cases:** _None._
 - `START <RefObj> wing command <Var/Wing Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 

@@ -52,6 +52,8 @@ This reference lists array commands available in X3TC scripting.
   - `$temp.array[4] = -200`
   - `$temp.array[6] = -1`
   - `$temp.array[1] = ''`
+  - `$al.Settings[12] = 1`
+  - `$al.Settings[12] = null`
 - **Edge Cases:** _None._
 - `<Var/Array1>[<Var/Number1>] = <Var/Array2>[<Var/Number2>]`
 - #### Rule: `append <Value> to array <Var/Array>`
@@ -133,6 +135,7 @@ This reference lists array commands available in X3TC scripting.
 - **Examples:**
   - `remove element from array $config.Array at index $s`
   - `remove element from array $dock.array at index $s`
+  - `remove element from array $factory.array at index $s`
 - **Edge Cases:** _None._
 - #### Rule: `resize array <Var/Array> to <Var/Number>`
 - **Full Description:** `resize array <Var/Array> to <Var/Number>`
@@ -158,6 +161,7 @@ This reference lists array commands available in X3TC scripting.
 - **Full Description:** `<RetVar/IF> size of array <Var/Array>`
 - **Examples:**
   - `$s = size of array $dock.array`
+  - `$s = size of array $factory.array`
   - `$s = size of array $glb.Array`
   - `$s = size of array $sector.array`
   - `$sf = size of array $factory.array`

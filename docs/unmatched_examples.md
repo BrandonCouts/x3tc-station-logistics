@@ -330,3 +330,43 @@
 - `$txt = $value` – could not be matched to any documented rule.
 - `$txt = $pre.txt + $txt` – could not be matched to any documented rule.
 - `if $menu.view == 1 OR $menu.view == 2 OR $menu.view == 5` – could not be matched to any documented rule.
+- `* Version: 2.0` – could not be matched to any documented rule.
+- `* Date: 27/07/2012` – could not be matched to any documented rule.
+- `* Tested: 27/07/2012` – could not be matched to any documented rule.
+- `* - factory array - holds all the know player factories` – could not be matched to any documented rule.
+- `* v2 change - Check to reverse array every other call` – could not be matched to any documented rule.
+- `* v2 - modify wait depending on number of factories` – could not be matched to any documented rule.
+- `* start of While Loop - Loop is for Factories` – could not be matched to any documented rule.
+- `* check if this is a new factory and flag as found` – could not be matched to any documented rule.
+- `* I use this to only manage the setting on first find and not every search` – could not be matched to any documented rule.
+- `* so player can still change settings with auto manage on` – could not be matched to any documented rule.
+- `* check auto manage setting if set turn on at factory` – could not be matched to any documented rule.
+- `* if product is managed call plugin.LI.FDN.Supply.Factory:` – could not be matched to any documented rule.
+- `* factory` – could not be matched to any documented rule.
+- `* call the supply factory script, flag one for the factory to pass its product to the DC` – could not be matched to any documented rule.
+- `* check.time and full.time is used to see if the factory is stalled` – could not be matched to any documented rule.
+- `* If stalled` – could not be matched to any documented rule.
+- `* if productuion time left is less than 45 seconds call plugin.LI.FDN.Supply.Factory` – could not be matched to any documented rule.
+- `* call the supply factory script to supply resources to the factory` – could not be matched to any documented rule.
+- `if not $al.Settings[12]` – could not be matched to any documented rule.
+- `if $s > 500` – could not be matched to any documented rule.
+- `$wait.1 = 20` – could not be matched to any documented rule.
+- `$wait.2 = 50` – could not be matched to any documented rule.
+- `else if $s > 300` – could not be matched to any documented rule.
+- `$wait.1 = 50` – could not be matched to any documented rule.
+- `$wait.2 = 100` – could not be matched to any documented rule.
+- `$wait.1 = 100` – could not be matched to any documented rule.
+- `$wait.2 = 200` – could not be matched to any documented rule.
+- `* debug` – could not be matched to any documented rule.
+- `$txt.debug = ' Supply Factort called flag = 1'` – could not be matched to any documented rule.
+- `if $settings.array[0]` – could not be matched to any documented rule.
+- `if $settings.array[1]` – could not be matched to any documented rule.
+- `$txt.debug = ' Check time = ' + $check.time + ' Full Time = ' + $full.time` – could not be matched to any documented rule.
+- `if $check.time == $full.time` – could not be matched to any documented rule.
+- `$txt.debug = ' Prdouction stalled - Supply Resource called'` – could not be matched to any documented rule.
+- `* if factory does not exist remove from array` – could not be matched to any documented rule.
+- `$txt.debug = ' Prdouction near completion - Supply Resource called'` – could not be matched to any documented rule.
+- `if $check.time < 45` – could not be matched to any documented rule.
+- `$txt.debug = ' Clean from Factory Array'` – could not be matched to any documented rule.
+- `* wait` – could not be matched to any documented rule.
+- `* v2 - clear is.running flag` – could not be matched to any documented rule.
