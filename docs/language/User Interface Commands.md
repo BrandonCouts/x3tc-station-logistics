@@ -3,13 +3,22 @@
 This reference covers user interface-related commands available in X3TC scripting. Each entry shows the basic syntax.
 
 - `add custom menu heading to array <value>: title=<Var/String>`
-- `add custom menu info line to array <value>: text=<Var/String>`
+- #### Rule: `add custom menu info line to array <value>: text=<Var/String>`
+- **Full Description:** `add custom menu info line to array <value>: text=<Var/String>`
+- **Examples:**
+  - `add custom menu info line to array $menu: text=' '`
+  - `add custom menu info line to array $menu: text=$temp.array`
+- **Edge Cases:** _None._
 - `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
 - `add section to custom menu: <Var/Array>`
 - `add value selection to menu: <Var/Array>, text=<Var/String>, value array=<Var/Array>, default=<Var/Number>, return id=<Var/String>`
 - `<RetVar> create custom menu array`
 - `<RetVar> create custom menu array, info lines=<Var/String>, <Var/String>, <Var/String>, <Var/String>`
-- `<RetVar> create custom menu array: heading=<Var/String>`
+- #### Rule: `<RetVar> create custom menu array: heading=<Var/String>`
+- **Full Description:** `<RetVar> create custom menu array: heading=<Var/String>`
+- **Examples:**
+  - `$menu = create custom menu array: heading=$txt`
+- **Edge Cases:** _None._
 - `<RetVar> create text for custom menu, left=<Var/String>, right=<Var/String>`
 - `display subtitle text: text=<Var/String> duration=<Var/Number> ms`
 - `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`

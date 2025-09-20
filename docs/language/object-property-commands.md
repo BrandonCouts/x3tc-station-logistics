@@ -34,7 +34,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get flying ware count`
 - `<RetVar/IF> <RefObj> get hull`
 - `<RetVar/IF> <RefObj> get hull percent`
-- `<RetVar/IF> <RefObj> get ID code`
+- #### Rule: `<RetVar/IF> <RefObj> get ID code`
+- **Full Description:** `<RetVar/IF> <RefObj> get ID code`
+- **Examples:**
+  - `$id = $object-> get ID code`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get laser type in bay <Var/Number>`
 - `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
@@ -44,7 +48,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get max. shield type that can be installed`
 - `<RetVar/IF> <RefObj> get maximum laser strength`
 - `<RetVar/IF> <RefObj> get maximum shield strength`
-- `<RetVar/IF> <RefObj> get name`
+- #### Rule: `<RetVar/IF> <RefObj> get name`
+- **Full Description:** `<RetVar/IF> <RefObj> get name`
+- **Examples:**
+  - `$name = $object-> get name`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get notoriety percentage to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get notoriety title to race <Var/Race>: text=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get notoriety to race <Var/Race>`
@@ -72,6 +80,8 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Examples:**
   - `$target.sector = $target-> get sector`
   - `$this.sector = [THIS]-> get sector`
+  - `$txt = $dc-> get sector`
+  - `$txt = $dock-> get sector`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get shield and hull percent`
 - `<RetVar/IF> <RefObj> get shield percent`

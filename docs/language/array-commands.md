@@ -2,10 +2,25 @@
 
 This reference lists array commands available in X3TC scripting.
 
-- `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- #### Rule: `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- **Full Description:** `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- **Examples:**
+  - `$PageID = $al.Settings[1]`
+  - `$dc = $al.Settings[2]`
+  - `$is.dynamic = $al.Settings[6]`
+  - `$dock = $dock.array[$s]`
+  - `$var = $glb.Array[$s]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`
-- `<Var/Array>[<Var/Number>] = <Value>`
+- #### Rule: `<Var/Array>[<Var/Number>] = <Value>`
+- **Full Description:** `<Var/Array>[<Var/Number>] = <Value>`
+- **Examples:**
+  - `$temp.array[0] = 1`
+  - `$temp.array[1] = $txt`
+  - `$temp.array[2] = -1`
+  - `$temp.array[3] = $txt`
+- **Edge Cases:** _None._
 - `<Var/Array1>[<Var/Number1>] = <Var/Array2>[<Var/Number2>]`
 - #### Rule: `append <Value> to array <Var/Array>`
 - **Full Description:** `append <Value> to array <Var/Array>`
@@ -16,12 +31,23 @@ This reference lists array commands available in X3TC scripting.
   - `append 0 to array $target.pos`
   - `append 0 to array $target.pos`
   - `append $target to array $target.pos`
+  - `append $format to array $menu`
 - **Edge Cases:** _None._
-- `<RetVar> array alloc: size=<Var/Number>`
+- #### Rule: `<RetVar> array alloc: size=<Var/Number>`
+- **Full Description:** `<RetVar> array alloc: size=<Var/Number>`
+- **Examples:**
+  - `$temp.array = array alloc: size=4`
+- **Edge Cases:** _None._
 - `<RetVar/IF> arrays <Value1> and <Value2> are equal`
 - `<RetVar> clone array <Var/Array> : index <Var/Number1> ... <Var/Number2>`
 - `copy array <Var/Array1> index <Var/Number1> ... <Var/Number2> into array <Var/Array2> at index <Var/Number3>`
-- `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- #### Rule: `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- **Full Description:** `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- **Examples:**
+  - `$format = create new array, arguments=$temp.array, $return.array, null, null, null`
+  - `$format = create new array, arguments=$temp.array, 'dynamic.dc', null, null, null`
+  - `$format = create new array, arguments=$temp.array, 'dynamic.dock', null, null, null`
+- **Edge Cases:** _None._
 - `<RetVar/IF> find <Value> in array: <Value>`
 - `<RetVar> get index of <Value> in array <Var/Array> offset=<Var/Number>`
 - `<RetVar/IF> <RefObj> get object name array`
@@ -33,6 +59,11 @@ This reference lists array commands available in X3TC scripting.
   - `resize array $target.pos to 0`
 - **Edge Cases:** _None._
 - `<RetVar/IF> reverse array <Value>`
-- `<RetVar/IF> size of array <Var/Array>`
+- #### Rule: `<RetVar/IF> size of array <Var/Array>`
+- **Full Description:** `<RetVar/IF> size of array <Var/Array>`
+- **Examples:**
+  - `$s = size of array $dock.array`
+  - `$s = size of array $glb.Array`
+- **Edge Cases:** _None._
 - `<RetVar> sort array <Value>`
 - `<RetVar> sort array: data=<Value> sort values=<Value>`

@@ -12,14 +12,22 @@ This reference summarizes various game engine and quest commands available in X3
 - `change event news availability`: Controls news article availability based on race, sector, and jump range.
 - `<RetVar/IF> display news article`: Shows a news article with optional placeholders and display limits.
 - `finish god event`: Marks a god event as completed and triggers post-event logic.
-- `<RetVar/IF> get global variable: name=<Var/String>`: Retrieves the value of a named global variable.
+- #### Rule: `<RetVar/IF> get global variable: name=<Var/String>`
+- **Full Description:** Retrieves the value of a named global variable.
+- **Examples:**
+  - `$al.Settings = get global variable: name='al.LI.FDN.event'`
+- **Edge Cases:** _None._
 - `register god event: script=<Script Name> mask=<Var/Number>`: Registers a script to run as a god event with a condition mask.
 - `register quest script <Script Name> instance multiple=<Var/Number>`: Registers a quest script, allowing multiple instances when needed.
 - `remove encyclopedia custom article: id=<Var/String>`: Deletes a custom encyclopedia entry.
 - `<RefObj> remove event listener: quest/event=<Var/Quest>`: Detaches an event listener script from an object.
 - `<RetVar> script engine version`: Returns the script engine's version number.
 - `set encyclopedia custom article sectors: id=<Var/String>, sector array=<Var/Array>`: Restricts a custom article to specified sectors.
-- `set global variable: name=<Var/String> value=<Value>`: Sets or creates a global variable.
+- #### Rule: `set global variable: name=<Var/String> value=<Value>`
+- **Full Description:** Sets or creates a global variable.
+- **Examples:**
+  - `set global variable: name=$var value=null`
+- **Edge Cases:** _None._
 - `set quest/event <Var/Quest> alive=<Var/Number>`: Enables or disables a quest/event.
 - `set quest/event <Var/Quest> timer to <Var/Number>`: Sets a countdown before a quest/event triggers or expires.
 - `set quest/event <Var/Quest> timeout to <Var/Number>`: Defines how long a quest/event remains active before auto-completion or failure.

@@ -8,3 +8,41 @@
 - `if $target.sector != $this.sector` – could not be matched to any documented rule.
 - `if $jumps.needed > 1` – could not be matched to any documented rule.
 - `return null` – could not be matched to any documented rule.
+- `return $return` – could not be matched to any documented rule.
+- `* -----------------------------------------------------------------------------------` – could not be matched to any documented rule.
+- `* Get save values from AL` – could not be matched to any documented rule.
+- `if $al.Settings` – could not be matched to any documented rule.
+- `if $dc == null` – could not be matched to any documented rule.
+- `Add.DC.Menu.Sub:` – could not be matched to any documented rule.
+- `Change.DC.Menu.Sub:` – could not be matched to any documented rule.
+- `Dynamic.Menu.Sub:` – could not be matched to any documented rule.
+- `Global.Options.Sub:` – could not be matched to any documented rule.
+- `Debug.Menu.Sub:` – could not be matched to any documented rule.
+- `Reset.Menu.Sub:` – could not be matched to any documented rule.
+- `if $s > 0` – could not be matched to any documented rule.
+- `while $s > 0` – could not be matched to any documented rule.
+- `if $dock` – could not be matched to any documented rule.
+- `if not $dock == $dc` – could not be matched to any documented rule.
+- `if $is.dynamic[0]` – could not be matched to any documented rule.
+- `if $is.dynamic[2]` – could not be matched to any documented rule.
+- `if $al.Settings[9]` – could not be matched to any documented rule.
+- `if $al.Settings[7]` – could not be matched to any documented rule.
+- `* Call add DC Menu` – could not be matched to any documented rule.
+- `* Calls script to format name` – could not be matched to any documented rule.
+- `* Call change DC Menu` – could not be matched to any documented rule.
+- `* Call dynamic Menu` – could not be matched to any documented rule.
+- `* $temp.array = array alloc: size=4` – could not be matched to any documented rule.
+- `* $temp.array[0] = 1` – could not be matched to any documented rule.
+- `* $txt = read text: page=$PageID id=105` – could not be matched to any documented rule.
+- `* $temp.array[1] = $txt` – could not be matched to any documented rule.
+- `* $temp.array[2] = -1` – could not be matched to any documented rule.
+- `* if $is.dynamic[1]` – could not be matched to any documented rule.
+- `* $txt = read text: page=$PageID id=148` – could not be matched to any documented rule.
+- `* else` – could not be matched to any documented rule.
+- `* $txt = read text: page=$PageID id=149` – could not be matched to any documented rule.
+- `* end` – could not be matched to any documented rule.
+- `* $temp.array[3] = $txt` – could not be matched to any documented rule.
+- `* $format = create new array, arguments=$temp.array, 'dynamic.dock.list', null, null, null` – could not be matched to any documented rule.
+- `* append $format to array $menu` – could not be matched to any documented rule.
+- `return $menu` – could not be matched to any documented rule.
+- `if $check == 'FDND.'` – could not be matched to any documented rule.

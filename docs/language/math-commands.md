@@ -2,7 +2,11 @@
 
 This reference lists math operations and random number commands in X3TC scripting. Each entry shows the basic syntax.
 
-- `dec <Var>`
+- #### Rule: `dec <Var>`
+- **Full Description:** `dec <Var>`
+- **Examples:**
+  - `dec $s`
+- **Edge Cases:** _None._
 - `<RetVar> fixed cos <Var/Number>`
 - `<RetVar> fixed sin <Var/Number>`
 - `<RetVar> get maximum, <Var/Number0>, <Var/Number1>, <Var/Number2>, <Var/Number3>, <Var/Number4>`

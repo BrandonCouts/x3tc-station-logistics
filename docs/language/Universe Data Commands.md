@@ -58,7 +58,11 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar/IF> <RefObj> get ship array from sector/ship/station`
 - `<RetVar/IF> get ship type array: maker race=<Var/Race> class=<value>`
 - `<RetVar/IF> <RefObj> get south warp gate`
-- `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- #### Rule: `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- **Full Description:** `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- **Examples:**
+  - `$dock.array = get station array: of race [Player] class/type=[Dock]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get station array: product=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> get station array: resource=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get station array from sector`
