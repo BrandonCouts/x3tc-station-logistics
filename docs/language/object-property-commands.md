@@ -13,8 +13,17 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get array of missiles aiming to me`
 - `<RetVar/IF> <RefObj> get asteroid yield`
 - `<RetVar/IF> <RefObj> get attacker`
-- `<RetVar/IF> <RefObj> get command`
-- `<RetVar/IF> <RefObj> get command target`
+- #### Rule: `<RetVar/IF> <RefObj> get command`
+- **Full Description:** `<RetVar/IF> <RefObj> get command`
+- **Examples:**
+  - `$target.command = $target-> get command`
+- **Edge Cases:** _None._
+
+- #### Rule: `<RetVar/IF> <RefObj> get command target`
+- **Full Description:** `<RetVar/IF> <RefObj> get command target`
+- **Examples:**
+  - `$target.pos = $target-> get command target`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get command target2`
 - `<RetVar/IF> <RefObj> get current action`
 - `<RetVar/IF> <RefObj> get current laser strength`
@@ -45,7 +54,12 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get number of subtypes of maintype <Var/Number>`
 - `<RetVar/IF> <RefObj> get object class`
 - `<RetVar/IF> <RefObj> get owner race`
-- `<RetVar/IF> <RefObj> get position as array`
+- #### Rule: `<RetVar/IF> <RefObj> get position as array`
+- **Full Description:** `<RetVar/IF> <RefObj> get position as array`
+- **Examples:**
+  - `$target.pos = $target-> get position as array`
+  - `$target.pos = $target-> get position as array`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get power generator`
 - `<RetVar/IF> <RefObj> get relation to object <Var/Ship/Station>`
 - `<RetVar/IF> <RefObj> get relation to race <Var/Race>`
@@ -53,7 +67,12 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get rot alpha`
 - `<RetVar/IF> <RefObj> get rot beta`
 - `<RetVar/IF> <RefObj> get rot gamma`
-- `<RetVar/IF> <RefObj> get sector`
+- #### Rule: `<RetVar/IF> <RefObj> get sector`
+- **Full Description:** `<RetVar/IF> <RefObj> get sector`
+- **Examples:**
+  - `$target.sector = $target-> get sector`
+  - `$this.sector = [THIS]-> get sector`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get shield and hull percent`
 - `<RetVar/IF> <RefObj> get shield percent`
 - `<RetVar/IF> <RefObj> get shield type in bay <Var/Number>`
@@ -85,7 +104,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> is known`
 - `<RetVar/IF> <RefObj> is landing`
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> neutral to me`
-- `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- #### Rule: `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- **Full Description:** `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- **Examples:**
+  - `if $target-> is of class [Moveable Ship]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
 - `<RetVar/IF> <RefObj> is starting`
 - `<RetVar/IF> <RefObj> is target visible <Var/Ship/Station>`
