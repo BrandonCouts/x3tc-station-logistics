@@ -10,4 +10,5 @@ This reference lists system property commands available in X3TC scripting.
 - `write to log file <Var/Number> append=<Var/Number> value=<Value>`
 - **Examples:**
   - `write to log file $DebugID append=[TRUE] value=$txt`
+  - `write to log file $DebugID append=[FALSE] value=$txt`
 - **Edge Cases:** _None._

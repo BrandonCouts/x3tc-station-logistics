@@ -170,3 +170,16 @@
 - `$txt.debug = 'Sold ' + $sold + ' for ' + $ware` – could not be matched to any documented rule.
 - `$txt.debug = 'To sell amount is now ' + $amount + ' for ' + $ware` – could not be matched to any documented rule.
 - `$txt = $d.time + ';' + $script + ';' + $dock + ';' + $txt.debug` – could not be matched to any documented rule.
+- `* setup handles the srart and stop actions for FDN` – could not be matched to any documented rule.
+- `* Setup` – could not be matched to any documented rule.
+- `* Create debug log` – could not be matched to any documented rule.
+- `* add fdn menu to config` – could not be matched to any documented rule.
+- `* remove fdn from config` – could not be matched to any documented rule.
+- `* To Do - N/A` – could not be matched to any documented rule.
+- `* - dock` – could not be matched to any documented rule.
+- `* Date: 23/05/2012` – could not be matched to any documented rule.
+- `$txt = 'FDN Debug Log:'` – could not be matched to any documented rule.
+- `$DebugID = 0 + $PageID` – could not be matched to any documented rule.
+- `if $status == [TRUE]` – could not be matched to any documented rule.
+- `if $config.Array` – could not be matched to any documented rule.
+- `if $script == $menu` – could not be matched to any documented rule.

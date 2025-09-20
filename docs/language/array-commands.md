@@ -5,6 +5,7 @@ This reference lists array commands available in X3TC scripting.
 - #### Rule: `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **Full Description:** `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **Examples:**
+  - `$status = $al.Settings[0]`
   - `$PageID = $al.Settings[1]`
   - `$dc = $al.Settings[2]`
   - `$is.dynamic = $al.Settings[6]`
@@ -13,6 +14,8 @@ This reference lists array commands available in X3TC scripting.
   - `$var = $glb.Array[$s]`
   - `$sector = $sector.array[$s]`
   - `$factory = $factory.array[$sf]`
+  - `$script.Array = $config.Array[$s]`
+  - `$script = $script.Array[0]`
   - `$dock = $dock.array[$sd]`
   - `$check = $factory.show.array[$s]`
   - `$ware = $ware.Array[$s]`
@@ -116,7 +119,11 @@ This reference lists array commands available in X3TC scripting.
 - `<RetVar> get index of <Value> in array <Var/Array> offset=<Var/Number>`
 - `<RetVar/IF> <RefObj> get object name array`
 - `insert <Value> into array <Var/Array> at index <Var/Number>`
-- `remove element from array <Var/Array> at index <Var/Number>`
+- #### Rule: `remove element from array <Var/Array> at index <Var/Number>`
+- **Full Description:** `remove element from array <Var/Array> at index <Var/Number>`
+- **Examples:**
+  - `remove element from array $config.Array at index $s`
+- **Edge Cases:** _None._
 - #### Rule: `resize array <Var/Array> to <Var/Number>`
 - **Full Description:** `resize array <Var/Array> to <Var/Number>`
 - **Examples:**
@@ -146,6 +153,7 @@ This reference lists array commands available in X3TC scripting.
   - `$sf = size of array $factory.array`
   - `$sd = size of array $dock.array`
   - `$s = size of array $ware.Array`
+  - `$s = size of array $config.Array`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar> sort array <Value>`
 - **Full Description:** `<RetVar> sort array <Value>`

@@ -22,6 +22,9 @@ This reference lists string commands available in X3TC scripting.
 - #### Rule: `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Full Description:** `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Examples:**
+  - `$section = read text: page=$PageID id=101`
+  - `$txt = read text: page=$PageID id=102`
+  - `$menu = read text: page=$PageID id=102`
   - `$txt = read text: page=$PageID id=103`
   - `$txt = read text: page=$PageID id=180`
   - `$txt = read text: page=$PageID id=181`

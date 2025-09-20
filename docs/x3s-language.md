@@ -69,7 +69,7 @@
 #### Rule: `<RetVar/IF> get global variable: name=<Var/String>`
 - **Short Description:** Retrieves the value of a named global variable.
 - **One Example:**
-  - `$al.Settings = get global variable: name='al.LI.FDN.event'`
+  - `$config.Array = get global variable: name='config.scripts'`
 - **Edge Cases:** _None._
 
 #### Rule: `set global variable: name=<Var/String> value=<Value>`
@@ -111,7 +111,7 @@
 #### Rule: `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Short Description:** `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **One Example:**
-  - `$txt = read text: page=$PageID id=180`
+  - `$section = read text: page=$PageID id=101`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
@@ -231,7 +231,7 @@
 #### Rule: `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **Short Description:** `<RetVar/IF> = <Var/Array>[<Var/Number>]`
 - **One Example:**
-  - `$factory = $factory.array[$sf]`
+  - `$script = $script.Array[0]`
 - **Edge Cases:** _None._
 
 #### Rule: `<Var/Array>[<Var/Number>] = <Value>`
@@ -252,6 +252,12 @@
   - `$format = create new array, arguments=$temp.array, $return.array, null, null, null`
 - **Edge Cases:** _None._
 
+#### Rule: `remove element from array <Var/Array> at index <Var/Number>`
+- **Short Description:** `remove element from array <Var/Array> at index <Var/Number>`
+- **One Example:**
+  - `remove element from array $config.Array at index $s`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF> reverse array <Value>`
 - **Short Description:** `<RetVar/IF> reverse array <Value>`
 - **One Example:**
@@ -267,7 +273,7 @@
 #### Rule: `<RetVar/IF> size of array <Var/Array>`
 - **Short Description:** `<RetVar/IF> size of array <Var/Array>`
 - **One Example:**
-  - `$s = size of array $sector.array`
+  - `$s = size of array $config.Array`
 - **Edge Cases:** _None._
 
 #### Rule: `dec <Var>`
@@ -285,7 +291,7 @@
 #### Rule: `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **Short Description:** `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **One Example:**
-  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
+  - `= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null`
 - **Edge Cases:** _None._
 
 #### Rule: `gosub <Label Name>:`
@@ -339,7 +345,7 @@
 #### Rule: `write to log file <Var/Number> append=<Var/Number> value=<Value>`
 - **Short Description:** `write to log file <Var/Number> append=<Var/Number> value=<Value>`
 - **One Example:**
-  - `write to log file $DebugID append=[TRUE] value=$txt`
+  - `write to log file $DebugID append=[FALSE] value=$txt`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> playing time`

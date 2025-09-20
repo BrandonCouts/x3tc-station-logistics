@@ -16,6 +16,7 @@ This reference summarizes various game engine and quest commands available in X3
 - **Full Description:** Retrieves the value of a named global variable.
 - **Examples:**
   - `$al.Settings = get global variable: name='al.LI.FDN.event'`
+  - `$config.Array = get global variable: name='config.scripts'`
 - **Edge Cases:** _None._
 - `register god event: script=<Script Name> mask=<Var/Number>`: Registers a script to run as a god event with a condition mask.
 - `register quest script <Script Name> instance multiple=<Var/Number>`: Registers a quest script, allowing multiple instances when needed.
