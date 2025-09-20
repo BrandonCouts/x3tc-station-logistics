@@ -15,6 +15,8 @@ This reference covers user interface-related commands available in X3TC scriptin
   - `add custom menu info line to array $menu: text=$txt`
 - **Edge Cases:** _None._
 - `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
+- **Examples:**
+  - `add custom menu item to array $menu: text=$txt returnvalue='switch.menu'`
 - #### Rule: `add section to custom menu: <Var/Array>`
 - **Full Description:** `add section to custom menu: <Var/Array>`
 - **Examples:**
@@ -37,11 +39,17 @@ This reference covers user interface-related commands available in X3TC scriptin
 - **Examples:**
   - `$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt`
   - `$amount = null-> get user input: type=[Var/Number], title=$txt`
+  - `$ware = null-> get user input: type=[Var/Ware], title=$txt`
+  - `$confirm = null-> get user input: type=[Var/Boolean], title=$txt`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get user input <Script Reference Type>, title=<Var/String>, sector=<Var/Sector>`
 - `<RetVar/IF> get user input without sector type=<Script Reference Type>, title=<Var/String>`
 - `<RetVar/IF> open custom info menu: title=<Var/String> description=<Var/String> option array=<Var/Array> maxoptions=<Var/Number>`
+- **Examples:**
+  - `$return = open custom info menu: title=$txt description=null option array=$menu maxoptions=2`
 - `<RetVar/IF> open custom menu: title=<Var/String> description=<Var/String> option array=<Var/Array>`
+- **Examples:**
+  - `$return = open custom menu: title=$txt description=null option array=$menu`
 - `play sample <Var/Number>`
 - `play sample: incoming transmission <Var/Number>, from object <value>`
 - `<RefObj> send audio message <Var/Number> to player`

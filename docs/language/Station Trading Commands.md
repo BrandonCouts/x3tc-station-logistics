@@ -34,6 +34,8 @@ This reference covers station trading-related commands available in X3TC scripti
 - `<RetVar/IF> order ship in next shipyard: owner=<Var/Race> sector=<Var/Sector> class=<Var/Class> optional: default shiptype for race:<Var/Race>`
 - `<RefObj> remove primary resource from factory: <Var/Ware>`
 - `<RefObj> remove product from factory or dock: <Var/Ware>`
+- **Examples:**
+  - `$value-> remove product from factory or dock: $ware`
 - `<RefObj> remove second resource from factory: <Var/Ware>`
 - `station <Var/Station>: lock ware <Var/Ware> for race <Var/Race>`
 - `station <Var/Station>: unlock ware <Var/Ware> for race <Var/Race>`

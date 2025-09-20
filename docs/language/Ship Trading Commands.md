@@ -5,6 +5,9 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - `<RetVar/IF> <RefObj> add <Var/Number> units of <Var/Ware>`
 - **Examples:**
   - `= $drone-> add $sell.amount units of $ware`
+  - `= $value-> add $remove units of $ware`
+  - `= $value-> add $virtual units of $ware`
+  - `= $value-> add $amount units of $ware`
 - `<RetVar/IF> <RefObj> buy <Var/Number> units of <Var/Ware>`
 - `<RetVar/IF> <RefObj> buy <Var/Number1> units of <Var/Ware> to a max. price of <Var/Number2> cr`
 - `<RetVar/IF> <RefObj> can buy ware <Var/Ware> at station <Var/Station>`
@@ -17,6 +20,7 @@ This reference covers ship trading commands available in X3TC scripting. Each en
   - `if [THIS]-> get amount of ware {FTL Jumpdrive Extension} in cargo bay`
   - `$physical.avialable = $source-> get amount of ware $ware in cargo bay`
   - `$physical.stock = $dock-> get amount of ware $ware in cargo bay`
+  - `$amount = $value-> get amount of ware $ware in cargo bay`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get cargo bay size`
 - `<RetVar/IF> <RefObj> get defined amount of ware <Var/Ware> as ship hardware`
@@ -24,6 +28,7 @@ This reference covers ship trading commands available in X3TC scripting. Each en
 - **Examples:**
   - `if not $destination-> get free amount of ware $ware in cargo bay`
   - `if $destination-> get free amount of ware $ware in cargo bay`
+  - `$amount = $value-> get free amount of ware $ware in cargo bay`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get free volume of cargo bay`
 - `<RetVar/IF> <RefObj> get free volume of ware <Var/Ware> in cargo bay`

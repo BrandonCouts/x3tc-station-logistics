@@ -12,6 +12,7 @@ This reference lists array commands available in X3TC scripting.
   - `$exclude.array = $al.Settings[8]`
   - `$dock.array = $al.Settings[4]`
   - `$debug = $al.Settings[7]`
+  - `$factory.array = $al.Settings[3]`
   - `$dock = $dock.array[$s]`
   - `$var = $glb.Array[$s]`
   - `$sector = $sector.array[$s]`
@@ -24,8 +25,14 @@ This reference lists array commands available in X3TC scripting.
   - `$sell.at = $ware.settings[6]`
   - `$virtual.stock = $ware.settings[0]`
   - `$sell = $ware.settings[5]`
+  - `$virtual = $ware.array[0]`
+  - `$menu = $return.array[0]`
+  - `$factory.show.array = $return.array[1]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
+- **Examples:**
+  - `$count = $return[1][0]`
+  - `$value = $return[1][1]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`
 - #### Rule: `<Var/Array>[<Var/Number>] = <Value>`
 - **Full Description:** `<Var/Array>[<Var/Number>] = <Value>`
@@ -154,6 +161,7 @@ This reference lists array commands available in X3TC scripting.
   - `$s = size of array $glb.Array`
   - `$s = size of array $sector.array`
   - `$sf = size of array $factory.array`
+  - `$s = size of array $factory.array`
   - `$sd = size of array $dock.array`
   - `$s = size of array $ware.Array`
   - `$s = size of array $config.Array`

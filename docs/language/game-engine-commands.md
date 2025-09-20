@@ -28,6 +28,7 @@ This reference summarizes various game engine and quest commands available in X3
 - **Full Description:** Sets or creates a global variable.
 - **Examples:**
   - `set global variable: name=$var value=null`
+  - `set global variable: name='al.LI.FDN.event' value=$al.Settings`
 - **Edge Cases:** _None._
 - `set quest/event <Var/Quest> alive=<Var/Number>`: Enables or disables a quest/event.
 - `set quest/event <Var/Quest> timer to <Var/Number>`: Sets a countdown before a quest/event triggers or expires.

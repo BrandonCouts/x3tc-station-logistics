@@ -189,3 +189,144 @@
 - `* The script will also remove any non-existing Docks from the stored array` – could not be matched to any documented rule.
 - `* - N/A the Factory array is stored in the AL Plugin variable` – could not be matched to any documented rule.
 - `* - dock array - holds all the know player factories` – could not be matched to any documented rule.
+- `* if AP use AP menus` – could not be matched to any documented rule.
+- `$return = null` – could not be matched to any documented rule.
+- `$called.by = null` – could not be matched to any documented rule.
+- `$factory.show.array = null` – could not be matched to any documented rule.
+- `$menu.view = 1` – could not be matched to any documented rule.
+- `* Start Menu` – could not be matched to any documented rule.
+- `while [TRUE]` – could not be matched to any documented rule.
+- `$cap = null` – could not be matched to any documented rule.
+- `$trade = null` – could not be matched to any documented rule.
+- `if $menu.view == 1 OR $menu.view == 2 OR $menu.view == 3` – could not be matched to any documented rule.
+- `if not $dc` – could not be matched to any documented rule.
+- `$menu.view = 7` – could not be matched to any documented rule.
+- `* Build Menu Body` – could not be matched to any documented rule.
+- `if $menu.view == 1` – could not be matched to any documented rule.
+- `else if $menu.view == 2` – could not be matched to any documented rule.
+- `else if $menu.view == 4` – could not be matched to any documented rule.
+- `else if $menu.view == 5` – could not be matched to any documented rule.
+- `else if $menu.view == 6` – could not be matched to any documented rule.
+- `else if $menu.view == 7` – could not be matched to any documented rule.
+- `$al.Settings[5] = $menu.view` – could not be matched to any documented rule.
+- `* Call Menu View for Footer` – could not be matched to any documented rule.
+- `* Start of return` – could not be matched to any documented rule.
+- `if $return == -1` – could not be matched to any documented rule.
+- `$al.Settings[5] = null` – could not be matched to any documented rule.
+- `else if not $dc` – could not be matched to any documented rule.
+- `if $menu.view == 3` – could not be matched to any documented rule.
+- `$menu.view = 2` – could not be matched to any documented rule.
+- `$menu.view = $called.by` – could not be matched to any documented rule.
+- `else if is datatype[$return] == [DATATYPE_ARRAY]` – could not be matched to any documented rule.
+- `$command = $return[0]` – could not be matched to any documented rule.
+- `if $command == 'remote.cap'` – could not be matched to any documented rule.
+- `$menu.view = 6` – could not be matched to any documented rule.
+- `$ware = $return[2]` – could not be matched to any documented rule.
+- `$cap = [TRUE]` – could not be matched to any documented rule.
+- `else if $command == 'maintain.cap'` – could not be matched to any documented rule.
+- `else if $command == 'can.buy'` – could not be matched to any documented rule.
+- `else if $command == 'surplus'` – could not be matched to any documented rule.
+- `else if $command == 'buy.at'` – could not be matched to any documented rule.
+- `$trade = [TRUE]` – could not be matched to any documented rule.
+- `else if $command == 'sell.cap'` – could not be matched to any documented rule.
+- `else if $command == 'sell.at'` – could not be matched to any documented rule.
+- `else if $command == 'move.ware'` – could not be matched to any documented rule.
+- `else if $command == 'to.physical'` – could not be matched to any documented rule.
+- `else if $command == 'to.virtual'` – could not be matched to any documented rule.
+- `else if $command == 'remove.ware'` – could not be matched to any documented rule.
+- `else if $command == 'add.ware'` – could not be matched to any documented rule.
+- `else if $command == 'open.factory'` – could not be matched to any documented rule.
+- `$menu.view = 4` – could not be matched to any documented rule.
+- `else if $command == 'add.dc'` – could not be matched to any documented rule.
+- `$al.Settings[2] = $value` – could not be matched to any documented rule.
+- `else if $command == 'change.dc'` – could not be matched to any documented rule.
+- `else if $command == 'open.dock'` – could not be matched to any documented rule.
+- `$menu.view = 5` – could not be matched to any documented rule.
+- `else if $command == 'open.ware'` – could not be matched to any documented rule.
+- `$called.by = $menu.view` – could not be matched to any documented rule.
+- `* these are used for TC menu - not required for AP` – could not be matched to any documented rule.
+- `else if $command == 'show.factory'` – could not be matched to any documented rule.
+- `$check = $factory.show.array[$value]` – could not be matched to any documented rule.
+- `$factory.show.array[$value] = 2` – could not be matched to any documented rule.
+- `$factory.show.array[$value] = 1` – could not be matched to any documented rule.
+- `else if $command == 'show.type.dc'` – could not be matched to any documented rule.
+- `$check = $show.type.array[$value]` – could not be matched to any documented rule.
+- `$show.type.array[$value] = 2` – could not be matched to any documented rule.
+- `$show.type.array[$value] = 1` – could not be matched to any documented rule.
+- `else if $command == 'show.type.dock'` – could not be matched to any documented rule.
+- `$check = $show.type.array[$count]` – could not be matched to any documented rule.
+- `$show.type.array[$count] = 2` – could not be matched to any documented rule.
+- `$show.type.array[$count] = 1` – could not be matched to any documented rule.
+- `else if $command == 'product'` – could not be matched to any documented rule.
+- `$settings.array[0] = null` – could not be matched to any documented rule.
+- `else if $command == 'resource'` – could not be matched to any documented rule.
+- `$settings.array[1] = null` – could not be matched to any documented rule.
+- `if $return == 'dynamic.dc'` – could not be matched to any documented rule.
+- `$is.dynamic[0] = null` – could not be matched to any documented rule.
+- `$is.dynamic[0] = 1` – could not be matched to any documented rule.
+- `else if $return == 'dynamic.dock'` – could not be matched to any documented rule.
+- `$is.dynamic[2] = null` – could not be matched to any documented rule.
+- `$is.dynamic[2] = 1` – could not be matched to any documented rule.
+- `else if $return == 'dynamic.dock.list'` – could not be matched to any documented rule.
+- `$is.dynamic[1] = null` – could not be matched to any documented rule.
+- `$is.dynamic[1] = 1` – could not be matched to any documented rule.
+- `else if $return == 'debug'` – could not be matched to any documented rule.
+- `$al.Settings[7] = null` – could not be matched to any documented rule.
+- `$al.Settings[7] = 1` – could not be matched to any documented rule.
+- `else if $return == 'auto'` – could not be matched to any documented rule.
+- `$al.Settings[9] = null` – could not be matched to any documented rule.
+- `$al.Settings[9] = 1` – could not be matched to any documented rule.
+- `else if $return == 'open.config'` – could not be matched to any documented rule.
+- `else if $return == 'product.all.on'` – could not be matched to any documented rule.
+- `$cmd.opt1 = 1` – could not be matched to any documented rule.
+- `$cmd.opt2 = 1` – could not be matched to any documented rule.
+- `else if $return == 'product.all.off'` – could not be matched to any documented rule.
+- `$cmd.opt2 = 2` – could not be matched to any documented rule.
+- `else if $return == 'resource.all.on'` – could not be matched to any documented rule.
+- `$cmd.opt1 = 2` – could not be matched to any documented rule.
+- `else if $return == 'resource.all.off'` – could not be matched to any documented rule.
+- `else if $return == 'open.dc.menu'` – could not be matched to any documented rule.
+- `else if $return == 'switch.menu'` – could not be matched to any documented rule.
+- `else if $return == 'master.reset'` – could not be matched to any documented rule.
+- `if $confirm == [TRUE]` – could not be matched to any documented rule.
+- `if $command == 'can.buy'` – could not be matched to any documented rule.
+- `if $ware.settings[3]` – could not be matched to any documented rule.
+- `$ware.settings[3] = null` – could not be matched to any documented rule.
+- `$ware.settings[3] = 1` – could not be matched to any documented rule.
+- `if $ware.settings[7]` – could not be matched to any documented rule.
+- `$ware.settings[7] = null` – could not be matched to any documented rule.
+- `$ware.settings[7] = 1` – could not be matched to any documented rule.
+- `if $cap` – could not be matched to any documented rule.
+- `if is datatype[$amount] == [DATATYPE_NULL]` – could not be matched to any documented rule.
+- `if $amount >= 0` – could not be matched to any documented rule.
+- `$ware.settings[1] = $amount` – could not be matched to any documented rule.
+- `$ware.settings[2] = $amount` – could not be matched to any documented rule.
+- `$ware.settings[5] = $amount` – could not be matched to any documented rule.
+- `$ware.settings[1] = null` – could not be matched to any documented rule.
+- `$ware.settings[2] = null` – could not be matched to any documented rule.
+- `$ware.settings[5] = null` – could not be matched to any documented rule.
+- `if $trade` – could not be matched to any documented rule.
+- `if $amount >= $min AND $amount <= $max` – could not be matched to any documented rule.
+- `if $command == 'buy.at'` – could not be matched to any documented rule.
+- `$ware.settings[4] = $amount` – could not be matched to any documented rule.
+- `$ware.settings[6] = $amount` – could not be matched to any documented rule.
+- `* Menu View 1 = DC Details` – could not be matched to any documented rule.
+- `if $is.AP == [TRUE]` – could not be matched to any documented rule.
+- `* Menu View 2 = Factory List` – could not be matched to any documented rule.
+- `* Menu View 4 = Factory Details` – could not be matched to any documented rule.
+- `* Menu View 5 = Dock Details` – could not be matched to any documented rule.
+- `* Menu View 6 = Ware Details` – could not be matched to any documented rule.
+- `if not $ware.array` – could not be matched to any documented rule.
+- `if $command == 'to.virtual'` – could not be matched to any documented rule.
+- `$virtual = $virtual + $amount` – could not be matched to any documented rule.
+- `$ware.array[0] = $virtual` – could not be matched to any documented rule.
+- `$remove = -$amount` – could not be matched to any documented rule.
+- `if $virtual <= $amount` – could not be matched to any documented rule.
+- `$ware.array[0] = 0` – could not be matched to any documented rule.
+- `$virtual = $virtual - $amount` – could not be matched to any documented rule.
+- `$factory = $factory.array[$s]` – could not be matched to any documented rule.
+- `if $cmd.opt1 == 1` – could not be matched to any documented rule.
+- `if $cmd.opt2 == 1` – could not be matched to any documented rule.
+- `$txt = $value` – could not be matched to any documented rule.
+- `$txt = $pre.txt + $txt` – could not be matched to any documented rule.
+- `if $menu.view == 1 OR $menu.view == 2 OR $menu.view == 5` – could not be matched to any documented rule.

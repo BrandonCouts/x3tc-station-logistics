@@ -3,14 +3,20 @@
 This reference lists ware property commands available in X3TC scripting.
 
 - `<RetVar> get average price of ware <Var/Ware>`
+- **Examples:**
+  - `$avg = get average price of ware $ware`
 - #### Rule: `<RetVar> get maintype of ware <Var/Ware>`
 - **Full Description:** `<RetVar> get maintype of ware <Var/Ware>`
 - **Examples:**
   - `$main.t = get maintype of ware $ware`
 - **Edge Cases:** _None._
 - `<RetVar> get max price of ware <Var/Ware>`
+- **Examples:**
+  - `$max = get max price of ware $ware`
 - `<RetVar> get max price of ware <Var/Ware> as secondary resource`
 - `<RetVar> get min price of ware <Var/Ware>`
+- **Examples:**
+  - `$min = get min price of ware $ware`
 - `<RetVar> get min price of ware <Var/Ware> as secondary resource`
 - `<RetVar> get missile flags of <Var/Ware>`
 - `<RetVar/IF> <RefObj> get price of ware <Var/Ware>`

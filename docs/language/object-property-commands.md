@@ -51,6 +51,11 @@ This reference covers object property commands available in X3TC scripting. Each
   - `$settings.array = $factory-> get local variable: name=$pointer`
   - `$ware.array = $source-> get local variable: name=$pointer`
   - `$ware.settings = $dock-> get local variable: name=$pointer`
+  - `$show.type.array = $dc-> get local variable: name=$pointer`
+  - `$show.type.array = $value-> get local variable: name=$pointer`
+  - `$settings.array = $value-> get local variable: name=$pointer`
+  - `$ware.settings = $value-> get local variable: name=$pointer`
+  - `$ware.array = $value-> get local variable: name=$pointer`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
@@ -156,6 +161,12 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Full Description:** `<RefObj> set local variable: name=<Var/String> value=<Value>`
 - **Examples:**
   - `$factory-> set local variable: name=$pointer value=$settings.array`
+  - `$value-> set local variable: name=$pointer value=$settings.array`
+  - `$dc-> set local variable: name=$pointer value=$show.type.array`
+  - `$value-> set local variable: name=$pointer value=$show.type.array`
+  - `$value-> set local variable: name=$pointer value=$ware.settings`
+  - `$value-> set local variable: name=$pointer value=$ware.array`
+  - `$value-> set local variable: name=$pointer value=null`
 - **Edge Cases:** _None._
 - `<RefObj> set name to <Var/String>`
 - `<RefObj> set owner race to <Var/Race>`

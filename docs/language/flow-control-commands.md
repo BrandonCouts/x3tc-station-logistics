@@ -18,6 +18,23 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null`
   - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dc flag=1`
   - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dock flag=null`
+  - `$is.AP = null-> call script 'lib.BW.isAP' :`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.DC.Details' : menu=$menu`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.DC.Details' : menu=$menu`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.Factory.List' : menu=$menu`
+  - `$return.array = null-> call script 'plugin.LI.FDN.Menu.Factory.List' : menu=$menu factory.show.array=null`
+  - `$return.array = null-> call script 'plugin.LI.FDN.Menu.Factory.List' : menu=$menu factory.show.array=$factory.show.array`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Factory.Details' : menu=$menu value=$value`
+  - `START null-> call script 'plugin.LI.FDN.Menu.DC.Details_D' :`
+  - `START null-> call script 'plugin.LI.FDN.Menu.Dock.Details_D' : value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.Dock.Details' : menu=$menu value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Dock.Details' : menu=$menu value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Ware.Details' : menu=$menu value=$value ware=$ware`
+  - `$menu = null-> call script 'plugin.LI.FDN.Config.Menu' : menu=$menu`
+  - `$dummy = null-> call script 'plugin.LI.FDN.Move.Ware' : ware=$ware source=$value`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=null station=$value action='create'`
+  - `= null-> call script 'plugin.LI.FDN.Reset' :`
+  - `START null-> call script 'plugin.LI.FDN.Cleanup' :`
 - **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
@@ -38,6 +55,19 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `gosub Factory.Summary.Sub:`
   - `gosub Dock.Summary.Sub:`
   - `gosub Debug.Sub:`
+  - `gosub Menu.View.Header.Sub:`
+  - `gosub Config.View.Sub:`
+  - `gosub Menu.View.Footer.Sub:`
+  - `gosub Ware.User.Input.Sub:`
+  - `gosub DC.Details.View.Sub:`
+  - `gosub Factory.List.View.Sub:`
+  - `gosub Factory.Details.View.Sub:`
+  - `gosub Dock.Details.View.Sub:`
+  - `gosub Ware.Details.View.Sub:`
+  - `gosub Add.Ware.Sub:`
+  - `gosub Regroom.Ware.Sub:`
+  - `gosub Remove.Ware.Sub:`
+  - `gosub Global.Factory.Sub:`
 - **Edge Cases:** _None._
 - `goto label <Label Name>:`
 - `<RefObj> interrupt task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3>`

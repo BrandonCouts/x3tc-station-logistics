@@ -81,7 +81,7 @@
 #### Rule: `set global variable: name=<Var/String> value=<Value>`
 - **Short Description:** Sets or creates a global variable.
 - **One Example:**
-  - `set global variable: name=$var value=null`
+  - `set global variable: name='al.LI.FDN.event' value=$al.Settings`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> get global variables: regular expression=<Var/String>`
@@ -105,13 +105,13 @@
 #### Rule: `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
 - **Short Description:** `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
 - **One Example:**
-  - `$settings.array = $factory-> get local variable: name=$pointer`
+  - `$ware.array = $value-> get local variable: name=$pointer`
 - **Edge Cases:** _None._
 
 #### Rule: `<RefObj> set local variable: name=<Var/String> value=<Value>`
 - **Short Description:** `<RefObj> set local variable: name=<Var/String> value=<Value>`
 - **One Example:**
-  - `$factory-> set local variable: name=$pointer value=$settings.array`
+  - `$value-> set local variable: name=$pointer value=$ware.settings`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
@@ -159,7 +159,13 @@
 #### Rule: `<RetVar/IF> <RefObj> add <Var/Number> units of <Var/Ware>`
 - **Short Description:** Adds a quantity of ware to a ship's cargo bay.
 - **One Example:**
-  - `= $drone-> add $sell.amount units of $ware`
+  - `= $value-> add $remove units of $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RefObj> remove product from factory or dock: <Var/Ware>`
+- **Short Description:** `<RefObj> remove product from factory or dock: <Var/Ware>`
+- **One Example:**
+  - `$value-> remove product from factory or dock: $ware`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> <RefObj> sell ware <Var/Ware>`
@@ -198,6 +204,12 @@
   - `add custom menu info line to array $menu: text=$txt`
 - **Edge Cases:** _None._
 
+#### Rule: `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
+- **Short Description:** `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
+- **One Example:**
+  - `add custom menu item to array $menu: text=$txt returnvalue='switch.menu'`
+- **Edge Cases:** _None._
+
 #### Rule: `add custom menu heading to array <Var/Array>: title=<Var/String>`
 - **Short Description:** `add custom menu heading to array <Var/Array>: title=<Var/String>`
 - **One Example:**
@@ -207,7 +219,7 @@
 #### Rule: `add custom menu heading to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **Short Description:** `add custom menu heading to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **One Example:**
-  - `add custom menu heading to array $menu: page=$PageID id=157`
+  - `add custom menu heading to array $menu: page=$PageID id=110`
 - **Edge Cases:** _None._
 
 #### Rule: `add custom menu info line to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
@@ -297,13 +309,13 @@
 #### Rule: `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **Short Description:** `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
 - **One Example:**
-  - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dc flag=1`
+  - `START null-> call script 'plugin.LI.FDN.Menu.DC.Details_D' :`
 - **Edge Cases:** _None._
 
 #### Rule: `gosub <Label Name>:`
 - **Short Description:** `gosub <Label Name>:`
 - **One Example:**
-  - `gosub Factory.Summary.Sub:`
+  - `gosub Ware.User.Input.Sub:`
 - **Edge Cases:** _None._
 
 #### Rule: `endsub`
@@ -330,10 +342,28 @@
   - `$d.time = format time: $d.time`
 - **Edge Cases:** _None._
 
+#### Rule: `<RetVar> convert number <Var/Number> to string`
+- **Short Description:** `<RetVar> convert number <Var/Number> to string`
+- **One Example:**
+  - `$min.txt = convert number $min to string`
+- **Edge Cases:** _None._
+
 #### Rule: `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
 - **Short Description:** `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
 - **One Example:**
-  - `$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt`
+  - `$ware = null-> get user input: type=[Var/Ware], title=$txt`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> open custom info menu: title=<Var/String> description=<Var/String> option array=<Var/Array> maxoptions=<Var/Number>`
+- **Short Description:** `<RetVar/IF> open custom info menu: title=<Var/String> description=<Var/String> option array=<Var/Array> maxoptions=<Var/Number>`
+- **One Example:**
+  - `$return = open custom info menu: title=$txt description=null option array=$menu maxoptions=2`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar/IF> open custom menu: title=<Var/String> description=<Var/String> option array=<Var/Array>`
+- **Short Description:** `<RetVar/IF> open custom menu: title=<Var/String> description=<Var/String> option array=<Var/Array>`
+- **One Example:**
+  - `$return = open custom menu: title=$txt description=null option array=$menu`
 - **Edge Cases:** _None._
 
 #### Rule: `display subtitle text: text=<Var/String> duration=<Var/Number> ms`
@@ -364,6 +394,24 @@
 - **Short Description:** `<RetVar/IF> <RefObj> get tradeable ware array from station`
 - **One Example:**
   - `$ware.Array = $station-> get tradeable ware array from station`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> get average price of ware <Var/Ware>`
+- **Short Description:** `<RetVar> get average price of ware <Var/Ware>`
+- **One Example:**
+  - `$avg = get average price of ware $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> get max price of ware <Var/Ware>`
+- **Short Description:** `<RetVar> get max price of ware <Var/Ware>`
+- **One Example:**
+  - `$max = get max price of ware $ware`
+- **Edge Cases:** _None._
+
+#### Rule: `<RetVar> get min price of ware <Var/Ware>`
+- **Short Description:** `<RetVar> get min price of ware <Var/Ware>`
+- **One Example:**
+  - `$min = get min price of ware $ware`
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> get maintype of ware <Var/Ware>`

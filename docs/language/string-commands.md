@@ -3,6 +3,10 @@
 This reference lists string commands available in X3TC scripting.
 
 - `<RetVar> convert number <Var/Number> to string`
+- **Examples:**
+  - `$min.txt = convert number $min to string`
+  - `$avg.txt = convert number $avg to string`
+  - `$max.txt = convert number $max to string`
 - `<RetVar> find position of pattern <Var/String1> in <Var/String2>`
 - `<RetVar> format seconds=<Var/String> to Zura time string`
 - `<RetVar> format time: <Var/Number>`
@@ -26,15 +30,33 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = read text: page=$PageID id=102`
   - `$menu = read text: page=$PageID id=102`
   - `$txt = read text: page=$PageID id=103`
+  - `$txt = read text: page=$PageID id=104`
+  - `$txt = read text: page=$PageID id=106`
+  - `$txt = read text: page=$PageID id=107`
+  - `$txt = read text: page=$PageID id=108`
+  - `$txt = read text: page=$PageID id=109`
   - `$txt = read text: page=$PageID id=180`
   - `$txt = read text: page=$PageID id=181`
+  - `$txt = read text: page=$PageID id=111`
+  - `$txt = read text: page=$PageID id=112`
+  - `$pre.txt = read text: page=$PageID id=114`
   - `$pointer = read text: page=$PageID id=4001`
+  - `$pointer = read text: page=$PageID id=4003`
+  - `$pointer = read text: page=$PageID id=4004`
   - `$txt = read text: page=$PageID id=162`
   - `$txt = read text: page=$PageID id=160`
   - `$txt = read text: page=$PageID id=163`
   - `$txt = read text: page=$PageID id=161`
   - `$txt = read text: page=$PageID id=184`
   - `$txt = read text: page=$PageID id=178`
+  - `$txt = read text: page=$PageID id=186`
+  - `$txt = read text: page=$PageID id=197`
+  - `$txt = read text: page=$PageID id=148`
+  - `$txt = read text: page=$PageID id=149`
+  - `$txt = read text: page=$PageID id=125`
+  - `$txt = read text: page=$PageID id=126`
+  - `$txt = read text: page=$PageID id=127`
+  - `$txt = read text: page=$PageID id=133`
 - **Edge Cases:** _None._
 - `<RetVar/IF> read text: page id=<Var/Number1>, from <Var/Number2> to <Var/Number3> to array, include empty=<Var/Number4>`
 - `<RetVar/IF> read text: page id=<Var/Number>, id=<Var/Number> exists`
@@ -53,6 +75,8 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = sprintf: pageid=$PageID textid=194, $destination, $ware, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=192, $destination, null, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=193, $amount, $ware, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=182, $ware, null, null, null, null`
+  - `$txt = sprintf: pageid=$PageID textid=183, $min.txt, $avg.txt, $max.txt, null, null`
 - **Edge Cases:** _None._
 - `<RetVar> string <Var/String> to integer`
 - `<RetVar> substitute in string <Var/String1>: pattern <Var/String2> with <Var/String3>`

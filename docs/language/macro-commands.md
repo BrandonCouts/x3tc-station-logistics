@@ -8,6 +8,7 @@ This reference lists macro commands available in X3TC scripting.
   - `add custom menu heading to array $menu: page=$PageID id=123`
   - `add custom menu heading to array $menu: page=$PageID id=124`
   - `add custom menu heading to array $menu: page=$PageID id=125`
+  - `add custom menu heading to array $menu: page=$PageID id=110`
   - `add custom menu heading to array $menu: page=$PageID id=108`
   - `add custom menu heading to array $menu: page=$PageID id=126`
   - `add custom menu heading to array $menu: page=$PageID id=127`
