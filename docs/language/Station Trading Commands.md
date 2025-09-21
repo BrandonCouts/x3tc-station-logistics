@@ -22,6 +22,7 @@ This reference covers station trading-related commands available in X3TC scripti
 - `<RetVar/IF> find factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - **Examples:**
   - `$sell.Station = find factory: buys $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array`
+- **Optional Parameter Definitions:** See [Station Trading Search Optional Parameters](../options/station-trading-search-options.md).
 - **Edge Cases:** _None._
 - `<RetVar/IF> find factory: buys <Var/Ware> with min jumps: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - `<RetVar/IF> find factory: sells <Var/Ware> with best chance: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`

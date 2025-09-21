@@ -70,6 +70,7 @@
 - **Short Description:** `<RefObj> interrupt with script <Script Name> and priority <Var/Number>: arg1=<Value> arg2=<Value> arg3=<Value> arg4=<Value>`
 - **One Example:**
   - `[THIS]-> interrupt with script 'plugin.advjump.jump' and priority 40: arg1=$target.pos arg2=null arg3=null arg4=null`
+- **Optional Parameter Definitions:** See [Flow Control Interrupt Optional Parameters](options/flow-control-interrupt-options.md).
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar/IF> get global variable: name=<Var/String>`
@@ -130,6 +131,7 @@
 - **Short Description:** Finds the best-price factory buying a ware from a given sector, honoring jump and exclusion limits.
 - **One Example:**
   - `$sell.Station = find factory: buys $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array`
+- **Optional Parameter Definitions:** See [Station Trading Search Optional Parameters](options/station-trading-search-options.md).
 - **Edge Cases:** _None._
 
 #### Rule: `<RetVar> create ship: type=<Var/Ship Type> owner=<Var/Race> addto=<value> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`

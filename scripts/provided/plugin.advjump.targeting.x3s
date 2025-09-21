@@ -1,0 +1,41 @@
+* Third-party script snippet: advanced jumpdrive targeting routine
+
+if not $target.class == [Sector (X3TC)]
+if $target-> is of class [Moveable Ship]
+$target.command = $target-> get command
+$target.pos = $target-> get command target
+$target.sector = $target-> get sector
+$target.pos = $target-> get position as array
+append $target.sector to array $target.pos
+else
+$target.sector = $target-> get sector
+$target.pos = $target-> get position as array
+append $target.sector to array $target.pos
+end
+
+* target is a sector
+else
+resize array $target.pos to 0
+append 0 to array $target.pos
+append 0 to array $target.pos
+append 0 to array $target.pos
+append $target to array $target.pos
+$target.sector = $target
+end
+
+$this.sector = [THIS]-> get sector
+if $target.sector != $this.sector
+$jumps.needed = get jumps from sector $this.sector to sector $target.sector
+if $jumps.needed > 1
+if [THIS]-> get amount of ware {Advanced Jumpdrive} in cargo bay
+if [THIS]-> get amount of ware {FTL Jumpdrive Extension} in cargo bay
+[THIS]-> interrupt with script 'plugin.advjump.jump' and priority 40: arg1=$target.pos arg2=null arg3=null arg4=null
+else
+[THIS]-> interrupt with script 'plugin.advjump.jump' and priority 40: arg1=$target.sector arg2=null arg3=null arg4=null
+end
+end
+end
+end
+end
+
+return null
