@@ -1,7 +1,7 @@
 * ******************************************************************************
 * SCRIPT NAME: lib.slx.query
-* DESCRIPTION: Query helpers for SLX
-* AUTHOR:      Brandon              DATE: 8 September 2025
+* DESCRIPTION: Shared queries and config helpers for SLX
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
 
 $ROLE = 0
@@ -9,86 +9,206 @@ $MIN_PCT = 1
 $MAX_PCT = 2
 $CHUNK_PCT = 3
 
+$DEF_ROLE = 'auto'
+$DEF_MIN = 10
+$DEF_MAX = 90
+$DEF_CHUNK = 20
+$DEF_REASON = 'BAL_OK'
+
 if $function == 'ListEnrolledStations'
   $result = array alloc: size=0
-  $all = get station array: of race [Player] class/type=[Station]
-  $count = size of array $all
+  $stations = get station array: of race [Player] class/type=[Station]
+  $count = size of array $stations
   while $count
     dec $count
-    $st = $all[$count]
-    $enrolled = $st -> get local variable: name='slx.enrolled'
-    if $enrolled
+    $st = $stations[$count]
+    if not $st
+      continue
+    end
+    $flag = $st -> get local variable: name='slx.enrolled'
+    if $flag
       append $st to array $result
     end
   end
   return $result
 end
 
-if $function == 'GetStationWarePct'
-  $amt = $station -> get amount of ware $ware in cargo bay
-  $cap = $station -> get max amount of ware $ware that can be stored in cargo bay
-  if $cap <= 0
+if $function == 'GetStationWarePercent'
+  if not $station
     return 0
   end
-  $pct = $amt * 100 / $cap
+  $amount = $station -> get amount of ware $ware in cargo bay
+  $capacity = $station -> get max amount of ware $ware that can be stored in cargo bay
+  if $capacity <= 0
+    return 0
+  end
+  $pct = null -> call script 'lib.slx.util' : function='Percent', part=$amount, whole=$capacity
   return $pct
 end
 
-if $function == 'GetSector'
-  $sec = $station -> get sector
-  return $sec
-end
-
 if $function == 'GetStationWareConfig'
-  $roleArr = $station -> get local variable: name='slx.ware.role'
-  $minArr = $station -> get local variable: name='slx.ware.min_pct'
-  $maxArr = $station -> get local variable: name='slx.ware.max_pct'
-  $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
-  $cfg = array alloc: size=4
-  $cfg[$ROLE] = $roleArr[$ware]
-  $cfg[$MIN_PCT] = $minArr[$ware]
-  $cfg[$MAX_PCT] = $maxArr[$ware]
-  $cfg[$CHUNK_PCT] = $chunkArr[$ware]
-  return $cfg
-end
-
-if $function == 'SetStationWareConfig'
+  if not $station
+    return null
+  end
   $roleArr = $station -> get local variable: name='slx.ware.role'
   if not $roleArr
     $roleArr = array alloc: size=0
   end
-  $roleArr[$ware] = $cfg[$ROLE]
-  $station -> set local variable: name='slx.ware.role' value=$roleArr
-
   $minArr = $station -> get local variable: name='slx.ware.min_pct'
   if not $minArr
     $minArr = array alloc: size=0
   end
-  $minArr[$ware] = $cfg[$MIN_PCT]
-  $station -> set local variable: name='slx.ware.min_pct' value=$minArr
-
   $maxArr = $station -> get local variable: name='slx.ware.max_pct'
   if not $maxArr
     $maxArr = array alloc: size=0
   end
-  $maxArr[$ware] = $cfg[$MAX_PCT]
-  $station -> set local variable: name='slx.ware.max_pct' value=$maxArr
-
   $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
   if not $chunkArr
     $chunkArr = array alloc: size=0
   end
-  $chunkArr[$ware] = $cfg[$CHUNK_PCT]
+
+  $role = $roleArr[$ware]
+  if not $role
+    $role = $DEF_ROLE
+  end
+
+  $min = $minArr[$ware]
+  if $min == null
+    $min = $DEF_MIN
+  end
+
+  $max = $maxArr[$ware]
+  if $max == null
+    $max = $DEF_MAX
+  end
+
+  $chunk = $chunkArr[$ware]
+  if $chunk == null
+    $chunk = $DEF_CHUNK
+  end
+
+  $min = null -> call script 'lib.slx.util' : function='Clamp', input=$min, min=0, max=100
+  $max = null -> call script 'lib.slx.util' : function='Clamp', input=$max, min=0, max=100
+  if $min > $max
+    $swap = $min
+    $min = $max
+    $max = $swap
+  end
+  $chunk = null -> call script 'lib.slx.util' : function='Clamp', input=$chunk, min=0, max=100
+
+  $roleArr[$ware] = $role
+  $station -> set local variable: name='slx.ware.role' value=$roleArr
+
+  $minArr[$ware] = $min
+  $station -> set local variable: name='slx.ware.min_pct' value=$minArr
+
+  $maxArr[$ware] = $max
+  $station -> set local variable: name='slx.ware.max_pct' value=$maxArr
+
+  $chunkArr[$ware] = $chunk
   $station -> set local variable: name='slx.ware.chunk_pct' value=$chunkArr
+
+  $cfg = array alloc: size=4
+  $cfg[$ROLE] = $role
+  $cfg[$MIN_PCT] = $min
+  $cfg[$MAX_PCT] = $max
+  $cfg[$CHUNK_PCT] = $chunk
+  return $cfg
+end
+
+if $function == 'SetStationWareConfig'
+  if not $station
+    return null
+  end
+  $roleArr = $station -> get local variable: name='slx.ware.role'
+  if not $roleArr
+    $roleArr = array alloc: size=0
+  end
+  $minArr = $station -> get local variable: name='slx.ware.min_pct'
+  if not $minArr
+    $minArr = array alloc: size=0
+  end
+  $maxArr = $station -> get local variable: name='slx.ware.max_pct'
+  if not $maxArr
+    $maxArr = array alloc: size=0
+  end
+  $chunkArr = $station -> get local variable: name='slx.ware.chunk_pct'
+  if not $chunkArr
+    $chunkArr = array alloc: size=0
+  end
+
+  $role = $cfg[$ROLE]
+  if not $role
+    $role = $DEF_ROLE
+  end
+
+  $min = $cfg[$MIN_PCT]
+  if $min == null
+    $min = $DEF_MIN
+  end
+
+  $max = $cfg[$MAX_PCT]
+  if $max == null
+    $max = $DEF_MAX
+  end
+
+  $chunk = $cfg[$CHUNK_PCT]
+  if $chunk == null
+    $chunk = $DEF_CHUNK
+  end
+
+  $min = null -> call script 'lib.slx.util' : function='Clamp', input=$min, min=0, max=100
+  $max = null -> call script 'lib.slx.util' : function='Clamp', input=$max, min=0, max=100
+  if $min > $max
+    $swap = $min
+    $min = $max
+    $max = $swap
+  end
+  $chunk = null -> call script 'lib.slx.util' : function='Clamp', input=$chunk, min=0, max=100
+
+  $roleArr[$ware] = $role
+  $station -> set local variable: name='slx.ware.role' value=$roleArr
+
+  $minArr[$ware] = $min
+  $station -> set local variable: name='slx.ware.min_pct' value=$minArr
+
+  $maxArr[$ware] = $max
+  $station -> set local variable: name='slx.ware.max_pct' value=$maxArr
+
+  $chunkArr[$ware] = $chunk
+  $station -> set local variable: name='slx.ware.chunk_pct' value=$chunkArr
+
   return null
 end
 
+if $function == 'GetLastReason'
+  if not $station
+    return $DEF_REASON
+  end
+  $arr = $station -> get local variable: name='slx.ware.last_reason'
+  if not $arr
+    $arr = array alloc: size=0
+    $station -> set local variable: name='slx.ware.last_reason' value=$arr
+  end
+  $code = $arr[$ware]
+  if not $code
+    $code = $DEF_REASON
+  end
+  return $code
+end
+
 if $function == 'SetLastReason'
+  if not $station
+    return null
+  end
   $arr = $station -> get local variable: name='slx.ware.last_reason'
   if not $arr
     $arr = array alloc: size=0
   end
-  $arr[$ware] = $text
+  if not $code
+    $code = $DEF_REASON
+  end
+  $arr[$ware] = $code
   $station -> set local variable: name='slx.ware.last_reason' value=$arr
   return null
 end

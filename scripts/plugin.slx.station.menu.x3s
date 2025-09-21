@@ -1,8 +1,9 @@
 * ******************************************************************************
 * SCRIPT NAME: plugin.slx.station.menu
-* DESCRIPTION: Station configuration menu for SLX
-* AUTHOR:      Brandon              DATE: 8 September 2025
+* DESCRIPTION: Station configuration menu for SLX logistics
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
+
 $PageId = 89055
 
 $ROLE = 0
@@ -12,7 +13,7 @@ $CHUNK_PCT = 3
 
 if not $station
   $prompt = read text: page=$PageId id=209
-  $station = null  ->  get user input: type=Var/Ship/Station owned by Player, title=$prompt
+  $station = null -> get user input: type=[Var/Ship/Station owned by Player], title=$prompt
 end
 if not $station
   return null
@@ -21,97 +22,131 @@ end
 while [TRUE]
   $title = read text: page=$PageId id=101
   $menu = create custom menu array: heading=$title
+
   $enrolled = $station -> get local variable: name='slx.enrolled'
   if $enrolled
-    $toggle = read text: page=$PageId id=216
+    $toggleTxt = read text: page=$PageId id=216
   else
-    $toggle = read text: page=$PageId id=215
+    $toggleTxt = read text: page=$PageId id=215
   end
-  add custom menu item to array $menu: text=$toggle returnvalue='toggle'
+  add custom menu item to array $menu: text=$toggleTxt returnvalue='toggle'
+
   add section to custom menu: $menu
+
   $wares = $station -> get tradeable ware array from station
-  $wcount = size of array $wares
-  while $wcount
-    dec $wcount
-    $ware = $wares[$wcount]
+  $count = size of array $wares
+  while $count
+    dec $count
+    $ware = $wares[$count]
+    if not $ware
+      continue
+    end
     $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
-    $last = $station -> get local variable: name='slx.ware.last_reason'
-    $code = $last[$ware]
-    $reason = null -> call script 'lib.slx.ui' : function='FormatReason', code=$code
-    $row = sprintf: pageid=$PageId textid=214, $ware, $cfg[$ROLE], $cfg[$MIN_PCT], $cfg[$MAX_PCT], $cfg[$CHUNK_PCT], $reason
+    $cfgRole = $cfg[$ROLE]
+    $cfgMinPct = $cfg[$MIN_PCT]
+    $cfgMaxPct = $cfg[$MAX_PCT]
+    $cfgChunkPct = $cfg[$CHUNK_PCT]
+    $reasonCode = null -> call script 'lib.slx.query' : function='GetLastReason', station=$station, ware=$ware
+    $reasonTxt = null -> call script 'lib.slx.ui' : function='FormatReason', code=$reasonCode
+    $chunkAndReason = sprintf: fmt='%s %s', $cfgChunkPct, $reasonTxt, null, null, null
+    $row = sprintf: pageid=$PageId textid=214, $ware, $cfgRole, $cfgMinPct, $cfgMaxPct, $chunkAndReason
     add custom menu item to array $menu: text=$row returnvalue=$ware
-    wait 1 ms
+    = wait 1 ms
   end
+
   add section to custom menu: $menu
   $exit = read text: page=$PageId id=208
   add custom menu item to array $menu: text=$exit returnvalue=null
-  $sel = open custom menu: title=$title description=null option array=$menu
-  if not $sel
+
+  $selection = open custom menu: title=$title description=null option array=$menu
+  if not $selection
     break
   end
-  if $sel == 'toggle'
+
+  if $selection == 'toggle'
     if $enrolled
       $station -> set local variable: name='slx.enrolled' value=null
     else
       $station -> set local variable: name='slx.enrolled' value=[TRUE]
-      $def = array alloc: size=4
-      $def[$ROLE] = 'auto'
-      $def[$MIN_PCT] = 10
-      $def[$MAX_PCT] = 90
-      $def[$CHUNK_PCT] = 20
-      $all = $station -> get tradeable ware array from station
-      $idx = size of array $all
+      $idx = size of array $wares
       while $idx
         dec $idx
-        $w = $all[$idx]
-        null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$w, cfg=$def
-        wait 1 ms
+        $ware = $wares[$idx]
+        if not $ware
+          continue
+        end
+        $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
+        = null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
+        = null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
+        = wait 1 ms
       end
     end
     continue
   end
-  $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$sel
-  $txtRole = read text: page=$PageId id=210
-  $role = null  ->  get user input: type=Var/String, title=$txtRole
-  if not $role
-    $role = $cfg[$ROLE]
-  end
-  $txtMin = read text: page=$PageId id=211
-  $min = null  ->  get user input: type=Var/Number, title=$txtMin
-  if not $min
-    $min = $cfg[$MIN_PCT]
-  end
-  $txtMax = read text: page=$PageId id=212
-  $max = null  ->  get user input: type=Var/Number, title=$txtMax
-  if not $max
-    $max = $cfg[$MAX_PCT]
-  end
-  $txtChunk = read text: page=$PageId id=213
-  $chunk = null  ->  get user input: type=Var/Number, title=$txtChunk
-  if not $chunk
-    $chunk = $cfg[$CHUNK_PCT]
+
+  if not $enrolled
+    continue
   end
 
-    * sanity clamp
-    if $min > $max
-    $tmp = $min
-    $min = $max
-    $max = $tmp
-    end
-    if $chunk < 1
-    $chunk = 1
-    end
-    if $chunk > 100
-    $chunk = 100
-    end
+  $ware = $selection
+  $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
+  $roleValue = $cfg[$ROLE]
+  $minValue = $cfg[$MIN_PCT]
+  $maxValue = $cfg[$MAX_PCT]
+  $chunkValue = $cfg[$CHUNK_PCT]
 
-  $new = array alloc: size=4
-  $new[$ROLE] = $role
-  $new[$MIN_PCT] = $min
-  $new[$MAX_PCT] = $max
-  $new[$CHUNK_PCT] = $chunk
-  null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$sel, cfg=$new
-  wait 1 ms
+  $rolePrompt = read text: page=$PageId id=210
+  $roleMenu = create custom menu array: heading=$rolePrompt
+  add custom menu item to array $roleMenu: text='Producer' returnvalue='producer'
+  add custom menu item to array $roleMenu: text='Consumer' returnvalue='consumer'
+  add custom menu item to array $roleMenu: text='Store' returnvalue='store'
+  add custom menu item to array $roleMenu: text='Auto' returnvalue='auto'
+  add section to custom menu: $roleMenu
+  add custom menu item to array $roleMenu: text=$exit returnvalue=null
+  $roleSel = open custom menu: title=$rolePrompt description=null option array=$roleMenu
+  if $roleSel
+    $roleValue = $roleSel
+  end
+
+  $minPrompt = read text: page=$PageId id=211
+  $minPrompt = sprintf: fmt='%s [%s]', $minPrompt, $minValue, null, null, null
+  $min = null -> get user input: type=[Var/Number], title=$minPrompt
+  if $min == null
+    $min = $minValue
+  end
+  $minValue = null -> call script 'lib.slx.util' : function='Clamp', input=$min, min=0, max=100
+
+  $maxPrompt = read text: page=$PageId id=212
+  $maxPrompt = sprintf: fmt='%s [%s]', $maxPrompt, $maxValue, null, null, null
+  $max = null -> get user input: type=[Var/Number], title=$maxPrompt
+  if $max == null
+    $max = $maxValue
+  end
+  $maxValue = null -> call script 'lib.slx.util' : function='Clamp', input=$max, min=0, max=100
+
+  if $minValue > $maxValue
+    $tmp = $minValue
+    $minValue = $maxValue
+    $maxValue = $tmp
+  end
+
+  $chunkPrompt = read text: page=$PageId id=213
+  $chunkPrompt = sprintf: fmt='%s [%s]', $chunkPrompt, $chunkValue, null, null, null
+  $chunk = null -> get user input: type=[Var/Number], title=$chunkPrompt
+  if $chunk == null
+    $chunk = $chunkValue
+  end
+  $chunkValue = null -> call script 'lib.slx.util' : function='Clamp', input=$chunk, min=0, max=100
+
+  $cfg[$ROLE] = $roleValue
+  $cfg[$MIN_PCT] = $minValue
+  $cfg[$MAX_PCT] = $maxValue
+  $cfg[$CHUNK_PCT] = $chunkValue
+
+  = null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
+  = null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
+
+  = wait 10 ms
 end
 
 return null

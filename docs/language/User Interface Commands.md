@@ -37,6 +37,7 @@ This reference covers user interface-related commands available in X3TC scriptin
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get user input: type=<Script Reference Type>, title=<Var/String>`
 - **Examples:**
+  - `$destination = null-> get user input: type=[Var/Ship/Station], title=$txt`
   - `$destination = null-> get user input: type=[Var/Ship/Station owned by Player], title=$txt`
   - `$amount = null-> get user input: type=[Var/Number], title=$txt`
   - `$ware = null-> get user input: type=[Var/Ware], title=$txt`

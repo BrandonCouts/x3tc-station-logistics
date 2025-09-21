@@ -60,7 +60,11 @@ This reference lists string commands available in X3TC scripting.
 - **Edge Cases:** _None._
 - `<RetVar/IF> read text: page id=<Var/Number1>, from <Var/Number2> to <Var/Number3> to array, include empty=<Var/Number4>`
 - `<RetVar/IF> read text: page id=<Var/Number>, id=<Var/Number> exists`
-- `<RetVar> sprintf: fmt=<Var/String>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- #### Rule: `<RetVar> sprintf: fmt=<Var/String>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- **Full Description:** Formats values using an inline format string. Supply all five argument slots, padding unused positions with `null`.
+- **Examples:**
+  - `$txt = sprintf: fmt='%s (Auto)', $txt, null, null, null, null`
+- **Edge Cases:** The command fails to parse if the unused argument slots are omitted.
 - #### Rule: `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
 - **Full Description:** `<RetVar> sprintf: pageid=<Var/Number> textid=<Var/Number>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
 - **Examples:**

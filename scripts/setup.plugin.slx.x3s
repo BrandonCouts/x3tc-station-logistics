@@ -1,64 +1,32 @@
 * ******************************************************************************
 * SCRIPT NAME: setup.plugin.slx
-* DESCRIPTION: SLX Station Logistics X3  (setup + AL plugin registration + loop guard)
-* AUTHOR:      Brandon              DATE: 8 September 2025
+* DESCRIPTION: Setup for SLX logistics (text page + AL registration)
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
 
-
-$Ver.Major = 1
-$Ver.Minor = 0
+$Ver.Major = 0
+$Ver.Minor = 2
 $Ver.Patch = 0
-
-$PageId = 89055
-
-* A combined integer is handy for comparison, e.g. v1.2.3 =
-* |Maj|Min|Pch|
-* |001|002|003|
 $Ver.Internal = ($Ver.Major * 1000000) + ($Ver.Minor * 1000) + $Ver.Patch
 
-$Config.Ver.Major = 0
-$Config.Ver.Minor = 1
-$Config.Ver.Patch = 2
-$Config.Ver.Internal = 3
-$Config.PageId = 4
-$Config.Debug.Enabled = 5
-$Config.Debug.Verbosity = 6
-$Config.Debug.Target = 7
-$Config.Required.Ware = 8
-$Config.Auto.Rename = 9
-$Config.Blacklist = 10
-$Config.Monitor.Task = 11
-$Config.Trade.Threshold = 12
-$Config.All.Wares = 13
-$Config.Trade.Illegal.Wares = 14
-$Config.Races = 15
-$Config.Illegal.Wares = 16
-$Config.Refuel.Percent = 17
-$Config.Global.Balance = 18
-$Config.Trade.Cache = 19
-$Config.Equip = 20
-$Config.Alert.Sound = 21
-
+$PageId = 89055
 load text: id=$PageId
 
-$section = read text: page=$PageId id=101
-$txt = read text: page=$PageId id=102
+set global variable: name='g.slx.version' value=$Ver.Internal
 
-skip if $section
-$section = 'SLX'
-
-skip if $txt
-$txt = 'Open SLX'
-
-$st = get global variable: name='slx.stations'
-if not $st
-$st = array alloc: size=0
-set global variable: name='slx.stations' value=$st
+$enabled = get global variable: name='g.slx.enabled'
+if $enabled == null
+  set global variable: name='g.slx.enabled' value=[TRUE]
 end
 
-* Register AL plugin for SLX
+set global variable: name='g.slx.manager.running' value=null
+
+$pluginTitle = read text: page=$PageId id=101
+
 al engine: register script='al.plugin.slx'
-al engine: set plugin 'al.plugin.slx' description to 'SLX Station Logistics'
+if $pluginTitle
+  al engine: set plugin 'al.plugin.slx' description to $pluginTitle
+end
 al engine: set plugin 'al.plugin.slx' timer interval to 30 s
 
 = [THIS] -> call script 'plugin.slx.init' :
