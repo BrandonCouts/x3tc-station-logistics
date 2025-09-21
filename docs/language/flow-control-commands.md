@@ -37,14 +37,14 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `START null-> call script 'plugin.LI.FDN.Cleanup' :`
   - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=1`
   - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=null`
-- **Edge Cases:** _None._
+- **Edge Cases:** Use the `=` prefix when ignoring the return value, wrap script names in single quotes, and keep named argument labels free of spaces.
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - #### Rule: `endsub`
 - **Full Description:** `endsub`
 - **Examples:**
   - `endsub`
-- **Edge Cases:** _None._
+- **Edge Cases:** Always end the `gosub` command with a trailing colon.
 - #### Rule: `gosub <Label Name>:`
 - **Full Description:** `gosub <Label Name>:`
 - **Examples:**
@@ -83,7 +83,11 @@ This reference covers flow control commands available in X3TC scripting. Each en
 - **Optional Parameter Definitions:** See [Flow Control Interrupt Optional Parameters](../options/flow-control-interrupt-options.md).
 - **Edge Cases:** _None._
 - `<RefObj> launch named script: task=<Var/Number> scriptname=<Var/String> prio=<Var/Number>, <Value>, <Value>, <Value>, <Value>, <Value>`
-- `<RetVar/IF> wait <Var/Number> ms`
+- #### Rule: `<RetVar/IF> wait <Var/Number> ms`
+- **Full Description:** `<RetVar/IF> wait <Var/Number> ms`
+- **Examples:**
+  - `= wait 1 ms`
+- **Edge Cases:** Prefix with `=` when you do not store the return value.
 - `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
 - **Examples:**
   - `= wait randomly from 500 to 1000 ms`

@@ -1,5 +1,41 @@
 # X3S Language Reference
 
+#### Rule: `Copy array elements into scalar variables before reuse`
+- **Short Description:** Inline array access cannot be used inside conditions, arithmetic, or command arguments; read the value into a scalar first.
+- **One Example:**
+  - `$_pct = $cfg[$MAX_PCT]`
+- **Edge Cases:** Store command results in scalars before writing them back into an array slot.
+
+#### Rule: `Prefix returning commands with '=' when discarding the result`
+- **Short Description:** Commands that return a value still require the `=` prefix when you ignore the result.
+- **One Example:**
+  - `= wait 1 ms`
+- **Edge Cases:** Use standard assignments when you need the result (for example, `$value = [THIS]-> call script 'lib.slx.util' : ...`).
+
+#### Rule: `Quote script names and keep argument labels identifier-safe`
+- **Short Description:** Script names must be wrapped in quotes and argument labels cannot contain spaces.
+- **One Example:**
+  - `= [THIS]-> call script 'plugin.config.addscript' : PluginName=$menuTitle, Author=null, ScriptName='plugin.slx.station.menu', DisplayAuthor=[FALSE], AddToSection=$section, Menu=null`
+- **Edge Cases:** Apply the same quoting to other script-name parameters such as interrupts.
+
+#### Rule: `Terminate gosub commands with ':'`
+- **Short Description:** Every `gosub` command must end with a colon.
+- **One Example:**
+  - `gosub ProcessWare:`
+- **Edge Cases:** _None._
+
+#### Rule: `Use bracketed script reference types for user input`
+- **Short Description:** User-input commands require bracketed script reference tokens exactly as provided by the editor, even when the token contains spaces.
+- **One Example:**
+  - `$station = null-> get user input: type=[Var/Ship/Station owned by Player], title=$prompt`
+- **Edge Cases:** Copy the bracketed token verbatim for other script reference categories to avoid typos.
+
+#### Rule: `Pad sprintf fmt arguments with null placeholders`
+- **Short Description:** The `sprintf: fmt=` variant expects five argument slots; fill unused slots with `null`.
+- **One Example:**
+  - `$txt = sprintf: fmt='%s (Auto)', $txt, null, null, null, null`
+- **Edge Cases:** Continue padding with `null` after providing all required values.
+
 #### Rule: `<RetVar/IF> <RefObj> exists`
 - **Short Description:** `<RetVar/IF> <RefObj> exists`
 - **One Example:**
