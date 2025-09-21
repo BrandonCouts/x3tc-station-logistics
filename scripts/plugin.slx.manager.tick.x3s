@@ -855,7 +855,7 @@ StoreReasons:
       $code = sprintf: fmt='A_%s', $code, null, null, null, null
     end
     $stationRef = $entry[$IDX_STATION]
-    null -> call script 'lib.slx.query' : function='SetLastReason', station=$stationRef, ware=$currentWare, code=$code
+    = null -> call script 'lib.slx.query' : function='SetLastReason', station=$stationRef, ware=$currentWare, code=$code
     = wait 1 ms
   end
   return null

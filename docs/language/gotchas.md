@@ -21,6 +21,7 @@ This reference collects common pitfalls encountered when writing X3S scripts.
   - `= null-> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg`
   - `= null-> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'`
 - **Edge Cases:** When you need the return value, assign it to a variable as usual (for example, `$result = [THIS]-> call script 'lib.slx.util' : ...`).
+  - Even when ignoring the result, add the `=` prefix to setter helpers such as `= null-> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code=$code`; without it the call is skipped entirely.
 
 - #### Rule: `Quote script names and keep argument labels identifier-safe`
 - **Full Description:** Script names passed to `call script` must be wrapped in single quotes, and named arguments cannot contain spaces or punctuation that would break identifier parsing. Use camelCase or underscores for multi-word labels.
@@ -47,4 +48,11 @@ This reference collects common pitfalls encountered when writing X3S scripts.
 - **Examples:**
   - `$txt = sprintf: fmt='%s (Auto)', $txt, null, null, null, null`
 - **Edge Cases:** When formatting more than one value, supply each argument in order and continue padding the remaining slots with `null`.
+
+- #### Rule: `Limit 'sprintf: pageid' to five substitution values`
+- **Full Description:** The `sprintf: pageid=<...> textid=<...>` command accepts at most five value arguments. Provide no more than five placeholders in the target text resource and coalesce extra fields before calling `sprintf`.
+- **Examples:**
+  - `$chunkReason = sprintf: fmt='%s %s', $chunkPct, $reasonTxt, null, null, null`
+  - `$row = sprintf: pageid=$PageId textid=214, $ware, $role, $minPct, $maxPct, $chunkReason`
+- **Edge Cases:** Build composite strings (such as chunk + reason) with the `fmt=` variant before passing them to the localized `sprintf` call.
 
