@@ -45,7 +45,7 @@ if $function == 'FormatReason'
   end
 
   if $auto and $txt
-    $txt = sprintf: fmt='%s (Auto)', $txt
+    $txt = sprintf: fmt='%s (Auto)', $txt, null, null, null, null
   end
 
   return $txt

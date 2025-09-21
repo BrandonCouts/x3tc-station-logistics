@@ -17,7 +17,7 @@ if not $menuTitle
   $menuTitle = 'Open SLX'
 end
 
-= [THIS] -> call script plugin.config.addscript : Plugin Name=$menuTitle, Author=null, Script Name='plugin.slx.station.menu', Display author=[FALSE], Add to section=$section, Menu=null
+= [THIS] -> call script 'plugin.config.addscript' : PluginName=$menuTitle, Author=null, ScriptName='plugin.slx.station.menu', DisplayAuthor=[FALSE], AddToSection=$section, Menu=null
 
 $running = get global variable: name='g.slx.manager.running'
 if not $running
