@@ -10,6 +10,9 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar> create nebula: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create planet: subtype=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create ship: type=<Var/Ship Type> owner=<Var/Race> addto=<value> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
+- **Examples:**
+  - `$drone = create ship: type={Argon Mercury Super Freighter XL} owner=[Player] addto=$sell.Station x=null y=null z=null`
+- **Edge Cases:** _None._
 - `<RetVar> create special: type=<Var/Number> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create station: type=<Var/Station Type> owner=<Var/Race> addto=<Var/Sector> x=<Var/Number1> y=<Var/Number2> z=<Var/Number3>`
 - `<RetVar> create sun: subtype=<Var/Number> r=<Var/Number1> g=<Var/Number2> b=<Var/Number3> addto=<Var/Sector>`
@@ -24,7 +27,12 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar> find nebula: sector=<Var/Sector> type=<Var/Number> effect=<Var/Number> flags=<Var/Number> refobj=<value> maxdist=<Var/Number> maxnum=<Var/Number> refpos=<Var/Array>`
 - `<RetVar/IF> <RefObj> find ship: class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxnum=<Var/Number> with homebase=<value>`
 - `<RetVar/IF> find ship: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
-- `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- #### Rule: `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **Full Description:** `<RetVar/IF> find station: sector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> maxdist=<Var/Number2> maxnum=<Var/Number> refpos=<Var/Array>`
+- **Examples:**
+  - `$factory.array = find station: sector=$sector class or type=[Factory] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
+  - `$dock.array = find station: sector=$sector class or type=[Dock] race=[Player] flags=$flags refobj=null maxdist=null maxnum=999 refpos=null`
+- **Edge Cases:** _None._
 - `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2>`
 - `<RetVar/IF> find station in galaxy: startsector=<Var/Sector> class or type=<value> race=<Var/Race> flags=<Var/Number> refobj=<value> serial=<Var/Stations Serial> max.jumps=<Var/Number2> num=<Var/Number>`
 - `<RetVar/IF> <RefObj> get all stationary objects: include asteroids=<Var/Boolean>`
@@ -39,7 +47,11 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar/IF> <RefObj> get factory array from sector`
 - `<RetVar/IF> <RefObj> get gate destination: return sector=<Var/Number>`
 - `<RetVar/IF> <RefObj> get gate id`
-- `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- #### Rule: `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- **Full Description:** `<RetVar/IF> get jumps from sector <Var/Sector1> to sector <Var/Sector2>`
+- **Examples:**
+  - `$jumps.needed = get jumps from sector $this.sector to sector $target.sector`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get max sectors in x direction`
 - `<RetVar/IF> get max sectors in y direction`
 - `<RetVar/IF> get next gate on route from <Var/Sector1> to <Var/Sector2>`
@@ -54,7 +66,11 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar/IF> <RefObj> get ship array from sector/ship/station`
 - `<RetVar/IF> get ship type array: maker race=<Var/Race> class=<value>`
 - `<RetVar/IF> <RefObj> get south warp gate`
-- `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- #### Rule: `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- **Full Description:** `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
+- **Examples:**
+  - `$dock.array = get station array: of race [Player] class/type=[Dock]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get station array: product=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> get station array: resource=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get station array from sector`

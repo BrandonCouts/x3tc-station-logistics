@@ -2,24 +2,187 @@
 
 This reference lists array commands available in X3TC scripting.
 
-- `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- #### Rule: `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- **Full Description:** `<RetVar/IF> = <Var/Array>[<Var/Number>]`
+- **Examples:**
+  - `$status = $al.Settings[0]`
+  - `$PageID = $al.Settings[1]`
+  - `$dc = $al.Settings[2]`
+  - `$is.dynamic = $al.Settings[6]`
+  - `$exclude.array = $al.Settings[8]`
+  - `$dock.array = $al.Settings[4]`
+  - `$debug = $al.Settings[7]`
+  - `$factory.array = $al.Settings[3]`
+  - `$dock = $dock.array[$s]`
+  - `$var = $glb.Array[$s]`
+  - `$sector = $sector.array[$s]`
+  - `$factory = $factory.array[$sf]`
+  - `$script.Array = $config.Array[$s]`
+  - `$script = $script.Array[0]`
+  - `$dock = $dock.array[$sd]`
+  - `$check = $factory.show.array[$s]`
+  - `$ware = $ware.Array[$s]`
+  - `$sell.at = $ware.settings[6]`
+  - `$virtual.stock = $ware.settings[0]`
+  - `$sell = $ware.settings[5]`
+  - `$virtual = $ware.array[0]`
+  - `$menu = $return.array[0]`
+  - `$factory.show.array = $return.array[1]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
+- **Examples:**
+  - `$count = $return[1][0]`
+  - `$value = $return[1][1]`
 - `<Var/Array>[<Var/Number1>][<Var/Number2>] = <Value>`
-- `<Var/Array>[<Var/Number>] = <Value>`
+- #### Rule: `<Var/Array>[<Var/Number>] = <Value>`
+- **Full Description:** `<Var/Array>[<Var/Number>] = <Value>`
+- **Examples:**
+  - `$temp.array[0] = 1`
+  - `$temp.array[1] = $txt`
+  - `$temp.array[2] = -1`
+  - `$temp.array[3] = $txt`
+  - `$factory.show.array[$s] = 1`
+  - `$temp.array[5] = $txt`
+  - `$temp.array[7] = $txt`
+  - `$settings.array[2] = 1`
+  - `$settings.array[0] = 1`
+  - `$settings.array[1] = 1`
+  - `$temp.array[2] = 5`
+  - `$temp.array[3] = $name`
+  - `$temp.array[4] = -200`
+  - `$temp.array[6] = -1`
+  - `$temp.array[1] = ''`
+  - `$al.Settings[12] = 1`
+  - `$al.Settings[12] = null`
+- **Edge Cases:** _None._
 - `<Var/Array1>[<Var/Number1>] = <Var/Array2>[<Var/Number2>]`
-- `append <Value> to array <Var/Array>`
-- `<RetVar> array alloc: size=<Var/Number>`
+- #### Rule: `append <Value> to array <Var/Array>`
+- **Full Description:** `append <Value> to array <Var/Array>`
+- **Examples:**
+  - `append $target.sector to array $target.pos`
+  - `append $target.sector to array $target.pos`
+  - `append 0 to array $target.pos`
+  - `append 0 to array $target.pos`
+  - `append 0 to array $target.pos`
+  - `append $target to array $target.pos`
+  - `append $format to array $menu`
+  - `append $ware to array $tlaser.Array`
+  - `append $ware to array $tshield.Array`
+  - `append $ware to array $tmissile.Array`
+  - `append $ware to array $tenergy.Array`
+  - `append $ware to array $tnatural.Array`
+  - `append $ware to array $tbio.Array`
+  - `append $ware to array $tfood.Array`
+  - `append $ware to array $tmineral.Array`
+  - `append $ware to array $ttech.Array`
+  - `append $ware to array $tequip.Array`
+  - `append $equip.Array to array $main.ware.Array`
+  - `append $tech.Array to array $main.ware.Array`
+  - `append $mineral.Array to array $main.ware.Array`
+  - `append $food.Array to array $main.ware.Array`
+  - `append $bio.Array to array $main.ware.Array`
+  - `append $natural.Array to array $main.ware.Array`
+  - `append $energy.Array to array $main.ware.Array`
+  - `append $missile.Array to array $main.ware.Array`
+  - `append $shield.Array to array $main.ware.Array`
+  - `append $laser.Array to array $main.ware.Array`
+- **Edge Cases:** _None._
+- #### Rule: `<RetVar> array alloc: size=<Var/Number>`
+- **Full Description:** `<RetVar> array alloc: size=<Var/Number>`
+- **Examples:**
+  - `$temp.array = array alloc: size=4`
+  - `$factory.show.array = array alloc: size=$s`
+  - `$settings.array = array alloc: size=6`
+  - `$temp.array = array alloc: size=8`
+  - `$tlaser.Array = array alloc: size=0`
+  - `$tshield.Array = array alloc: size=0`
+  - `$tmissile.Array = array alloc: size=0`
+  - `$tenergy.Array = array alloc: size=0`
+  - `$tnatural.Array = array alloc: size=0`
+  - `$tbio.Array = array alloc: size=0`
+  - `$tfood.Array = array alloc: size=0`
+  - `$tmineral.Array = array alloc: size=0`
+  - `$ttech.Array = array alloc: size=0`
+  - `$tequip.Array = array alloc: size=0`
+  - `$main.ware.Array = array alloc: size=0`
+- **Edge Cases:** _None._
 - `<RetVar/IF> arrays <Value1> and <Value2> are equal`
 - `<RetVar> clone array <Var/Array> : index <Var/Number1> ... <Var/Number2>`
 - `copy array <Var/Array1> index <Var/Number1> ... <Var/Number2> into array <Var/Array2> at index <Var/Number3>`
-- `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- #### Rule: `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- **Full Description:** `<RetVar> create new array, arguments=<Value0>, <Value1>, <Value2>, <Value3>, <Value4>`
+- **Examples:**
+  - `$format = create new array, arguments=$temp.array, $return.array, null, null, null`
+  - `$format = create new array, arguments=$temp.array, 'dynamic.dc', null, null, null`
+  - `$format = create new array, arguments=$temp.array, 'dynamic.dock', null, null, null`
+  - `$laser.Array = create new array, arguments=8, $tlaser.Array, null, null, null`
+  - `$shield.Array = create new array, arguments=9, $tshield.Array, null, null, null`
+  - `$missile.Array = create new array, arguments=10, $tmissile.Array, null, null, null`
+  - `$energy.Array = create new array, arguments=11, $tenergy.Array, null, null, null`
+  - `$natural.Array = create new array, arguments=12, $tnatural.Array, null, null, null`
+  - `$bio.Array = create new array, arguments=13, $tbio.Array, null, null, null`
+  - `$food.Array = create new array, arguments=14, $tfood.Array, null, null, null`
+  - `$mineral.Array = create new array, arguments=15, $tmineral.Array, null, null, null`
+  - `$tech.Array = create new array, arguments=16, $ttech.Array, null, null, null`
+  - `$equip.Array = create new array, arguments=17, $tequip.Array, null, null, null`
+- **Edge Cases:** _None._
 - `<RetVar/IF> find <Value> in array: <Value>`
 - `<RetVar> get index of <Value> in array <Var/Array> offset=<Var/Number>`
 - `<RetVar/IF> <RefObj> get object name array`
 - `insert <Value> into array <Var/Array> at index <Var/Number>`
-- `remove element from array <Var/Array> at index <Var/Number>`
-- `resize array <Var/Array> to <Var/Number>`
-- `<RetVar/IF> reverse array <Value>`
-- `<RetVar/IF> size of array <Var/Array>`
-- `<RetVar> sort array <Value>`
+- #### Rule: `remove element from array <Var/Array> at index <Var/Number>`
+- **Full Description:** `remove element from array <Var/Array> at index <Var/Number>`
+- **Examples:**
+  - `remove element from array $config.Array at index $s`
+  - `remove element from array $dock.array at index $s`
+  - `remove element from array $factory.array at index $s`
+- **Edge Cases:** _None._
+- #### Rule: `resize array <Var/Array> to <Var/Number>`
+- **Full Description:** `resize array <Var/Array> to <Var/Number>`
+- **Examples:**
+  - `resize array $target.pos to 0`
+- **Edge Cases:** _None._
+- #### Rule: `<RetVar/IF> reverse array <Value>`
+- **Full Description:** `<RetVar/IF> reverse array <Value>`
+- **Examples:**
+  - `$factory.array = reverse array $factory.array`
+  - `$dock.array = reverse array $dock.array`
+  - `$tequip.Array = reverse array $tequip.Array`
+  - `$ttech.Array = reverse array $ttech.Array`
+  - `$tmineral.Array = reverse array $tmineral.Array`
+  - `$tfood.Array = reverse array $tfood.Array`
+  - `$tbio.Array = reverse array $tbio.Array`
+  - `$tnatural.Array = reverse array $tnatural.Array`
+  - `$tmissile.Array = reverse array $tmissile.Array`
+  - `$tshield.Array = reverse array $tshield.Array`
+  - `$tlaser.Array = reverse array $tlaser.Array`
+- **Edge Cases:** _None._
+- #### Rule: `<RetVar/IF> size of array <Var/Array>`
+- **Full Description:** `<RetVar/IF> size of array <Var/Array>`
+- **Examples:**
+  - `$s = size of array $dock.array`
+  - `$s = size of array $factory.array`
+  - `$s = size of array $glb.Array`
+  - `$s = size of array $sector.array`
+  - `$sf = size of array $factory.array`
+  - `$s = size of array $factory.array`
+  - `$sd = size of array $dock.array`
+  - `$s = size of array $ware.Array`
+  - `$s = size of array $config.Array`
+- **Edge Cases:** _None._
+- #### Rule: `<RetVar> sort array <Value>`
+- **Full Description:** `<RetVar> sort array <Value>`
+- **Examples:**
+  - `$factory.array = sort array $factory.array`
+  - `$dock.array = sort array $dock.array`
+  - `$tequip.Array = sort array $tequip.Array`
+  - `$ttech.Array = sort array $ttech.Array`
+  - `$tmineral.Array = sort array $tmineral.Array`
+  - `$tfood.Array = sort array $tfood.Array`
+  - `$tbio.Array = sort array $tbio.Array`
+  - `$tnatural.Array = sort array $tnatural.Array`
+  - `$tmissile.Array = sort array $tmissile.Array`
+  - `$tshield.Array = sort array $tshield.Array`
+  - `$tlaser.Array = sort array $tlaser.Array`
+- **Edge Cases:** _None._
 - `<RetVar> sort array: data=<Value> sort values=<Value>`

@@ -3,6 +3,11 @@
 ## Mission
 Automate safe, mechanical X3TC work using **.x3s** source files only. Write scripts, keep IDs organized, lint syntax/structure, and ship docs—no XML build required (use your local compiler when needed).
 
+## Script Archive Requirement
+- Save every provided or third-party reference script verbatim under `scripts/provided/` with a descriptive `.x3s` filename before extracting examples for documentation updates.
+- Keep archived snippets separate from production gameplay scripts in `src/scripts/`.
+- Record any assumptions about archived snippets directly inside the saved file as comments when needed.
+
 ## Roles
 - **Architect** – repo layout, `docs/ids.md`, PR templates.
 - **Scriptor (X3S)** – writes `src/scripts/*.x3s` (setup/lib/commands/AL).

@@ -4,7 +4,13 @@ This reference covers object property commands available in X3TC scripting. Each
 
 - `<RetVar/IF> <RefObj> can be controlled by race logic`
 - `<RetVar/IF> <RefObj> can execute StartAction`
-- `<RetVar/IF> <RefObj> exists`
+- #### Rule: `<RetVar/IF> <RefObj> exists`
+- **Full Description:** `<RetVar/IF> <RefObj> exists`
+- **Examples:**
+  - `if $dc-> exists`
+  - `if $dock-> exists`
+  - `if $factory-> exists`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> find nearest enemy ship: max.dist=<Var/Number>`
 - `<RetVar/IF> <RefObj> find nearest enemy ship in range: class=<Var/Class>`
 - `<RetVar/IF> <RefObj> find nearest enemy station: max.dist=<Var/Number>`
@@ -13,8 +19,17 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get array of missiles aiming to me`
 - `<RetVar/IF> <RefObj> get asteroid yield`
 - `<RetVar/IF> <RefObj> get attacker`
-- `<RetVar/IF> <RefObj> get command`
-- `<RetVar/IF> <RefObj> get command target`
+- #### Rule: `<RetVar/IF> <RefObj> get command`
+- **Full Description:** `<RetVar/IF> <RefObj> get command`
+- **Examples:**
+  - `$target.command = $target-> get command`
+- **Edge Cases:** _None._
+
+- #### Rule: `<RetVar/IF> <RefObj> get command target`
+- **Full Description:** `<RetVar/IF> <RefObj> get command target`
+- **Examples:**
+  - `$target.pos = $target-> get command target`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get command target2`
 - `<RetVar/IF> <RefObj> get current action`
 - `<RetVar/IF> <RefObj> get current laser strength`
@@ -25,9 +40,25 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get flying ware count`
 - `<RetVar/IF> <RefObj> get hull`
 - `<RetVar/IF> <RefObj> get hull percent`
-- `<RetVar/IF> <RefObj> get ID code`
+- #### Rule: `<RetVar/IF> <RefObj> get ID code`
+- **Full Description:** `<RetVar/IF> <RefObj> get ID code`
+- **Examples:**
+  - `$id = $object-> get ID code`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get laser type in bay <Var/Number>`
-- `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- #### Rule: `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **Full Description:** `<RetVar/IF> <RefObj> get local variable: name=<Var/String>`
+- **Examples:**
+  - `$settings.array = $factory-> get local variable: name=$pointer`
+  - `$ware.array = $source-> get local variable: name=$pointer`
+  - `$ware.settings = $dock-> get local variable: name=$pointer`
+  - `$show.type.array = $dc-> get local variable: name=$pointer`
+  - `$show.type.array = $value-> get local variable: name=$pointer`
+  - `$settings.array = $value-> get local variable: name=$pointer`
+  - `$ware.settings = $value-> get local variable: name=$pointer`
+  - `$ware.array = $value-> get local variable: name=$pointer`
+  - `if not $factory-> get local variable: name=$pointer`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
 - `<RetVar/IF> <RefObj> get maker race`
@@ -35,7 +66,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get max. shield type that can be installed`
 - `<RetVar/IF> <RefObj> get maximum laser strength`
 - `<RetVar/IF> <RefObj> get maximum shield strength`
-- `<RetVar/IF> <RefObj> get name`
+- #### Rule: `<RetVar/IF> <RefObj> get name`
+- **Full Description:** `<RetVar/IF> <RefObj> get name`
+- **Examples:**
+  - `$name = $object-> get name`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get notoriety percentage to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get notoriety title to race <Var/Race>: text=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get notoriety to race <Var/Race>`
@@ -45,15 +80,30 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get number of subtypes of maintype <Var/Number>`
 - `<RetVar/IF> <RefObj> get object class`
 - `<RetVar/IF> <RefObj> get owner race`
-- `<RetVar/IF> <RefObj> get position as array`
+- #### Rule: `<RetVar/IF> <RefObj> get position as array`
+- **Full Description:** `<RetVar/IF> <RefObj> get position as array`
+- **Examples:**
+  - `$target.pos = $target-> get position as array`
+  - `$target.pos = $target-> get position as array`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get power generator`
 - `<RetVar/IF> <RefObj> get relation to object <Var/Ship/Station>`
+- **Examples:**
+  - `$relation = $dock-> get relation to object $sell.Station`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get relation to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get resource waretype of asteroid`
 - `<RetVar/IF> <RefObj> get rot alpha`
 - `<RetVar/IF> <RefObj> get rot beta`
 - `<RetVar/IF> <RefObj> get rot gamma`
-- `<RetVar/IF> <RefObj> get sector`
+- #### Rule: `<RetVar/IF> <RefObj> get sector`
+- **Full Description:** `<RetVar/IF> <RefObj> get sector`
+- **Examples:**
+  - `$target.sector = $target-> get sector`
+  - `$this.sector = [THIS]-> get sector`
+  - `$txt = $dc-> get sector`
+  - `$txt = $dock-> get sector`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get shield and hull percent`
 - `<RetVar/IF> <RefObj> get shield percent`
 - `<RetVar/IF> <RefObj> get shield type in bay <Var/Number>`
@@ -72,7 +122,11 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> a enemy`
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> a friend`
 - `<RetVar/IF> <RefObj> is asteroid scanned`
-- `<RetVar/IF> <RefObj> is detectable`
+- #### Rule: `<RetVar/IF> <RefObj> is detectable`
+- **Full Description:** `<RetVar/IF> <RefObj> is detectable`
+- **Examples:**
+  - `$detectable = $factory-> is detectable`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is disabled`
 - `<RetVar/IF> <RefObj> is docking allowed at <Var/Ship/Station>`
 - `<RetVar/IF> <RefObj> is hidden`
@@ -85,7 +139,14 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> is known`
 - `<RetVar/IF> <RefObj> is landing`
 - `<RetVar/IF> <RefObj> is <Var/Ship/Station> neutral to me`
-- `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- #### Rule: `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- **Full Description:** `<RetVar/IF> <RefObj> is of class <Var/Class>`
+- **Examples:**
+  - `if $target-> is of class [Moveable Ship]`
+  - `if $factory-> is of class [Factory]`
+  - `if not $factory-> is of class [Complex Hub]`
+  - `if not $destination-> is of class [Dock]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
 - `<RetVar/IF> <RefObj> is starting`
 - `<RetVar/IF> <RefObj> is target visible <Var/Ship/Station>`
@@ -98,7 +159,17 @@ This reference covers object property commands available in X3TC scripting. Each
 - `set discovered status: type=<Value> status=<Var/Boolean>`
 - `<RefObj> set hull to <Var/Number>`
 - `<RefObj> set known status to <Var/Number>`
-- `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- #### Rule: `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **Full Description:** `<RefObj> set local variable: name=<Var/String> value=<Value>`
+- **Examples:**
+  - `$factory-> set local variable: name=$pointer value=$settings.array`
+  - `$value-> set local variable: name=$pointer value=$settings.array`
+  - `$dc-> set local variable: name=$pointer value=$show.type.array`
+  - `$value-> set local variable: name=$pointer value=$show.type.array`
+  - `$value-> set local variable: name=$pointer value=$ware.settings`
+  - `$value-> set local variable: name=$pointer value=$ware.array`
+  - `$value-> set local variable: name=$pointer value=null`
+- **Edge Cases:** _None._
 - `<RefObj> set name to <Var/String>`
 - `<RefObj> set owner race to <Var/Race>`
 - `<RefObj> set position: x=<Var/Number> y=<Var/Number> z=<Var/Number>`

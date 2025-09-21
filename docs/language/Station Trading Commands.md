@@ -20,6 +20,10 @@ This reference covers station trading-related commands available in X3TC scripti
 - `<RetVar/IF> find dock: sells <Var/Ware> with min. jumps: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - `<RetVar/IF> find factory: buys <Var/Ware> with best chance: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - `<RetVar/IF> find factory: buys <Var/Ware> with best price: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
+- **Examples:**
+  - `$sell.Station = find factory: buys $ware with best price: min.price=$sell.at, amount=null, max.jumps=0, startsector=$sector, trader=null, exclude array=$exclude.array`
+- **Optional Parameter Definitions:** See [Station Trading Search Optional Parameters](../options/station-trading-search-options.md).
+- **Edge Cases:** _None._
 - `<RetVar/IF> find factory: buys <Var/Ware> with min jumps: min.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - `<RetVar/IF> find factory: sells <Var/Ware> with best chance: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
 - `<RetVar/IF> find factory: sells <Var/Ware> with best price: max.price=<Var/Number1>, amount=<Var/Number2>, max.jumps=<Var/Number3>, startsector=<Var/Sector>, trader=<Var/Ship/Station>, exclude array=<Var/Array>`
@@ -31,6 +35,8 @@ This reference covers station trading-related commands available in X3TC scripti
 - `<RetVar/IF> order ship in next shipyard: owner=<Var/Race> sector=<Var/Sector> class=<Var/Class> optional: default shiptype for race:<Var/Race>`
 - `<RefObj> remove primary resource from factory: <Var/Ware>`
 - `<RefObj> remove product from factory or dock: <Var/Ware>`
+- **Examples:**
+  - `$value-> remove product from factory or dock: $ware`
 - `<RefObj> remove second resource from factory: <Var/Ware>`
 - `station <Var/Station>: lock ware <Var/Ware> for race <Var/Race>`
 - `station <Var/Station>: unlock ware <Var/Ware> for race <Var/Race>`

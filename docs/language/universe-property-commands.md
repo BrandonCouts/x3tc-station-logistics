@@ -5,7 +5,11 @@ This reference covers universe property commands available in X3TC scripting. Ea
 - `<Var/Race> add notoriety: race=<Var/Race> value=<Var/Number>`
 - `<RetVar> get all global variable keys, starting with=<Var/String>`
 - `<RetVar/IF> <RefObj> get current galaxy flight timestep in ms`
-- `<RetVar/IF> get global variables: regular expression=<Var/String>`
+- #### Rule: `<RetVar/IF> get global variables: regular expression=<Var/String>`
+- **Full Description:** `<RetVar/IF> get global variables: regular expression=<Var/String>`
+- **Examples:**
+  - `$glb.Array = get global variables: regular expression='FDND.*'`
+- **Edge Cases:** _None._
 - `<RetVar> get Kha\`ak aggression level`
 - `<RetVar/IF> get notoriety from race <Var/Race> to race <Var/Race>`
 - `<RetVar> get notoriety required to buy ware: <Var/Ware>`

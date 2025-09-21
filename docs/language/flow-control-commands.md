@@ -4,17 +4,91 @@ This reference covers flow control commands available in X3TC scripting. Each en
 
 - `<RefObj> begin task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3> arg5=<Value4>`
 - `<RetVar/IF> <RefObj> call named script: script=<Var/String>, <Value>, <Value>, <Value>, <Value>, <Value>`
-- `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
+- #### Rule: `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
+- **Full Description:** `<RetVar/IF/START> <RefObj> call script <Script Name> : [ arg1=<Value> arg2=<Value> ... arga=<Value> ]`
+- **Examples:**
+  - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dc`
+  - `$txt = [THIS]-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
+  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=4`
+  - `$sector.array = null-> call script 'plugin.LI.FDN.Sector.Array' : search=3`
+  - `$name = null-> call script 'plugin.LI.FDN.Format.Name' : object=$dock`
+  - `$amount.added = null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$destination action='add'`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$source action='remove'`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$sold station=$dock action='remove'`
+  - `= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dc flag=1`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dock flag=null`
+  - `$is.AP = null-> call script 'lib.BW.isAP' :`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.DC.Details' : menu=$menu`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.DC.Details' : menu=$menu`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.Factory.List' : menu=$menu`
+  - `$return.array = null-> call script 'plugin.LI.FDN.Menu.Factory.List' : menu=$menu factory.show.array=null`
+  - `$return.array = null-> call script 'plugin.LI.FDN.Menu.Factory.List' : menu=$menu factory.show.array=$factory.show.array`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Factory.Details' : menu=$menu value=$value`
+  - `START null-> call script 'plugin.LI.FDN.Menu.DC.Details_D' :`
+  - `START null-> call script 'plugin.LI.FDN.Menu.Dock.Details_D' : value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.AP.Dock.Details' : menu=$menu value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Dock.Details' : menu=$menu value=$value`
+  - `$menu = null-> call script 'plugin.LI.FDN.Menu.Ware.Details' : menu=$menu value=$value ware=$ware`
+  - `$menu = null-> call script 'plugin.LI.FDN.Config.Menu' : menu=$menu`
+  - `$dummy = null-> call script 'plugin.LI.FDN.Move.Ware' : ware=$ware source=$value`
+  - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=null station=$value action='create'`
+  - `= null-> call script 'plugin.LI.FDN.Reset' :`
+  - `START null-> call script 'plugin.LI.FDN.Cleanup' :`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=1`
+  - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=null`
+- **Edge Cases:** _None._
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
-- `endsub`
-- `gosub <Label Name>:`
+- #### Rule: `endsub`
+- **Full Description:** `endsub`
+- **Examples:**
+  - `endsub`
+- **Edge Cases:** _None._
+- #### Rule: `gosub <Label Name>:`
+- **Full Description:** `gosub <Label Name>:`
+- **Examples:**
+  - `gosub Add.DC.Menu.Sub:`
+  - `gosub Change.DC.Menu.Sub:`
+  - `gosub Global.Options.Sub:`
+  - `gosub Dynamic.Menu.Sub:`
+  - `gosub Debug.Menu.Sub:`
+  - `gosub Reset.Menu.Sub:`
+  - `gosub Factory.Summary.Sub:`
+  - `gosub Dock.Summary.Sub:`
+  - `gosub Debug.Sub:`
+  - `gosub Menu.View.Header.Sub:`
+  - `gosub Config.View.Sub:`
+  - `gosub Menu.View.Footer.Sub:`
+  - `gosub Ware.User.Input.Sub:`
+  - `gosub DC.Details.View.Sub:`
+  - `gosub Factory.List.View.Sub:`
+  - `gosub Factory.Details.View.Sub:`
+  - `gosub Dock.Details.View.Sub:`
+  - `gosub Ware.Details.View.Sub:`
+  - `gosub Add.Ware.Sub:`
+  - `gosub Regroom.Ware.Sub:`
+  - `gosub Remove.Ware.Sub:`
+  - `gosub Global.Factory.Sub:`
+- **Edge Cases:** _None._
 - `goto label <Label Name>:`
 - `<RefObj> interrupt task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3>`
+  - **Optional Parameter Definitions:** See [Flow Control Interrupt Optional Parameters](../options/flow-control-interrupt-options.md).
 - `<RefObj> interrupt with script <Script Name> and priority <Var/Number>`
-- `<RefObj> interrupt with script <Script Name> and priority <Var/Number>: arg1=<Value> arg2=<Value> arg3=<Value> arg4=<Value>`
+- #### Rule: `<RefObj> interrupt with script <Script Name> and priority <Var/Number>: arg1=<Value> arg2=<Value> arg3=<Value> arg4=<Value>`
+- **Full Description:** `<RefObj> interrupt with script <Script Name> and priority <Var/Number>: arg1=<Value> arg2=<Value> arg3=<Value> arg4=<Value>`
+- **Examples:**
+  - `[THIS]-> interrupt with script 'plugin.advjump.jump' and priority 40: arg1=$target.pos arg2=null arg3=null arg4=null`
+  - `[THIS]-> interrupt with script 'plugin.advjump.jump' and priority 40: arg1=$target.sector arg2=null arg3=null arg4=null`
+- **Optional Parameter Definitions:** See [Flow Control Interrupt Optional Parameters](../options/flow-control-interrupt-options.md).
+- **Edge Cases:** _None._
 - `<RefObj> launch named script: task=<Var/Number> scriptname=<Var/String> prio=<Var/Number>, <Value>, <Value>, <Value>, <Value>, <Value>`
 - `<RetVar/IF> wait <Var/Number> ms`
 - `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
+- **Examples:**
+  - `= wait randomly from 500 to 1000 ms`
+  - `= wait randomly from 1000 to 2000 ms`
+  - `= wait randomly from $wait.1 to $wait.2 ms`
+- **Edge Cases:** _None._
 - `START <RefObj> wing command <Var/Wing Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 
