@@ -22,14 +22,10 @@ end
 set global variable: name='g.slx.manager.running' value=null
 
 $pluginTitle = read text: page=$PageId id=101
-$pluginMenu = read text: page=$PageId id=102
 
 al engine: register script='al.plugin.slx'
 if $pluginTitle
   al engine: set plugin 'al.plugin.slx' description to $pluginTitle
-end
-if $pluginMenu
-  al engine: set plugin 'al.plugin.slx' start text to $pluginMenu
 end
 al engine: set plugin 'al.plugin.slx' timer interval to 30 s
 
