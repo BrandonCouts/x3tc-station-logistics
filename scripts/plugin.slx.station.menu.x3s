@@ -48,7 +48,8 @@ while [TRUE]
     $cfgChunkPct = $cfg[$CHUNK_PCT]
     $reasonCode = null -> call script 'lib.slx.query' : function='GetLastReason', station=$station, ware=$ware
     $reasonTxt = null -> call script 'lib.slx.ui' : function='FormatReason', code=$reasonCode
-    $row = sprintf: pageid=$PageId textid=214, $ware, $cfgRole, $cfgMinPct, $cfgMaxPct, $cfgChunkPct, $reasonTxt
+    $chunkAndReason = sprintf: fmt='%s %s', $cfgChunkPct, $reasonTxt, null, null, null
+    $row = sprintf: pageid=$PageId textid=214, $ware, $cfgRole, $cfgMinPct, $cfgMaxPct, $chunkAndReason
     add custom menu item to array $menu: text=$row returnvalue=$ware
     = wait 1 ms
   end
