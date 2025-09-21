@@ -55,6 +55,8 @@ while [TRUE]
       end
       $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$st, ware=$ware
       $role = $cfg[$ROLE]
+      $cfgMinPct = $cfg[$MIN_PCT]
+      $cfgMaxPct = $cfg[$MAX_PCT]
       if not $role
         continue
       end
@@ -70,8 +72,8 @@ while [TRUE]
         $chunkUnits = 1
       end
 
-      $minUnits = null -> call script 'lib.slx.transfer' : function='CapacityForPercent', capacity=$cap, percent=$cfg[$MIN_PCT]
-      $maxUnits = null -> call script 'lib.slx.transfer' : function='CapacityForPercent', capacity=$cap, percent=$cfg[$MAX_PCT]
+      $minUnits = null -> call script 'lib.slx.transfer' : function='CapacityForPercent', capacity=$cap, percent=$cfgMinPct
+      $maxUnits = null -> call script 'lib.slx.transfer' : function='CapacityForPercent', capacity=$cap, percent=$cfgMaxPct
       if $minUnits > $maxUnits
         $tmp = $minUnits
         $minUnits = $maxUnits
@@ -81,9 +83,9 @@ while [TRUE]
       $auto = [FALSE]
       if $role == 'auto'
         $auto = [TRUE]
-        if $pct >= $cfg[$MAX_PCT]
+        if $pct >= $cfgMaxPct
           $role = 'producer'
-        else if $pct <= $cfg[$MIN_PCT]
+        else if $pct <= $cfgMinPct
           $role = 'consumer'
         else
           $role = 'store'
@@ -99,8 +101,8 @@ while [TRUE]
       $entry = array alloc: size=15
       $entry[$IDX_STATION] = $st
       $entry[$IDX_ROLE] = $role
-      $entry[$IDX_MIN] = $cfg[$MIN_PCT]
-      $entry[$IDX_MAX] = $cfg[$MAX_PCT]
+      $entry[$IDX_MIN] = $cfgMinPct
+      $entry[$IDX_MAX] = $cfgMaxPct
       $entry[$IDX_CHUNK] = $chunkUnits
       $entry[$IDX_AMOUNT] = $amount
       $entry[$IDX_CAP] = $cap
@@ -117,7 +119,8 @@ while [TRUE]
       $kCount = size of array $wareKeys
       while $kCount
         dec $kCount
-        if $wareKeys[$kCount] == $ware
+        $existingWare = $wareKeys[$kCount]
+        if $existingWare == $ware
           $wareIdx = $kCount
           break
         end
@@ -131,9 +134,9 @@ while [TRUE]
       $entryList = $wareEntries[$wareIdx]
       append $entry to array $entryList
       $wareEntries[$wareIdx] = $entryList
-      wait 1 ms
+      = wait 1 ms
     end
-    wait 1 ms
+    = wait 1 ms
   end
 
   $wIndex = size of array $wareKeys
@@ -142,13 +145,13 @@ while [TRUE]
     $currentWare = $wareKeys[$wIndex]
     $entries = $wareEntries[$wIndex]
     if size of array $entries
-      gosub ProcessWare
+      gosub ProcessWare:
       $wareEntries[$wIndex] = $entries
     end
-    wait 5 ms
+    = wait 5 ms
   end
 
-  wait 10000 ms
+  = wait 10000 ms
 end
 
 return null
@@ -159,14 +162,14 @@ ProcessWare:
     return null
   end
 
-  gosub InitializeEntries
-  gosub StageProducerToStore
-  gosub StageStoreToConsumer
-  gosub StageProducerToConsumer
-  gosub StageStoreBleed
-  gosub StageProducerTopUp
-  gosub FinalizeReasons
-  gosub StoreReasons
+  gosub InitializeEntries:
+  gosub StageProducerToStore:
+  gosub StageStoreToConsumer:
+  gosub StageProducerToConsumer:
+  gosub StageStoreBleed:
+  gosub StageProducerTopUp:
+  gosub FinalizeReasons:
+  gosub StoreReasons:
   return null
 
 InitializeEntries:
@@ -274,22 +277,32 @@ ApplyTransfer:
   end
   $srcEntry = $entries[$bestSrcIdx]
   $dstEntry = $entries[$bestDstIdx]
-  $ok = null -> call script 'lib.slx.transfer' : function='ApplyMove', src=$srcEntry[$IDX_STATION], dst=$dstEntry[$IDX_STATION], ware=$currentWare, amount=$bestAmount
+  $srcStation = $srcEntry[$IDX_STATION]
+  $dstStation = $dstEntry[$IDX_STATION]
+  $ok = null -> call script 'lib.slx.transfer' : function='ApplyMove', src=$srcStation, dst=$dstStation, ware=$currentWare, amount=$bestAmount
   if not $ok
     return null
   end
-  $srcEntry[$IDX_AMOUNT] = $srcEntry[$IDX_AMOUNT] - $bestAmount
-  if $srcEntry[$IDX_CAP] > 0
-    $srcEntry[$IDX_PCT] = null -> call script 'lib.slx.util' : function='Percent', part=$srcEntry[$IDX_AMOUNT], whole=$srcEntry[$IDX_CAP]
+  $srcAmount = $srcEntry[$IDX_AMOUNT]
+  $srcCap = $srcEntry[$IDX_CAP]
+  $srcAmount = $srcAmount - $bestAmount
+  $srcEntry[$IDX_AMOUNT] = $srcAmount
+  if $srcCap > 0
+    $srcPct = null -> call script 'lib.slx.util' : function='Percent', part=$srcAmount, whole=$srcCap
   else
-    $srcEntry[$IDX_PCT] = 0
+    $srcPct = 0
   end
-  $dstEntry[$IDX_AMOUNT] = $dstEntry[$IDX_AMOUNT] + $bestAmount
-  if $dstEntry[$IDX_CAP] > 0
-    $dstEntry[$IDX_PCT] = null -> call script 'lib.slx.util' : function='Percent', part=$dstEntry[$IDX_AMOUNT], whole=$dstEntry[$IDX_CAP]
+  $srcEntry[$IDX_PCT] = $srcPct
+  $dstAmount = $dstEntry[$IDX_AMOUNT]
+  $dstCap = $dstEntry[$IDX_CAP]
+  $dstAmount = $dstAmount + $bestAmount
+  $dstEntry[$IDX_AMOUNT] = $dstAmount
+  if $dstCap > 0
+    $dstPct = null -> call script 'lib.slx.util' : function='Percent', part=$dstAmount, whole=$dstCap
   else
-    $dstEntry[$IDX_PCT] = 0
+    $dstPct = 0
   end
+  $dstEntry[$IDX_PCT] = $dstPct
   $srcEntry[$IDX_SENT] = [TRUE]
   $dstEntry[$IDX_RECEIVED] = [TRUE]
   if $reasonSend
@@ -304,19 +317,23 @@ ApplyTransfer:
 
 StageProducerToStore:
   while [TRUE]
-    gosub ResetBest
+    gosub ResetBest:
     $i = size of array $entries
     while $i
       dec $i
       $src = $entries[$i]
-      if $src[$IDX_ROLE] != 'producer'
+      $srcRole = $src[$IDX_ROLE]
+      if $srcRole != 'producer'
         continue
       end
-      $available = $src[$IDX_AMOUNT] - $src[$IDX_MAX_UNITS]
+      $srcAmount = $src[$IDX_AMOUNT]
+      $srcMaxUnits = $src[$IDX_MAX_UNITS]
+      $available = $srcAmount - $srcMaxUnits
       if $available <= 0
         continue
       end
-      $safe = $src[$IDX_AMOUNT] - $src[$IDX_MIN_UNITS]
+      $srcMinUnits = $src[$IDX_MIN_UNITS]
+      $safe = $srcAmount - $srcMinUnits
       if $available > $safe
         $available = $safe
       end
@@ -327,6 +344,8 @@ StageProducerToStore:
       if $srcChunk <= 0
         continue
       end
+      $srcPct = $src[$IDX_PCT]
+      $srcSector = $src[$IDX_SECTOR]
       $j = size of array $entries
       while $j
         dec $j
@@ -334,10 +353,13 @@ StageProducerToStore:
           continue
         end
         $dst = $entries[$j]
-        if $dst[$IDX_ROLE] != 'store'
+        $dstRole = $dst[$IDX_ROLE]
+        if $dstRole != 'store'
           continue
         end
-        $room = $dst[$IDX_MAX_UNITS] - $dst[$IDX_AMOUNT]
+        $dstMaxUnits = $dst[$IDX_MAX_UNITS]
+        $dstAmount = $dst[$IDX_AMOUNT]
+        $room = $dstMaxUnits - $dstAmount
         if $room <= 0
           continue
         end
@@ -354,14 +376,16 @@ StageProducerToStore:
         $candSrcIdx = $i
         $candDstIdx = $j
         $candAmount = $amt
-        $candTargetPct = $dst[$IDX_PCT]
-        $candSourcePct = $src[$IDX_PCT]
+        $dstPct = $dst[$IDX_PCT]
+        $candTargetPct = $dstPct
+        $candSourcePct = $srcPct
         $candSame = 0
-        if $src[$IDX_SECTOR] == $dst[$IDX_SECTOR]
+        $dstSector = $dst[$IDX_SECTOR]
+        if $srcSector == $dstSector
           $candSame = 1
         end
-        $candDistance = get jumps from sector $src[$IDX_SECTOR] to sector $dst[$IDX_SECTOR]
-        gosub ConsiderCandidate
+        $candDistance = get jumps from sector $srcSector to sector $dstSector
+        gosub ConsiderCandidate:
       end
     end
     if $bestSrcIdx == null
@@ -372,25 +396,29 @@ StageProducerToStore:
     end
     $reasonSend = 'P2S'
     $reasonRecv = 'P2S_RECV'
-    gosub ApplyTransfer
+    gosub ApplyTransfer:
   end
   return null
 
 StageStoreToConsumer:
   while [TRUE]
-    gosub ResetBest
+    gosub ResetBest:
     $i = size of array $entries
     while $i
       dec $i
       $dst = $entries[$i]
-      if $dst[$IDX_ROLE] != 'consumer'
+      $dstRole = $dst[$IDX_ROLE]
+      if $dstRole != 'consumer'
         continue
       end
-      $shortfall = $dst[$IDX_MIN_UNITS] - $dst[$IDX_AMOUNT]
+      $dstMinUnits = $dst[$IDX_MIN_UNITS]
+      $dstAmount = $dst[$IDX_AMOUNT]
+      $shortfall = $dstMinUnits - $dstAmount
       if $shortfall <= 0
         continue
       end
-      $room = $dst[$IDX_MAX_UNITS] - $dst[$IDX_AMOUNT]
+      $dstMaxUnits = $dst[$IDX_MAX_UNITS]
+      $room = $dstMaxUnits - $dstAmount
       if $room <= 0
         continue
       end
@@ -402,6 +430,8 @@ StageStoreToConsumer:
       if $dstChunk <= 0
         continue
       end
+      $dstPct = $dst[$IDX_PCT]
+      $dstSector = $dst[$IDX_SECTOR]
       $j = size of array $entries
       while $j
         dec $j
@@ -409,10 +439,13 @@ StageStoreToConsumer:
           continue
         end
         $src = $entries[$j]
-        if $src[$IDX_ROLE] != 'store'
+        $srcRole = $src[$IDX_ROLE]
+        if $srcRole != 'store'
           continue
         end
-        $available = $src[$IDX_AMOUNT] - $src[$IDX_MIN_UNITS]
+        $srcAmount = $src[$IDX_AMOUNT]
+        $srcMinUnits = $src[$IDX_MIN_UNITS]
+        $available = $srcAmount - $srcMinUnits
         if $available <= 0
           continue
         end
@@ -429,14 +462,16 @@ StageStoreToConsumer:
         $candSrcIdx = $j
         $candDstIdx = $i
         $candAmount = $amt
-        $candTargetPct = $dst[$IDX_PCT]
-        $candSourcePct = $src[$IDX_PCT]
+        $srcPct = $src[$IDX_PCT]
+        $candTargetPct = $dstPct
+        $candSourcePct = $srcPct
         $candSame = 0
-        if $src[$IDX_SECTOR] == $dst[$IDX_SECTOR]
+        $srcSector = $src[$IDX_SECTOR]
+        if $srcSector == $dstSector
           $candSame = 1
         end
-        $candDistance = get jumps from sector $src[$IDX_SECTOR] to sector $dst[$IDX_SECTOR]
-        gosub ConsiderCandidate
+        $candDistance = get jumps from sector $srcSector to sector $dstSector
+        gosub ConsiderCandidate:
       end
     end
     if $bestSrcIdx == null
@@ -447,21 +482,24 @@ StageStoreToConsumer:
     end
     $reasonSend = 'S_BAL'
     $reasonRecv = 'S2C'
-    gosub ApplyTransfer
+    gosub ApplyTransfer:
   end
   return null
 
 StageProducerToConsumer:
   while [TRUE]
-    gosub ResetBest
+    gosub ResetBest:
     $i = size of array $entries
     while $i
       dec $i
       $dst = $entries[$i]
-      if $dst[$IDX_ROLE] != 'consumer'
+      $dstRole = $dst[$IDX_ROLE]
+      if $dstRole != 'consumer'
         continue
       end
-      $room = $dst[$IDX_MAX_UNITS] - $dst[$IDX_AMOUNT]
+      $dstMaxUnits = $dst[$IDX_MAX_UNITS]
+      $dstAmount = $dst[$IDX_AMOUNT]
+      $room = $dstMaxUnits - $dstAmount
       if $room <= 0
         continue
       end
@@ -469,6 +507,8 @@ StageProducerToConsumer:
       if $dstChunk <= 0
         continue
       end
+      $dstPct = $dst[$IDX_PCT]
+      $dstSector = $dst[$IDX_SECTOR]
       $j = size of array $entries
       while $j
         dec $j
@@ -476,10 +516,13 @@ StageProducerToConsumer:
           continue
         end
         $src = $entries[$j]
-        if $src[$IDX_ROLE] != 'producer'
+        $srcRole = $src[$IDX_ROLE]
+        if $srcRole != 'producer'
           continue
         end
-        $available = $src[$IDX_AMOUNT] - $src[$IDX_MIN_UNITS]
+        $srcAmount = $src[$IDX_AMOUNT]
+        $srcMinUnits = $src[$IDX_MIN_UNITS]
+        $available = $srcAmount - $srcMinUnits
         if $available <= 0
           continue
         end
@@ -496,14 +539,16 @@ StageProducerToConsumer:
         $candSrcIdx = $j
         $candDstIdx = $i
         $candAmount = $amt
-        $candTargetPct = $dst[$IDX_PCT]
-        $candSourcePct = $src[$IDX_PCT]
+        $srcPct = $src[$IDX_PCT]
+        $candTargetPct = $dstPct
+        $candSourcePct = $srcPct
         $candSame = 0
-        if $src[$IDX_SECTOR] == $dst[$IDX_SECTOR]
+        $srcSector = $src[$IDX_SECTOR]
+        if $srcSector == $dstSector
           $candSame = 1
         end
-        $candDistance = get jumps from sector $src[$IDX_SECTOR] to sector $dst[$IDX_SECTOR]
-        gosub ConsiderCandidate
+        $candDistance = get jumps from sector $srcSector to sector $dstSector
+        gosub ConsiderCandidate:
       end
     end
     if $bestSrcIdx == null
@@ -514,25 +559,29 @@ StageProducerToConsumer:
     end
     $reasonSend = 'P2C'
     $reasonRecv = 'P2S_RECV'
-    gosub ApplyTransfer
+    gosub ApplyTransfer:
   end
   return null
 
 StageStoreBleed:
   while [TRUE]
-    gosub ResetBest
+    gosub ResetBest:
     $i = size of array $entries
     while $i
       dec $i
       $src = $entries[$i]
-      if $src[$IDX_ROLE] != 'store'
+      $srcRole = $src[$IDX_ROLE]
+      if $srcRole != 'store'
         continue
       end
-      $excess = $src[$IDX_AMOUNT] - $src[$IDX_MAX_UNITS]
+      $srcAmount = $src[$IDX_AMOUNT]
+      $srcMaxUnits = $src[$IDX_MAX_UNITS]
+      $excess = $srcAmount - $srcMaxUnits
       if $excess <= 0
         continue
       end
-      $safe = $src[$IDX_AMOUNT] - $src[$IDX_MIN_UNITS]
+      $srcMinUnits = $src[$IDX_MIN_UNITS]
+      $safe = $srcAmount - $srcMinUnits
       if $excess > $safe
         $excess = $safe
       end
@@ -543,6 +592,8 @@ StageStoreBleed:
       if $srcChunk <= 0
         continue
       end
+      $srcPct = $src[$IDX_PCT]
+      $srcSector = $src[$IDX_SECTOR]
       $j = size of array $entries
       while $j
         dec $j
@@ -550,10 +601,13 @@ StageStoreBleed:
           continue
         end
         $dst = $entries[$j]
-        if $dst[$IDX_ROLE] != 'consumer'
+        $dstRole = $dst[$IDX_ROLE]
+        if $dstRole != 'consumer'
           continue
         end
-        $room = $dst[$IDX_MAX_UNITS] - $dst[$IDX_AMOUNT]
+        $dstMaxUnits = $dst[$IDX_MAX_UNITS]
+        $dstAmount = $dst[$IDX_AMOUNT]
+        $room = $dstMaxUnits - $dstAmount
         if $room <= 0
           continue
         end
@@ -570,14 +624,16 @@ StageStoreBleed:
         $candSrcIdx = $i
         $candDstIdx = $j
         $candAmount = $amt
-        $candTargetPct = $dst[$IDX_PCT]
-        $candSourcePct = $src[$IDX_PCT]
+        $dstPct = $dst[$IDX_PCT]
+        $candTargetPct = $dstPct
+        $candSourcePct = $srcPct
         $candSame = 0
-        if $src[$IDX_SECTOR] == $dst[$IDX_SECTOR]
+        $dstSector = $dst[$IDX_SECTOR]
+        if $srcSector == $dstSector
           $candSame = 1
         end
-        $candDistance = get jumps from sector $src[$IDX_SECTOR] to sector $dst[$IDX_SECTOR]
-        gosub ConsiderCandidate
+        $candDistance = get jumps from sector $srcSector to sector $dstSector
+        gosub ConsiderCandidate:
       end
     end
     if $bestSrcIdx == null
@@ -588,25 +644,29 @@ StageStoreBleed:
     end
     $reasonSend = 'S_BAL'
     $reasonRecv = 'S2C'
-    gosub ApplyTransfer
+    gosub ApplyTransfer:
   end
   return null
 
 StageProducerTopUp:
   while [TRUE]
-    gosub ResetBest
+    gosub ResetBest:
     $i = size of array $entries
     while $i
       dec $i
       $dst = $entries[$i]
-      if $dst[$IDX_ROLE] != 'store'
+      $dstRole = $dst[$IDX_ROLE]
+      if $dstRole != 'store'
         continue
       end
-      $shortfall = $dst[$IDX_MIN_UNITS] - $dst[$IDX_AMOUNT]
+      $dstMinUnits = $dst[$IDX_MIN_UNITS]
+      $dstAmount = $dst[$IDX_AMOUNT]
+      $shortfall = $dstMinUnits - $dstAmount
       if $shortfall <= 0
         continue
       end
-      $room = $dst[$IDX_MAX_UNITS] - $dst[$IDX_AMOUNT]
+      $dstMaxUnits = $dst[$IDX_MAX_UNITS]
+      $room = $dstMaxUnits - $dstAmount
       if $room <= 0
         continue
       end
@@ -618,6 +678,8 @@ StageProducerTopUp:
       if $dstChunk <= 0
         continue
       end
+      $dstPct = $dst[$IDX_PCT]
+      $dstSector = $dst[$IDX_SECTOR]
       $j = size of array $entries
       while $j
         dec $j
@@ -625,10 +687,13 @@ StageProducerTopUp:
           continue
         end
         $src = $entries[$j]
-        if $src[$IDX_ROLE] != 'producer'
+        $srcRole = $src[$IDX_ROLE]
+        if $srcRole != 'producer'
           continue
         end
-        $available = $src[$IDX_AMOUNT] - $src[$IDX_MIN_UNITS]
+        $srcAmount = $src[$IDX_AMOUNT]
+        $srcMinUnits = $src[$IDX_MIN_UNITS]
+        $available = $srcAmount - $srcMinUnits
         if $available <= 0
           continue
         end
@@ -645,14 +710,16 @@ StageProducerTopUp:
         $candSrcIdx = $j
         $candDstIdx = $i
         $candAmount = $amt
-        $candTargetPct = $dst[$IDX_PCT]
-        $candSourcePct = $src[$IDX_PCT]
+        $srcPct = $src[$IDX_PCT]
+        $candTargetPct = $dstPct
+        $candSourcePct = $srcPct
         $candSame = 0
-        if $src[$IDX_SECTOR] == $dst[$IDX_SECTOR]
+        $srcSector = $src[$IDX_SECTOR]
+        if $srcSector == $dstSector
           $candSame = 1
         end
-        $candDistance = get jumps from sector $src[$IDX_SECTOR] to sector $dst[$IDX_SECTOR]
-        gosub ConsiderCandidate
+        $candDistance = get jumps from sector $srcSector to sector $dstSector
+        gosub ConsiderCandidate:
       end
     end
     if $bestSrcIdx == null
@@ -663,7 +730,7 @@ StageProducerTopUp:
     end
     $reasonSend = 'P2S'
     $reasonRecv = 'P2S_RECV'
-    gosub ApplyTransfer
+    gosub ApplyTransfer:
   end
   return null
 
@@ -677,7 +744,9 @@ FinalizeReasons:
     $amount = $entry[$IDX_AMOUNT]
     $minUnits = $entry[$IDX_MIN_UNITS]
     $maxUnits = $entry[$IDX_MAX_UNITS]
-    if $entry[$IDX_SENT] or $entry[$IDX_RECEIVED]
+    $sentFlag = $entry[$IDX_SENT]
+    $receivedFlag = $entry[$IDX_RECEIVED]
+    if $sentFlag or $receivedFlag
       if not $reason
         $reason = 'BAL_OK'
       end
@@ -694,8 +763,11 @@ FinalizeReasons:
               continue
             end
             $peer = $entries[$inner]
-            if $peer[$IDX_ROLE] == 'store'
-              $room = $peer[$IDX_MAX_UNITS] - $peer[$IDX_AMOUNT]
+            $peerRole = $peer[$IDX_ROLE]
+            if $peerRole == 'store'
+              $peerMaxUnits = $peer[$IDX_MAX_UNITS]
+              $peerAmount = $peer[$IDX_AMOUNT]
+              $room = $peerMaxUnits - $peerAmount
               if $room > 0
                 $roomFound = [TRUE]
                 break
@@ -722,14 +794,19 @@ FinalizeReasons:
               continue
             end
             $peer = $entries[$inner]
-            if $peer[$IDX_ROLE] == 'store'
-              $avail = $peer[$IDX_AMOUNT] - $peer[$IDX_MIN_UNITS]
+            $peerRole = $peer[$IDX_ROLE]
+            if $peerRole == 'store'
+              $peerAmount = $peer[$IDX_AMOUNT]
+              $peerMinUnits = $peer[$IDX_MIN_UNITS]
+              $avail = $peerAmount - $peerMinUnits
               if $avail > 0
                 $supply = [TRUE]
                 break
               end
-            else if $peer[$IDX_ROLE] == 'producer'
-              $avail = $peer[$IDX_AMOUNT] - $peer[$IDX_MIN_UNITS]
+            else if $peerRole == 'producer'
+              $peerAmount = $peer[$IDX_AMOUNT]
+              $peerMinUnits = $peer[$IDX_MIN_UNITS]
+              $avail = $peerAmount - $peerMinUnits
               if $avail > 0
                 $supply = [TRUE]
                 break
@@ -773,10 +850,12 @@ StoreReasons:
     if not $code
       $code = 'BAL_OK'
     end
-    if $entry[$IDX_AUTO]
-      $code = sprintf: fmt='A_%s', $code
+    $autoFlag = $entry[$IDX_AUTO]
+    if $autoFlag
+      $code = sprintf: fmt='A_%s', $code, null, null, null, null
     end
-    null -> call script 'lib.slx.query' : function='SetLastReason', station=$entry[$IDX_STATION], ware=$currentWare, code=$code
-    wait 1 ms
+    $stationRef = $entry[$IDX_STATION]
+    null -> call script 'lib.slx.query' : function='SetLastReason', station=$stationRef, ware=$currentWare, code=$code
+    = wait 1 ms
   end
   return null

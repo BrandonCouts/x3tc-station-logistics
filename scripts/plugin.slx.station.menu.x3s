@@ -13,7 +13,7 @@ $CHUNK_PCT = 3
 
 if not $station
   $prompt = read text: page=$PageId id=209
-  $station = null -> get user input: type=Var/Ship/Station owned by Player, title=$prompt
+  $station = null -> get user input: type=[Var/Ship/Station owned by Player], title=$prompt
 end
 if not $station
   return null
@@ -42,11 +42,15 @@ while [TRUE]
       continue
     end
     $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
+    $cfgRole = $cfg[$ROLE]
+    $cfgMinPct = $cfg[$MIN_PCT]
+    $cfgMaxPct = $cfg[$MAX_PCT]
+    $cfgChunkPct = $cfg[$CHUNK_PCT]
     $reasonCode = null -> call script 'lib.slx.query' : function='GetLastReason', station=$station, ware=$ware
     $reasonTxt = null -> call script 'lib.slx.ui' : function='FormatReason', code=$reasonCode
-    $row = sprintf: pageid=$PageId textid=214, $ware, $cfg[$ROLE], $cfg[$MIN_PCT], $cfg[$MAX_PCT], $cfg[$CHUNK_PCT], $reasonTxt
+    $row = sprintf: pageid=$PageId textid=214, $ware, $cfgRole, $cfgMinPct, $cfgMaxPct, $cfgChunkPct, $reasonTxt
     add custom menu item to array $menu: text=$row returnvalue=$ware
-    wait 1 ms
+    = wait 1 ms
   end
 
   add section to custom menu: $menu
@@ -73,7 +77,7 @@ while [TRUE]
         $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
         null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
         null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
-        wait 1 ms
+        = wait 1 ms
       end
     end
     continue
@@ -85,6 +89,10 @@ while [TRUE]
 
   $ware = $selection
   $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
+  $roleValue = $cfg[$ROLE]
+  $minValue = $cfg[$MIN_PCT]
+  $maxValue = $cfg[$MAX_PCT]
+  $chunkValue = $cfg[$CHUNK_PCT]
 
   $rolePrompt = read text: page=$PageId id=210
   $roleMenu = create custom menu array: heading=$rolePrompt
@@ -96,43 +104,48 @@ while [TRUE]
   add custom menu item to array $roleMenu: text=$exit returnvalue=null
   $roleSel = open custom menu: title=$rolePrompt description=null option array=$roleMenu
   if $roleSel
-    $cfg[$ROLE] = $roleSel
+    $roleValue = $roleSel
   end
 
   $minPrompt = read text: page=$PageId id=211
-  $minPrompt = sprintf: fmt='%s [%s]', $minPrompt, $cfg[$MIN_PCT]
-  $min = null -> get user input: type=Var/Number, title=$minPrompt
+  $minPrompt = sprintf: fmt='%s [%s]', $minPrompt, $minValue, null, null, null
+  $min = null -> get user input: type=[Var/Number], title=$minPrompt
   if $min == null
-    $min = $cfg[$MIN_PCT]
+    $min = $minValue
   end
-  $cfg[$MIN_PCT] = null -> call script 'lib.slx.util' : function='Clamp', input=$min, min=0, max=100
+  $minValue = null -> call script 'lib.slx.util' : function='Clamp', input=$min, min=0, max=100
 
   $maxPrompt = read text: page=$PageId id=212
-  $maxPrompt = sprintf: fmt='%s [%s]', $maxPrompt, $cfg[$MAX_PCT]
-  $max = null -> get user input: type=Var/Number, title=$maxPrompt
+  $maxPrompt = sprintf: fmt='%s [%s]', $maxPrompt, $maxValue, null, null, null
+  $max = null -> get user input: type=[Var/Number], title=$maxPrompt
   if $max == null
-    $max = $cfg[$MAX_PCT]
+    $max = $maxValue
   end
-  $cfg[$MAX_PCT] = null -> call script 'lib.slx.util' : function='Clamp', input=$max, min=0, max=100
+  $maxValue = null -> call script 'lib.slx.util' : function='Clamp', input=$max, min=0, max=100
 
-  if $cfg[$MIN_PCT] > $cfg[$MAX_PCT]
-    $tmp = $cfg[$MIN_PCT]
-    $cfg[$MIN_PCT] = $cfg[$MAX_PCT]
-    $cfg[$MAX_PCT] = $tmp
+  if $minValue > $maxValue
+    $tmp = $minValue
+    $minValue = $maxValue
+    $maxValue = $tmp
   end
 
   $chunkPrompt = read text: page=$PageId id=213
-  $chunkPrompt = sprintf: fmt='%s [%s]', $chunkPrompt, $cfg[$CHUNK_PCT]
-  $chunk = null -> get user input: type=Var/Number, title=$chunkPrompt
+  $chunkPrompt = sprintf: fmt='%s [%s]', $chunkPrompt, $chunkValue, null, null, null
+  $chunk = null -> get user input: type=[Var/Number], title=$chunkPrompt
   if $chunk == null
-    $chunk = $cfg[$CHUNK_PCT]
+    $chunk = $chunkValue
   end
-  $cfg[$CHUNK_PCT] = null -> call script 'lib.slx.util' : function='Clamp', input=$chunk, min=0, max=100
+  $chunkValue = null -> call script 'lib.slx.util' : function='Clamp', input=$chunk, min=0, max=100
+
+  $cfg[$ROLE] = $roleValue
+  $cfg[$MIN_PCT] = $minValue
+  $cfg[$MAX_PCT] = $maxValue
+  $cfg[$CHUNK_PCT] = $chunkValue
 
   null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
   null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
 
-  wait 10 ms
+  = wait 10 ms
 end
 
 return null
