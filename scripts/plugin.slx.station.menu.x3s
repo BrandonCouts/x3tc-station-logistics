@@ -76,8 +76,8 @@ while [TRUE]
           continue
         end
         $cfg = null -> call script 'lib.slx.query' : function='GetStationWareConfig', station=$station, ware=$ware
-        null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
-        null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
+        = null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
+        = null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
         = wait 1 ms
       end
     end
@@ -143,8 +143,8 @@ while [TRUE]
   $cfg[$MAX_PCT] = $maxValue
   $cfg[$CHUNK_PCT] = $chunkValue
 
-  null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
-  null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
+  = null -> call script 'lib.slx.query' : function='SetStationWareConfig', station=$station, ware=$ware, cfg=$cfg
+  = null -> call script 'lib.slx.query' : function='SetLastReason', station=$station, ware=$ware, code='BAL_OK'
 
   = wait 10 ms
 end
