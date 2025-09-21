@@ -3,13 +3,13 @@
   <page id="89055" title="SLX" desc="" voice="no">
     <t id="101">SLX</t>
     <t id="102">Open SLX</t>
-    <t id="201">At Min (no export)</t>
-    <t id="202">No store headroom</t>
-    <t id="203">Filled to Max</t>
-    <t id="204">Exported to store</t>
-    <t id="205">Exported to consumer</t>
-    <t id="206">Imported from store</t>
-    <t id="207">Imported from producer</t>
+    <t id="201">At minimum threshold</t>
+    <t id="202">No partner available</t>
+    <t id="203">At maximum threshold</t>
+    <t id="204">Sent to store</t>
+    <t id="205">Sent to consumer</t>
+    <t id="206">Received from store</t>
+    <t id="207">Received from producer</t>
     <t id="208">Exit</t>
     <t id="209">Select Station</t>
     <t id="210">Role (producer|consumer|store|auto)</t>
@@ -23,6 +23,6 @@
     <t id="218">Exported to peer store</t>
     <t id="219">Imported from peer store</t>
     <t id="220">No peer store</t>
-    <t id="221">Balance OK</t>
+    <t id="221">Balanced</t>
   </page>
 </language>

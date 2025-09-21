@@ -1,12 +1,18 @@
 * ******************************************************************************
 * SCRIPT NAME: al.plugin.slx
-* DESCRIPTION: AL plugin entrypoint for SLX (start/stop manager task)
-* AUTHOR:      Brandon              DATE: 16 September 2025
+* DESCRIPTION: AL heartbeat for SLX (ensures manager task is running)
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
+
 $PageId = 89055
 load text: id=$PageId
 
-* Start manager task if not already running
+$enabled = get global variable: name='g.slx.enabled'
+if $enabled == [FALSE]
+  set global variable: name='g.slx.manager.running' value=[FALSE]
+  return null
+end
+
 $running = get global variable: name='g.slx.manager.running'
 if not $running
   START [THIS] -> call script 'plugin.slx.manager.tick' :

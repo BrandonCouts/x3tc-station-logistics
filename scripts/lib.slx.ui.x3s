@@ -1,97 +1,53 @@
 * ******************************************************************************
 * SCRIPT NAME: lib.slx.ui
-* DESCRIPTION: UI helpers for SLX
-* AUTHOR:      Brandon              DATE: 8 September 2025
+* DESCRIPTION: Reason-code formatting helpers for SLX menus
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
 
 if $function == 'FormatReason'
   $page = 89055
-  * auto roles use same text as base codes
-  if $code == 'A_AT_MIN'
-    $code = 'AT_MIN'
+  if not $code
+    return ''
   end
-  if $code == 'A_NO_STORE'
-    $code = 'NO_STORE'
+
+  $auto = [FALSE]
+  $prefix = get substring of $code offset=0 length=2
+  if $prefix == 'A_'
+    $auto = [TRUE]
+    $len = get length of string $code
+    $len = $len - 2
+    if $len < 0
+      $len = 0
+    end
+    $code = get substring of $code offset=2 length=$len
   end
-  if $code == 'A_FILLED_MAX'
-    $code = 'FILLED_MAX'
-  end
-  if $code == 'A_P2S'
-    $code = 'P2S'
-  end
-  if $code == 'A_P2C'
-    $code = 'P2C'
-  end
-  if $code == 'A_S2C'
-    $code = 'S2C'
-  end
-  if $code == 'A_P2S_RECV'
-    $code = 'P2S_RECV'
-  end
-  if $code == 'A_S_BAL'
-    $code = 'S_BAL'
-  end
-  if $code == 'A_S2S'
-    $code = 'S2S'
-  end
-  if $code == 'A_S2S_RECV'
-    $code = 'S2S_RECV'
-  end
-  if $code == 'A_NO_PEER'
-    $code = 'NO_PEER'
-  end
-  if $code == 'A_BAL_OK'
-    $code = 'BAL_OK'
-  end
-  if $code == 'AT_MIN'
-    $txt = read text: page=$page id=201
-    return $txt
-  end
-  if $code == 'NO_STORE'
-    $txt = read text: page=$page id=202
-    return $txt
-  end
-  if $code == 'FILLED_MAX'
-    $txt = read text: page=$page id=203
-    return $txt
-  end
-  if $code == 'P2S'
-    $txt = read text: page=$page id=204
-    return $txt
-  end
-  if $code == 'P2C'
-    $txt = read text: page=$page id=205
-    return $txt
-  end
-  if $code == 'S2C'
-    $txt = read text: page=$page id=206
-    return $txt
-  end
-  if $code == 'P2S_RECV'
-    $txt = read text: page=$page id=207
-    return $txt
-  end
-  if $code == 'S_BAL'
-    $txt = read text: page=$page id=217
-    return $txt
-  end
-  if $code == 'S2S'
-    $txt = read text: page=$page id=218
-    return $txt
-  end
-  if $code == 'S2S_RECV'
-    $txt = read text: page=$page id=219
-    return $txt
-  end
-  if $code == 'NO_PEER'
-    $txt = read text: page=$page id=220
-    return $txt
-  end
+
   if $code == 'BAL_OK'
     $txt = read text: page=$page id=221
-    return $txt
+  else if $code == 'AT_MIN'
+    $txt = read text: page=$page id=201
+  else if $code == 'FILLED_MAX'
+    $txt = read text: page=$page id=203
+  else if $code == 'NO_STORE'
+    $txt = read text: page=$page id=202
+  else if $code == 'P2S'
+    $txt = read text: page=$page id=204
+  else if $code == 'P2C'
+    $txt = read text: page=$page id=205
+  else if $code == 'S2C'
+    $txt = read text: page=$page id=206
+  else if $code == 'P2S_RECV'
+    $txt = read text: page=$page id=207
+  else if $code == 'S_BAL'
+    $txt = read text: page=$page id=217
+  else
+    $txt = ''
   end
-  $txt = ''
+
+  if $auto and $txt
+    $txt = sprintf: fmt='%s (Auto)', $txt
+  end
+
   return $txt
 end
 

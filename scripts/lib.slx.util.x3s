@@ -1,40 +1,55 @@
 * ******************************************************************************
 * SCRIPT NAME: lib.slx.util
-* DESCRIPTION: Utility helpers for SLX
-* AUTHOR:      Brandon              DATE: 8 September 2025
+* DESCRIPTION: Generic helper functions for SLX scripts
+* AUTHOR:      SLX Team                DATE: 18 October 2025
 * ******************************************************************************
 
 if $function == 'Min'
   if $a < $b
     return $a
-  else
-    return $b
   end
+  return $b
 end
 
 if $function == 'Max'
   if $a > $b
     return $a
-  else
-    return $b
   end
+  return $b
 end
 
-if $function == 'SafeDiv'
-  if $den <= 0
-    return 0
-  else
-    $res = $num / $den
-    return $res
+if $function == 'Clamp'
+  $value = $input
+  if $value < $min
+    return $min
   end
+  if $value > $max
+    return $max
+  end
+  return $value
 end
 
 if $function == 'Percent'
   if $whole <= 0
     return 0
   end
-  $res = $part * 100 / $whole
-  return $res
+  $pct = $part * 100 / $whole
+  return $pct
+end
+
+if $function == 'UnitsForPercent'
+  if $capacity <= 0
+    return 0
+  end
+  $units = $capacity * $percent / 100
+  return $units
+end
+
+if $function == 'Abs'
+  if $value < 0
+    $value = -$value
+  end
+  return $value
 end
 
 return null

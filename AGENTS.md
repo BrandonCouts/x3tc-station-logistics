@@ -25,6 +25,7 @@ Automate safe, mechanical X3TC work using **.x3s** source files only. Write scri
 - Tasks: 101+ for background loops (never task 0)
 - Text page: reserve one `89xxx` and record in `docs/ids.md`
 - **Setup scripts must include** `load text: id=<89xxx>`
+- Ignore any legacy `.xml` files in `scripts/`; they are reference dumps only and must not be edited or treated as source.
 
 # LEARNING
 ## Attach Examples from X3S Scripts to Documented Rules
