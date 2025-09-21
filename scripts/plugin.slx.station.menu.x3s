@@ -6,6 +6,8 @@
 
 $PageId = 89055
 
+load text: id=$PageId
+
 $ROLE = 0
 $MIN_PCT = 1
 $MAX_PCT = 2

@@ -10,11 +10,21 @@ load text: id=$PageId
 $section = read text: page=$PageId id=101
 if not $section
   $section = 'SLX'
+else
+  $prefix = get substring of $section offset=0 length=8
+  if $prefix == 'ReadText'
+    $section = 'SLX'
+  end
 end
 
 $menuTitle = read text: page=$PageId id=102
 if not $menuTitle
   $menuTitle = 'Open SLX'
+else
+  $prefix = get substring of $menuTitle offset=0 length=8
+  if $prefix == 'ReadText'
+    $menuTitle = 'Open SLX'
+  end
 end
 
 = [THIS] -> call script 'plugin.config.addscript' : PluginName=$menuTitle, Author=null, ScriptName='plugin.slx.station.menu', DisplayAuthor=[FALSE], AddToSection=$section, Menu=null
