@@ -24,6 +24,9 @@ This reference covers ship property commands available in X3TC scripting. Each e
 - `<RetVar/IF> <RefObj> get current speed`
 - `<RetVar/IF> <RefObj> get desired speed`
 - `<RetVar/IF> <RefObj> get destination`
+- **Examples:**
+  - `$v2 = $m.selected-> get destination`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get emergency jump minimum shield threshold`
 - `<RetVar/IF> <RefObj> get fire missile probability`
 - `<RetVar/IF> <RefObj> get fire missile time difference in seconds`
@@ -66,6 +69,10 @@ This reference covers ship property commands available in X3TC scripting. Each e
 - `<RetVar/IF> <RefObj> is civilian ship`
 - `<RetVar/IF> <RefObj> is decoupled ships leader`
 - `<RetVar/IF> <RefObj> is docked`
+- **Examples:**
+  - `do if $v1-> is docked`
+  - `skip if $v1-> is docked`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is emergency jump activated`
 - `<RetVar/IF> <RefObj> is hired`
 - `<RetVar/IF> <RefObj> is in a sector`

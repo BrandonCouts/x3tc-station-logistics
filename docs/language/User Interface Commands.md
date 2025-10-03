@@ -6,6 +6,7 @@ This reference covers user interface-related commands available in X3TC scriptin
 - **Full Description:** `add custom menu heading to array <Var/Array>: title=<Var/String>`
 - **Examples:**
   - `add custom menu heading to array $menu: title=$txt`
+  - `add custom menu heading to array $menu: title=$st`
 - **Edge Cases:** _None._
 - #### Rule: `add custom menu info line to array <value>: text=<Var/String>`
 - **Full Description:** `add custom menu info line to array <value>: text=<Var/String>`
@@ -13,10 +14,40 @@ This reference covers user interface-related commands available in X3TC scriptin
   - `add custom menu info line to array $menu: text=' '`
   - `add custom menu info line to array $menu: text=$temp.array`
   - `add custom menu info line to array $menu: text=$txt`
+  - `add custom menu info line to array $menu: text=$st`
 - **Edge Cases:** _None._
 - `add custom menu item to array <value>: text=<Var/String> returnvalue=<value>`
 - **Examples:**
   - `add custom menu item to array $menu: text=$txt returnvalue='switch.menu'`
+  - `add custom menu item to array $menu: text=$st returnvalue=$v1`
+  - `add custom menu item to array $menu: text=$st returnvalue='cursor'`
+  - `add custom menu item to array $menu: text=$st returnvalue='cmdon'`
+  - `add custom menu item to array $menu: text=$st returnvalue='cmdoff'`
+  - `add custom menu item to array $menu: text=$st returnvalue='jumptome'`
+  - `add custom menu item to array $menu: text=$st returnvalue='jumpto'`
+  - `add custom menu item to array $menu: text=$st returnvalue='dockto'`
+  - `add custom menu item to array $menu: text=$st returnvalue='attack'`
+  - `add custom menu item to array $menu: text=$st returnvalue='protect'`
+  - `add custom menu item to array $menu: text=$st returnvalue='attackall'`
+  - `add custom menu item to array $menu: text=$st returnvalue='patrol'`
+  - `add custom menu item to array $menu: text=$st returnvalue='standby'`
+  - `add custom menu item to array $menu: text=$st returnvalue='wingattack'`
+  - `add custom menu item to array $menu: text=$st returnvalue='wingdefend'`
+  - `add custom menu item to array $menu: text=$st returnvalue='clearsector'`
+  - `add custom menu item to array $menu: text=$st returnvalue='dockall'`
+  - `add custom menu item to array $menu: text=$st returnvalue='buywares'`
+  - `add custom menu item to array $menu: text=$st returnvalue='sellwares'`
+  - `add custom menu item to array $menu: text=$st returnvalue='viewships'`
+  - `add custom menu item to array $menu: text=$st returnvalue='toggle.ads'`
+  - `add custom menu item to array $menu: text=$st returnvalue='setup.object'`
+  - `add custom menu item to array $menu: text=$st returnvalue='toggle.grid'`
+  - `add custom menu item to array $menu: text=$st returnvalue='grid.ship'`
+  - `add custom menu item to array $menu: text=$st returnvalue=$v3`
+  - `add custom menu item to array $menu: text=$st returnvalue=0`
+  - `add custom menu item to array $menu: text=$st returnvalue='alert'`
+  - `add custom menu item to array $menu: text=$st returnvalue='grid.toggle'`
+  - `add custom menu item to array $menu: text=$st returnvalue='applyall'`
+  - `add custom menu item to array $menu: text=$st returnvalue='uninstall'`
 - #### Rule: `add section to custom menu: <Var/Array>`
 - **Full Description:** `add section to custom menu: <Var/Array>`
 - **Examples:**
@@ -61,6 +92,11 @@ This reference covers user interface-related commands available in X3TC scriptin
 - `<RetVar/> <RefObj> serialise object`
 - `<RetVar/IF/START> speak array: <value> prio=<Var/Number>`
 - `<RetVar/IF/START> speak text: page=<Var/Number> textid=<Var/Number> priority=<Var/Number>`
+- #### Rule: `<RetVar/IF/START> speak text: page=<Var/Number> textid=<Var/Number> priority=<Var/Number>`
+- **Full Description:** `<RetVar/IF/START> speak text: page=<Var/Number> textid=<Var/Number> priority=<Var/Number>`
+- **Examples:**
+  - `= speak text: page=13 id=131 priority=0`
+- **Edge Cases:** _None._
 - `<RefObj> write to logbook <value>`
 - `write to player logbook <value>`
 - `write to player logbook: printf: fmt=<Var/String>, <Value0>, <Value1>, <Value2>, <Value3>, <Value4>`

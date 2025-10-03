@@ -9,6 +9,18 @@
 - `if $jumps.needed > 1` – could not be matched to any documented rule.
 - `return null` – could not be matched to any documented rule.
 - `return $return` – could not be matched to any documented rule.
+- `* Auther: Logain Abler` – could not be matched to any documented rule.
+- `* --------------------` – could not be matched to any documented rule.
+- `$PageID = 9910` – could not be matched to any documented rule.
+- `$al.Ret = null` – could not be matched to any documented rule.
+- `if not $al.Settings` – could not be matched to any documented rule.
+- `if $al.Event == 'init' OR $al.Event == 'reinit'` – could not be matched to any documented rule.
+- `else if $al.Event == 'start'` – could not be matched to any documented rule.
+- `else if $al.Event == 'stop'` – could not be matched to any documented rule.
+- `else if $al.Event == 'timer'` – could not be matched to any documented rule.
+- `if $al.Settings[0]` – could not be matched to any documented rule.
+- `else if $al.Event == 'isenabled'` – could not be matched to any documented rule.
+- `return $al.Ret` – could not be matched to any documented rule.
 - `* -----------------------------------------------------------------------------------` – could not be matched to any documented rule.
 - `* Get save values from AL` – could not be matched to any documented rule.
 - `if $al.Settings` – could not be matched to any documented rule.
@@ -370,3 +382,72 @@
 - `$txt.debug = ' Clean from Factory Array'` – could not be matched to any documented rule.
 - `* wait` – could not be matched to any documented rule.
 - `* v2 - clear is.running flag` – could not be matched to any documented rule.
+- `$cmd.id = 2010` – could not be matched to any documented rule.
+- `$m.menumode = 'none'` – could not be matched to any documented rule.
+- `* While order /= quit` – could not be matched to any documented rule.
+- `while $m.menumode != 'quit'` – could not be matched to any documented rule.
+- `* $debug = sprintf: fmt='%s - %s - %s - %s - %s', $m.filter, $m.selected, $m.menumode, $m.showcmd, $m.viewgridship` – could not be matched to any documented rule.
+- `* = [THIS]-> call script 'anarkis.debug.output' : message=$debug` – could not be matched to any documented rule.
+- `* - If something is selected` – could not be matched to any documented rule.
+- `* - - If viewship over something select` – could not be matched to any documented rule.
+- `* - - Well, let`s show owned ships then` – could not be matched to any documented rule.
+- `if $m.viewowned == [TRUE]` – could not be matched to any documented rule.
+- `$ok = [FALSE]` – could not be matched to any documented rule.
+- `while $cnt` – could not be matched to any documented rule.
+- `continue` – could not be matched to any documented rule.
+- `if not $ok` – could not be matched to any documented rule.
+- `* - - End Display : Owned Ships` – could not be matched to any documented rule.
+- `if $v1 == $v2` – could not be matched to any documented rule.
+- `* - - If the fucking selection is a ship display the comand panel` – could not be matched to any documented rule.
+- `if $m.showcmd == [FALSE]` – could not be matched to any documented rule.
+- `if $v1 != $v2` – could not be matched to any documented rule.
+- `if $isadscompat == [TRUE] AND $isadsactive == [FALSE]` – could not be matched to any documented rule.
+- `* - - End` – could not be matched to any documented rule.
+- `* - - ACC Commands for Stations` – could not be matched to any documented rule.
+- `* - - If the selected object has docking bays, show menu` – could not be matched to any documented rule.
+- `* - - If the selected object is ADS compatible show setup and automode` – could not be matched to any documented rule.
+- `* - - Show the Grid Mode toggle for big ships` – could not be matched to any documented rule.
+- `* - Ship Menu Done` – could not be matched to any documented rule.
+- `* - Show the main menu` – could not be matched to any documented rule.
+- `if $m.selected == null AND $m.menumode != 'grid.sector'` – could not be matched to any documented rule.
+- `if $m.filter == null` – could not be matched to any documented rule.
+- `$v1 = $m.filter` – could not be matched to any documented rule.
+- `* - End` – could not be matched to any documented rule.
+- `* - Defense Grid : Main Menu` – could not be matched to any documented rule.
+- `if $m.menumode == 'grid.sector'` – could not be matched to any documented rule.
+- `if $m.viewgridship == [TRUE]` – could not be matched to any documented rule.
+- `* - Defense Grid : Ship List` – could not be matched to any documented rule.
+- `for each $v3 in array $v1 using counter $v2` – could not be matched to any documented rule.
+- `if not $v3-> get local variable: name='anarkis.ads.grid'` – could not be matched to any documented rule.
+- `* - Defense Grid : Sector List` – could not be matched to any documented rule.
+- `* - Handle Carrier and Station Lists` – could not be matched to any documented rule.
+- `if $m.menumode == 'list'` – could not be matched to any documented rule.
+- `if $m.filter == [Carrier]` – could not be matched to any documented rule.
+- `for each $select in array $list using counter $cnt` – could not be matched to any documented rule.
+- `* - If nothing selected` – could not be matched to any documented rule.
+- `if $m.selected == null` – could not be matched to any documented rule.
+- `if $m.filter != null` – could not be matched to any documented rule.
+- `* - Info Lines` – could not be matched to any documented rule.
+- `if $m.selected != null` – could not be matched to any documented rule.
+- `$v2 = ' '` – could not be matched to any documented rule.
+- `* $v2 = [THIS]-> call script 'anarkis.lib.shortstring' : string=$v2 max=18` – could not be matched to any documented rule.
+- `if $m.selected` – could not be matched to any documented rule.
+- `$page.id = 7539` – could not be matched to any documented rule.
+- `* use the ware manager to add our wares` – could not be matched to any documented rule.
+- `$StationClass = [Equipment Dock]` – could not be matched to any documented rule.
+- `* Advanced Jumpdrive` – could not be matched to any documented rule.
+- `* Energy Convertor` – could not be matched to any documented rule.
+- `* Targeting scanners` – could not be matched to any documented rule.
+- `* Add to terran stations` – could not be matched to any documented rule.
+- `* assign the command slots` – could not be matched to any documented rule.
+- `set ship command preload script: command=[COMMAND_CYCROW_JUMP] script='plugin.advjump.cmd.jump.preload'` – could not be matched to any documented rule.
+- `set script command upgrade: command=[COMMAND_CYCROW_JUMP]  upgrade={Navigation Command Software MK1}  script='plugin.advjump.cmdcheck.jump'` – could not be matched to any documented rule.
+- `global script map: set: key=[COMMAND_CYCROW_JUMP], class=[Ship], race=[Player], script='plugin.advjump.cmd.jump', prio=10` – could not be matched to any documented rule.
+- `set wing command preload script: wing command=[COMMAND_CYCROW_WING_JUMP] script='plugin.advjump.cmd.preload.wing'` – could not be matched to any documented rule.
+- `set script command upgrade: wing command=[COMMAND_CYCROW_WING_JUMP] upgrade={Navigation Command Software MK1}` – could not be matched to any documented rule.
+- `global script map for wings: key=[COMMAND_CYCROW_WING_JUMP] race=[Player] script='plugin.advjump.cmd.wing' prio=50` – could not be matched to any documented rule.
+- `global script map: remove: key=[COMMAND_ADVJUMP_AUTO], class=[Ship], race=[Player]` – could not be matched to any documented rule.
+- `set script command upgrade: command=[COMMAND_ADVJUMP_AUTO]  upgrade={Advanced Jumpdrive}  script='plugin.advjump.cmd.check'` – could not be matched to any documented rule.
+- `global script map: set: key=[COMMAND_ADVJUMP_AUTO], class=[Ship], race=[Player], script='plugin.advjump.autojump', prio=10` – could not be matched to any documented rule.
+- `* = [THIS]-> call script 'plugin.advnav.register.sector' : argument1='advjump' argument2='plugin.advjump.jump' argument3=90` – could not be matched to any documented rule.
+- `err.NoWareManager:` – could not be matched to any documented rule.

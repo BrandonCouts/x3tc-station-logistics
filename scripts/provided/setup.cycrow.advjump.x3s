@@ -1,0 +1,72 @@
+$page.id = 7539 
+load text: id=$page.id
+set global variable: name='advjump.pageid' value=$page.id
+
+* use the ware manager to add our wares
+$StationClass = [Equipment Dock]
+* Advanced Jumpdrive
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+* Energy Convertor
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+* Targeting scanners
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+* Add to terran stations
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran ATF Research Base} argument2=[Terran] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Saturn Research Station} argument2=[Terran] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Orbital Defence Station} argument2=[Terran] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Military Base} argument2=[Terran] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Split Strong Arms HQ} argument2=[Split] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]
+goto label err.NoWareManager:
+
+* assign the command slots
+set ship command preload script: command=[COMMAND_CYCROW_JUMP] script='plugin.advjump.cmd.jump.preload'
+set script command upgrade: command=[COMMAND_CYCROW_JUMP]  upgrade={Navigation Command Software MK1}  script='plugin.advjump.cmdcheck.jump'
+global script map: set: key=[COMMAND_CYCROW_JUMP], class=[Ship], race=[Player], script='plugin.advjump.cmd.jump', prio=10
+
+set wing command preload script: wing command=[COMMAND_CYCROW_WING_JUMP] script='plugin.advjump.cmd.preload.wing'
+set script command upgrade: wing command=[COMMAND_CYCROW_WING_JUMP] upgrade={Navigation Command Software MK1}
+global script map for wings: key=[COMMAND_CYCROW_WING_JUMP] race=[Player] script='plugin.advjump.cmd.wing' prio=50
+
+
+$text = read text: page=$page.id id=27
+$text = sprintf: pageid=$page.id textid=20, $text, null, null, null, null
+= [THIS]-> call script 'plugin.hotkeymanager.add' : argument1='advjump' argument2=$text argument3='plugin.advjump.hotkey'
+
+$text = read text: page=$page.id id=25
+$text = sprintf: pageid=$page.id textid=20, $text, null, null, null, null
+= [THIS]-> call script 'plugin.hotkeymanager.add' : argument1='advjump.target' argument2=$text argument3='plugin.advjump.hotkey.target'
+
+global script map: remove: key=[COMMAND_ADVJUMP_AUTO], class=[Ship], race=[Player]
+set script command upgrade: command=[COMMAND_ADVJUMP_AUTO]  upgrade={Advanced Jumpdrive}  script='plugin.advjump.cmd.check'
+global script map: set: key=[COMMAND_ADVJUMP_AUTO], class=[Ship], race=[Player], script='plugin.advjump.autojump', prio=10
+
+= [THIS]-> call script 'plugin.advnav.register.between' : argument1='advjump.ftl' argument2='plugin.advjump.flytosector' argument3=90
+= [THIS]-> call script 'plugin.advnav.register.jump' : argument1='advjump' argument2='plugin.advjump.jump' argument3=90
+* = [THIS]-> call script 'plugin.advnav.register.sector' : argument1='advjump' argument2='plugin.advjump.jump' argument3=90
+
+return null
+
+err.NoWareManager:
+return null

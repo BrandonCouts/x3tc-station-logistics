@@ -13,12 +13,23 @@ This reference lists macro commands available in X3TC scripting.
   - `add custom menu heading to array $menu: page=$PageID id=126`
   - `add custom menu heading to array $menu: page=$PageID id=127`
   - `add custom menu heading to array $menu: page=$PageID id=157`
+  - `add custom menu heading to array $menu: page=$page.id id=1042`
+  - `add custom menu heading to array $menu: page=$page.id id=1043`
+  - `add custom menu heading to array $menu: page=$page.id id=1001`
+  - `add custom menu heading to array $menu: page=$page.id id=1049`
+  - `add custom menu heading to array $menu: page=$page.id id=1118`
+  - `add custom menu heading to array $menu: page=$page.id id=1119`
+  - `add custom menu heading to array $menu: page=$page.id id=1050`
+  - `add custom menu heading to array $menu: page=$page.id id=1017`
+  - `add custom menu heading to array $menu: page=$page.id id=1004`
 - **Edge Cases:** _None._
 - #### Rule: `add custom menu info line to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **Full Description:** `add custom menu info line to array <Var/Array>: page=<Var/Number1> id=<Var/Number2>`
 - **Examples:**
   - `add custom menu info line to array $menu: page=$PageID id=119`
   - `add custom menu info line to array $menu: page=$PageID id=129`
+  - `add custom menu info line to array $menu: page=$page.id id=1010`
+  - `add custom menu info line to array $menu: page=$page.id id=1011`
 - **Edge Cases:** _None._
 - #### Rule: `add custom menu item to array <Var/Array>: page=<Var/Number1> id=<Var/Number2> returnvalue=<Value>`
 - **Full Description:** `add custom menu item to array <Var/Array>: page=<Var/Number1> id=<Var/Number2> returnvalue=<Value>`
@@ -30,6 +41,14 @@ This reference lists macro commands available in X3TC scripting.
   - `add custom menu item to array $menu: page=$PageID id=159 returnvalue='resource.all.on'`
   - `add custom menu item to array $menu: page=$PageID id=166 returnvalue='product.all.off'`
   - `add custom menu item to array $menu: page=$PageID id=167 returnvalue='resource.all.off'`
+  - `add custom menu item to array $menu: page=$page.id id=1003 returnvalue=[Carrier]`
+  - `add custom menu item to array $menu: page=$page.id id=1002 returnvalue=[Station]`
+  - `add custom menu item to array $menu: page=$page.id id=1044 returnvalue='defense.grid'`
+  - `add custom menu item to array $menu: page=$page.id id=1049 returnvalue='grid.ship'`
+  - `add custom menu item to array $menu: page=$page.id id=1118 returnvalue=$v3`
+  - `add custom menu item to array $menu: page=$page.id id=1119 returnvalue=$v3`
+  - `add custom menu item to array $menu: page=$page.id id=1050 returnvalue=0`
+  - `add custom menu item to array $menu: page=$page.id id=1089 returnvalue='gen.set'`
 - **Edge Cases:** _None._
 - #### Rule: `dim <Var/Array> = <Value> [, <Value> ] [, <Value> ] ... [, <Value> ]`
 - **Full Description:** `dim <Var/Array> = <Value> [, <Value> ] [, <Value> ] ... [, <Value> ]`

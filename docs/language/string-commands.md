@@ -22,6 +22,8 @@ This reference lists string commands available in X3TC scripting.
 - **Edge Cases:** _None._
 - `<RetVar/IF> get text id: ware=<Var/Ware>`
 - `load text: id=<Var/Number>`
+  - **Examples:**
+    - `load text: id=$page.id`
 - `<RetVar/IF> match regular expression: <Var/String1> to string <Var/String2>`
 - #### Rule: `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
 - **Full Description:** `<RetVar> read text: page=<Var/Number1> id=<Var/Number2>`
@@ -57,6 +59,20 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = read text: page=$PageID id=126`
   - `$txt = read text: page=$PageID id=127`
   - `$txt = read text: page=$PageID id=133`
+  - `$st = read text: page=$page.id id=820`
+  - `$st = read text: page=$page.id id=821`
+  - `$v1 = read text: page=$page.id id=1044`
+  - `$st = read text: page=$page.id id=204`
+  - `$v2 = read text: page=$page.id id=203`
+  - `$v2 = read text: page=$page.id id=204`
+  - `$v3 = read text: page=$page.id id=203`
+  - `$v3 = read text: page=$page.id id=204`
+  - `$v2 = read text: page=$page.id id=100`
+  - `$v1 = read text: page=$page.id id=1000`
+  - `$st = read text: page=$page.id id=201`
+  - `$st = read text: page=$page.id id=202`
+  - `$text = read text: page=$page.id id=27`
+  - `$text = read text: page=$page.id id=25`
 - **Edge Cases:** _None._
 - `<RetVar/IF> read text: page id=<Var/Number1>, from <Var/Number2> to <Var/Number3> to array, include empty=<Var/Number4>`
 - `<RetVar/IF> read text: page id=<Var/Number>, id=<Var/Number> exists`
@@ -76,11 +92,32 @@ This reference lists string commands available in X3TC scripting.
   - `$txt = sprintf: pageid=$PageID textid=2002, $factory.count, $product.count, $resource.count, null, null`
   - `$txt = sprintf: pageid=$PageID textid=2001, $dock.count, null, null, null, null`
   - `$pointer = sprintf: pageid=$PageID textid=4000, $ware, null, null, null, null`
+  - `$plugin.description = sprintf: pageid=$PageID textid=100, null, null, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=194, $destination, $ware, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=192, $destination, null, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=193, $amount, $ware, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=182, $ware, null, null, null, null`
   - `$txt = sprintf: pageid=$PageID textid=183, $min.txt, $avg.txt, $max.txt, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1042, null, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1041, $v2, $v3, $v4, $v5, null`
+  - `$st = sprintf: pageid=$page.id textid=1030, null, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1034, null, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1039, $st, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1018, $v1, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1059, $st, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1047, $st, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1051, $x, $y, $v3, $v4, $v5`
+  - `$st = sprintf: pageid=$page.id textid=1017, $m.filter, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1006, $m.filter, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1058, $st, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1008, $m.filter, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1007, $m.filter, null, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1013, $v1, $v2, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1014, $v1, $v2, null, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1015, $v1, $v2, $v3, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1016, $v1, $v2, $v3, null, null`
+  - `$st = sprintf: pageid=$page.id textid=1012, $v2, $v1, null, null, null`
+  - `$text = sprintf: pageid=$page.id textid=20, $text, null, null, null, null`
 - **Edge Cases:** _None._
 - `<RetVar> string <Var/String> to integer`
 - `<RetVar> substitute in string <Var/String1>: pattern <Var/String2> with <Var/String3>`

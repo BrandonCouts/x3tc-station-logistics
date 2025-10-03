@@ -28,6 +28,15 @@ This reference lists array commands available in X3TC scripting.
   - `$virtual = $ware.array[0]`
   - `$menu = $return.array[0]`
   - `$factory.show.array = $return.array[1]`
+  - `$page.id = $gl.setup[0]`
+  - `$m.filter = $select[0]`
+  - `$m.selected = $select[1]`
+  - `$m.menumode = $select[2]`
+  - `$m.showcmd = $select[3]`
+  - `$m.viewgridship = $select[4]`
+  - `$m.viewowned = $select[5]`
+  - `$v1 = $list[$cnt]`
+  - `$al.Ret = $al.Settings[0]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> = <Var/Array>[<Var/Number1>][<Var/Number2>]`
 - **Examples:**
@@ -54,15 +63,24 @@ This reference lists array commands available in X3TC scripting.
   - `$temp.array[1] = ''`
   - `$al.Settings[12] = 1`
   - `$al.Settings[12] = null`
+  - `$al.Settings[0] = [FALSE]`
+  - `$al.Settings[1] = $PageID`
+  - `$al.Settings[2] = null`
+  - `$al.Settings[3] = $factory.array`
+  - `$al.Settings[4] = $dock.array`
+  - `$al.Settings[5] = null`
+  - `$is.dymanic[0] = [TRUE]`
+  - `$is.dymanic[1] = [TRUE]`
+  - `$is.dymanic[2] = [TRUE]`
+  - `$al.Settings[6] = $is.dymanic`
+  - `$al.Settings[7] = null`
+  - `$al.Settings[0] = [TRUE]`
 - **Edge Cases:** _None._
 - `<Var/Array1>[<Var/Number1>] = <Var/Array2>[<Var/Number2>]`
 - #### Rule: `append <Value> to array <Var/Array>`
 - **Full Description:** `append <Value> to array <Var/Array>`
 - **Examples:**
   - `append $target.sector to array $target.pos`
-  - `append $target.sector to array $target.pos`
-  - `append 0 to array $target.pos`
-  - `append 0 to array $target.pos`
   - `append 0 to array $target.pos`
   - `append $target to array $target.pos`
   - `append $format to array $menu`
@@ -105,6 +123,10 @@ This reference lists array commands available in X3TC scripting.
   - `$ttech.Array = array alloc: size=0`
   - `$tequip.Array = array alloc: size=0`
   - `$main.ware.Array = array alloc: size=0`
+  - `$al.Settings = array alloc: size=30`
+  - `$factory.array = array alloc: size=0`
+  - `$dock.array = array alloc: size=0`
+  - `$is.dymanic = array alloc: size=10`
 - **Edge Cases:** _None._
 - `<RetVar/IF> arrays <Value1> and <Value2> are equal`
 - `<RetVar> clone array <Var/Array> : index <Var/Number1> ... <Var/Number2>`
@@ -141,6 +163,8 @@ This reference lists array commands available in X3TC scripting.
 - **Full Description:** `resize array <Var/Array> to <Var/Number>`
 - **Examples:**
   - `resize array $target.pos to 0`
+  - `resize array $menu to 0`
+  - `resize array $menu to $cnt`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar/IF> reverse array <Value>`
 - **Full Description:** `<RetVar/IF> reverse array <Value>`
@@ -165,10 +189,14 @@ This reference lists array commands available in X3TC scripting.
   - `$s = size of array $glb.Array`
   - `$s = size of array $sector.array`
   - `$sf = size of array $factory.array`
-  - `$s = size of array $factory.array`
   - `$sd = size of array $dock.array`
   - `$s = size of array $ware.Array`
   - `$s = size of array $config.Array`
+  - `$cnt = size of array $list`
+  - `$cnt = size of array $menu`
+  - `$v4 = size of array $v4`
+  - `$v1 = size of array $v1`
+  - `$v3 = size of array $v3`
 - **Edge Cases:** _None._
 - #### Rule: `<RetVar> sort array <Value>`
 - **Full Description:** `<RetVar> sort array <Value>`

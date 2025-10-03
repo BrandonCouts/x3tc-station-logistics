@@ -58,11 +58,21 @@ This reference lists universe data commands available in X3TC scripting.
 - `<RetVar/IF> get next sector on route from sector <Var/Sector1> to sector <Var/Sector2>`
 - `<RetVar/IF> <RefObj> get north warp gate`
 - `<RetVar/IF> <RefObj> get owned ships: class/type=<value>`
+- **Examples:**
+  - `$list = $m.selected-> get owned ships: class/type=[Ship]`
+  - `$v1 = $m.selected-> get owned ships: class/type=[Ship]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get planet array`
 - `<RetVar/IF> <RefObj> get player owned ship array from sector`
 - `<RetVar/IF> <RefObj> get player owned station array from sector`
+- **Examples:**
+  - `$v4 = $v3-> get player owned station array from sector`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get sector from universe index: x=<Var/Number1>, y=<Var/Number2>`
 - `<RetVar/IF> get ship array: of race <Var/Race> class/type=<value>`
+- **Examples:**
+  - `$v1 = get ship array: of race [Player] class/type=[Big Ship]`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get ship array from sector/ship/station`
 - `<RetVar/IF> get ship type array: maker race=<Var/Race> class=<value>`
 - `<RetVar/IF> <RefObj> get south warp gate`
@@ -70,12 +80,19 @@ This reference lists universe data commands available in X3TC scripting.
 - **Full Description:** `<RetVar/IF> get station array: of race <Var/Race> class/type=<value>`
 - **Examples:**
   - `$dock.array = get station array: of race [Player] class/type=[Dock]`
+  - `$list = get station array: of race [Player] class/type=[Dock]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> get station array: product=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> get station array: resource=<Var/Ware> include empty=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get station array from sector`
 - `<RetVar/IF> get universe x index`
+- **Examples:**
+  - `$x = $v3-> get universe x index`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get universe y index`
+- **Examples:**
+  - `$y = $v3-> get universe y index`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get warp gate: gate id=<Var/Number>`
 - `<RetVar/IF> <RefObj> get west warp gate`
 - `<RetVar/IF> <RefObj> is core sector`

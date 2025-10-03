@@ -10,6 +10,10 @@ This reference covers object property commands available in X3TC scripting. Each
   - `if $dc-> exists`
   - `if $dock-> exists`
   - `if $factory-> exists`
+  - `if $m.selected-> exists`
+  - `skip if $v2-> exists`
+  - `if $v2-> exists`
+  - `skip if $aim-> exists`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> find nearest enemy ship: max.dist=<Var/Number>`
 - `<RetVar/IF> <RefObj> find nearest enemy ship in range: class=<Var/Class>`
@@ -19,16 +23,22 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get array of missiles aiming to me`
 - `<RetVar/IF> <RefObj> get asteroid yield`
 - `<RetVar/IF> <RefObj> get attacker`
+- **Examples:**
+  - `if $m.selected-> get attacker`
+- **Edge Cases:** _None._
 - #### Rule: `<RetVar/IF> <RefObj> get command`
 - **Full Description:** `<RetVar/IF> <RefObj> get command`
 - **Examples:**
   - `$target.command = $target-> get command`
+  - `$v3 = $v1-> get command`
+  - `$v1 = $m.selected-> get command`
 - **Edge Cases:** _None._
 
 - #### Rule: `<RetVar/IF> <RefObj> get command target`
 - **Full Description:** `<RetVar/IF> <RefObj> get command target`
 - **Examples:**
   - `$target.pos = $target-> get command target`
+  - `$v2 = $m.selected-> get command target`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get command target2`
 - `<RetVar/IF> <RefObj> get current action`
@@ -36,10 +46,17 @@ This reference covers object property commands available in X3TC scripting. Each
 - `<RetVar/IF> <RefObj> get current shield strength`
 - `<RetVar/IF> <RefObj> get debris count`
 - `<RetVar/IF> <RefObj> get dock bay size`
+- **Examples:**
+  - `if $m.selected-> get dock bay size`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get environment`
 - `<RetVar/IF> <RefObj> get flying ware count`
 - `<RetVar/IF> <RefObj> get hull`
 - `<RetVar/IF> <RefObj> get hull percent`
+- **Examples:**
+  - `$v4 = $v1-> get hull percent`
+  - `$v1 = $m.selected-> get hull percent`
+- **Edge Cases:** _None._
 - #### Rule: `<RetVar/IF> <RefObj> get ID code`
 - **Full Description:** `<RetVar/IF> <RefObj> get ID code`
 - **Examples:**
@@ -58,6 +75,8 @@ This reference covers object property commands available in X3TC scripting. Each
   - `$ware.settings = $value-> get local variable: name=$pointer`
   - `$ware.array = $value-> get local variable: name=$pointer`
   - `if not $factory-> get local variable: name=$pointer`
+  - `if $m.selected-> get local variable: name='anarkis.ads.grid'`
+  - `if $m.selected-> get local variable: name='anarkis.acc.battle'`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get local variables: regular expression=<Var/String>`
 - `<RetVar/IF> <RefObj> get maintype`
@@ -70,20 +89,27 @@ This reference covers object property commands available in X3TC scripting. Each
 - **Full Description:** `<RetVar/IF> <RefObj> get name`
 - **Examples:**
   - `$name = $object-> get name`
+  - `$v2 = $v2-> get name`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get notoriety percentage to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get notoriety title to race <Var/Race>: text=<Var/Boolean>`
 - `<RetVar/IF> <RefObj> get notoriety to race <Var/Race>`
 - `<RetVar/IF> <RefObj> get number of landed ships`
+- **Examples:**
+  - `$v2 = $m.selected-> get number of landed ships`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get number of laser bays`
 - `<RetVar/IF> <RefObj> get number of shield bays`
 - `<RetVar/IF> <RefObj> get number of subtypes of maintype <Var/Number>`
 - `<RetVar/IF> <RefObj> get object class`
+- **Examples:**
+  - `$v2 = $m.selected-> get object class`
+  - `$v1 = $aim-> get object class`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get owner race`
 - #### Rule: `<RetVar/IF> <RefObj> get position as array`
 - **Full Description:** `<RetVar/IF> <RefObj> get position as array`
 - **Examples:**
-  - `$target.pos = $target-> get position as array`
   - `$target.pos = $target-> get position as array`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get power generator`
@@ -103,14 +129,23 @@ This reference covers object property commands available in X3TC scripting. Each
   - `$this.sector = [THIS]-> get sector`
   - `$txt = $dc-> get sector`
   - `$txt = $dock-> get sector`
+  - `$v1 = [PLAYERSHIP]-> get sector`
+  - `$v2 = $m.selected-> get sector`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get shield and hull percent`
 - `<RetVar/IF> <RefObj> get shield percent`
+- **Examples:**
+  - `$v5 = $v1-> get shield percent`
+  - `$v2 = $m.selected-> get shield percent`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get shield type in bay <Var/Number>`
 - `<RetVar/IF> <RefObj> get size of object`
 - `<RetVar/IF> <RefObj> get subtype`
 - `<RetVar/IF> <RefObj> get true owner`
 - `<RetVar/IF> <RefObj> get ware type code of object`
+- **Examples:**
+  - `$v2 = $v1-> get ware type code of object`
+- **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> get x position`
 - `<RetVar/IF> <RefObj> get y position`
 - `<RetVar/IF> <RefObj> get z position`
@@ -146,6 +181,9 @@ This reference covers object property commands available in X3TC scripting. Each
   - `if $factory-> is of class [Factory]`
   - `if not $factory-> is of class [Complex Hub]`
   - `if not $destination-> is of class [Dock]`
+  - `if $m.selected-> is of class [Moveable Ship]`
+  - `if $m.selected-> is of class [Station]`
+  - `if $m.selected-> is of class [Big Ship]`
 - **Edge Cases:** _None._
 - `<RetVar/IF> <RefObj> is of type <Var/Ship Type/Station Type>`
 - `<RetVar/IF> <RefObj> is starting`

@@ -7,7 +7,11 @@ This reference summarizes various game engine and quest commands available in X3
 - `<RefObj> add event listener`: Attaches a script to an object that runs when a specified event occurs.
 - `al engine: register script=<Script Name>`: Registers a script with the Artificial Life (AL) engine.
 - `al engine: set plugin <Var/String> description to <Var/String>`: Updates the description text shown for a registered AL plugin.
+  - **Examples:**
+    - `al engine: set plugin $al.PluginID description to $plugin.description`
 - `al engine: set plugin <Var/String> timer interval to <Var/Number> s`: Sets how often an AL plugin runs.
+  - **Examples:**
+    - `al engine: set plugin $al.PluginID timer interval to 25 s`
 - `al engine: unregister script <Script Name>`: Removes a script from AL engine management.
 - `change event news availability`: Controls news article availability based on race, sector, and jump range.
 - `<RetVar/IF> display news article`: Shows a news article with optional placeholders and display limits.
@@ -17,6 +21,10 @@ This reference summarizes various game engine and quest commands available in X3
 - **Examples:**
   - `$al.Settings = get global variable: name='al.LI.FDN.event'`
   - `$config.Array = get global variable: name='config.scripts'`
+  - `$gl.setup = get global variable: name='anarkis.ads.setup'`
+  - `$select = get global variable: name='anarkis.ads.menu'`
+  - `if get global variable: name='anarkis.ads.grid.mode'`
+  - `$al.Settings = get global variable: name=$al.PluginID`
 - **Edge Cases:** _None._
 - `register god event: script=<Script Name> mask=<Var/Number>`: Registers a script to run as a god event with a condition mask.
 - `register quest script <Script Name> instance multiple=<Var/Number>`: Registers a quest script, allowing multiple instances when needed.
@@ -29,6 +37,8 @@ This reference summarizes various game engine and quest commands available in X3
 - **Examples:**
   - `set global variable: name=$var value=null`
   - `set global variable: name='al.LI.FDN.event' value=$al.Settings`
+  - `set global variable: name='advjump.pageid' value=$page.id`
+  - `set global variable: name=$al.PluginID value=$al.Settings`
 - **Edge Cases:** _None._
 - `set quest/event <Var/Quest> alive=<Var/Number>`: Enables or disables a quest/event.
 - `set quest/event <Var/Quest> timer to <Var/Number>`: Sets a countdown before a quest/event triggers or expires.
