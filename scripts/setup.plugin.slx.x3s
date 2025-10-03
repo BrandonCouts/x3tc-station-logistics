@@ -29,6 +29,18 @@ if $pluginTitle
 end
 al engine: set plugin 'al.plugin.slx' timer interval to 30 s
 
+* Register station command shortcut for the configuration menu
+$cmdTitle = read text: page=$PageId id=103
+if not $cmdTitle
+  $cmdTitle = 'Configure SLX Logistics'
+end
+
+$commandId = COMMAND_TYPE_STATION_51
+set script command: command=$commandId script='plugin.slx.station.command'
+set script command description: command=$commandId text=$cmdTitle
+set script command upgrade: command=$commandId upgrade=null
+global script map: set: key=$commandId class=Station race=Player script='plugin.slx.station.command'
+
 = [THIS] -> call script 'plugin.slx.init' :
 
 return null

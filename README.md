@@ -43,7 +43,7 @@ It ignores NPC trading and focuses purely on balancing your own production netwo
 3. Start or reload your game; the setup script will register SLX.
 
 ## How it works
-- Enroll a station via Plugin Config > SLX > Station Logistics.
+- Enroll a station via Plugin Config > SLX > Station Logistics or by running **Configure SLX Logistics** under a station's Additional Commands.
 - Each ware can be set as **Producer**, **Consumer**, or **Store** with Min/Max/Chunk limits.
 - A manager task runs roughly every 10 seconds and transfers wares in priority order:
     1. Producer -> Store when above Max%.
