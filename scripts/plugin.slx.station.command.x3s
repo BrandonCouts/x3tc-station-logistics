@@ -1,0 +1,28 @@
+* ******************************************************************************
+* SCRIPT NAME: plugin.slx.station.command
+* DESCRIPTION: Station command entry point for SLX logistics menu
+* AUTHOR:      SLX Team                DATE: 21 October 2025
+* ******************************************************************************
+
+$station = [THIS]
+if not $station
+  return null
+end
+
+if not $station -> is of class [Station]
+  return null
+end
+
+$owner = $station -> get owner race
+if $owner != [Player]
+  return null
+end
+
+$enabled = get global variable: name='g.slx.enabled'
+if not $enabled
+  return null
+end
+
+= null -> call script 'plugin.slx.station.menu' : station=$station
+
+return null
