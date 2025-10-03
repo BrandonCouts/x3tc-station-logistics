@@ -16,6 +16,7 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$amount station=$source action='remove'`
   - `= null-> call script 'plugin.LI.FDN.Update.Ware' : ware=$ware amount=$sold station=$dock action='remove'`
   - `= [THIS]-> call script 'plugin.config.addscript' : argument1=$txt argument2=null argument3='plugin.LI.FDN.Main.Menu' argument4=[FALSE] argument5=$section argument6=null`
+  - `= [THIS]-> call script 'plugin.LI.FDN.Setup' :`
   - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dc flag=1`
   - `START null-> call script 'plugin.LI.FDN.Supply.Dock' : dock=$dock flag=null`
   - `$is.AP = null-> call script 'lib.BW.isAP' :`
@@ -37,6 +38,38 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `START null-> call script 'plugin.LI.FDN.Cleanup' :`
   - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=1`
   - `START null-> call script 'plugin.LI.FDN.Supply.Factory' : factory=$factory flag=null`
+  - `$v3 = [THIS]-> call script 'anarkis.lib.shortcmd' : command=$v3`
+  - `$isadscompat = [THIS]-> call script 'anarkis.acc.is.compatible' : select=$m.selected`
+  - `if [THIS]-> call script 'anarkis.acc.is.compatible' : select=[PLAYERSHIP]`
+  - `$isadsactive = [THIS]-> call script 'anarkis.acc.lib.isadsactive' : target=$m.selected`
+  - `if [THIS]-> call script 'anarkis.acc.lib.isadsactive' : target=$m.selected`
+  - `$st = [THIS]-> call script 'anarkis.ads.lib.shiptostring' : ship=$v3`
+  - `$v1 = [THIS]-> call script 'anarkis.ads.lib.get.plsectors' :`
+  - `$v5 = [THIS]-> call script 'anarkis.ads.lib.get.sectorthreat' : sector=$v3 race=[Player]`
+  - `$list = [THIS]-> call script 'anarkis.acc.get.acc.carriers' : active.only=[FALSE]`
+  - `$v1 = [THIS]-> call script 'anarkis.acc.evalute.danger' : sector=$v1 refobject=$m.selected`
+  - `$v3 = [THIS]-> call script 'anarkis.acc.lib.get.adsonly.from' : target=$m.selected`
+  - `$v1 = [THIS]-> call script 'anarkis.lib.shortstring' : string=$v1 max=25`
+  - `$count = [THIS]-> call script 'anarkis.lib.get.shipcount' : class=$v1`
+  - `START [PLAYERSHIP]-> call script 'anarkis.acc.wing.attack.pl' : target=$aim wing.size=$count`
+  - `= [THIS]-> call script 'plugin.LI.FDN.Supply.Start' :`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Argon] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1=$StationClass argument2=[Goner] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran ATF Research Base} argument2=[Terran] argument3={FTL Jumpdrive Extension} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Saturn Research Station} argument2=[Terran] argument3={Advanced Jumpdrive Accelertor} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Orbital Defence Station} argument2=[Terran] argument3={Jumpdrive Energy Generator} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Terran Military Base} argument2=[Terran] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]`
+  - `skip if [THIS]-> call script 'plugin.waremanager.add' : argument1={Split Strong Arms HQ} argument2=[Split] argument3={Advanced Jumpdrive} argument4=-1 argument5=[TRUE]`
+  - `= [THIS]-> call script 'plugin.hotkeymanager.add' : argument1='advjump' argument2=$text argument3='plugin.advjump.hotkey'`
+  - `= [THIS]-> call script 'plugin.hotkeymanager.add' : argument1='advjump.target' argument2=$text argument3='plugin.advjump.hotkey.target'`
+  - `= [THIS]-> call script 'plugin.advnav.register.between' : argument1='advjump.ftl' argument2='plugin.advjump.flytosector' argument3=90`
+  - `= [THIS]-> call script 'plugin.advnav.register.jump' : argument1='advjump' argument2='plugin.advjump.jump' argument3=90`
 - **Edge Cases:** Use the `=` prefix when ignoring the return value, wrap script names in single quotes, and keep named argument labels free of spaces.
 - `START <RefObj> command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
 - `START <RefObj> delayed command <Object Command> : arg1=<Value>, arg2=<Value>, arg3=<Value>, arg4=<Value>`
@@ -72,6 +105,8 @@ This reference covers flow control commands available in X3TC scripting. Each en
   - `gosub Global.Factory.Sub:`
 - **Edge Cases:** _None._
 - `goto label <Label Name>:`
+  - **Examples:**
+    - `goto label err.NoWareManager:`
 - `<RefObj> interrupt task <Var/Number> with script <Script Name> and priority <Var/Number>: arg1=<Value0> arg2=<Value1> arg3=<Value2> arg4=<Value3>`
   - **Optional Parameter Definitions:** See [Flow Control Interrupt Optional Parameters](../options/flow-control-interrupt-options.md).
 - `<RefObj> interrupt with script <Script Name> and priority <Var/Number>`
@@ -87,6 +122,7 @@ This reference covers flow control commands available in X3TC scripting. Each en
 - **Full Description:** `<RetVar/IF> wait <Var/Number> ms`
 - **Examples:**
   - `= wait 1 ms`
+  - `= wait 100 ms`
 - **Edge Cases:** Prefix with `=` when you do not store the return value.
 - `<RetVar/IF> wait randomly from <Var/Number> to <Var/Number> ms`
 - **Examples:**

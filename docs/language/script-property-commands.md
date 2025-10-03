@@ -12,6 +12,8 @@ This reference lists script property commands available in X3TC scripting.
 - `<RetVar/IF> get player name`
 - `<RetVar/IF> get player ship`
 - `<RetVar/IF> get player tracking aim`
+- **Examples:**
+  - `$aim = get player tracking aim`
 - `<RetVar/IF> get trade rank`
 - `<RetVar/IF> get trade rank percentage`
 - `<RetVar/IF> get trade rank title: text=<Var/Boolean>`

@@ -8,6 +8,7 @@ This reference lists math operations and random number commands in X3TC scriptin
   - `dec $s`
   - `dec $sf`
   - `dec $sd`
+  - `dec $cnt`
 - **Edge Cases:** _None._
 - `<RetVar> fixed cos <Var/Number>`
 - `<RetVar> fixed sin <Var/Number>`

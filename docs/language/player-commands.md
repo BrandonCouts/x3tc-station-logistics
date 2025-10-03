@@ -12,6 +12,11 @@ This reference covers player-specific commands in X3TC scripting. Each entry sho
 - `<RetVar/IF> get player name`
 - `<RetVar/IF> get player ship`
 - `<RetVar/IF> get player tracking aim`
+- #### Rule: `<RetVar/IF> get player tracking aim`
+- **Full Description:** `<RetVar/IF> get player tracking aim`
+- **Examples:**
+  - `$aim = get player tracking aim`
+- **Edge Cases:** _None._
 - `<RetVar/IF> get trade rank`
 - `<RetVar/IF> get trade rank percentage`
 - `<RetVar/IF> get trade rank title: text=<Var/Boolean>`
